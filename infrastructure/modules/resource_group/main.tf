@@ -1,9 +1,9 @@
-# resource_group/main.tf
-resource "azurerm_resource_group" "core" {
-  name     = var.rg_name
-  location = var.location
+# modules/resource_group/main.tf
+terraform {
+  backend "azurerm" {}
 }
 
-output "rg_name" {
-  value = azurerm_resource_group.core.name
+resource "azurerm_resource_group" "rg" {
+  name     = "rg-tfst-${var.environment}"
+  location = var.location
 }

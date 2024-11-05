@@ -1,18 +1,19 @@
+# infrastructure/envs/terragrunt.hcl
 locals {
-  # Automatically load environment-level variables
+  # Cargar variables de entorno
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
 
-  # Extract necessary variables for tfstate storage dynamically based on environment name
+  # Extraer las variables necesarias para el almacenamiento de tfstate dinámicamente
   environment_name        = local.environment_vars.locals.environment_name
   location                = local.environment_vars.locals.location
   tfstate_rg_name         = try(local.environment_vars.locals.tfstate_rg_name, "tfst-tfstate-${local.environment_name}")
   tfstate_storage_account = try(local.environment_vars.locals.tfstate_storage_account, "tfsttfstate${local.environment_name}")
 }
 
-# Generate the Azure provider block
+# Bloque de proveedor Azure
 generate "provider" {
   path      = "provider.tf"
-  if_exists = "overwrite_terragrunt"
+  if_exists = "overwrite"
   contents  = <<EOF
     provider "azurerm" {
       features {}
@@ -20,7 +21,6 @@ generate "provider" {
 EOF
 }
 
-# Generate Terraform version and provider configuration
 generate "versions" {
   path      = "versions_override.tf"
   if_exists = "overwrite_terragrunt"
@@ -30,14 +30,14 @@ generate "versions" {
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = "4.8.0"
+          version = ">=4.8.0" # Minimum version required for the azurerm_client_config data source
         }
       }
     }
 EOF
 }
 
-# Configure remote state storage in Azure dynamically for the environment
+# Configure remote state
 remote_state {
   backend = "azurerm"
   config = {
@@ -45,9 +45,5 @@ remote_state {
     storage_account_name = local.tfstate_storage_account
     container_name       = "tfstate-container"
     key                  = "${path_relative_to_include()}/terraform.tfstate"
-  }
-  generate = {
-    path      = "backend.tf"
-    if_exists = "overwrite_terragrunt"
   }
 }

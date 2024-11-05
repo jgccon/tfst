@@ -1,7 +1,5 @@
-# dev/storage/terragrunt.htl
-
+# infrastructure/envs/dev/storage/terragrunt.hcl
 locals {
-  # Automatically load environment-level variables
   env_vars = read_terragrunt_config(find_in_parent_folders("env.hcl")).locals
 }
 
@@ -13,15 +11,13 @@ include {
   path = find_in_parent_folders()
 }
 
-
-dependency "core" {
-  config_path = "../core"
+dependency "resource_group" {
+  config_path = "../resource_group"
 }
 
 inputs = {
-  location         = local.env_vars.location
-  environment_name = local.env_vars.environment_name
-  tags             = local.env_vars.default_tags
-  rg_name          = dependency.core.outputs.rg_name
+  storage_account_name = "tfstpublicstorage${local.env_vars.environment_name}"
+  resource_group_name  = dependency.resource_group.outputs.resource_group_name
+  location             = local.env_vars.location
+  tags                 = local.env_vars.default_tags
 }
-

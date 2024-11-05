@@ -14,6 +14,8 @@ az login
 
 # Set the Azure subscription
 az account set --subscription "$SUBSCRIPTION"
+export ARM_SUBSCRIPTION_ID=$SUBSCRIPTION
+
 
 # Create the resource group
 az group create --name "$TFSTATE_RG_NAME" --location "$TFSTATE_LOCATION"
