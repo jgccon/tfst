@@ -31,6 +31,19 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+**/bin/
+**/obj/
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+*.tfplan
+terraform.tfstate
+terraform.tfstate.backup
+
+# Terragrunt
+.terragrunt-cache
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
