@@ -1,0 +1,29 @@
+# src/api/pipelines/ci-build.yml
+trigger:
+  branches:
+    include:
+      - "*"
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  BUILD_CONFIGURATION: 'Release'
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '8.x'
+      installationPath: $(Agent.ToolsDirectory)/dotnet
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'restore'
+      projects: 'src/api/TheFullStackTeam.Backend.sln'
+
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+      projects: 'src/api/TheFullStackTeam.Backend.sln'
+      arguments: '--configuration $(BUILD_CONFIGURATION)'

@@ -21,6 +21,7 @@
     "peacock.remoteColor": "#4682B4",
     "files.exclude": {
         "**/bin": true,
-        "**/obj": true
+        "**/obj": true,
+        "**/api/infrastructure": true
     }
 }
