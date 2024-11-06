@@ -12,7 +12,7 @@ steps:
   displayName: 'Set up .NET Core SDK'
   inputs:
     packageType: 'sdk'
-    version: '8.x.x'
+    version: '8.x'
 
 - checkout: self
   displayName: 'Checkout code from repository'
