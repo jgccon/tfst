@@ -14,7 +14,7 @@ steps:
 - checkout: self
   displayName: 'Checkout code from repository'
 
-- task: DotNetCoreCLI@2
+- task: DotNetCoreCLI@2  
   displayName: 'Restore .NET packages'
   inputs:
     command: 'restore'
