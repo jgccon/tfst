@@ -1,31 +1,30 @@
-# src/api/pipelines/ci-build.yml
 trigger:
-  branches:
-    include:
-      - "*"
+- main
 
 pool:
   vmImage: 'ubuntu-24.04'
 
-variables:
-  BUILD_CONFIGURATION: 'Release'
-
 steps:
-  - task: UseDotNet@2
-    inputs:
-      packageType: 'sdk'
-      version: '8.x'
-      installationPath: $(Agent.ToolsDirectory)/dotnet
+- task: UseDotNet@2
+  displayName: 'Set up .NET Core SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '8.x.x'
 
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'restore'
-      projects: 'src/api/TheFullStackTeam.Backend.sln'
-      # workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
+- checkout: self
+  displayName: 'Checkout code from repository'
 
-  - task: DotNetCoreCLI@2
-    inputs:
-      command: 'build'
-      projects: 'src/api/TheFullStackTeam.Backend.sln'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
-      arguments: '--configuration $(BUILD_CONFIGURATION)'
+- task: DotNetCoreCLI@2
+  displayName: 'Restore .NET packages'
+  inputs:
+    command: 'restore'
+    projects: 'src/api/TheFullStackTeam.Backend.sln'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build .NET Solution'
+  inputs:
+    command: 'build'
+    projects: 'src/api/TheFullStackTeam.Backend.sln'
+    arguments: '--configuration Release'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
