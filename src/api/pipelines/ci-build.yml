@@ -1,5 +1,8 @@
+# src/api/pipelines/ci-build.yml
 trigger:
-- main
+  branches:
+    include:
+      - "*"
 
 pool:
   vmImage: 'ubuntu-24.04'
