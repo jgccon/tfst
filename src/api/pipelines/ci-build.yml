@@ -21,9 +21,11 @@ steps:
     inputs:
       command: 'restore'
       projects: 'src/api/TheFullStackTeam.Backend.sln'
+      # workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
 
   - task: DotNetCoreCLI@2
     inputs:
       command: 'build'
       projects: 'src/api/TheFullStackTeam.Backend.sln'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
       arguments: '--configuration $(BUILD_CONFIGURATION)'
