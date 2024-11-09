@@ -65,6 +65,47 @@ Each environment has its own configuration folder in `envs/` (e.g., `dev`, `stag
   ```
 - `terragrunt.hcl` files reference modules and set up environment-specific variables.
 
+## Environment Setup Scripts
+
+We have included helper scripts to simplify the setup process for local development and Azure backend initialization. These scripts ensure that your local environment is properly configured and ready for using Terraform and Terragrunt.
+
+### 1. Azure Backend Initialization (`initialize_azure_backend.sh`)
+This script sets up the Azure resources needed to store Terraform state files securely. It creates a dedicated resource group, storage account, and blob container for your Terraform state.
+
+#### Usage:
+```bash
+bash scripts/initialize_azure_backend.sh <your-azure-subscription-id> <environment>
+```
+
+#### Parameters:
+
+<your-azure-subscription-id>: The Azure subscription where the resources will be created.
+<environment>: The environment (e.g., dev, prod) for which to set up the backend.
+
+What it does:
+
+Creates an Azure resource group for backend storage.
+Creates a storage account and blob container to store your Terraform state files.
+
+This script should be run once during the initial setup for each environment.
+
+### 2. Local Environment Configuration (setup_local_env.sh)
+For local development, you can use this script to set up the necessary environment variables for Terraform and Terragrunt. It automatically uses your currently active Azure subscription, so there's no need to manually specify it.
+
+Usage:
+```bash
+source scripts/setup_local_env.sh
+```
+
+#### What it does:
+Checks if you're logged into Azure and prompts you to log in if necessary.
+
+Automatically sets the `ARM_SUBSCRIPTION_ID`, `ARM_TENANT_ID`, and other environment variables needed by Terraform.
+
+Ensures that the configuration is using the currently active Azure subscription.
+
+By running this script, you can seamlessly switch between environments and work locally without hardcoding sensitive information into your configuration files.
+
 ## Running Terragrunt Locally
 To apply changes locally, navigate to the environment folder (e.g., `envs/dev/storage`) and use `terragrunt plan` or `terragrunt apply` as follows:
 
