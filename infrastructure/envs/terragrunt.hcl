@@ -10,10 +10,10 @@ locals {
   tfstate_storage_account = try(local.environment_vars.locals.tfstate_storage_account, "tfsttfstate${local.environment_name}")
 }
 
-# Azure provider configuration
+# Generate an Azure provider block
 generate "provider" {
   path      = "provider.tf"
-  if_exists = "overwrite"
+  if_exists = "overwrite_terragrunt"
   contents  = <<EOF
     provider "azurerm" {
       features {}
@@ -38,7 +38,7 @@ generate "versions" {
 EOF
 }
 
-# Configure remote state
+# Configure Terragrunt to automatically store tfstate files in Azure storage container
 remote_state {
   backend = "azurerm"
   config = {
@@ -46,5 +46,11 @@ remote_state {
     storage_account_name = local.tfstate_storage_account
     container_name       = "tfstate-container"
     key                  = "${path_relative_to_include()}/terraform.tfstate"
+    subscription_id      = get_env("ARM_SUBSCRIPTION_ID", "")
+    tenant_id            = get_env("ARM_TENANT_ID", "")
+  }  
+  generate = {
+    path      = "backend.tf"
+    if_exists = "overwrite_terragrunt"
   }
 }
