@@ -11,3 +11,8 @@ variable "api_url" {
   description = "The URL of the API service"
   type        = string
 }
+
+variable "always_on" {
+  description = "Enable Always On setting for the Web App"
+  type        = bool
+}

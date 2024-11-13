@@ -6,3 +6,8 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "always_on" {
+  description = "Enable Always On setting for the Web App"
+  type        = bool
+}

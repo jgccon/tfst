@@ -1,8 +1,4 @@
 # modules/service_plan/main.tf
-terraform {
-  backend "azurerm" {}
-}
-
 resource "azurerm_service_plan" "service_plan" {
   name                = "service-plan-${var.environment}"
   location            = var.location
