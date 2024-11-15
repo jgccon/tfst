@@ -1,0 +1,21 @@
+# pipeline_templates/terraform_validate_scripts.yml
+parameters:
+  env: ''
+  subscription: ''
+
+jobs:
+  - job: terraform_validation
+    displayName: "Terraform Validation"
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: ${{ parameters.subscription }}
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            cd infrastructure/envs/${{ parameters.env }}
+            terraform init
+            terraform validate
+        displayName: "Validate Terraform Configuration"
