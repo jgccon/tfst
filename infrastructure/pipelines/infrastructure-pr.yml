@@ -33,7 +33,7 @@ jobs:
           terragrunt hclfmt --terragrunt-check
         displayName: Terragrunt HCL FMT
 
-  # Validación para el entorno dev
+  # Job para validar la infraestructura en el entorno dev
   - job: validate_terraform_dev
     displayName: Validate Terraform scripts (dev)
     dependsOn: validate_terraform_modules

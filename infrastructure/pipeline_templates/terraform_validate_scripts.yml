@@ -3,29 +3,20 @@ parameters:
     type: string
   - name: subscription
     type: string
-  - name: dependsOn
-    type: object
-    default: []
 
-jobs:
-  - job: validate_terraform_scripts_${{ parameters.env }}
-    displayName: Validate Terraform scripts (${{ parameters.env }})
-    dependsOn: ${{ parameters.dependsOn }}
-    pool:
-      vmImage: ubuntu-22.04
-    steps:
-      # Inicializar Terragrunt
-      - template: ../pipeline_templates/terragrunt_init.yml
-        parameters:
-          subscription: ${{ parameters.subscription }}
+steps:
+  # Inicializar Terragrunt
+  - template: ../pipeline_templates/terragrunt_init.yml
+    parameters:
+      subscription: ${{ parameters.subscription }}
 
-      # Validar Terragrunt y Terraform
-      - bash: |
-          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/${{ parameters.env }}
-          terragrunt run-all validate
-        displayName: Terragrunt validate (${{ parameters.env }})
-      
-      - bash: |
-          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/${{ parameters.env }}
-          terragrunt run-all validate-inputs
-        displayName: Terragrunt validate inputs (${{ parameters.env }})
+  # Validar Terragrunt y Terraform
+  - bash: |
+      cd $(System.DefaultWorkingDirectory)/infrastructure/envs/${{ parameters.env }}
+      terragrunt run-all validate
+    displayName: Terragrunt validate (${{ parameters.env }})
+  
+  - bash: |
+      cd $(System.DefaultWorkingDirectory)/infrastructure/envs/${{ parameters.env }}
+      terragrunt run-all validate-inputs
+    displayName: Terragrunt validate inputs (${{ parameters.env }})
