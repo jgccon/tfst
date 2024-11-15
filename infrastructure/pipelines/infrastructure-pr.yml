@@ -15,24 +15,42 @@ pool:
   vmImage: ubuntu-22.04
 
 stages:
-  - stage: ValidateAndDeploy
-    displayName: "Validate and Deploy Infrastructure"
+  - stage: validate_azure_infrastructure
+    displayName: Validate Infrastructure Configuration
     jobs:
-      - job: validate_infrastructure
-        displayName: "Validate Infrastructure"
+      # Validar módulos de Terraform y Terragrunt
+      - job: validate_terraform_modules
+        displayName: Check formatting of *.tf and *.hcl files
         steps:
-          - template: infrastructure/pipeline_templates/terraform_validate_scripts.yml
+          - template: ../pipeline_templates/terragrunt_init.yml
             parameters:
-              env: dev
               subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
 
-      - job: deploy_infrastructure
-        displayName: "Deploy Infrastructure"
-        dependsOn: validate_infrastructure
-        condition: succeeded()
-        steps:
+          - bash: terraform fmt -recursive -check $(System.DefaultWorkingDirectory)/infrastructure/modules
+            displayName: Terraform FMT modules
+
           - bash: |
-              cd infrastructure/envs/dev
-              terraform plan -out=tfplan
-              terraform apply -auto-approve tfplan
-            displayName: "Terraform Apply"
+              cd $(System.DefaultWorkingDirectory)/infrastructure
+              terragrunt hclfmt --terragrunt-check
+            displayName: Terragrunt HCL FMT
+
+      # Validación para el entorno dev
+      - template: ../pipeline_templates/terraform_validate_scripts.yml
+        parameters:
+          env: dev
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
+          dependsOn: validate_terraform_modules
+
+      # Validación para el entorno staging
+      - template: ../pipeline_templates/terraform_validate_scripts.yml
+        parameters:
+          env: staging
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
+          dependsOn: validate_terraform_modules
+
+      # Validación para el entorno prod
+      - template: ../pipeline_templates/terraform_validate_scripts.yml
+        parameters:
+          env: prod
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_PROD)
+          dependsOn: validate_terraform_modules

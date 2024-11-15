@@ -1,38 +1,31 @@
 parameters:
-  env: ''
-  subscription: ''
+  - name: env
+    type: string
+  - name: subscription
+    type: string
+  - name: dependsOn
+    type: object
+    default: []
 
 jobs:
-  - job: terraform_validation
-    displayName: "Terraform Validation"
+  - job: validate_terraform_scripts_${{ parameters.env }}
+    displayName: Validate Terraform scripts (${{ parameters.env }})
+    dependsOn: ${{ parameters.dependsOn }}
     pool:
       vmImage: ubuntu-22.04
     steps:
-      # 1. Initialize Terraform for the environment
-      - bash: |
-          echo "Initializing Terraform for environment: ${{ parameters.env }}"
-          cd infrastructure/envs/${{ parameters.env }}
-          terraform init \
-            -backend-config="subscription_id=$(ARM_SUBSCRIPTION_ID)" \
-            -backend-config="client_id=$(ARM_CLIENT_ID)" \
-            -backend-config="client_secret=$(ARM_CLIENT_SECRET)" \
-            -backend-config="tenant_id=$(ARM_TENANT_ID)"
-        displayName: "Terraform Init"
+      # Inicializar Terragrunt
+      - template: ../pipeline_templates/terragrunt_init.yml
+        parameters:
+          subscription: ${{ parameters.subscription }}
 
-      # 2. Validate Terraform configuration
+      # Validar Terragrunt y Terraform
       - bash: |
-          echo "Validating Terraform configuration"
-          terraform validate
-        displayName: "Terraform Validate"
-
-      # 3. Verify Terraform formatting
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/${{ parameters.env }}
+          terragrunt run-all validate
+        displayName: Terragrunt validate (${{ parameters.env }})
+      
       - bash: |
-          echo "Checking Terraform formatting"
-          terraform fmt -recursive -check
-        displayName: "Terraform FMT"
-
-      # 4. Validate Terragrunt files
-      - bash: |
-          echo "Validating Terragrunt files"
-          terragrunt hclfmt --terragrunt-check
-        displayName: "Terragrunt HCL FMT"
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/${{ parameters.env }}
+          terragrunt run-all validate-inputs
+        displayName: Terragrunt validate inputs (${{ parameters.env }})

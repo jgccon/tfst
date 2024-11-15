@@ -1,0 +1,13 @@
+parameters:
+  subscription: ''
+
+steps:
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: ${{ parameters.subscription }}
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+        echo "Initializing Terragrunt for subscription: ${{ parameters.subscription }}"
+        terragrunt init
+    displayName: Terragrunt Init
