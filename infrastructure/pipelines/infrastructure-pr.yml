@@ -12,7 +12,7 @@ variables:
   - group: AzureServiceConnectionDev
 
 pool:
-  vmImage: ubuntu-22.04
+  vmImage: ubuntu-24.04
 
 jobs:
   # Job para validar módulos de Terraform y Terragrunt

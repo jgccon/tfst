@@ -3,6 +3,10 @@ trigger:
   branches:
     include:
       - "*"
+  # Include only the paths that contain the API project
+  paths:
+    include:
+      - src/api/**
 
 pool:
   vmImage: 'ubuntu-24.04'

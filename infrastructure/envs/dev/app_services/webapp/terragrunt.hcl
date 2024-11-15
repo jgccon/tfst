@@ -20,7 +20,7 @@ dependency "resource_group" {
 }
 
 dependency "api" {
-  config_path = "../api"
+  config_path  = "../api"
   skip_outputs = false
   mock_outputs = {
     api_url = "http://mock-api-url"
@@ -33,10 +33,10 @@ inputs = {
   resource_group_name = dependency.resource_group.outputs.resource_group_name
   service_plan_id     = dependency.service_plan.outputs.service_plan_id
   tags                = local.env_vars.default_tags
-  
+
   # Set `always_on` based on the `service_sku`
-  always_on           = local.env_vars.service_sku != "f1" && local.env_vars.service_sku != "d1"
-  
+  always_on = local.env_vars.service_sku != "f1" && local.env_vars.service_sku != "d1"
+
   # Use the API service's URL as an environment variable
-  api_url             = dependency.api.outputs.api_url
+  api_url = dependency.api.outputs.api_url
 }

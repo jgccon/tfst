@@ -4,6 +4,6 @@ locals {
 
 # Variables comunes para el entorno
 inputs = {
-  rg_name = "tfst-prod-rg"
-  location            = "westeurope"
+  rg_name  = "tfst-prod-rg"
+  location = "westeurope"
 }
