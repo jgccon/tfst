@@ -10,7 +10,7 @@ pr:
       - infrastructure/**
 
 variables:
-  - group: AzureServiceConnection
+  - group: AzureServiceConnectionDev
 
 pool:
   vmImage: ubuntu-20.04
