@@ -4,8 +4,8 @@ parameters:
   - name: subscription
     type: string
 steps:
-  - task: TerraformInstaller@0
-    displayName: Install Terraform
+  - task: TerraformInstaller@1
+    displayName: install terraform
     inputs:
       terraformVersion: latest
   - bash: |
