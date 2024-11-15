@@ -1,4 +1,3 @@
-# pipelines/infrastructure-pr.yml
 trigger: none
 
 pr:
@@ -13,45 +12,27 @@ variables:
   - group: AzureServiceConnectionDev
 
 pool:
-  vmImage: ubuntu-20.04
+  vmImage: ubuntu-22.04
 
 stages:
   - stage: ValidateAndDeploy
-    displayName: "Validate and Deploy Infrastructure to DEV"
+    displayName: "Validate and Deploy Infrastructure"
     jobs:
-      # Job 1: Validar la infraestructura antes de aplicar cambios
       - job: validate_infrastructure
-        displayName: "Validate Terraform Infrastructure"
+        displayName: "Validate Infrastructure"
         steps:
-          - script: |
-              sudo apt-get update -y
-              sudo apt-get install -y yamllint
-              yamllint infrastructure/azure-pipelines.yml
-            displayName: "Lint YAML files"
-
-          - bash: |
-              terraform fmt -recursive -check infrastructure/modules
-            displayName: "Check Terraform Formatting"
-
-          - bash: |
-              cd infrastructure/envs/dev
-              terragrunt hclfmt --terragrunt-check
-            displayName: "Validate Terragrunt HCL Formatting"
-
-          - template: ../pipeline_templates/terraform_validate_scripts.yml
+          - template: infrastructure/pipeline_templates/terraform_validate_scripts.yml
             parameters:
               env: dev
               subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
 
-      # Job 2: Aplicar los cambios solo si la validación fue exitosa
-      - job: apply_terraform
-        displayName: "Apply Terraform Changes"
+      - job: deploy_infrastructure
+        displayName: "Deploy Infrastructure"
         dependsOn: validate_infrastructure
         condition: succeeded()
         steps:
           - bash: |
               cd infrastructure/envs/dev
-              terraform init
               terraform plan -out=tfplan
               terraform apply -auto-approve tfplan
-            displayName: "Terraform Init, Plan, and Apply"
+            displayName: "Terraform Apply"

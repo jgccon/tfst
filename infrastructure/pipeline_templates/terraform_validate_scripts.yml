@@ -1,0 +1,38 @@
+parameters:
+  env: ''
+  subscription: ''
+
+jobs:
+  - job: terraform_validation
+    displayName: "Terraform Validation"
+    pool:
+      vmImage: ubuntu-22.04
+    steps:
+      # 1. Initialize Terraform for the environment
+      - bash: |
+          echo "Initializing Terraform for environment: ${{ parameters.env }}"
+          cd infrastructure/envs/${{ parameters.env }}
+          terraform init \
+            -backend-config="subscription_id=$(ARM_SUBSCRIPTION_ID)" \
+            -backend-config="client_id=$(ARM_CLIENT_ID)" \
+            -backend-config="client_secret=$(ARM_CLIENT_SECRET)" \
+            -backend-config="tenant_id=$(ARM_TENANT_ID)"
+        displayName: "Terraform Init"
+
+      # 2. Validate Terraform configuration
+      - bash: |
+          echo "Validating Terraform configuration"
+          terraform validate
+        displayName: "Terraform Validate"
+
+      # 3. Verify Terraform formatting
+      - bash: |
+          echo "Checking Terraform formatting"
+          terraform fmt -recursive -check
+        displayName: "Terraform FMT"
+
+      # 4. Validate Terragrunt files
+      - bash: |
+          echo "Validating Terragrunt files"
+          terragrunt hclfmt --terragrunt-check
+        displayName: "Terragrunt HCL FMT"
