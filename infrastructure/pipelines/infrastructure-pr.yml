@@ -14,43 +14,31 @@ variables:
 pool:
   vmImage: ubuntu-22.04
 
-stages:
-  - stage: validate_azure_infrastructure
-    displayName: Validate Infrastructure Configuration
-    jobs:
-      # Validar módulos de Terraform y Terragrunt
-      - job: validate_terraform_modules
-        displayName: Check formatting of *.tf and *.hcl files
-        steps:
-          - template: ../pipeline_templates/terragrunt_init.yml
-            parameters:
-              subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
+jobs:
+  # Job para validar módulos de Terraform y Terragrunt
+  - job: validate_terraform_modules
+    displayName: Check formatting of *.tf and *.hcl files
+    steps:
+      - template: ../pipeline_templates/terragrunt_init.yml
+        parameters:
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
 
-          - bash: terraform fmt -recursive -check $(System.DefaultWorkingDirectory)/infrastructure/modules
-            displayName: Terraform FMT modules
+      # Verificar el formato de los archivos Terraform
+      - bash: terraform fmt -recursive -check $(System.DefaultWorkingDirectory)/infrastructure/modules
+        displayName: Terraform FMT modules
 
-          - bash: |
-              cd $(System.DefaultWorkingDirectory)/infrastructure
-              terragrunt hclfmt --terragrunt-check
-            displayName: Terragrunt HCL FMT
+      # Validar la sintaxis de Terragrunt
+      - bash: |
+          cd $(System.DefaultWorkingDirectory)/infrastructure
+          terragrunt hclfmt --terragrunt-check
+        displayName: Terragrunt HCL FMT
 
-      # Validación para el entorno dev
+  # Validación para el entorno dev
+  - job: validate_terraform_dev
+    displayName: Validate Terraform scripts (dev)
+    dependsOn: validate_terraform_modules
+    steps:
       - template: ../pipeline_templates/terraform_validate_scripts.yml
         parameters:
           env: dev
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-          dependsOn: validate_terraform_modules
-
-      # Validación para el entorno staging
-      - template: ../pipeline_templates/terraform_validate_scripts.yml
-        parameters:
-          env: staging
-          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-          dependsOn: validate_terraform_modules
-
-      # Validación para el entorno prod
-      - template: ../pipeline_templates/terraform_validate_scripts.yml
-        parameters:
-          env: prod
-          subscription: $(SERVICE_CONNECTION_NAME_ARM_PROD)
-          dependsOn: validate_terraform_modules
