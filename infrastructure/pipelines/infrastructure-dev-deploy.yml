@@ -6,6 +6,8 @@ trigger:
     include:
       - infrastructure/**
 
+pr: none
+
 variables:
   - group: AzureServiceConnectionDev
 
@@ -14,7 +16,8 @@ pool:
 
 jobs:
   - job: deploy_infrastructure
-    displayName: "Deploy Terraform & Terragrunt"
+    displayName: "Deploy Infrastructure Changes to DEV"
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
     steps:
       # Install tools and authenticate
       - template: ../pipeline_templates/terragrunt_init.yml
@@ -25,14 +28,18 @@ jobs:
       - bash: |
           cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
           terragrunt run-all plan -out=dev.tfplan
-        displayName: "Plan Infrastructure Changes"
+        displayName: "Plan Infrastructure Changes"       
+        env:
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
 
       # Apply plan
       - bash: |
           cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
           terragrunt run-all apply dev.tfplan -auto-approve
-        displayName: "Apply Infrastructure Changes"
-        
+        displayName: "Apply Infrastructure Changes"        
         env:
           ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
           ARM_CLIENT_ID: $(ARM_CLIENT_ID)
