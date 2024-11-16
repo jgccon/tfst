@@ -15,30 +15,26 @@ pool:
   vmImage: ubuntu-24.04
 
 jobs:
-  # Job para validar módulos de Terraform y Terragrunt
-  - job: validate_terraform_modules
-    displayName: Check formatting of *.tf and *.hcl files
+  - job: validate_infrastructure
+    displayName: "Validate Terraform & Terragrunt"
     steps:
+      # Instalar herramientas y autenticar
       - template: ../pipeline_templates/terragrunt_init.yml
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-
-      # Verificar el formato de los archivos Terraform
+      
+      # Validar formato Terraform
       - bash: terraform fmt -recursive -check $(System.DefaultWorkingDirectory)/infrastructure/modules
-        displayName: Terraform FMT modules
+        displayName: "Terraform FMT modules"
 
-      # Validar la sintaxis de Terragrunt
+      # Validar sintaxis de Terragrunt
       - bash: |
           cd $(System.DefaultWorkingDirectory)/infrastructure
           terragrunt hclfmt --terragrunt-check
-        displayName: Terragrunt HCL FMT
+        displayName: "Terragrunt HCL FMT"
 
-  # Job para validar la infraestructura en el entorno dev
-  - job: validate_terraform_dev
-    displayName: Validate Terraform scripts (dev)
-    dependsOn: validate_terraform_modules
-    steps:
-      - template: ../pipeline_templates/terraform_validate_scripts.yml
-        parameters:
-          env: dev
-          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
+      # Validar infraestructura
+      - bash: |
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
+          terragrunt run-all validate
+        displayName: "Terragrunt Validate"

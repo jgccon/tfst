@@ -1,0 +1,34 @@
+trigger:
+  branches:
+    include:
+      - dev
+  paths:
+    include:
+      - infrastructure/**
+
+variables:
+  - group: AzureServiceConnectionDev
+
+pool:
+  vmImage: ubuntu-24.04
+
+jobs:
+  - job: deploy_infrastructure
+    displayName: "Deploy Terraform & Terragrunt"
+    steps:
+      # Inicializar herramientas y autenticación
+      - template: ../pipeline_templates/terragrunt_init.yml
+        parameters:
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
+
+      # Generar plan
+      - bash: |
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
+          terragrunt run-all plan -out=dev.tfplan
+        displayName: "Terragrunt Plan"
+
+      # Aplicar cambios
+      - bash: |
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
+          terragrunt run-all apply dev.tfplan -auto-approve
+        displayName: "Terragrunt Apply"
