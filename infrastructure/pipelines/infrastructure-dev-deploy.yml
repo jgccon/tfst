@@ -38,7 +38,7 @@ jobs:
       # Apply plan
       - bash: |
           cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
-          terragrunt run-all apply dev.tfplan -auto-approve
+          terragrunt run-all apply dev.tfplan --terragrunt-non-interactive
         displayName: "Apply Infrastructure Changes"        
         env:
           ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
