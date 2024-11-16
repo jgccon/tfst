@@ -1,6 +1,6 @@
 # envs/env.hcl
 locals {
-  environment_name = "pro"
+  environment_name = "prod"
   location         = "westeurope"
 
   # Select Service Plan SKU
