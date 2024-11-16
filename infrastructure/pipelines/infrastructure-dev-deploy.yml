@@ -27,7 +27,6 @@ jobs:
       - template: ../pipeline_templates/terragrunt_init.yml
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-        displayName: "Terragrunt Init"
 
       # Generate plan
       - bash: |
