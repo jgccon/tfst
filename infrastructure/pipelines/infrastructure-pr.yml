@@ -18,23 +18,6 @@ jobs:
   - job: validate_infrastructure
     displayName: "Validate Terraform & Terragrunt"
     steps:
-      # Autenticate with Azure and set ARM variables
-      - task: AzureCLI@2
-        displayName: "Authenticate with Azure"
-        inputs:
-          azureSubscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-          scriptType: bash
-          addSpnToEnvironment: true
-          scriptLocation: inlineScript
-          inlineScript: |
-            echo "Authenticating with Azure..."
-            export ARM_SUBSCRIPTION_ID=$(az account show --query id --output tsv)
-            export ARM_CLIENT_ID=$servicePrincipalId
-            export ARM_CLIENT_SECRET=$servicePrincipalKey
-            export ARM_TENANT_ID=$tenantId
-            echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
-            echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
-            echo "ARM_TENANT_ID: $ARM_TENANT_ID"
       # Install tools and authenticate
       - template: ../pipeline_templates/terragrunt_init.yml
         parameters:
@@ -55,3 +38,8 @@ jobs:
           cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
           terragrunt run-all validate
         displayName: "Terragrunt Validate"
+        env:
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
