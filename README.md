@@ -27,8 +27,8 @@
 ### Prerequisites
 
 - **Git**
-- **.NET SDK 7.0**
-- **Node.js (v16.x) and npm**
+- **.NET SDK 8.0**
+- **Node.js (v18.x) and npm**
 - **Angular CLI**
 - **Docker and Docker Compose** (optional for containerized setup)
 
