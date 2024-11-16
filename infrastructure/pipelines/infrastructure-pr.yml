@@ -22,24 +22,20 @@ jobs:
       - template: ../pipeline_templates/terragrunt_init.yml
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
+        displayName: "Terragrunt Init"
       
       # Validate Terraform modules
       - bash: terraform fmt -recursive -check $(System.DefaultWorkingDirectory)/infrastructure/modules
-        displayName: "Terraform FMT modules"
+        displayName: "Validate Terraform Syntax"
 
       # Validate Terragrunt syntax
       - bash: |
           cd $(System.DefaultWorkingDirectory)/infrastructure
           terragrunt hclfmt --terragrunt-check
-        displayName: "Terragrunt HCL FMT"
+        displayName: "Validate Terragrunt Syntax"
 
       # Validate infrastructure code
       - bash: |
           cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
           terragrunt run-all validate
-        displayName: "Terragrunt Validate"
-        env:
-          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
-          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
-          ARM_TENANT_ID: $(ARM_TENANT_ID)
+        displayName: "Validate Infrastructure Code"
