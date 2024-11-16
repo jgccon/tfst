@@ -28,7 +28,7 @@ inputs = {
   # Set `always_on` based on the `service_sku`
   always_on = local.env_vars.service_sku != "f1" && local.env_vars.service_sku != "d1"
 
-  api_app_settings    = {
+  api_app_settings = {
     "ASPNETCORE_ENVIRONMENT" = "Development"
   }
 }

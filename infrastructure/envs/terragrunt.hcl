@@ -48,7 +48,7 @@ remote_state {
     key                  = "${path_relative_to_include()}/terraform.tfstate"
     subscription_id      = get_env("ARM_SUBSCRIPTION_ID", "")
     tenant_id            = get_env("ARM_TENANT_ID", "")
-  }  
+  }
   generate = {
     path      = "backend.tf"
     if_exists = "overwrite_terragrunt"
