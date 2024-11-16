@@ -17,12 +17,6 @@ pool:
 jobs:
   - job: validate_infrastructure
     displayName: "Validate Terraform & Terragrunt" 
-    # Inject environment variables from Library Variable Group(s)
-    variables:
-      ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-      ARM_CLIENT_ID: $(ARM_CLIENT_ID)
-      ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
-      ARM_TENANT_ID: $(ARM_TENANT_ID)
     steps:
       # Install tools and authenticate
       - template: ../pipeline_templates/terragrunt_init.yml
@@ -44,3 +38,9 @@ jobs:
           cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
           terragrunt run-all validate
         displayName: "Validate Infrastructure Code"
+        # Inject environment variables from Library Variable Group(s)
+        env:
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
