@@ -15,13 +15,6 @@ pool:
 jobs:
   - job: deploy_infrastructure
     displayName: "Deploy Terraform & Terragrunt"
-
-    # Inject environment variables from Library Variable Group(s)
-    variables:
-      ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-      ARM_CLIENT_ID: $(ARM_CLIENT_ID)
-      ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
-      ARM_TENANT_ID: $(ARM_TENANT_ID)
     steps:
       # Install tools and authenticate
       - template: ../pipeline_templates/terragrunt_init.yml
@@ -39,3 +32,9 @@ jobs:
           cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
           terragrunt run-all apply dev.tfplan -auto-approve
         displayName: "Apply Infrastructure Changes"
+        
+        env:
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
