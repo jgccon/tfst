@@ -1,51 +1,70 @@
+# The Full Stack Team (TFST)
 
-# The Full Stack Team
+**The Full Stack Team (TFST)** es una plataforma de código abierto diseñada para optimizar la gestión de proyectos y clientes para freelancers y profesionales. Esta plataforma ofrece herramientas para gestionar clientes, proyectos, contratos, facturación y horas trabajadas en un entorno multitenant.
 
-**The Full Stack Team** es una plataforma de código abierto para freelancers y profesionales que facilita la gestión de clientes, proyectos, contratos, facturación y horas de trabajo en un entorno multitenant.
+## Características
 
-## Funcionalidades
-
-- **Soporte Multitenant**: Gestiona múltiples clientes con aislamiento de datos.
-- **Gestión de Proyectos**: Asigna freelancers a proyectos y sigue el progreso.
+- **Soporte Multitenant**: Gestiona múltiples clientes con datos aislados.
+- **Gestión de Proyectos**: Asigna profesionales a proyectos y realiza seguimiento.
 - **Gestión de Clientes**: Maneja contratos, facturación y cobros.
-- **Registro de Horas**: Registra horas trabajadas y productividad.
-- **Perfiles de Empleados**: Gestiona perfiles y certificaciones.
-- **Arquitectura Escalable**: Construido con tecnologías modernas para alto rendimiento.
+- **Seguimiento de Horas**: Registra horas de trabajo y monitorea la productividad.
+- **Arquitectura Escalable**: Construida utilizando tecnologías modernas para alto rendimiento.
 
 ## Tecnologías Utilizadas
 
 - **Backend**: .NET (ASP.NET Core)
 - **Frontend**: Angular
-- **Base de Datos**: SQL Server, PostgreSQL, Cosmos DB (API MongoDB)
+- **Bases de Datos**: SQL Server, PostgreSQL, Cosmos DB (MongoDB API)
 - **Autenticación**: JWT, OAuth2, Azure AD B2C
 - **Contenerización**: Docker
 - **CI/CD**: Azure DevOps, GitHub Actions
-- **Plataforma Cloud**: Azure, Terraform para infraestructura como código
+- **Infraestructura como Código**: Terraform
+- **Plataforma en la Nube**: Azure
 
 ## Instalación
 
-### Prerrequisitos
-- Git, .NET SDK 8.0, Node.js (v18.x), Angular CLI, Docker
+### Requisitos Previos
+Asegúrate de tener instalados:
+- **Git**
+- **.NET SDK 8.0**
+- **Node.js (v18.x) y npm**
+- **Angular CLI**
+- **Docker (opcional)**
 
 ### Pasos
-1. **Clonar el Repositorio**:
+1. **Clona el Repositorio**:
    ```bash
    git clone https://github.com/JGCarmona-Consulting/tfst.git
    cd tfst
    ```
-2. **Configurar Backend & Frontend**:
+
+2. **Configuración del Backend**:
    ```bash
-   cd src/api && dotnet build
-   cd ../webapp && npm install
-   ```
-3. **Ejecutar Localmente**:
-   ```bash
-   dotnet run --project src/api && ng serve --project webapp
+   cd src/api
+   dotnet build
    ```
 
-## Contribuir
+3. **Configuración del Frontend**:
+   ```bash
+   cd ../webapp
+   npm install
+   ng serve
+   ```
 
-Consulta [CONTRIBUTING.md](CONTRIBUTING-es.md) para más detalles.
+4. **Ejecutar la Aplicación Localmente**:
+   ```bash
+   dotnet run --project src/api
+   ng serve --project webapp
+   ```
+# CI/CD con Azure DevOps
+
+[YA REALIZADO AQUI](https://dev.azure.com/jgcarmona/TheFullStackTeam/)
+
+## Guía de Contribución
+¡Damos la bienvenida a contribuciones! Consulta [CONTRIBUTING-es.md](CONTRIBUTING-es.md) para más detalles.
+
+## Documentación
+Para documentación detallada, consulta la carpeta `/docs` o visita nuestra [página de documentación](docs/README.md).
 
 ## Licencia
-Licenciado bajo la licencia MIT. Ver [LICENSE](LICENSE) para más información.
+Licenciado bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles.
