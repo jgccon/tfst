@@ -12,6 +12,6 @@ include {
 }
 
 inputs = {
-  environment = "dev"
+  environment = "prod"
   location    = "westeurope"
 }
