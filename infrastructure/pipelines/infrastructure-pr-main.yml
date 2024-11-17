@@ -21,7 +21,7 @@ jobs:
       # Install tools and authenticate
       - template: ../pipeline_templates/terragrunt_init.yml
         parameters:
-          subscription: $(SERVICE_CONNECTION_NAME_ARM_PRO)
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_PROD)
       
       # Validate Terraform modules
       - bash: terraform fmt -recursive -check $(System.DefaultWorkingDirectory)/infrastructure/modules
