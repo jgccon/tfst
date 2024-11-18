@@ -5,7 +5,10 @@ export const routes: Routes = [
     {
         path:"",
         component: AppLayoutComponent,
-
+    },
+    {
+        path:'auth',
+        loadChildren: ()=> import('./features/auth/auth.routes')
     }
     
 ];
