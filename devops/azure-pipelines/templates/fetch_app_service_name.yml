@@ -5,9 +5,9 @@ parameters:
 
 steps:
   - bash: |
-      echo "Changing to directory: $(System.DefaultWorkingDirectory)/$(parameters.terragrunt_path)"
-      cd "$(System.DefaultWorkingDirectory)/$(parameters.terragrunt_path)" || {
-        echo "Error: Directory not found: $(System.DefaultWorkingDirectory)/$(parameters.terragrunt_path)"
+      echo "Changing to directory: $(System.DefaultWorkingDirectory)/${{ parameters.terragrunt_path }}"
+      cd "$(System.DefaultWorkingDirectory)/${{ parameters.terragrunt_path }}" || {
+        echo "Error: Directory not found: $(System.DefaultWorkingDirectory)/${{ parameters.terragrunt_path }}"
         exit 1
       }
       APP_SERVICE_NAME=$(terragrunt output -json | jq -r '.api_url.value')
