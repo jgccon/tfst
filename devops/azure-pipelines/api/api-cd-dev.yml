@@ -55,21 +55,11 @@ jobs:
           ls -al $(Build.ArtifactStagingDirectory)
         displayName: "List Artifact Directory"
 
-      # 6. Create Deployment ZIP
-      - task: ArchiveFiles@2
-        displayName: 'Create Deployment ZIP'
-        inputs:
-          rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/publish'
-          includeRootFolder: false
-          archiveType: 'zip'
-          archiveFile: '$(Build.ArtifactStagingDirectory)/api-deployment.zip'
-          replaceExistingArchive: true
-
-      # 7. Deploy API to App Service
+      # 6. Deploy API to App Service
       - task: AzureWebApp@1
         displayName: "Deploy API to App Service"
         inputs:
           azureSubscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
           appType: 'webApp'
           appName: $(APP_SERVICE_NAME)
-          package: '$(Build.ArtifactStagingDirectory)/api-deployment.zip'
+          package: '$(Build.ArtifactStagingDirectory)/TheFullStackTeam.API.zip'
