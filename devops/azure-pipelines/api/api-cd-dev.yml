@@ -25,12 +25,12 @@ jobs:
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
       
-      # # 2. Initialize Terraform (ensure the backend is configured)
-      # - bash: |
-      #     echo "Changing to directory: $(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/api"
-      #     cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/api"
-      #     terragrunt init -reconfigure
-      #   displayName: "Initialize Terraform Backend"
+      # 2. Initialize Terraform (ensure the backend is configured)
+      - bash: |
+          echo "Changing to directory: $(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/api"
+          cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/api"
+          terragrunt init -reconfigure
+        displayName: "Initialize Terraform Backend"
 
       # 3. Fetch App Service Name using template
       - template: ../templates/fetch_app_service_name.yml
