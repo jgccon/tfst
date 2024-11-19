@@ -35,11 +35,13 @@ jobs:
         displayName: "Fetch App Service Name from Terraform Outputs"
 
       # 3. build and publish the API
-      - template: ../templates/dotnet_build.yml
-        parameters:
-          solution: 'src/api/TheFullStackTeam.Backend.sln'
-          configuration: 'Release'
-          publishDirectory: '$(Build.ArtifactStagingDirectory)'
+      - task: DotNetCoreCLI@2
+        displayName: 'Build .NET Solution'
+        inputs:
+          command: 'build'
+          projects: 'src/api/TheFullStackTeam.Backend.sln'
+          arguments: '--configuration Release'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
 
       # 4. Deploy API to App Service
       - task: AzureWebApp@1
