@@ -27,7 +27,7 @@ jobs:
       - bash: |
           echo "Initializing Terragrunt dependencies for WebApp..."
           cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/webapp"
-          terragrunt run-all init -reconfigure
+          terragrunt run-all init -reconfigure --terragrunt-non-interactive
         displayName: "Initialize Terragrunt Dependencies for WebApp"
         env:
           ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
