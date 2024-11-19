@@ -55,24 +55,20 @@ jobs:
           npm run build --prod
         displayName: "Build Angular Application"
 
-      # Copy nginx.conf into the browser folder
+      # Prepare deployment artifacts
       - bash: |
-          echo "Adding nginx.conf to the build output..."
-          cp $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/nginx.conf \
-            $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front/browser/
-        displayName: "Include nginx.conf in Build Artifacts"
-
-      # Compress build output into a zip file (/browser folder only)
-      - bash: |
-          echo "Compressing build artifacts into a zip file..."
-          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front/browser
+          echo "Preparing deployment artifacts..."
+          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front
+          cp server.js dist/tfst-front/
+          cp package.json dist/tfst-front/
+          cd dist/tfst-front
           zip -r $(Build.ArtifactStagingDirectory)/webapp.zip .
-        displayName: "Compress Build Artifacts"
+        displayName: "Prepare Deployment Artifacts"
 
       # Verify compressed artifact
       - bash: |
           echo "Verifying the compressed artifact..."
-          ls -al $(Build.ArtifactStagingDirectory)
+          unzip -l $(Build.ArtifactStagingDirectory)/webapp.zip
         displayName: "Verify Compressed Artifact"
 
       # Deploy WebApp to Azure App Service
@@ -83,3 +79,8 @@ jobs:
           appType: 'webAppLinux'
           appName: $(APP_SERVICE_NAME)
           package: '$(Build.ArtifactStagingDirectory)/webapp.zip'
+          
+      # Isntall express on the App Service
+      - script: |
+          npm install express
+        displayName: "Install Express on Azure App Service"
