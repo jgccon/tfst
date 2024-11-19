@@ -1,5 +1,3 @@
-# devops/azure-pipelines/api/api-cd-dev.yml
-# This file contains the pipeline definition for deploying the API to the DEV environment.
 trigger:
   branches:
     include:
@@ -25,7 +23,7 @@ jobs:
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
       
-      # 2. Initialize all dependencies
+      # 2. Initialize Terragrunt Dependencies
       - bash: |
           echo "Initializing Terragrunt dependencies"
           cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev"
@@ -37,26 +35,41 @@ jobs:
           ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
           ARM_TENANT_ID: $(ARM_TENANT_ID)
 
-
-      # 3. Fetch App Service Name using template
+      # 3. Fetch App Service Name
       - template: ../templates/fetch_app_service_name.yml
         parameters:
           terragrunt_path: infrastructure/envs/dev/app_services/api
 
-      # 4. Build and publish the API
+      # 4. Publish .NET Solution
       - task: DotNetCoreCLI@2
-        displayName: 'Build .NET Solution'
+        displayName: 'Publish .NET Solution'
         inputs:
-          command: 'build'
+          command: 'publish'
           projects: 'src/api/TheFullStackTeam.Backend.sln'
-          arguments: '--configuration Release'
+          arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
           workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
 
-      # 5. Deploy API to App Service
+      # 5. Verify Artifact Directory
+      - bash: |
+          echo "Contents of $(Build.ArtifactStagingDirectory):"
+          ls -al $(Build.ArtifactStagingDirectory)
+        displayName: "List Artifact Directory"
+
+      # 6. Create Deployment ZIP
+      - task: ArchiveFiles@2
+        displayName: 'Create Deployment ZIP'
+        inputs:
+          rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/publish'
+          includeRootFolder: false
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/api-deployment.zip'
+          replaceExistingArchive: true
+
+      # 7. Deploy API to App Service
       - task: AzureWebApp@1
         displayName: "Deploy API to App Service"
         inputs:
           azureSubscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-          appType: 'webAppLinux'
+          appType: 'webApp'
           appName: $(APP_SERVICE_NAME)
-          package: '$(Build.ArtifactStagingDirectory)'
+          package: '$(Build.ArtifactStagingDirectory)/api-deployment.zip'
