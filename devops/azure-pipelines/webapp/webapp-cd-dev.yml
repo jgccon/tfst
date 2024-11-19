@@ -79,5 +79,5 @@ jobs:
           appType: 'webAppLinux'
           appName: $(APP_SERVICE_NAME)
           package: '$(Build.ArtifactStagingDirectory)/webapp.zip'
-          startUpCommand: 'npm start' # Or adjust to 'node server.js' if necessary
+          startUpCommand: 'npm install && node server.js' # Or adjust to 'node server.js' if necessary
           runtimeStack: 'NODE|18-lts'
