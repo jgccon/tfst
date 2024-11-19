@@ -60,7 +60,7 @@ jobs:
           echo "Preparing deployment artifacts..."
           cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front
           cp server.js dist/tfst-front/
-          cp package.json dist/tfst-front/
+          cp packages-server.json dist/tfst-front/package.json
           cd dist/tfst-front
           zip -r $(Build.ArtifactStagingDirectory)/webapp.zip .
         displayName: "Prepare Deployment Artifacts"
@@ -79,5 +79,5 @@ jobs:
           appType: 'webAppLinux'
           appName: $(APP_SERVICE_NAME)
           package: '$(Build.ArtifactStagingDirectory)/webapp.zip'
-          startUpCommand: 'npm run startserver'    
+          startUpCommand: 'npm install && npm run start'    
           runtimeStack: 'NODE|18-lts'
