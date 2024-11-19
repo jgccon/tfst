@@ -19,7 +19,7 @@ jobs:
     displayName: "Validate Terraform & Terragrunt" 
     steps:
       # Install tools and authenticate
-      - template: ../pipeline_templates/terragrunt_init.yml
+      - template: ../templates/terragrunt_init.yml
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_PROD)
       

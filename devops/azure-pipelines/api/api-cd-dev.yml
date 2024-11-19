@@ -1,5 +1,6 @@
-# src/api/pipelines/ci-build.yml
-pr:
+# devops/azure-pipelines/api/api-cd-dev.yml
+# This file contains the pipeline definition for deploying the API to the DEV environment.
+trigger:
   branches:
     include:
       - dev
@@ -7,30 +8,53 @@ pr:
     include:
       - src/api/**
 
+pr: none
+
+variables:
+  - group: AzureServiceConnectionDev
+
 pool:
-  vmImage: 'ubuntu-24.04'
+  vmImage: ubuntu-24.04
 
-steps:
-- task: UseDotNet@2
-  displayName: 'Set up .NET Core SDK'
-  inputs:
-    packageType: 'sdk'
-    version: '8.x'
+jobs:
+  - job: deploy_api
+    displayName: "Deploy API to DEV"
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
+    steps:
+      # 1. Autenticate and initialize Terraform
+      - template: ../templates/terragrunt_init.yml
+        parameters:
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
 
-- checkout: self
-  displayName: 'Checkout code from repository'
+      # 2. Get App Service Name from Terraform Outputs
+      - bash: |
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
+          terraform output -state=terraform.tfstate -json > tf-outputs.json
+          APP_SERVICE_NAME=$(jq -r '.api_url.value' tf-outputs.json)
+          echo "##vso[task.setvariable variable=APP_SERVICE_NAME]$APP_SERVICE_NAME"
+        displayName: "Fetch App Service Name from Terraform Outputs"
 
-- task: DotNetCoreCLI@2  
-  displayName: 'Restore .NET packages'
-  inputs:
-    command: 'restore'
-    projects: 'src/api/TheFullStackTeam.Backend.sln'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
+      # 3. build and publish the API
+      - template: ../templates/dotnet_build.yml
+        parameters:
+          solution: 'src/api/TheFullStackTeam.Backend.sln'
+          configuration: 'Release'
+          publishDirectory: '$(Build.ArtifactStagingDirectory)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Build .NET Solution'
-  inputs:
-    command: 'build'
-    projects: 'src/api/TheFullStackTeam.Backend.sln'
-    arguments: '--configuration Release'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
+      # 4. Deploy API to App Service
+      - task: AzureWebApp@1
+        displayName: "Deploy API to App Service"
+        inputs:
+          azureSubscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
+          appType: 'webApp'
+          appName: $(APP_SERVICE_NAME)
+          package: '$(Build.ArtifactStagingDirectory)'
+
+      # # 5. (Opcional) Actualizar configuraciones del App Service
+      # - bash: |
+      #     az webapp config appsettings set \
+      #       --name $(APP_SERVICE_NAME) \
+      #       --resource-group $(ARM_RESOURCE_GROUP_NAME) \
+      #       --settings ASPNETCORE_ENVIRONMENT=Development
+      #   displayName: "Update App Settings"
+
