@@ -1,0 +1,17 @@
+# devops/azure-pipelines/templates/fetch_app_service_name.yml
+# Template to fetch the App Service name from Terraform outputs
+
+parameters:
+  subscription: ''
+  terragrunt_path: ''
+
+steps:
+  - bash: |
+      cd $(System.DefaultWorkingDirectory)/{{ parameters.terragrunt_path }}
+      APP_SERVICE_NAME=$(terragrunt output -json | jq -r '.api_url.value')
+      echo "##vso[task.setvariable variable=APP_SERVICE_NAME]$APP_SERVICE_NAME"
+      if [ -z "$APP_SERVICE_NAME" ]; then
+        echo "Error: APP_SERVICE_NAME is empty. Check Terraform outputs."
+        exit 1
+      fi
+    displayName: "Fetch App Service Name from Terraform Outputs"

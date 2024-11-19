@@ -24,14 +24,12 @@ jobs:
       - template: ../templates/terragrunt_init.yml
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-
-      # 2. Get App Service Name from Terraform Outputs
-      - bash: |
-          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
-          terraform output -state=terraform.tfstate -json > tf-outputs.json
-          APP_SERVICE_NAME=$(jq -r '.api_url.value' tf-outputs.json)
-          echo "##vso[task.setvariable variable=APP_SERVICE_NAME]$APP_SERVICE_NAME"
-        displayName: "Fetch App Service Name from Terraform Outputs"
+     
+      # 2. Fetch App Service Name using template
+      - template: ../templates/fetch_app_service_name.yml
+        parameters:
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
+          terragrunt_path: infrastructure/envs/dev/app_services/api
 
       # 3. build and publish the API
       - task: DotNetCoreCLI@2
