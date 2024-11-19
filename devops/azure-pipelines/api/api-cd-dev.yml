@@ -31,6 +31,12 @@ jobs:
           cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev"
           terragrunt run-all init -reconfigure
         displayName: "Initialize Terragrunt Dependencies"
+        env:
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
+
 
       # 3. Fetch App Service Name using template
       - template: ../templates/fetch_app_service_name.yml
