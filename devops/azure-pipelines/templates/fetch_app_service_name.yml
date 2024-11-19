@@ -10,7 +10,7 @@ steps:
         echo "Error: Directory not found: $(System.DefaultWorkingDirectory)/${{ parameters.terragrunt_path }}"
         exit 1
       }
-      APP_SERVICE_NAME=$(terragrunt output -json | jq -r '.api_url.value')
+      APP_SERVICE_NAME=$(terragrunt output -json | jq -r '.name.value')
       echo "##vso[task.setvariable variable=APP_SERVICE_NAME]$APP_SERVICE_NAME"
       if [ -z "$APP_SERVICE_NAME" ]; then
         echo "Error: APP_SERVICE_NAME is empty. Check Terraform outputs."
