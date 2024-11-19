@@ -28,7 +28,6 @@ jobs:
       # 2. Fetch App Service Name using template
       - template: ../templates/fetch_app_service_name.yml
         parameters:
-          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
           terragrunt_path: infrastructure/envs/dev/app_services/api
 
       # 3. build and publish the API
