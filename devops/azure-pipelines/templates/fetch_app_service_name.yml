@@ -16,4 +16,9 @@ steps:
         echo "Error: APP_SERVICE_NAME is empty. Check Terraform outputs."
         exit 1
       fi
-    displayName: "Fetch App Service Name from Terraform Outputs"
+    displayName: "Fetch App Service Name from Terraform Outputs"    
+    env:
+      ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+      ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+      ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+      ARM_TENANT_ID: $(ARM_TENANT_ID)
