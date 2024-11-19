@@ -1,14 +1,13 @@
 # devops/azure-pipelines/templates/fetch_app_service_name.yml
-# Template to fetch the App Service name from Terraform outputs
 parameters:
   - name: terragrunt_path
     type: string
 
 steps:
   - bash: |
-      echo "Changing to directory: $(System.DefaultWorkingDirectory)/$(terragrunt_path)"
-      cd "$(System.DefaultWorkingDirectory)/$(terragrunt_path)" || {
-        echo "Error: Directory not found: $(System.DefaultWorkingDirectory)/$(terragrunt_path)"
+      echo "Changing to directory: $(System.DefaultWorkingDirectory)/$(parameters.terragrunt_path)"
+      cd "$(System.DefaultWorkingDirectory)/$(parameters.terragrunt_path)" || {
+        echo "Error: Directory not found: $(System.DefaultWorkingDirectory)/$(parameters.terragrunt_path)"
         exit 1
       }
       APP_SERVICE_NAME=$(terragrunt output -json | jq -r '.api_url.value')
