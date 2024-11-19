@@ -55,17 +55,10 @@ jobs:
           npm run build --prod
         displayName: "Build Angular Application"
 
-      # Add nginx.conf to the build output
-      - bash: |
-          echo "Adding nginx.conf to the build artifacts..."
-          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front
-          cp ../../nginx.conf .
-        displayName: "Add nginx.conf"
-
-      # Compress build output into a zip file
+      # Compress build output into a zip file  (/browser folder only)
       - bash: |
           echo "Compressing build artifacts into a zip file..."
-          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front
+          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front/browser
           zip -r $(Build.ArtifactStagingDirectory)/webapp.zip .
         displayName: "Compress Build Artifacts"
 
