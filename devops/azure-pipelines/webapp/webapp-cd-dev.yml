@@ -79,8 +79,5 @@ jobs:
           appType: 'webAppLinux'
           appName: $(APP_SERVICE_NAME)
           package: '$(Build.ArtifactStagingDirectory)/webapp.zip'
-          
-      # Isntall express on the App Service
-      - script: |
-          npm install express
-        displayName: "Install Express on Azure App Service"
+          startUpCommand: 'npm start' # Or adjust to 'node server.js' if necessary
+          runtimeStack: 'NODE|18-lts'
