@@ -57,20 +57,33 @@ jobs:
       - bash: |
           echo "Building Angular application for production..."
           cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front
-          npm run build --prod --output-path=$(Build.ArtifactStagingDirectory)/webapp
+          npm run build --prod
         displayName: "Build Angular Application"
 
-      # 6. Verify artifact directory content
+      # 6. Verify build output directory
       - bash: |
-          echo "Listing contents of the build artifact directory..."
-          ls -al $(Build.ArtifactStagingDirectory)/webapp
-        displayName: "Verify Build Artifacts"
+          echo "Listing contents of the build output directory..."
+          ls -al $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front
+        displayName: "Verify Build Output Directory"
 
-      # 7. Deploy WebApp to Azure App Service
+      # 7. Prepare the build artifacts for deployment (compress to zip)
+      - bash: |
+          echo "Compressing build artifacts into a zip file..."
+          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front
+          zip -r $(Build.ArtifactStagingDirectory)/webapp.zip .
+        displayName: "Compress Build Artifacts"
+
+      # 8. Verify compressed artifact
+      - bash: |
+          echo "Verifying the compressed artifact..."
+          ls -al $(Build.ArtifactStagingDirectory)
+        displayName: "Verify Compressed Artifact"
+
+      # 9. Deploy WebApp to Azure App Service
       - task: AzureWebApp@1
         displayName: "Deploy WebApp to Azure App Service"
         inputs:
           azureSubscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
           appType: 'webApp'
           appName: $(APP_SERVICE_NAME_WEBAPP)
-          package: '$(Build.ArtifactStagingDirectory)/webapp'
+          package: '$(Build.ArtifactStagingDirectory)/webapp.zip'
