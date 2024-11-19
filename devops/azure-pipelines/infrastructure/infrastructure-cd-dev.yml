@@ -17,7 +17,6 @@ pool:
 jobs:
   - job: deploy_infrastructure
     displayName: "Deploy Infrastructure Changes to DEV"
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
     steps:
       # Install tools and authenticate
       - template: ../templates/terragrunt_init.yml
