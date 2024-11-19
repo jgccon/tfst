@@ -20,17 +20,24 @@ jobs:
   - job: deploy_api
     displayName: "Deploy API to DEV"
     steps:
-      # 1. Autenticate and initialize Terraform
+      # 1. Authenticate and initialize Terraform
       - template: ../templates/terragrunt_init.yml
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-     
-      # 2. Fetch App Service Name using template
+      
+      # # 2. Initialize Terraform (ensure the backend is configured)
+      # - bash: |
+      #     echo "Changing to directory: $(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/api"
+      #     cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/api"
+      #     terragrunt init -reconfigure
+      #   displayName: "Initialize Terraform Backend"
+
+      # 3. Fetch App Service Name using template
       - template: ../templates/fetch_app_service_name.yml
         parameters:
           terragrunt_path: infrastructure/envs/dev/app_services/api
 
-      # 3. build and publish the API
+      # 4. Build and publish the API
       - task: DotNetCoreCLI@2
         displayName: 'Build .NET Solution'
         inputs:
@@ -39,7 +46,7 @@ jobs:
           arguments: '--configuration Release'
           workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
 
-      # 4. Deploy API to App Service
+      # 5. Deploy API to App Service
       - task: AzureWebApp@1
         displayName: "Deploy API to App Service"
         inputs:
@@ -47,12 +54,3 @@ jobs:
           appType: 'webApp'
           appName: $(APP_SERVICE_NAME)
           package: '$(Build.ArtifactStagingDirectory)'
-
-      # # 5. (Opcional) Actualizar configuraciones del App Service
-      # - bash: |
-      #     az webapp config appsettings set \
-      #       --name $(APP_SERVICE_NAME) \
-      #       --resource-group $(ARM_RESOURCE_GROUP_NAME) \
-      #       --settings ASPNETCORE_ENVIRONMENT=Development
-      #   displayName: "Update App Settings"
-
