@@ -60,6 +60,6 @@ jobs:
         displayName: "Deploy API to App Service"
         inputs:
           azureSubscription: $(SERVICE_CONNECTION_NAME_ARM_PROD)
-          appType: 'webApp'
+          appType: 'webAppLinux'
           appName: $(APP_SERVICE_NAME)
           package: '$(Build.ArtifactStagingDirectory)/TheFullStackTeam.API.zip'

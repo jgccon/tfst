@@ -18,12 +18,12 @@ jobs:
   - job: deploy_webapp
     displayName: "Deploy WebApp to DEV"
     steps:
-      # 1. Authenticate and initialize Terraform for infrastructure
+      # Authenticate and initialize Terraform for infrastructure
       - template: ../templates/terragrunt_init.yml
         parameters:
           subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
 
-      # 2. Initialize Terragrunt dependencies (App Service for WebApp)
+      # Initialize Terragrunt dependencies
       - bash: |
           echo "Initializing Terragrunt dependencies for WebApp..."
           cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/webapp"
@@ -35,55 +35,51 @@ jobs:
           ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
           ARM_TENANT_ID: $(ARM_TENANT_ID)
 
-      # 3. Fetch App Service Name for WebApp
+      # Fetch App Service Name for WebApp
       - template: ../templates/fetch_app_service_name.yml
         parameters:
           terragrunt_path: infrastructure/envs/dev/app_services/webapp
 
-      # 4. Install Node.js for Angular 18.x+
+      # Install Node.js for Angular 18.x+
       - task: NodeTool@0
         displayName: "Install Node.js 18.x for Angular"
         inputs:
           versionSpec: '18.x'
           checkLatest: true
 
-      # 5. Build Angular application
-      - bash: |
-          echo "Installing npm dependencies..."
-          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front
-          npm install
-        displayName: "Install npm dependencies"
-
+      # Build Angular application
       - bash: |
           echo "Building Angular application for production..."
           cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front
+          npm install
           npm run build --prod
         displayName: "Build Angular Application"
 
-      # 6. Verify build output directory
+      # Add nginx.conf to the build output
       - bash: |
-          echo "Listing contents of the build output directory..."
-          ls -al $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front
-        displayName: "Verify Build Output Directory"
+          echo "Adding nginx.conf to the build artifacts..."
+          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front
+          cp ../../nginx.conf .
+        displayName: "Add nginx.conf"
 
-      # 7. Prepare the build artifacts for deployment (compress to zip)
+      # Compress build output into a zip file
       - bash: |
           echo "Compressing build artifacts into a zip file..."
           cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front
           zip -r $(Build.ArtifactStagingDirectory)/webapp.zip .
         displayName: "Compress Build Artifacts"
 
-      # 8. Verify compressed artifact
+      # Verify compressed artifact
       - bash: |
           echo "Verifying the compressed artifact..."
           ls -al $(Build.ArtifactStagingDirectory)
         displayName: "Verify Compressed Artifact"
 
-      # 9. Deploy WebApp to Azure App Service
+      # Deploy WebApp to Azure App Service
       - task: AzureWebApp@1
         displayName: "Deploy WebApp to Azure App Service"
         inputs:
           azureSubscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
-          appType: 'webApp'
-          appName: $(APP_SERVICE_NAME)
+          appType: 'webAppLinux'
+          appName: $(APP_SERVICE_NAME_WEBAPP)
           package: '$(Build.ArtifactStagingDirectory)/webapp.zip'
