@@ -1,9 +1,8 @@
 # src/api/pipelines/ci-build.yml
-trigger:
+pr:
   branches:
     include:
-      - "*"
-  # Include only the paths that contain the API project
+      - dev
   paths:
     include:
       - src/api/**
