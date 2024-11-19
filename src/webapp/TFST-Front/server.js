@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 });
 
 // Log to confirm the directory serving static files
-const staticPath = path.join(__dirname, 'dist/tfst-front');
+const staticPath = path.join(__dirname, 'browser'); 
 console.log(`Serving static files from: ${staticPath}`);
 app.use(express.static(staticPath));
 
