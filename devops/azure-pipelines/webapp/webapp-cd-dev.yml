@@ -81,5 +81,5 @@ jobs:
         inputs:
           azureSubscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
           appType: 'webAppLinux'
-          appName: $(APP_SERVICE_NAME_WEBAPP)
+          appName: $(APP_SERVICE_NAME)
           package: '$(Build.ArtifactStagingDirectory)/webapp.zip'
