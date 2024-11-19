@@ -19,7 +19,6 @@ pool:
 jobs:
   - job: deploy_api
     displayName: "Deploy API to DEV"
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
     steps:
       # 1. Autenticate and initialize Terraform
       - template: ../templates/terragrunt_init.yml
