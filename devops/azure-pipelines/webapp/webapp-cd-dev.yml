@@ -58,7 +58,7 @@ jobs:
       # Copy nginx.conf into the browser folder
       - bash: |
           echo "Adding nginx.conf to the build output..."
-          cp $(System.DefaultWorkingDirectory)/src/webapp/nginx.conf \
+          cp $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/nginx.conf \
             $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front/dist/tfst-front/browser/
         displayName: "Include nginx.conf in Build Artifacts"
 
