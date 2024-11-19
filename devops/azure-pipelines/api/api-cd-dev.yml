@@ -26,7 +26,7 @@ jobs:
       # 2. Initialize Terragrunt Dependencies
       - bash: |
           echo "Initializing Terragrunt dependencies"
-          cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev"
+          cd "$(System.DefaultWorkingDirectory)/infrastructure/envs/dev/app_services/api"
           terragrunt run-all init -reconfigure
         displayName: "Initialize Terragrunt Dependencies"
         env:

@@ -35,31 +35,16 @@ jobs:
           ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
           ARM_TENANT_ID: $(ARM_TENANT_ID)
 
-      # 3. Detect Angular version and set Node.js dynamically
-      - bash: |
-          echo "Detecting Angular version..."
-          cd $(System.DefaultWorkingDirectory)/src/webapp/TFST-Front
-          ANGULAR_VERSION=$(npm list --depth=0 @angular/core | grep @angular/core | awk -F@ '{print $2}')
-          echo "Detected Angular Version: $ANGULAR_VERSION"
+      # 3. Fetch App Service Name for WebApp
+      - template: ../templates/fetch_app_service_name.yml
+        parameters:
+          terragrunt_path: infrastructure/envs/dev/app_services/webapp
 
-          # Ensure Angular version is 18.x or higher
-          if [[ "$ANGULAR_VERSION" =~ ^18 || "$ANGULAR_VERSION" > "18" ]]; then
-            NODE_VERSION="18.x"
-          else
-            echo "Error: Unsupported Angular version ($ANGULAR_VERSION). Only Angular 18.x or higher is supported."
-            exit 1
-          fi
-          echo "Selected Node.js Version: $NODE_VERSION"
-
-          # Export variable for subsequent steps
-          echo "##vso[task.setvariable variable=NODE_VERSION]$NODE_VERSION"
-        displayName: "Detect Angular Version and Set Node.js"
-
-      # 4. Install Node.js based on detected Angular version
+      # 4. Install Node.js for Angular 18.x+
       - task: NodeTool@0
-        displayName: "Install Node.js"
+        displayName: "Install Node.js 18.x for Angular"
         inputs:
-          versionSpec: '$(NODE_VERSION)'
+          versionSpec: '18.x'
           checkLatest: true
 
       # 5. Build Angular application
