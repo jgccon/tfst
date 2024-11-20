@@ -1,0 +1,36 @@
+# .github/workflows/api-dev-ci.yml
+# GitHub Actions workflow to build the API in the DEV environment
+
+name: API DEV CI
+
+on:
+  pull_request:
+    branches:
+      - dev
+    paths:
+      - 'src/api/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      # Restore .NET packages
+      - name: Restore .NET packages
+        run: dotnet restore src/api/TheFullStackTeam.Backend.sln
+        working-directory: src/api
+
+      # Build .NET solution
+      - name: Build .NET Solution
+        run: dotnet build src/api/TheFullStackTeam.Backend.sln --configuration Release
+        working-directory: src/api
