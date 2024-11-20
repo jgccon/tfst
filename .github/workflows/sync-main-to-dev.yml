@@ -1,0 +1,49 @@
+name: Sync main to dev
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync-main-to-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Configure Git
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      # Step 3: Authenticate using the PAT
+      - name: Authenticate using PAT
+        env:
+          PAT_SYNC_TOKEN: ${{ secrets.PAT_SYNC_TOKEN }}
+        run: |
+          echo "https://${PAT_SYNC_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
+          git config credential.helper 'store --file=~/.git-credentials'
+
+      # Step 4: Pull the latest changes from main
+      - name: Pull latest changes from main
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main
+
+      # Step 5: Merge main into dev
+      - name: Merge main into dev
+        run: |
+          git checkout dev
+          git merge main --no-edit
+
+      # Step 6: Push changes to dev
+      - name: Push changes to dev
+        env:
+          PAT_SYNC_TOKEN: ${{ secrets.PAT_SYNC_TOKEN }}
+        run: |
+          git push origin dev
