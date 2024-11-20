@@ -35,8 +35,4 @@ steps:
     command: 'build'
     projects: 'src/api/TheFullStackTeam.Backend.sln'
     arguments: '--configuration Release'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'
-
-
-
-    
+    workingDirectory: '$(System.DefaultWorkingDirectory)/src/api'    
