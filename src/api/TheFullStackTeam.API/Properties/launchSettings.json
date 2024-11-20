@@ -24,10 +24,10 @@
     "Container (Dockerfile)": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
-        "ASPNETCORE_HTTPS_PORTS": "7101",
-        "ASPNETCORE_HTTP_PORTS": "7100"
+        "ASPNETCORE_HTTPS_PORT": "7101",
+        "ASPNETCORE_HTTP_PORT": "7100"
       },
       "publishAllPorts": true,
       "useSSL": true

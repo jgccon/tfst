@@ -20,8 +20,8 @@ services:
       - tfst-rabbitmq
       - tfst-seq
       - tfst-mongo
-    #volumes:
-      #- ${USERPROFILE}/.aspnet/https:/https/
+    volumes:
+      - ${USERPROFILE}/.aspnet/https:/https/
 
   tfst-sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -45,7 +45,7 @@ services:
     container_name: RabbitMqContainer
     environment:
       RABBITMQ_DEFAULT_USER: qnauser
-      RABBITMQ_DEFAULT_PASS: Password123*
+      RABBITMQ_DEFAULT_PASS: P@ssw0rd!
     ports:
       - "5672:5672"  # AMQP
       - "15672:15672" # Management
