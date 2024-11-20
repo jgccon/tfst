@@ -3,13 +3,13 @@ trigger: none
 pr:
   branches:
     include:
-      - main
+      - dev
   paths:
     include:
       - infrastructure/**
 
 variables:
-  - group: AzureServiceConnectionProd
+  - group: AzureServiceConnectionDev
 
 pool:
   vmImage: ubuntu-24.04
@@ -19,9 +19,9 @@ jobs:
     displayName: "Validate Terraform & Terragrunt" 
     steps:
       # Install tools and authenticate
-      - template: ../pipeline_templates/terragrunt_init.yml
+      - template: ../templates/terragrunt_init.yml
         parameters:
-          subscription: $(SERVICE_CONNECTION_NAME_ARM_PROD)
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
       
       # Validate Terraform modules
       - bash: terraform fmt -recursive -check $(System.DefaultWorkingDirectory)/infrastructure/modules
@@ -35,7 +35,7 @@ jobs:
 
       # Validate infrastructure code
       - bash: |
-          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/prod
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
           terragrunt run-all validate
         displayName: "Validate Infrastructure Code"
         # Inject environment variables from Library Variable Group(s)

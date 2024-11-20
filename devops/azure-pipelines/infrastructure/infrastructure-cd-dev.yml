@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - main
+      - dev
   paths:
     include:
       - infrastructure/**
@@ -9,26 +9,25 @@ trigger:
 pr: none
 
 variables:
-  - group: AzureServiceConnectionProd
+  - group: AzureServiceConnectionDev
 
 pool:
   vmImage: ubuntu-24.04
 
 jobs:
   - job: deploy_infrastructure
-    displayName: "Deploy Infrastructure Changes to PROD"
-    condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+    displayName: "Deploy Infrastructure Changes to DEV"
     steps:
       # Install tools and authenticate
-      - template: ../pipeline_templates/terragrunt_init.yml
+      - template: ../templates/terragrunt_init.yml
         parameters:
-          subscription: $(SERVICE_CONNECTION_NAME_ARM_PROD)
+          subscription: $(SERVICE_CONNECTION_NAME_ARM_DEV)
 
       # Generate plan
       - bash: |
-          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/prod
-          terragrunt run-all plan -out=prod.tfplan
-        displayName: "Plan Infrastructure Changes for PROD"
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
+          terragrunt run-all plan -out=dev.tfplan
+        displayName: "Plan Infrastructure Changes"       
         env:
           ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
           ARM_CLIENT_ID: $(ARM_CLIENT_ID)
@@ -37,9 +36,9 @@ jobs:
 
       # Apply plan
       - bash: |
-          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/prod
-          terragrunt run-all apply prod.tfplan --terragrunt-non-interactive
-        displayName: "Apply Infrastructure Changes to PROD"
+          cd $(System.DefaultWorkingDirectory)/infrastructure/envs/dev
+          terragrunt run-all apply dev.tfplan --terragrunt-non-interactive
+        displayName: "Apply Infrastructure Changes"        
         env:
           ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
           ARM_CLIENT_ID: $(ARM_CLIENT_ID)

@@ -15,3 +15,7 @@ To run the WebApp locally, ensure you have Node.js and Angular CLI installed.
 2. Run the development server:
    ```bash
    ng serve
+   ```
+
+@aaleyva97 --> We need to improve this doc ;)
+Thanks in advance!
