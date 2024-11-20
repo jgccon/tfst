@@ -9,6 +9,9 @@ on:
       - dev
     paths:
       - 'src/api/**'
+# Add a manual trigger
+  workflow_dispatch:    
+
 
 jobs:
   build:
