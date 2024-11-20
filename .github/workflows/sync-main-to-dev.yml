@@ -13,6 +13,8 @@ jobs:
       # Step 1: Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history for all branches
 
       # Step 2: Configure Git
       - name: Configure Git
@@ -28,20 +30,23 @@ jobs:
           echo "https://${PAT_SYNC_TOKEN}:x-oauth-basic@github.com" > ~/.git-credentials
           git config credential.helper 'store --file=~/.git-credentials'
 
-      # Step 4: Pull the latest changes from main
+      # Step 4: Fetch all branches
+      - name: Fetch all branches
+        run: git fetch --all
+
+      # Step 5: Pull the latest changes from main
       - name: Pull latest changes from main
         run: |
-          git fetch origin main
           git checkout main
           git pull origin main
 
-      # Step 5: Merge main into dev
+      # Step 6: Merge main into dev
       - name: Merge main into dev
         run: |
-          git checkout dev
+          git checkout dev || git checkout -b dev # Create 'dev' if it doesn't exist
           git merge main --no-edit
 
-      # Step 6: Push changes to dev
+      # Step 7: Push changes to dev
       - name: Push changes to dev
         env:
           PAT_SYNC_TOKEN: ${{ secrets.PAT_SYNC_TOKEN }}
