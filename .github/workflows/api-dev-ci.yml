@@ -30,10 +30,15 @@ jobs:
 
       # Restore .NET packages
       - name: Restore .NET packages
-        run: dotnet restore src/api/TheFullStackTeam.Backend.sln
+        run: |
+          dotnet restore TheFullStackTeam.Backend.sln
+          echo "Restore completed successfully"
         working-directory: src/api
 
       # Build .NET solution
       - name: Build .NET Solution
-        run: dotnet build src/api/TheFullStackTeam.Backend.sln --configuration Release
+        run: |
+          dotnet build TheFullStackTeam.Backend.sln --configuration Release
+          echo "Build completed successfully"
         working-directory: src/api
+        if: always()
