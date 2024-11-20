@@ -1,4 +1,10 @@
 {
+    "peacock.remoteColor": "#4682B4",
+    "files.exclude": {
+        "**/bin": true,
+        "**/obj": true,
+        "**/api/infrastructure": true
+    },
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#689bc4",
         "activityBar.background": "#689bc4",
@@ -17,11 +23,5 @@
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#4682b499",
         "titleBar.inactiveForeground": "#e7e7e799"
-    },
-    "peacock.remoteColor": "#4682B4",
-    "files.exclude": {
-        "**/bin": true,
-        "**/obj": true,
-        "**/api/infrastructure": true
     }
 }
