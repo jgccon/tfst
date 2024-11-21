@@ -11,14 +11,10 @@ include {
   path = find_in_parent_folders()
 }
 
-dependency "resource_group" {
-  config_path = "../resource_group"
-}
-
 inputs = {
   environment         = local.env_vars.environment_name
   location            = local.env_vars.location
-  resource_group_name = dependency.resource_group.outputs.resource_group_name
+  resource_group_name = local.env_vars.resource_group_name
   tags                = local.env_vars.default_tags
   # SKU NAME:
   #     - The F1 plan is free.

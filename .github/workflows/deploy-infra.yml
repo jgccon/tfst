@@ -1,0 +1,56 @@
+# .github/workflows/deploy-infra.yml
+name: Deploy Infrastructure Workflow
+
+on:
+  workflow_call:
+    inputs:
+      working_directory:
+        required: true
+        type: string
+        description: "The working directory for the environment (e.g., infrastructure/envs/dev)"
+    secrets:
+      ARM_SUBSCRIPTION_ID:
+        required: true
+      ARM_CLIENT_ID:
+        required: true
+      ARM_CLIENT_SECRET:
+        required: true
+      ARM_TENANT_ID:
+        required: true
+
+jobs:
+  deploy_infra:
+    name: Deploy Infrastructure
+    runs-on: ubuntu-latest
+
+    env:
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Install Terraform and Terragrunt
+      - name: Install Terraform and Terragrunt
+        run: |
+          sudo apt-get update && sudo apt-get install -y unzip
+          curl -fsSL https://releases.hashicorp.com/terraform/1.5.5/terraform_1.5.5_linux_amd64.zip -o terraform.zip
+          unzip terraform.zip -d /usr/local/bin/
+          curl -fsSL https://github.com/gruntwork-io/terragrunt/releases/download/v0.45.12/terragrunt_linux_amd64 -o /usr/local/bin/terragrunt
+          chmod +x /usr/local/bin/terragrunt
+
+      # Generate Plan
+      - name: Plan Infrastructure Changes
+        run: |
+          cd ${{ inputs.working_directory }}
+          terragrunt run-all plan -out=tfplan
+
+      # Apply Plan
+      - name: Apply Infrastructure Changes
+        run: |
+          cd ${{ inputs.working_directory }}
+          terragrunt run-all apply tfplan --terragrunt-non-interactive
