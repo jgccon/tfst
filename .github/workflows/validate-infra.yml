@@ -16,18 +16,12 @@ on:
         required: true
         type: string
         description: "The directory for Terraform modules (e.g., infrastructure/modules)"
-      AZURE_CREDENTIALS:
-        required: true
-        type: string
-        description: "The Azure Credentials"
 
 jobs:
   validate_infra:
     name: Validate Infrastructure  to ${{ inputs.environment }}
     runs-on: ubuntu-latest
-
-    env:
-      AZURE_CREDENTIALS: ${{ inputs.AZURE_CREDENTIALS }}
+    environment: ${{ inputs.environment }}
 
     steps:
       # Checkout code
