@@ -16,6 +16,9 @@ on:
         required: true
         type: string
         description: "The directory for Terraform modules (e.g., infrastructure/modules)"
+    secrets:
+      AZURE_CREDENTIALS:
+        required: true
 
 jobs:
   validate_infra:

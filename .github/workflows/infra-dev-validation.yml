@@ -17,3 +17,5 @@ jobs:
       environment: dev
       working_directory: infrastructure/envs/dev
       terraform_modules_directory: infrastructure/modules
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
