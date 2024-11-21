@@ -1,0 +1,88 @@
+# .github/workflows/api-prod-cd.yml
+# GitHub Actions workflow to deploy the API in the PROD environment
+name: Deploy API to PROD
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/api/**'
+# Add a manual trigger
+  workflow_dispatch:   
+
+jobs:
+  deploy_api:
+    name: Deploy API to PROD
+    runs-on: ubuntu-latest
+    environment: prod
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Azure authentication
+      - name: Login to Azure
+        uses: azure/login@v1       
+        with:
+          creds : ${{ secrets.AZURE_CREDENTIALS }}      
+
+      # Initialize Terragrunt dependencies
+      - name: Initialize Terragrunt dependencies
+        run: |
+          echo "Initializing Terragrunt dependencies"         
+          terragrunt init --terragrunt-non-interactive
+        working-directory: infrastructure/envs/prod/app_services/api
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+      # Fetch App Service Name
+      - name: Fetch App Service Name
+        run: |
+          echo "Fetching App Service Name"          
+          APP_SERVICE_NAME=$(terragrunt output -json | jq -r '.name.value')
+          echo "APP_SERVICE_NAME=$APP_SERVICE_NAME" >> $GITHUB_ENV
+          if [ -z "$APP_SERVICE_NAME" ]; then
+            echo "Error: APP_SERVICE_NAME is empty. Check Terraform outputs."
+            exit 1
+          fi
+        working-directory: infrastructure/envs/prod/app_services/api
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+      # Set up .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      # Publish .NET Solution
+      - name: Publish .NET Solution
+        run: |
+          dotnet publish src/api/TheFullStackTeam.Backend.sln \
+            --configuration Release \
+            --output ${{ github.workspace }}/artifacts
+        env:
+          DOTNET_ROOT: /usr/share/dotnet
+
+      # Verify Artifact Directory
+      - name: List Artifact Directory
+        run: |
+          echo "Contents of artifact directory:"
+          ls -al ${{ github.workspace }}/artifacts
+
+      # Deploy API to Azure App Service
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.APP_SERVICE_NAME }}
+          slot-name: production
+          package: ${{ github.workspace }}/artifacts
+

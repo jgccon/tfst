@@ -1,0 +1,73 @@
+# .github/workflows/deploy-api.yml
+name: Deploy API
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      branch:
+        required: true
+        type: string
+      working_directory:
+        required: true
+        type: string
+    secrets:
+      AZURE_CREDENTIALS:
+        required: true
+      ARM_SUBSCRIPTION_ID:
+        required: true
+      ARM_CLIENT_ID:
+        required: true
+      ARM_CLIENT_SECRET:
+        required: true
+      ARM_TENANT_ID:
+        required: true
+
+jobs:
+  deploy_api:
+    name: Deploy API to ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Debug Inputs and Secrets
+        run: |
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Branch: ${{ inputs.branch }}"
+          echo "Working Directory: ${{ inputs.working_directory }}"
+          echo "AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}"
+          
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Initialize Terragrunt dependencies
+        run: |
+          echo "Initializing Terragrunt dependencies"
+          terragrunt init --terragrunt-non-interactive
+        working-directory: ${{ inputs.working_directory }}
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+      - name: Fetch App Service Name
+        run: |
+          APP_SERVICE_NAME=$(terragrunt output -json | jq -r '.name.value')
+          echo "APP_SERVICE_NAME=$APP_SERVICE_NAME" >> $GITHUB_ENV
+          if [ -z "$APP_SERVICE_NAME" ]; then
+            echo "Error: APP_SERVICE_NAME is empty."
+            exit 1
+          fi
+
+      - name: Deploy API to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.APP_SERVICE_NAME }}
+          package: ${{ github.workspace }}/artifacts
