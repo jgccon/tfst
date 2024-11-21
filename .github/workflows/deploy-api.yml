@@ -71,14 +71,15 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+      # Package Artifacts
       - name: Package Artifacts
         run: |
-          zip -r artifacts.zip artifacts
+          cd ${{ github.workspace }}/artifacts
+          zip -r ../deployment.zip .
         working-directory: ${{ github.workspace }}
       
       - name: Deploy API to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ inputs.app_service_name }}
-          package: ${{ github.workspace }}/artifacts.zip
+          package: ${{ github.workspace }}/deployment.zip
