@@ -14,9 +14,7 @@ jobs:
   deploy_prod_infra:
     uses: ./.github/workflows/deploy-infra.yml
     with:
-      working_directory: infrastructure/envs/prod
+      environment: prod
+      working_directory: infrastructure/envs/prod      
     secrets:
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
