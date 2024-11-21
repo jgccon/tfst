@@ -3,7 +3,11 @@ name: Validate Infrastructure
 
 on:
   workflow_call:
-    inputs:
+    inputs:      
+      environment:
+        required: true
+        type: string
+        description: "The deployment environment (e.g., dev, prod)"
       working_directory:
         required: true
         type: string
@@ -13,30 +17,33 @@ on:
         type: string
         description: "The directory for Terraform modules (e.g., infrastructure/modules)"
     secrets:
-      ARM_SUBSCRIPTION_ID:
+      AZURE_CREDENTIALS:
         required: true
       ARM_CLIENT_ID:
         required: true
       ARM_CLIENT_SECRET:
+        required: true
+      ARM_SUBSCRIPTION_ID:
         required: true
       ARM_TENANT_ID:
         required: true
 
 jobs:
   validate_infra:
-    name: Validate Infrastructure
+    name: Validate Infrastructure  to ${{ inputs.environment }}
     runs-on: ubuntu-latest
-
-    env:
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+    environment: ${{ inputs.environment }}
 
     steps:
       # Checkout code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+          
+      # Login to Azure
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Install Terraform and Terragrunt
       - name: Install Terraform and Terragrunt
@@ -62,3 +69,8 @@ jobs:
         run: |
           cd ${{ inputs.working_directory }}
           terragrunt run-all validate
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}

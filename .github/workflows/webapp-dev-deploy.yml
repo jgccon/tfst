@@ -14,6 +14,7 @@ jobs:
   deploy_dev_webapp:
     uses: ./.github/workflows/deploy-angular.yml
     with:
+      environment: dev
       working_directory: src/webapp/TFST-Front
       app_service_name: tfst-webapp-dev
     secrets:

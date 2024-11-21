@@ -4,6 +4,10 @@ name: Deploy Angular Application
 on:
   workflow_call:
     inputs:
+      environment:
+        required: true
+        type: string
+        description: "Environment to deploy the Angular application"
       working_directory:
         required: true
         type: string
@@ -20,11 +24,12 @@ jobs:
   build_and_deploy:
     name: Build and Deploy Angular Application
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
 
     steps:
       # Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Set up Node.js environment
       - name: Setup Node.js
