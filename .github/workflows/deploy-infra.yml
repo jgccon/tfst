@@ -33,6 +33,12 @@ jobs:
       # Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
+          
+      # Login to Azure
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Install Terraform and Terragrunt
       - name: Install Terraform and Terragrunt
