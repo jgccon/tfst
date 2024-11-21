@@ -45,7 +45,7 @@ jobs:
 
       # Checkout code
       - name: Checkout code
-        uses: actions/checkout@v3        
+        uses: actions/checkout@v4        
         
       # Login to Azure
       - name: Login to Azure
@@ -69,7 +69,7 @@ jobs:
       - name: Build .NET Solution
         run: |
           dotnet build ${{ inputs.solution_name }} --configuration Release --no-restore
-        working-directory: ${{ inputs.working_directory }}
+        working-directory: ${{ github.workspace }}
 
       # Publish .NET Solution
       - name: Publish .NET Solution
