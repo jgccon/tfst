@@ -1,0 +1,23 @@
+# .github/workflows/infra-dev-validation.yml
+name: Validate Infrastructure for DEV
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - infrastructure/**
+
+  workflow_dispatch:
+
+jobs:
+  validate_dev_infra:
+    uses: ./.github/workflows/validate-infra.yml
+    with:
+      working_directory: infrastructure/envs/dev
+      terraform_modules_directory: infrastructure/modules
+    secrets:
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
