@@ -7,18 +7,17 @@ on:
       - dev
     paths:
       - 'src/api/**'
+
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy_api:
     uses: ./.github/workflows/deploy-api.yml
     with:
       environment: dev
       branch: dev
-      working_directory: infrastructure/envs/dev/app_services/api
+      working_directory: src/api
+      solution_name: TheFullStackTeam.Backend.sln
+      app_service_name: tfst-api-dev
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}

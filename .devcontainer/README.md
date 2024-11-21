@@ -43,3 +43,77 @@ note: AZURE_CREDENTIALS_DEV is a json, just search for that format.
 
 ## Purpose
 This container ensures a consistent environment for testing workflows locally, particularly those involving Azure resources.
+
+# Commands to run pipelines locally with `act`
+
+## Infrastructure Validation
+
+### Validation for `dev`
+```bash
+act workflow_dispatch -W .github/workflows/infra-dev-validation.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+### Validation for `prod`
+```bash
+act workflow_dispatch -W .github/workflows/infra-prod-validation.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+## Infrastructure Deployment
+
+### Deployment for `dev`
+```bash
+act workflow_dispatch -W .github/workflows/infra-dev-deploy.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+### Deployment for `prod`
+```bash
+act workflow_dispatch -W .github/workflows/infra-prod-deploy.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+## CI for Backend API
+
+### CI for `dev`
+```bash
+act workflow_dispatch -W .github/workflows/api-dev-ci.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+### CI for `prod`
+```bash
+act workflow_dispatch -W .github/workflows/api-prod-ci.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+##Backend API Deployment
+
+### Deployment for `dev`
+```bash
+act workflow_dispatch -W .github/workflows/api-dev-cd.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+### Deployment for `prod`
+```bash
+act workflow_dispatch -W .github/workflows/api-prod-cd.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+## CI for Frontend Angular
+
+### CI for `dev`
+```bash
+act workflow_dispatch -W .github/workflows/webapp-dev-ci.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+### CI for `prod`
+```bash
+act workflow_dispatch -W .github/workflows/webapp-prod-ci.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+## Angular Frontend Deployment
+
+### Deployment for `dev`
+```bash
+act workflow_dispatch -W .github/workflows/webapp-dev-deploy.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```
+
+### Deployment for `prod`
+```bash
+act workflow_dispatch -W .github/workflows/webapp-prod-deploy.yml -P ubuntu-latest=my-act-image:latest --pull=false
+```

@@ -7,22 +7,25 @@ on:
       environment:
         required: true
         type: string
+        description: "The deployment environment (e.g., dev, prod)"
       branch:
         required: true
         type: string
+        description: "The branch being deployed"
       working_directory:
         required: true
         type: string
+        description: "The working directory for the API project"
+      solution_name:
+        required: true
+        type: string
+        description: "The name of the .NET solution file"
+      app_service_name:
+        required: true
+        type: string
+        description: "The Azure App Service name for deployment"
     secrets:
       AZURE_CREDENTIALS:
-        required: true
-      ARM_SUBSCRIPTION_ID:
-        required: true
-      ARM_CLIENT_ID:
-        required: true
-      ARM_CLIENT_SECRET:
-        required: true
-      ARM_TENANT_ID:
         required: true
 
 jobs:
@@ -31,43 +34,51 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug Inputs and Secrets
+      # Debug Inputs
+      - name: Debug Inputs
         run: |
           echo "Environment: ${{ inputs.environment }}"
           echo "Branch: ${{ inputs.branch }}"
           echo "Working Directory: ${{ inputs.working_directory }}"
-          echo "AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}"
-          
-      - name: Checkout code
-        uses: actions/checkout@v3
+          echo "Solution Name: ${{ inputs.solution_name }}"
+          echo "App Service Name: ${{ inputs.app_service_name }}"
 
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3        
+
+      # Set up .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      # Publish .NET Solution
+      - name: Publish .NET Solution
+        run: |
+          dotnet publish ${{ inputs.working_directory }}/${{ inputs.solution_name }} \
+            --configuration Release \
+            --output ${{ github.workspace }}/artifacts
+
+      # Verify Artifact Directory
+      - name: Verify Artifact Directory
+        run: |
+          echo "Contents of artifact directory:"
+          ls -al ${{ github.workspace }}/artifacts
+
+      # Login to Azure
       - name: Login to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Initialize Terragrunt dependencies
+      - name: Package Artifacts
         run: |
-          echo "Initializing Terragrunt dependencies"
-          terragrunt init --terragrunt-non-interactive
-        working-directory: ${{ inputs.working_directory }}
-        env:
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-
-      - name: Fetch App Service Name
-        run: |
-          APP_SERVICE_NAME=$(terragrunt output -json | jq -r '.name.value')
-          echo "APP_SERVICE_NAME=$APP_SERVICE_NAME" >> $GITHUB_ENV
-          if [ -z "$APP_SERVICE_NAME" ]; then
-            echo "Error: APP_SERVICE_NAME is empty."
-            exit 1
-          fi
-
+          zip -r artifacts.zip artifacts
+        working-directory: ${{ github.workspace }}
+      
       - name: Deploy API to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.APP_SERVICE_NAME }}
-          package: ${{ github.workspace }}/artifacts
+          app-name: ${{ inputs.app_service_name }}
+          package: ${{ github.workspace }}/artifacts.zip
