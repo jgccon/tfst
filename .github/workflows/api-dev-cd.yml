@@ -18,38 +18,29 @@ jobs:
     environment: dev
 
     steps:
-      # 1. Checkout the code
+      # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
-      
-      - name: Check terragrunt HCL
-        uses: gruntwork-io/terragrunt-action@v2
+
+      # Set up Azure authentication
+      - name: Login to Azure
+        uses: azure/login@v1       
         with:
-          tg_version: 0.69.0
-          tg_command: "hclfmt --terragrunt-check --terragrunt-diff"
-          tg_dir: "infrastructure/envs/dev/app_services/api"
-          tf_version: 1.4.6
+          creds : ${{ secrets.AZURE_CREDENTIALS_DEV }}      
 
-      # # 2. Set up Azure authentication
-      # - name: Login to Azure
-      #   uses: azure/login@v1       
-      #   with:
-      #     creds : ${{ secrets.AZURE_CREDENTIALS_DEV }}
-      
+      # Initialize Terragrunt dependencies
+      - name: Initialize Terragrunt dependencies
+        run: |
+          echo "Initializing Terragrunt dependencies"         
+          terragrunt init --terragrunt-non-interactive
+        working-directory: infrastructure/envs/dev/app_services/api
+        env:
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
-      # # 3. Initialize Terragrunt dependencies
-      # - name: Initialize Terragrunt dependencies
-      #   run: |
-      #     echo "Initializing Terragrunt dependencies"         
-      #     terragrunt init --terragrunt-non-interactive
-      #   working-directory: infrastructure/envs/dev/app_services/api
-      #   env:
-      #     ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      #     ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      #     ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      #     ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-
-      # 4. Fetch App Service Name
+      # Fetch App Service Name
       - name: Fetch App Service Name
         run: |
           echo "Fetching App Service Name"          
@@ -66,26 +57,32 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
-      # 5. Publish .NET Solution
+      # Set up .NET Core SDK
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      # Publish .NET Solution
       - name: Publish .NET Solution
         run: |
           dotnet publish src/api/TheFullStackTeam.Backend.sln \
             --configuration Release \
-            --output $GITHUB_WORKSPACE/artifacts
+            --output ${{ github.workspace }}/artifacts
         env:
           DOTNET_ROOT: /usr/share/dotnet
 
-      # 6. Verify Artifact Directory
+      # Verify Artifact Directory
       - name: List Artifact Directory
         run: |
           echo "Contents of artifact directory:"
-          ls -al $GITHUB_WORKSPACE/artifacts
+          ls -al ${{ github.workspace }}/artifacts
 
-      # 7. Deploy API to Azure App Service
+      # Deploy API to Azure App Service
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.APP_SERVICE_NAME }}
           slot-name: production
-          package: ${{ github.workspace }}/artifacts/TheFullStackTeam.API.zip
+          package: ${{ github.workspace }}/artifacts
 

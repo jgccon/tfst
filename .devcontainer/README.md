@@ -17,6 +17,24 @@ When executing `act`, specify the custom image for the platforms used in your wo
 act workflow_dispatch -W .github/workflows/api-dev-cd.yml -P ubuntu-latest=my-act-image:latest --pull=false
 ```
 
+## Configuration of the `.secrets` file
+
+To run the workflows locally, you need a `.secrets` file in the root of the project. This file contains the credentials required to authenticate with Azure and manage infrastructure resources.
+
+### Example of `.secrets`
+
+Create a `.secrets` file in the root of the project and add the necessary keys in the following format:
+
+```plaintext
+AZURE_CREDENTIALS_DEV=<JSON with Azure credentials for the DEV environment>
+ARM_SUBSCRIPTION_ID=<Azure Subscription ID>
+ARM_CLIENT_ID=<Azure Client ID>
+ARM_CLIENT_SECRET=<Azure Client Secret>
+ARM_TENANT_ID=<Azure Tenant ID>
+```
+
+note: AZURE_CREDENTIALS_DEV is a json, just search for that format.
+
 ## Tools Included
 - Azure CLI
 - Terragrunt
