@@ -32,6 +32,7 @@ jobs:
   deploy_api:
     name: Deploy API to ${{ inputs.environment }}
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
 
     steps:
       # Debug Inputs
