@@ -70,15 +70,16 @@ jobs:
       - name: Build .NET Solution
         run: |
           dotnet build ${{ inputs.solution_name }} --configuration Release --no-restore
-        working-directory: ${{ github.workspace }}
+        working-directory: ${{ inputs.working_directory }}
 
       # Publish .NET Solution
       - name: Publish .NET Solution
         run: |
-          dotnet publish ${{ inputs.working_directory }}/${{ inputs.solution_name }} \
+          dotnet publish ${{ inputs.solution_name }} \
             --configuration Release \
             --no-build \
             --output ${{ github.workspace }}/publish
+        working-directory: ${{ inputs.working_directory }}
       
       - name: Deploy API to Azure App Service
         uses: azure/webapps-deploy@v2
