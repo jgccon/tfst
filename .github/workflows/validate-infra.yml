@@ -16,9 +16,10 @@ on:
         required: true
         type: string
         description: "The directory for Terraform modules (e.g., infrastructure/modules)"
-    secrets:
       AZURE_CREDENTIALS:
         required: true
+        type: string
+        description: "The Azure Credentials"
 
 jobs:
   validate_infra:
@@ -26,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      AZURE_CREDENTIALS: ${{ inputs.AZURE_CREDENTIALS }}
 
     steps:
       # Checkout code
