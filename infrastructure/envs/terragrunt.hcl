@@ -31,7 +31,7 @@ generate "versions" {
       required_providers {
         azurerm = {
           source  = "hashicorp/azurerm"
-          version = ">=4.8.0" # Minimum version required for the azurerm_client_config data source
+          version = "~> 4.11.0"
         }
       }
     }

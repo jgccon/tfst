@@ -34,5 +34,5 @@ inputs = {
   always_on = local.env_vars.service_sku != "f1" && local.env_vars.service_sku != "d1"
 
   # Pass the SQL connection string as an environment variable
-  sql_connection_string = dependency.sql_database.outputs.connection_string
+  mssql_connection_string = dependency.sql_database.outputs.connection_string
 }
