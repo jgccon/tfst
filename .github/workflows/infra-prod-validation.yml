@@ -2,7 +2,7 @@
 name: Validate Infrastructure for PROD
 
 on:
-  push:
+  pull_request:
     branches:
       - main
     paths:
@@ -19,4 +19,8 @@ jobs:
       terraform_modules_directory: infrastructure/modules
     secrets:
       AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
