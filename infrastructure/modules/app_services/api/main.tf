@@ -13,7 +13,7 @@ resource "azurerm_linux_web_app" "api" {
   }
 
   app_settings = {
-    "ASPNETCORE_ENVIRONMENT"  = var.aspnetcore_environment
+    "ASPNETCORE_ENVIRONMENT"               = var.aspnetcore_environment
     "ConnectionStrings__DefaultConnection" = var.mssql_connection_string
   }
 
