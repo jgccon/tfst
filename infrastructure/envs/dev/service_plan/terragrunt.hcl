@@ -21,7 +21,7 @@ inputs = {
   #     - The D1 plan is the cheapest plan after the free plan.
   #     - For test and development environments, F1 and D1 are ideal.
   # Change this value to "D1" or "B1" or whatever you diced to select a different SKU
-  sku_name = "F1"
+  sku_name = local.env_vars.service_sku
   # Change this value to "Windows" if you want to deploy a Windows Service Plan
   os_type = "Linux"
 }
