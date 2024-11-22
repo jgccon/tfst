@@ -13,7 +13,7 @@ resource "azurerm_mssql_server" "shared" {
 resource "azurerm_mssql_database" "shared" {
   name         = var.database_name
   server_id    = azurerm_mssql_server.shared.id
-  collation    = "SQL_Latin1_General_CP1_CI_AS"  # Default collation
+  collation    = "SQL_Latin1_General_CP1_CI_AS" # Default collation
   sku_name     = var.sku_name
   max_size_gb  = var.max_size_gb
   license_type = "LicenseIncluded"
