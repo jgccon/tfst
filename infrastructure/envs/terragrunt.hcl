@@ -14,8 +14,8 @@ locals {
   admin_password = get_env("SQL_ADMIN_PASSWORD", "")
 
   # Validate missing variables
-  missing_variables = [for key, value in {"SQL_ADMIN_USERNAME" = local.admin_username, "SQL_ADMIN_PASSWORD" = local.admin_password} : key if value == ""]
-  
+  missing_variables = [for key, value in { "SQL_ADMIN_USERNAME" = local.admin_username, "SQL_ADMIN_PASSWORD" = local.admin_password } : key if value == ""]
+
   # Throw an error if variables are missing
   validation_error = length(local.missing_variables) > 0 ? error("Missing required environment variables: ${join(", ", local.missing_variables)}") : null
 }
