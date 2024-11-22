@@ -21,7 +21,7 @@ services:
       - tfst-seq
       - tfst-mongo
     volumes:
-      - ${USERPROFILE}/.aspnet/https:/https/
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
 
   tfst-sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
