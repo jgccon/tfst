@@ -31,7 +31,7 @@ inputs = {
   aspnetcore_environment = local.env_vars.aspnetcore_environment
 
   # Set `always_on` based on the `service_sku`
-  always_on = local.env_vars.service_sku != "f1" && local.env_vars.service_sku != "d1"
+  always_on = local.env_vars.service_sku != "F1" && local.env_vars.service_sku != "D1"
 
   # Pass the SQL connection string as an environment variable
   mssql_connection_string = dependency.sql_database.outputs.connection_string

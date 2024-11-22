@@ -10,7 +10,7 @@ locals {
   service_sku = "F1"
 
   # SQL Database Configuration
-  sql_server_name = "sql-server-dev"
+  sql_server_name = "tfst-sql-server-dev"
   database_name   = "shared-sql-db"
   admin_username  = "sqladmin"
   admin_password  = "SuperSecurePassword123"
