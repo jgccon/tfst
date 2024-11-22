@@ -2,12 +2,12 @@
 locals {
   environment_name       = "prod"
   aspnetcore_environment = "Production"
-  location               = "westeurope"
+  location               = "spaincentral"
 
   resource_group_name = "rg-tfst-prod"
 
   # Select Service Plan SKU
-  service_sku = "D1" # We can change this value to "d1" or "b1"
+  service_sku = "B1"
 
   # SQL Database Configuration
   sql_server_name = "sql-server-prod"
