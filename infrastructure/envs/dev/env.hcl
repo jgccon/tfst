@@ -12,8 +12,8 @@ locals {
   # SQL Database Configuration
   sql_server_name = "tfst-sql-server-dev"
   database_name   = "shared-sql-db"
-  admin_username  = "sqladmin"
-  admin_password  = "SuperSecurePassword123"
+  admin_username  = ""
+  admin_password  =  ""
   sku_name        = "GP_S_Gen5_2" # Free tier
   max_size_gb     = 32
 
