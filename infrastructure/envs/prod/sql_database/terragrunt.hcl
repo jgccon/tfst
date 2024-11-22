@@ -4,7 +4,7 @@ locals {
 }
 
 terraform {
-  source = "../../../modules/modules/sql_database"
+  source = "../../../modules/sql_database"
 }
 
 include {
