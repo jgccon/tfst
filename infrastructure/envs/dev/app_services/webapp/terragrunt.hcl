@@ -31,7 +31,7 @@ inputs = {
   tags                = local.env_vars.default_tags
 
   # Set `always_on` based on the `service_sku`
-  always_on = local.env_vars.service_sku != "f1" && local.env_vars.service_sku != "d1"
+  always_on = local.env_vars.service_sku != "F1" && local.env_vars.service_sku != "D1"
 
   # Use the API service's URL as an environment variable
   api_url = dependency.api.outputs.default_hostname

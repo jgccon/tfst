@@ -23,6 +23,12 @@ on:
         required: true
       ARM_TENANT_ID:
         required: true
+      SQL_ADMIN_PASSWORD:
+        required: true
+        description: "The password for the SQL Server admin user"
+      SQL_ADMIN_USERNAME:
+        required: true
+        description: "The username for the SQL Server admin user"
 
 
 jobs:

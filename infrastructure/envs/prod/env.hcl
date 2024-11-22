@@ -2,18 +2,18 @@
 locals {
   environment_name       = "prod"
   aspnetcore_environment = "Production"
-  location               = "westeurope"
+  location               = "spaincentral"
 
   resource_group_name = "rg-tfst-prod"
 
   # Select Service Plan SKU
-  service_sku = "D1" # We can change this value to "d1" or "b1"
+  service_sku = "B1"
 
   # SQL Database Configuration
-  sql_server_name = "sql-server-prod"
+  sql_server_name = "tfst-sql-server-prod"
   database_name   = "shared-sql-db"
-  admin_username  = "sqladmin"
-  admin_password  = "SuperSecurePassword123"
+  admin_username  = ""
+  admin_password  = ""
   sku_name        = "GP_S_Gen5_2" # Free tier
   max_size_gb     = 32
 

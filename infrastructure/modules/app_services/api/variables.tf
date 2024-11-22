@@ -10,6 +10,7 @@ variable "tags" {
 variable "always_on" {
   description = "Enable Always On setting for the Web App"
   type        = bool
+  default     = true
 }
 
 variable "aspnetcore_environment" {
