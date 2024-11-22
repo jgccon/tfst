@@ -11,3 +11,8 @@ variable "always_on" {
   description = "Enable Always On setting for the Web App"
   type        = bool
 }
+
+variable "aspnetcore_environment" {
+  description = "The ASP.NET Core environment (e.g., Development, Staging, Production)"
+  type        = string
+}
