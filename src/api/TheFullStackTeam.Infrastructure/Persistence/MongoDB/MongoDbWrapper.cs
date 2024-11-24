@@ -8,7 +8,7 @@ using TheFullStackTeam.Domain.Views;
 namespace TheFullStackTeam.Infrastructure.Persistence.MongoDB;
 public class MongoDbWrapper
 {
-    private readonly Lazy<IMongoDatabase> _databaseLazy;
+    private readonly Lazy<IMongoDatabase?> _databaseLazy;
     private readonly ILogger<MongoDbWrapper> _logger;
     private readonly string _databaseName;
     private readonly MongoDbSettings _mongoSettings;
@@ -20,7 +20,7 @@ public class MongoDbWrapper
         configuration.GetSection("MongoDbSettings").Bind(_mongoSettings);
         _databaseName = _mongoSettings.DatabaseName;
 
-        _databaseLazy = new Lazy<IMongoDatabase>(() =>
+        _databaseLazy = new Lazy<IMongoDatabase?>(() =>
         {
             try
             {
@@ -39,7 +39,7 @@ public class MongoDbWrapper
         });
     }
 
-    public IMongoDatabase Database => _databaseLazy.Value;
+    public IMongoDatabase? Database => _databaseLazy.Value;
 
     public bool IsDatabaseInitialized => _databaseLazy.IsValueCreated && _databaseLazy.Value != null;
 
@@ -54,7 +54,7 @@ public class MongoDbWrapper
         try
         {
             _logger.LogInformation("Pinging MongoDB...");
-            var result = await Database.RunCommandAsync((Command<BsonDocument>)"{ping:1}");
+            var result = await Database!.RunCommandAsync((Command<BsonDocument>)"{ping:1}");
             _logger.LogInformation("Successfully connected to MongoDB.");
 
             await InitializeIndexes();
@@ -69,16 +69,16 @@ public class MongoDbWrapper
     {
         try
         {
-            // Index AccountView
-            var accountCollection = Database.GetCollection<AccountView>("Accounts");
+            // Indexes AccountView
+            var accountCollection = Database!.GetCollection<AccountView>("Accounts");
             var accountIndexKeys = Builders<AccountView>.IndexKeys
                 .Ascending(u => u.EntityId)
                 .Ascending(u => u.Version);
             var accountIndexModel = new CreateIndexModel<AccountView>(accountIndexKeys);
             await accountCollection.Indexes.CreateOneAsync(accountIndexModel);
 
-            // Index UserProfileView
-            var userProfileCollection = Database.GetCollection<UserProfileView>("UserProfiles");
+            // Indexes UserProfileView
+            var userProfileCollection = Database!.GetCollection<UserProfileView>("UserProfiles");
             var userProfileIndexKeys = Builders<UserProfileView>.IndexKeys
                 .Ascending(up => up.EntityId)
                 .Ascending(up => up.Version);

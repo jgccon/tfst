@@ -51,7 +51,7 @@ public class Program
 
         // Configure services
         builder.Services.AddDatabaseConfiguration(builder.Configuration);
-        builder.Services.AddMongoDb(builder.Configuration);
+        builder.Services.AddMongoDb();
         builder.Services.AddCommandRepositories();
         builder.Services.AddQueryRepositories();
         builder.Services.AddMediatRConfiguration();
