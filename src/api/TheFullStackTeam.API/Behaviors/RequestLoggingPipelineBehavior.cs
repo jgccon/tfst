@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Serilog.Context;
 
-namespace TheFullStackTeam.Api.Behaviors
+namespace TheFullStackTeam.API.Behaviors
 {
     public class RequestLoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {

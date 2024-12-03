@@ -1,4 +1,4 @@
-﻿namespace TheFullStackTeam.Api.Middlewares
+﻿namespace TheFullStackTeam.API.Middlewares
 {
     /// <summary>
     /// Middleware to handle global exceptions

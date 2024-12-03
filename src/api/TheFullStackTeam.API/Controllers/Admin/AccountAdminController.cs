@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TheFullStackTeam.Api.Controllers.Admin
+namespace TheFullStackTeam.API.Controllers.Admin
 {
     [ApiExplorerSettings(GroupName = "Admin")]
     [Area("Admin")]

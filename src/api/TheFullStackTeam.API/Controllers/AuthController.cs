@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TheFullStackTeam.Api.Controllers
+namespace TheFullStackTeam.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

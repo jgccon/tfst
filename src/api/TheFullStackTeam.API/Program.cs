@@ -3,8 +3,8 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using System.Text.Json;
-using TheFullStackTeam.Api.Extensions;
-using TheFullStackTeam.Api.Middlewares;
+using TheFullStackTeam.API.Extensions;
+using TheFullStackTeam.API.Middlewares;
 using TheFullStackTeam.API.HealthChecks;
 using TheFullStackTeam.Common.Configuration;
 using TheFullStackTeam.Common.Converters;
@@ -16,7 +16,7 @@ using TheFullStackTeam.Infrastructure.Persistence.Sql.Initialization;
 using TheFullStackTeam.Infrastructure.Persistence.Sql.Services;
 using TheFullStackTeam.Infrastructure.Services;
 
-namespace TheFullStackTeam.Api;
+namespace TheFullStackTeam.API;
 
 public class Program
 {

@@ -1,4 +1,4 @@
-using TheFullStackTeam.Api.Extensions;
+using TheFullStackTeam.API.Extensions;
 using TheFullStackTeam.Application.Accounts.Commands.SignUp;
 using TheFullStackTeam.Application.Accounts.Models;
 using TheFullStackTeam.Application.Accounts.Queries;
@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TheFullStackTeam.Api.Controllers
+namespace TheFullStackTeam.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

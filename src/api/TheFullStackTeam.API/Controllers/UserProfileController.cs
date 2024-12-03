@@ -1,4 +1,4 @@
-﻿using TheFullStackTeam.Api.Extensions;
+﻿using TheFullStackTeam.API.Extensions;
 using TheFullStackTeam.Application.UserProfiles.Commands;
 using TheFullStackTeam.Application.UserProfiles.Models;
 using TheFullStackTeam.Application.UserProfiles.Queries;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NUlid;
 
-namespace TheFullStackTeam.Api.Controllers
+namespace TheFullStackTeam.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

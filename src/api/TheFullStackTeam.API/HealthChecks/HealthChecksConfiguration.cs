@@ -6,7 +6,12 @@ public static class HealthChecksConfiguration
 {
     public static void AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration)
     {
-        var rabbitMQSettings = configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
+        var rabbitMQSettings = configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>() ?? throw new InvalidOperationException("RabbitMQ settings are not configured properly in the application settings.");
+
+        if (string.IsNullOrEmpty(rabbitMQSettings.UserName) || string.IsNullOrEmpty(rabbitMQSettings.Password) || string.IsNullOrEmpty(rabbitMQSettings.HostName))
+        {
+            throw new InvalidOperationException("RabbitMQ settings are incomplete. Please provide valid UserName, Password, and HostName.");
+        }
 
         services.AddHealthChecks()
             // SQL Server

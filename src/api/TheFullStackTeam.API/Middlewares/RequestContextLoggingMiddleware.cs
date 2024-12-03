@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Primitives;
 using Serilog.Context;
 
-namespace TheFullStackTeam.Api.Middlewares
+namespace TheFullStackTeam.API.Middlewares
 {
     public class RequestContextLoggingMiddleware
     {

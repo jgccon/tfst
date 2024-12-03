@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Serilog;
 
-namespace TheFullStackTeam.Api.Behaviors
+namespace TheFullStackTeam.API.Behaviors
 {
     public class RequestExceptionHandlerBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>

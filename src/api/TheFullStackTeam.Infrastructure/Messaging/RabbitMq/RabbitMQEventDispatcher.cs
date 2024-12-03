@@ -10,11 +10,31 @@ using TheFullStackTeam.Domain.Events;
 using TheFullStackTeam.Domain.Services;
 
 namespace TheFullStackTeam.Infrastructure.Messaging.RabbitMq;
-
+/// <summary>
+/// Provides an implementation of <see cref="IEventDispatcher"/> that leverages RabbitMQ as the message broker.
+/// 
+/// The RabbitMQEventDispatcher is responsible for sending messages to RabbitMQ queues.
+/// This implementation uses Lazy initialization for connections and channels to:
+/// - Defer resource-heavy operations until they are strictly necessary.
+/// - Avoid failures during application startup caused by transient network issues.
+/// - Ensure that resources are thread-safe and only initialized once.
+/// 
+/// Note: Developers must ensure that the connection and channel are properly disposed
+/// to avoid resource leaks or unintended behavior during application shutdown.
+/// </summary>
 public class RabbitMQEventDispatcher : IEventDispatcher
 {
-    private readonly Lazy<IConnection> _connection;
-    private readonly Lazy<IModel> _channel;
+    /// <summary>
+    /// Represents a lazy-loaded RabbitMQ connection, ensuring it is only initialized when required.
+    /// This improves performance and avoids unnecessary resource allocation in cases where the connection
+    /// is not immediately needed.
+    /// </summary>
+    private readonly Lazy<IConnection> _lazyConnection;
+    /// <summary>
+    /// Represents a lazy-loaded RabbitMQ channel for interacting with queues and exchanges.
+    /// It is initialized only when required, ensuring efficient use of resources and supporting
+    /// thread-safe operations in concurrent scenarios.
+    private readonly Lazy<IModel> _lazyChannel;
     private readonly RabbitMQSettings _settings;
     private readonly ILogger<RabbitMQEventDispatcher> _logger;
 
@@ -22,7 +42,7 @@ public class RabbitMQEventDispatcher : IEventDispatcher
     {
         _logger = logger;
         _settings = settings.Value;
-        _connection = new Lazy<IConnection>(() =>
+        _lazyConnection = new Lazy<IConnection>(() =>
         {
             var factory = new ConnectionFactory()
             {
@@ -33,10 +53,10 @@ public class RabbitMQEventDispatcher : IEventDispatcher
 
             return factory.CreateConnection();
         });
-        _channel = new Lazy<IModel>(() =>
+        _lazyChannel = new Lazy<IModel>(() =>
         {
             // Create the channel from the connection
-            var channel = _connection.Value.CreateModel();
+            var channel = _lazyConnection.Value.CreateModel();
 
             // Declare the exchange
             channel.ExchangeDeclare(
@@ -56,7 +76,7 @@ public class RabbitMQEventDispatcher : IEventDispatcher
         try
         {
             // Ensure the channel is initialized
-            var channel = _channel.Value;
+            var channel = _lazyChannel.Value;
 
             // Include the assembly name to deserialize the event
             var eventType = domainEvent.GetType().AssemblyQualifiedName;

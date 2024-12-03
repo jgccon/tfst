@@ -1,4 +1,4 @@
-namespace TheFullStackTeam.Api
+namespace TheFullStackTeam.API
 {
     public static class Constants
     {
