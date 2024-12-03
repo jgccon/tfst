@@ -5,8 +5,8 @@ namespace TheFullStackTeam.Application.UserProfiles.Models
 {
     public class UserProfileModel
     {
-        public string Id { get; set; }
-        public string AccountId { get; set; }
+        public string? Id { get; set; }
+        public string? AccountId { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string DisplayName { get; set; } = string.Empty;

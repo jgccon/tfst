@@ -60,14 +60,14 @@ namespace TheFullStackTeam.Infrastructure.Repositories.MongoDB.Repositories
         public async Task UpdateAsync(T entity)
         {
             if (_collection == null) return;
-            var filter = Builders<T>.Filter.Eq("EntityId", entity.GetType().GetProperty("EntityId")?.GetValue(entity, null).ToString());
+            var filter = Builders<T>.Filter.Eq("EntityId", entity.GetType().GetProperty("EntityId")?.GetValue(entity, null)?.ToString() ?? string.Empty);
             await _collection.ReplaceOneAsync(filter, entity);
         }
 
         public async Task DeleteAsync(T entity)
         {
             if (_collection == null) return;
-            var filter = Builders<T>.Filter.Eq("EntityId", entity.GetType().GetProperty("EntityId")?.GetValue(entity, null).ToString());
+            var filter = Builders<T>.Filter.Eq("EntityId", entity.GetType().GetProperty("EntityId")?.GetValue(entity, null)?.ToString() ?? string.Empty);
             await _collection.DeleteOneAsync(filter);
         }
     }

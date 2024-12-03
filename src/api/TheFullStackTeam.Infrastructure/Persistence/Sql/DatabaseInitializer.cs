@@ -33,22 +33,22 @@ namespace TheFullStackTeam.Infrastructure.Persistence.Sql.Initialization
 
         public async Task SeedAdminUserAsync()
         {
-            var adminUser = await _accountRepository.GetByEmailAsync(_adminSettings.Email);
+            var adminUser = await _accountRepository.GetByEmailAsync(_adminSettings.Email!);
             if (adminUser == null)
             {
                 adminUser = new Account
                 {
-                    Email = _adminSettings.Email,
-                    PasswordHash = _passwordHasher.Hash(_adminSettings.Password),
+                    Email = _adminSettings.Email!,
+                    PasswordHash = _passwordHasher.Hash(_adminSettings.Password!),
                     Roles = ["Admin", "User"],
                     IsActive = true,
                     Profiles =
                     {
                         new UserProfile
                         {
-                            FirstName = _adminSettings.FirstName,
-                            LastName = _adminSettings.LastName,
-                            DisplayName = _adminSettings.FirstName,
+                            FirstName = _adminSettings.FirstName!,
+                            LastName = _adminSettings.LastName!,
+                            DisplayName = _adminSettings.FirstName!,
                             IsPrimary = true
                         }
                     }

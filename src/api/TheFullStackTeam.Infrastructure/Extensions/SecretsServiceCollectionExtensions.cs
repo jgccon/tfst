@@ -11,7 +11,7 @@ namespace TheFullStackTeam.Infrastructure.Extensions
         {
             var featureFlags = configuration.GetSection("FeatureFlags").Get<FeatureFlags>();
 
-            switch (featureFlags.SecretsProvider.ToLower())
+            switch (featureFlags?.SecretsProvider.ToLower())
             {
                 case "azurekeyvault":
                     var keyVaultName = Environment.GetEnvironmentVariable("AZURE_KEYVAULT_NAME");

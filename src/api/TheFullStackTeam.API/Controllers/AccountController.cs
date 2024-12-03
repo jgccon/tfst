@@ -38,13 +38,13 @@ namespace TheFullStackTeam.Api.Controllers
         public async Task<IActionResult> Me()
         {
             var email = User?.Identity?.Name;
-            var profileId = User.GetProfileId();
+            var profileId = User?.GetProfileId();
             if (email == null)
             {
                 return BadRequest("Not authenticated!");
             }
 
-            var query = new GetAccountByEmailQuery(email, profileId);
+            var query = new GetAccountByEmailQuery(email, profileId!);
             var account = await _mediator.Send(query);
 
             if (account == null)

@@ -19,9 +19,9 @@
 
         public class QuestionSummary
         {
-            public string Id { get; set; }
-            public string Moniker { get; set; }
-            public string Title { get; set; }
+            public string? Id { get; set; }
+            public string? Moniker { get; set; }
+            public string? Title { get; set; }
             public DateTime CreatedAt { get; set; }
             public int TotalVotes { get; set; }
             public int AnswerCount { get; set; }
@@ -30,30 +30,30 @@
 
         public class AnswerSummary
         {
-            public string Id { get; set; }
-            public string QuestionId { get; set; }
-            public string QuestionTitle { get; set; }
-            public string ContentSnippet { get; set; }
+            public string? Id { get; set; }
+            public string? QuestionId { get; set; }
+            public string? QuestionTitle { get; set; }
+            public string? ContentSnippet { get; set; }
             public int Votes { get; set; }
             public DateTime AnsweredAt { get; set; }
         }
 
         public class CommentSummary
         {
-            public string Id { get; set; }
-            public string Content { get; set; }
-            public string Author { get; set; }
+            public string? Id { get; set; }
+            public string? Content { get; set; }
+            public string? Author { get; set; }
             public DateTime PostedAt { get; set; }
-            public string TargetId { get; set; } // ID of the question or answer being commented on
-            public string TargetType { get; set; } // "Question" or "Answer"
+            public string? TargetId { get; set; } // ID of the question or answer being commented on
+            public string? TargetType { get; set; } // "Question" or "Answer"
         }
 
         public class VoteSummary
         {
-            public string Id { get; set; }
-            public string TargetId { get; set; } // ID of the question or answer being voted on
-            public string TargetType { get; set; } // "Question" or "Answer"
-            public string TargetTitle { get; set; }
+            public string? Id { get; set; }
+            public string? TargetId { get; set; } // ID of the question or answer being voted on
+            public string? TargetType { get; set; } // "Question" or "Answer"
+            public string? TargetTitle { get; set; }
             public int Value { get; set; } // +1 for upvote, -1 for downvote
         }
 

@@ -36,7 +36,7 @@ namespace TheFullStackTeam.Application.Auth.Commands
             var account = await _accountRepository.GetByEmailAsync(request.Username);
             if (account == null || !_passwordHasher.Verify(account.PasswordHash, request.Password))
             {
-                return null;
+                throw new Exception($"No account found for email: {request.Username}");
             }
 
             var selectedProfile = account.Profiles.Where(up => up.IsPrimary).FirstOrDefault();

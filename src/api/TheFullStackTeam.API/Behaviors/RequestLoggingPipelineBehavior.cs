@@ -3,7 +3,7 @@ using Serilog.Context;
 
 namespace TheFullStackTeam.Api.Behaviors
 {
-    public class RequestLoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class RequestLoggingPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
     {
         private readonly ILogger<RequestLoggingPipelineBehavior<TRequest, TResponse>> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;

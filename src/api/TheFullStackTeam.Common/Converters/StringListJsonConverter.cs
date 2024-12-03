@@ -15,7 +15,7 @@ namespace TheFullStackTeam.Common.Converters
 
                 if (reader.TokenType == JsonTokenType.String)
                 {
-                    list.Add(reader.GetString());
+                    list.Add(reader.GetString()!);
                 }
             }
             return list;

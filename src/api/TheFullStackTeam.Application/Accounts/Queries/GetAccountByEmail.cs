@@ -44,7 +44,7 @@ namespace TheFullStackTeam.Application.Accounts.Queries
             var account = await _accountRepository.GetByEmailAsync(request.Email);
             if (account == null)
             {
-                return null;
+                throw new Exception($"No account found for email: {request.Email}");
             }
 
             var correlationId = _httpContextAccessor.HttpContext?.Items["CorrelationId"]?.ToString() ?? string.Empty;
