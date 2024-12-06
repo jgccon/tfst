@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using System.Text;
@@ -73,51 +74,76 @@ public class RabbitMQEventDispatcher : IEventDispatcher
 
     public Task DispatchAsync<TEvent>(TEvent domainEvent) where TEvent : EventBase
     {
+        var eventType = domainEvent.GetType().AssemblyQualifiedName;
+        var messagePayload = new
+        {
+            EventType = eventType,
+            EventData = domainEvent
+        };
+        var jsonOptions = new JsonSerializerOptions
+        {
+            Converters = { new UlidJsonConverter() }
+        };
+        var message = JsonSerializer.Serialize(messagePayload, jsonOptions);
+        var body = Encoding.UTF8.GetBytes(message);
+
+        var channel = _lazyChannel.Value;
+        var properties = channel.CreateBasicProperties();
+        properties.Persistent = true;
+        properties.Headers = new Dictionary<string, object>
+        {
+            { "CorrelationId", domainEvent.CorrelationId }
+        };
+
+        // retry policy for BrokerUnreachableException and AlreadyClosedException
+        var policy = Policy
+        .Handle<BrokerUnreachableException>().Or<AlreadyClosedException>()
+        .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+        (exception, timeSpan, retryCount, context) =>
+        {
+            _logger.LogWarning(exception,
+                "RabbitMQ unreachable. Retry {RetryCount} after {DelaySeconds} seconds. EventType: {EventType}, CorrelationId: {CorrelationId}, Exchange: {ExchangeName}",
+                retryCount,
+                timeSpan.TotalSeconds,
+                domainEvent.GetType().Name,
+                domainEvent.CorrelationId,
+                _settings.ExchangeName);
+        });
+
         try
         {
-            // Ensure the channel is initialized
-            var channel = _lazyChannel.Value;
-
-            // Include the assembly name to deserialize the event
-            var eventType = domainEvent.GetType().AssemblyQualifiedName;
-            var messagePayload = new
-            {
-                EventType = eventType,
-                EventData = domainEvent
-            };
-            var jsonOptions = new JsonSerializerOptions
-            {
-                Converters = { new UlidJsonConverter() }
-            };
-            var message = JsonSerializer.Serialize(messagePayload, jsonOptions);
-
-            var body = Encoding.UTF8.GetBytes(message);
-
-            var properties = channel.CreateBasicProperties();
-            properties.Persistent = true;
-            properties.Headers = new Dictionary<string, object>
-            {
-                { "CorrelationId", domainEvent.CorrelationId }
-            };
-
-            channel.BasicPublish(
-                exchange: _settings.ExchangeName,
-                routingKey: "",
-                basicProperties: properties,
-                body: body
+            policy.Execute(() =>
+                channel.BasicPublish(
+                    exchange: _settings.ExchangeName,
+                    routingKey: "",
+                    basicProperties: properties,
+                    body: body
+                )
             );
         }
         catch (BrokerUnreachableException ex)
         {
-            _logger.LogError(ex, $"RabbitMQ is unreachable. Event Type: {domainEvent.GetType().Name}");
+            _logger.LogError(ex,
+                "RabbitMQ is unreachable even after retries. EventType: {EventType}, CorrelationId: {CorrelationId}, Exchange: {ExchangeName}",
+                domainEvent.GetType().Name,
+                domainEvent.CorrelationId,
+                _settings.ExchangeName);
         }
         catch (AlreadyClosedException ex)
         {
-            _logger.LogError(ex, $"RabbitMQ connection is closed. Event Type: {domainEvent.GetType().Name}");
+            _logger.LogError(ex,
+                "RabbitMQ connection is closed. EventType: {EventType}, CorrelationId: {CorrelationId}, Exchange: {ExchangeName}",
+                domainEvent.GetType().Name,
+                domainEvent.CorrelationId,
+                _settings.ExchangeName);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, $"An unexpected error occurred when sending event to RabbitMQ. Event Type: {domainEvent.GetType().Name}");
+            _logger.LogError(ex,
+                "An unexpected error occurred when sending event to RabbitMQ. EventType: {EventType}, CorrelationId: {CorrelationId}, Exchange: {ExchangeName}",
+                domainEvent.GetType().Name,
+                domainEvent.CorrelationId,
+                _settings.ExchangeName);
         }
         return Task.CompletedTask;
     }
