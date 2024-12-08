@@ -6,6 +6,7 @@ using TheFullStackTeam.Domain.ValueObjects;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using TheFullStackTeam.Common.Configuration;
+using TheFullStackTeam.Infrastructure.Common.Constants;
 
 namespace TheFullStackTeam.Infrastructure.Persistence.Sql.Initialization
 {
@@ -40,7 +41,7 @@ namespace TheFullStackTeam.Infrastructure.Persistence.Sql.Initialization
                 {
                     Email = _adminSettings.Email!,
                     PasswordHash = _passwordHasher.Hash(_adminSettings.Password!),
-                    Roles = ["Admin", "User"],
+                    Roles = [UserRoles.Admin, UserRoles.User],
                     IsActive = true,
                     Profiles =
                     {

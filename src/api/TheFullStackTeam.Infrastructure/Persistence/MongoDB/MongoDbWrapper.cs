@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Polly;
@@ -16,11 +16,10 @@ public class MongoDbWrapper
     private readonly MongoDbSettings _mongoSettings;
     private readonly AsyncPolicy _retryAndTimeoutPolicy;
 
-    public MongoDbWrapper(IConfiguration configuration, ILogger<MongoDbWrapper> logger)
+    public MongoDbWrapper(IOptions<MongoDbSettings> options, ILogger<MongoDbWrapper> logger)
     {
         _logger = logger;
-        _mongoSettings = new MongoDbSettings();
-        configuration.GetSection("MongoDbSettings").Bind(_mongoSettings);
+        _mongoSettings = options.Value;
         _databaseName = _mongoSettings.DatabaseName;
 
         // Sync Retry policy for lazy initialization of the database

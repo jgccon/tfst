@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using TheFullStackTeam.Common.Configuration;
+using TheFullStackTeam.Infrastructure.Common.Constants;
 
 namespace TheFullStackTeam.API.HealthChecks;
 public static class HealthChecksConfiguration
@@ -14,26 +15,30 @@ public static class HealthChecksConfiguration
         }
 
         services.AddHealthChecks()
+            //check liveness
+            .AddCheck(HealthCheckTags.Liveness, () => HealthCheckResult.Healthy(), tags: [HealthCheckTags.Liveness])
+
+            //check readiness 
             // SQL Server
             .AddSqlServer(
                 connectionString: configuration.GetConnectionString("DefaultConnection")!,
                 healthQuery: "SELECT 1",
                 name: "SQL Server",
                 failureStatus: HealthStatus.Unhealthy,
-                tags: ["db", "sql"])
+                tags: [HealthCheckTags.Readiness])
             // MongoDb
             .AddMongoDb(
                 mongodbConnectionString: configuration["MongoDbSettings:ConnectionString"]!,
                 mongoDatabaseName: configuration["MongoDbSettings:DatabaseName"]!,
                 name: "MongoDB",
                 failureStatus: HealthStatus.Degraded,
-                tags: ["db", "mongodb"])
+                tags: [HealthCheckTags.Readiness])
             // RabbitMQ
             .AddRabbitMQ(
                 rabbitConnectionString: $"amqp://{rabbitMQSettings!.UserName}:{rabbitMQSettings.Password}@{rabbitMQSettings.HostName}",
                 name: "RabbitMQ",
                 failureStatus: HealthStatus.Unhealthy,
-                tags: ["mq", "rabbitmq"])
+                tags: [HealthCheckTags.Readiness])
             ;
     }
 

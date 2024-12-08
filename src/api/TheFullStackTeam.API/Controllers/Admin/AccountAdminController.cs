@@ -4,14 +4,15 @@ using TheFullStackTeam.Application.Admin.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TheFullStackTeam.Infrastructure.Common.Constants;
 
 namespace TheFullStackTeam.API.Controllers.Admin
 {
-    [ApiExplorerSettings(GroupName = "Admin")]
-    [Area("Admin")]
+    [ApiExplorerSettings(GroupName = UserRoles.Admin)]
+    [Area(UserRoles.Admin)]
     [Route("admin/account")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = UserRoles.Admin)]
     public class AccountAdminController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -15,6 +15,7 @@ using TheFullStackTeam.Infrastructure.Persistence.Sql.Extensions;
 using TheFullStackTeam.Infrastructure.Persistence.Sql.Initialization;
 using TheFullStackTeam.Infrastructure.Persistence.Sql.Services;
 using TheFullStackTeam.Infrastructure.Services;
+using TheFullStackTeam.Infrastructure.Common.Constants;
 
 namespace TheFullStackTeam.API;
 
@@ -104,11 +105,18 @@ public class Program
         app.MapControllers();
 
         // HealthCheck Middleware
-        app.MapHealthChecks("/api/health", new HealthCheckOptions()
+        //liveness  endpoint
+        app.MapHealthChecks("/api/health/liveness", new HealthCheckOptions()
         {
-            Predicate = _ => true,
+            Predicate = (check) => check.Tags.Contains(HealthCheckTags.Liveness),
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-        });        
+        });
+        //readiness  endpoint
+        app.MapHealthChecks("/api/health/readiness", new HealthCheckOptions()
+        {
+            Predicate = (check) => check.Tags.Contains(HealthCheckTags.Readiness),
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        });
 
         app.Run();
     }
