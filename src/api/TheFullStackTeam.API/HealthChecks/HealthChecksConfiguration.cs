@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using TheFullStackTeam.Common.Configuration;
-using TheFullStackTeam.Infrastructure.Common.Constants;
+using TheFullStackTeam.Common.Constants;
 
 namespace TheFullStackTeam.API.HealthChecks;
 public static class HealthChecksConfiguration

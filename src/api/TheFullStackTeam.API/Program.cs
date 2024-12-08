@@ -15,7 +15,7 @@ using TheFullStackTeam.Infrastructure.Persistence.Sql.Extensions;
 using TheFullStackTeam.Infrastructure.Persistence.Sql.Initialization;
 using TheFullStackTeam.Infrastructure.Persistence.Sql.Services;
 using TheFullStackTeam.Infrastructure.Services;
-using TheFullStackTeam.Infrastructure.Common.Constants;
+using TheFullStackTeam.Common.Constants;
 
 namespace TheFullStackTeam.API;
 
