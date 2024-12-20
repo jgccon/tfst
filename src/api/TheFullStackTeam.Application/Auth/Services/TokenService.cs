@@ -28,17 +28,17 @@ public class TokenService(IOptions<JwtSettings> jwtOptions, ApplicationDbContext
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 
-        // Agregar claims de roles
+        // Add claims for roles
         claims.AddRange(account.Roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         var key = Encoding.ASCII.GetBytes(_jwtSettings.Key ?? throw new InvalidOperationException("JWT key not configured."));
         var tokenHandler = new JwtSecurityTokenHandler();
-        var tokenLifetime = _jwtSettings.TokenLifetimeInMinutes;
+        var tokenLifetime = _jwtSettings.TokenLifetimeInHours;
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(tokenLifetime),
+            Expires = DateTime.UtcNow.AddHours(tokenLifetime),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             Issuer = _jwtSettings.Issuer,
             Audience = _jwtSettings.Audience
@@ -47,7 +47,7 @@ public class TokenService(IOptions<JwtSettings> jwtOptions, ApplicationDbContext
         var accessToken = tokenHandler.CreateToken(tokenDescriptor);
         var accessTokenString = tokenHandler.WriteToken(accessToken);
 
-        // Generar el refresh token
+        // Generate refresh token
         var refreshToken = new RefreshToken
         {
             JwtId = accessToken.Id,

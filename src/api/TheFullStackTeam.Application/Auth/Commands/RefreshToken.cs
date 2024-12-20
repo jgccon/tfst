@@ -13,6 +13,7 @@ public class RefreshTokenCommand(string token, string refreshToken) : IRequest<T
     public string RefreshToken { get; set; } = refreshToken;
 }
 
+// TODO: Implement the Result pattern to handle errors
 public class RefreshTokenCommandHandler(
     ApplicationDbContext context, TokenValidationParameters tokenValidationParameters, ITokenService tokenService
     ) : IRequestHandler<RefreshTokenCommand, TokenResponse>
@@ -44,7 +45,7 @@ public class RefreshTokenCommandHandler(
                 if (result == false) throw new Exception("The Token has encryption errors");
             }
 
-            // validation: Check expiration date
+            // validation: Check expiration date token
             var utcExpiryDateToken = long.Parse(tokenVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp)!.Value);
 
             var expiryDateToken = UnixTimeStampToDateTime(utcExpiryDateToken);
@@ -52,20 +53,20 @@ public class RefreshTokenCommandHandler(
 
             //validation: Exist refresh token in DB
             var storedToken = await _context.RefreshTokens!
-                .FirstOrDefaultAsync(x => x.Token == request.RefreshToken) ?? throw new Exception("The Token does not exist");
+                .FirstOrDefaultAsync(x => x.Token == request.RefreshToken) ?? throw new Exception("The refresh Token does not exist");
 
-            // validation to check if the token was already used
-            if (storedToken.IsUsed) throw new Exception("The Token has already been used");
+            // validation to check if the refresh token was already used
+            if (storedToken.IsUsed) throw new Exception("The refresh Token has already been used");
 
-            // validation the token was revoked?
-            if (storedToken.IsRevoked) throw new Exception("The Token has been revoked");
+            // validation the refresh token was revoked?
+            if (storedToken.IsRevoked) throw new Exception("The refresh Token has been revoked");
 
-            // check token id
+            // check refresh token id
             var jti = tokenVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti)!.Value;
 
-            if (storedToken.JwtId != jti) throw new Exception("Token does not match initial value");
+            if (storedToken.JwtId != jti) throw new Exception("Refresh Token does not match initial value");
 
-            // second validation for expiration date
+            // validation for expiration date refresh token
             if (storedToken.ExpireDate < DateTime.UtcNow) throw new Exception("The refresh token has expired");
 
             storedToken.IsUsed = true;
