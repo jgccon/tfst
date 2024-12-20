@@ -28,7 +28,7 @@ public class AuthenticateUserCommandHandler(
             throw new Exception($"No account found for email: {request.Username}");
         }
 
-        var tokenResponse = _tokenService.GenerateTokens(account);
+        var tokenResponse = await _tokenService.GenerateTokens(account);
         return tokenResponse;
     }
     

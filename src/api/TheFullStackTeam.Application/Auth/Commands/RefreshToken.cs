@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using TheFullStackTeam.Application.Auth.Models;
 using TheFullStackTeam.Application.Auth.Services;
-using TheFullStackTeam.Infrastructure.Persistence.Sql;
+using TheFullStackTeam.Domain.Repositories.Command;
 
 namespace TheFullStackTeam.Application.Auth.Commands;
 public class RefreshTokenCommand(string token, string refreshToken) : IRequest<TokenResponse>
@@ -14,11 +14,11 @@ public class RefreshTokenCommand(string token, string refreshToken) : IRequest<T
 }
 
 // TODO: Implement the Result pattern to handle errors
-public class RefreshTokenCommandHandler(
-    ApplicationDbContext context, TokenValidationParameters tokenValidationParameters, ITokenService tokenService
-    ) : IRequestHandler<RefreshTokenCommand, TokenResponse>
+public class RefreshTokenCommandHandler(IRefreshTokenCommandRepository refreshTokenRepository, IAccountCommandRepository accountRepository,
+    TokenValidationParameters tokenValidationParameters, ITokenService tokenService) : IRequestHandler<RefreshTokenCommand, TokenResponse>
 {
-    private readonly ApplicationDbContext _context = context;
+    private readonly IRefreshTokenCommandRepository _refreshTokenRepository = refreshTokenRepository;
+    private readonly IAccountCommandRepository _accountRepository = accountRepository;
     private readonly TokenValidationParameters _tokenValidationParameters = tokenValidationParameters;
     private readonly ITokenService _tokenService = tokenService;
 
@@ -52,32 +52,29 @@ public class RefreshTokenCommandHandler(
             if (expiryDateToken > DateTime.UtcNow) throw new Exception("The Token hasn´t expired");
 
             //validation: Exist refresh token in DB
-            var storedToken = await _context.RefreshTokens!
-                .FirstOrDefaultAsync(x => x.Token == request.RefreshToken) ?? throw new Exception("The refresh Token does not exist");
+            var storedRefreshToken = await _refreshTokenRepository.GetByRefreshTokenAsync(request.RefreshToken) ?? throw new Exception("The refresh Token does not exist");
 
             // validation to check if the refresh token was already used
-            if (storedToken.IsUsed) throw new Exception("The refresh Token has already been used");
+            if (storedRefreshToken.IsUsed) throw new Exception("The refresh Token has already been used");
 
             // validation the refresh token was revoked?
-            if (storedToken.IsRevoked) throw new Exception("The refresh Token has been revoked");
+            if (storedRefreshToken.IsRevoked) throw new Exception("The refresh Token has been revoked");
 
             // check refresh token id
             var jti = tokenVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti)!.Value;
 
-            if (storedToken.JwtId != jti) throw new Exception("Refresh Token does not match initial value");
+            if (storedRefreshToken.JwtId != jti) throw new Exception("Refresh Token does not match initial value");
 
             // validation for expiration date refresh token
-            if (storedToken.ExpireDate < DateTime.UtcNow) throw new Exception("The refresh token has expired");
+            if (storedRefreshToken.ExpireDate < DateTime.UtcNow) throw new Exception("The refresh token has expired");
 
-            storedToken.IsUsed = true;
-            _context.RefreshTokens!.Update(storedToken);
-            await _context.SaveChangesAsync(cancellationToken);
+            storedRefreshToken.IsUsed = true;
+            await _refreshTokenRepository.UpdateAsync(storedRefreshToken);
 
-            var account = await _context.Accounts!
-                .Include(a => a.Profiles)
-                .FirstOrDefaultAsync(a => a.Id == storedToken.AccountId, cancellationToken) ?? throw new Exception("No account found for the given token");
+            var email = tokenVerification.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name)!.Value;
+            var account = await _accountRepository.GetByEmailAsync(email) ?? throw new Exception("No account found for the given token");
 
-            var tokenResponse = _tokenService.GenerateTokens(account);
+            var tokenResponse = await _tokenService.GenerateTokens(account);
             return tokenResponse;
 
         }

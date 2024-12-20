@@ -12,8 +12,8 @@ using TheFullStackTeam.Infrastructure.Persistence.Sql;
 namespace TheFullStackTeam.Infrastructure.Persistence.Sql.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241219033049_AddRefreshToken")]
-    partial class AddRefreshToken
+    [Migration("20241220161342_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

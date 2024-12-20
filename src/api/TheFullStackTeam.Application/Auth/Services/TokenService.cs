@@ -6,26 +6,26 @@ using System.Text;
 using TheFullStackTeam.Application.Auth.Models;
 using TheFullStackTeam.Common.Configuration;
 using TheFullStackTeam.Domain.Entities;
-using TheFullStackTeam.Infrastructure.Persistence.Sql;
+using TheFullStackTeam.Domain.Repositories.Command;
 
 namespace TheFullStackTeam.Application.Auth.Services;
-public class TokenService(IOptions<JwtSettings> jwtOptions, ApplicationDbContext context) : ITokenService
+public class TokenService(IOptions<JwtSettings> jwtOptions, IRefreshTokenCommandRepository refreshTokenRepository) : ITokenService
 {
     private readonly JwtSettings _jwtSettings = jwtOptions.Value;
-    private readonly ApplicationDbContext _context = context;
+    private readonly IRefreshTokenCommandRepository _refreshTokenRepository = refreshTokenRepository;
 
-    public TokenResponse GenerateTokens(Account account)
+    public async Task<TokenResponse> GenerateTokens(Account account)
     {
         var selectedProfile = account.Profiles.FirstOrDefault(p => p.IsPrimary) ?? throw new Exception("No primary profile found.");
 
         // Add custom claims for profile info
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, account.Email),
-            new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
-            new Claim("ProfileId", selectedProfile?.Id.ToString() ?? string.Empty),
-            new Claim("DisplayName", selectedProfile?.DisplayName ?? string.Empty),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new(ClaimTypes.Name, account.Email),
+            new(ClaimTypes.NameIdentifier, account.Id.ToString()),
+            new("ProfileId", selectedProfile?.Id.ToString() ?? string.Empty),
+            new("DisplayName", selectedProfile?.DisplayName ?? string.Empty),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
         // Add claims for roles
@@ -58,8 +58,7 @@ public class TokenService(IOptions<JwtSettings> jwtOptions, ApplicationDbContext
             Token = $"{GenerateRandomTokenCharacters(35)}{Guid.NewGuid()}"
         };
 
-        _context.RefreshTokens!.Add(refreshToken);
-        _context.SaveChanges();
+        await _refreshTokenRepository.AddAsync(refreshToken);
 
         return new TokenResponse
         {
@@ -68,7 +67,7 @@ public class TokenService(IOptions<JwtSettings> jwtOptions, ApplicationDbContext
         };
     }
 
-    private string GenerateRandomTokenCharacters(int length)
+    private static string GenerateRandomTokenCharacters(int length)
     {
         var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         var random = new Random();

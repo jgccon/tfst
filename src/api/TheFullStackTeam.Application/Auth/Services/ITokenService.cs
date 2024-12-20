@@ -4,5 +4,5 @@ using TheFullStackTeam.Domain.Entities;
 namespace TheFullStackTeam.Application.Auth.Services;
 public interface ITokenService
 {
-    TokenResponse GenerateTokens(Account account);
+    Task<TokenResponse> GenerateTokens(Account account);
 }
