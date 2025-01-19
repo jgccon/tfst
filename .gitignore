@@ -391,10 +391,6 @@ FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 *.code-workspace
 
 # Local History for Visual Studio Code
@@ -419,3 +415,6 @@ FodyWeavers.xsd
 /src/api/infrastructure/docker/rabbitmq-data
 /src/api/infrastructure/docker/mongo-data
 .secrets
+
+# macOS metadata files
+.DS_Store
