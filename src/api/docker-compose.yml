@@ -1,5 +1,3 @@
-version: '3.4'
-
 networks:
   tfst-network:
     driver: bridge
@@ -22,16 +20,17 @@ services:
       - tfst-mongo
     volumes:
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ./TheFullStackTeam.API/.env:/app/.env:ro
 
   tfst-sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     networks:
       - tfst-network
     user: root
     container_name: SqlServerContainer
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "YourStrong@Passw0rd"
+      MSSQL_SA_PASSWORD: "YourStrong@Passw0rd"
     ports:
       - "1433:1433"
     volumes:
