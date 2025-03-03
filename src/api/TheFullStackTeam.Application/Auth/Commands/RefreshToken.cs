@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,12 +15,16 @@ public class RefreshTokenCommand(string token, string refreshToken) : IRequest<T
 }
 
 // TODO: Implement the Result pattern to handle errors
-public class RefreshTokenCommandHandler(IRefreshTokenCommandRepository refreshTokenRepository, IAccountCommandRepository accountRepository,
-    TokenValidationParameters tokenValidationParameters, ITokenService tokenService) : IRequestHandler<RefreshTokenCommand, TokenResponse>
+public class RefreshTokenCommandHandler(IRefreshTokenCommandRepository refreshTokenRepository,
+    IAccountCommandRepository accountRepository,
+    TokenValidationParameters tokenValidationParameters,
+    ILogger<RefreshTokenCommandHandler> logger,
+    ITokenService tokenService) : IRequestHandler<RefreshTokenCommand, TokenResponse>
 {
     private readonly IRefreshTokenCommandRepository _refreshTokenRepository = refreshTokenRepository;
     private readonly IAccountCommandRepository _accountRepository = accountRepository;
     private readonly TokenValidationParameters _tokenValidationParameters = tokenValidationParameters;
+    private readonly ILogger<RefreshTokenCommandHandler> _logger = logger;
     private readonly ITokenService _tokenService = tokenService;
 
     public async Task<TokenResponse> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
@@ -78,8 +83,9 @@ public class RefreshTokenCommandHandler(IRefreshTokenCommandRepository refreshTo
             return tokenResponse;
 
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            _logger.LogError(ex, "Error refreshing token");
             throw;
         }
     }

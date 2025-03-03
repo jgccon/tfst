@@ -43,7 +43,7 @@ services:
     hostname: rabbitmq
     container_name: RabbitMqContainer
     environment:
-      RABBITMQ_DEFAULT_USER: qnauser
+      RABBITMQ_DEFAULT_USER: rabbituser
       RABBITMQ_DEFAULT_PASS: Rabbit123*
     ports:
       - "5672:5672"  # AMQP
