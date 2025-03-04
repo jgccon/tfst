@@ -30,9 +30,8 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("refreshToken")]
-    public async Task<IActionResult> RefreshToken([FromForm] string token, [FromForm] string refreshToken)
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
     {
-        var command = new RefreshTokenCommand(token, refreshToken);
         var tokenResponse = await _mediator.Send(command);
 
         if (tokenResponse == null)
