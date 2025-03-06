@@ -5,19 +5,19 @@ using TheFullStackTeam.IdentityServer.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración de la BD
+// Database Configuration
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityDB"));
     options.UseOpenIddict();
 });
 
-// Configuración de Identity
+// Identity Configuration
 builder.Services.AddIdentity<Account, IdentityRole>()
     .AddEntityFrameworkStores<IdentityDbContext>()
     .AddDefaultTokenProviders();
 
-// Configuración de OpenIddict
+// OpenIddict Configuration
 builder.Services.AddOpenIddict()
     .AddCore(options =>
     {
@@ -29,7 +29,13 @@ builder.Services.AddOpenIddict()
         options.SetTokenEndpointUris("/connect/token");
         options.AllowPasswordFlow();
         options.AcceptAnonymousClients();
-        options.UseAspNetCore();
+
+        // Temporary encryption & signing keys for development purposes
+        options.AddDevelopmentEncryptionCertificate(); // ✅ Required encryption key
+        options.AddDevelopmentSigningCertificate();    // ✅ Required signing key
+
+        options.UseAspNetCore()
+               .EnableTokenEndpointPassthrough();
     })
     .AddValidation(options =>
     {
@@ -37,8 +43,14 @@ builder.Services.AddOpenIddict()
         options.UseAspNetCore();
     });
 
+// Register essential services
+builder.Services.AddControllers();
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

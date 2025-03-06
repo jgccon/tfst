@@ -9,11 +9,16 @@
   <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
       <PackageReference Include="OpenIddict.AspNetCore" Version="6.1.0" />
       <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="6.1.0" />
       <PackageReference Include="OpenIddict.Quartz" Version="6.1.0" />
       <PackageReference Include="Quartz.Extensions.Hosting" Version="3.6.0" />
       <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TheFullStackTeam.IdentityServer.Domain\TheFullStackTeam.IdentityServer.Domain.csproj" />
   </ItemGroup>
 <!-- 
   <ItemGroup>

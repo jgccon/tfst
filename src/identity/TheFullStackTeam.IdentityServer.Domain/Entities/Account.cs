@@ -6,8 +6,6 @@ namespace TheFullStackTeam.IdentityServer.Domain.Entities
     {
         public bool EmailVerified { get; private set; }
         public DateTime? LastLoginDate { get; set; }
-        public bool TwoFactorEnabled { get; set; }
-
         public void MarkAsVerified()
         {
             EmailVerified = true;
