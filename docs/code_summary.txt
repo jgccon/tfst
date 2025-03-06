@@ -1,0 +1,1966 @@
+==== features/identity_management.md ====
+# Identity & Access Management Features
+
+## Feature: User Authentication & Login
+- **User Story:**  
+  *As a user, I want to log into TFST securely using email/password or external authentication, so I can access my account.*
+- **Next Level:**  
+  - Multi-Factor Authentication (MFA).  
+  - Support for OAuth providers (Google, GitHub, LinkedIn).  
+
+## Feature: Authorization & Role Management
+- **User Story:**  
+  *As an admin, I want to assign roles and permissions to users, so I can control what actions they can perform.*
+- **Next Level:**  
+  - Fine-grained permission management.  
+  - Role-based access control (RBAC).  
+
+## Feature: API Authentication with OAuth2 & JWT
+- **User Story:**  
+  *As a developer, I want to authenticate API requests using OAuth2 tokens, so I can access protected resources securely.*
+- **Next Level:**  
+  - Token expiration & refresh tokens.  
+  - API scopes for granular permissions.  
+
+## Feature: Single Sign-On (SSO)
+- **User Story:**  
+  *As a user, I want to log in once and access multiple services within TFST, so I don’t have to re-authenticate.*
+- **Next Level:**  
+  - Support for SAML or OpenID Connect for enterprise integrations.  
+  - Session management across multiple portals.
+
+---
+
+### **Autentication Sequence Diagram**
+```mermaid
+sequenceDiagram
+    participant User
+    participant Angular
+    participant IdentityServer
+    participant TFST.API
+
+    User->>Angular: Enters TFST Portal
+    Angular->>IdentityServer: Redirects to login (OAuth/OpenID)
+    IdentityServer->>User: Requests credentials
+    User->>IdentityServer: Sends email/password
+    IdentityServer->>IdentityServer: Verifies user in ASP.NET Identity
+    IdentityServer->>User: Requests MFA code (if enabled)
+    User->>IdentityServer: Sends MFA code
+    IdentityServer->>Angular: Returns access_token + id_token
+    Angular->>TFST.API: Sends access_token in each request
+    TFST.API->>IdentityServer: Verifies token and permissions
+    TFST.API->>Angular: Returns protected data
+```
+
+### Components Diagram
+
+```mermaid
+graph TD
+    A[User] -->|Logs in| B[Angular Frontend]
+    B -->|Sends request| C[Identity Server]
+    C -->|Validates user| D[ASP.NET Core Identity DB]
+    C -->|Generates token| B
+    B -->|Sends token| E[TFST API]
+    E -->|Validates token with| C
+    E -->|Returns protected resources| B
+```
+
+
+
+==== architecture/01_introduction_and_goals.md ====
+# 1. Introduction and Goals
+
+## Purpose
+The **Full Stack Team** project is an open-source, multitenant human resources management platform designed to manage employee profiles, projects, contracts, billing, and work hours.
+
+## Goals
+- Provide a scalable, user-friendly HR platform for small to large organizations.
+- Enable multitenant support for managing multiple clients in a single deployment.
+- Ensure security, flexibility, and extensibility for diverse use cases.
+
+## Audience
+This documentation is intended for developers, contributors, and technical stakeholders.
+
+
+
+==== architecture/02_constraints.md ====
+# 2. Constraints
+
+## Technical Constraints
+- **Backend**: Must be built in **.NET (ASP.NET Core)** for compatibility with existing skills and infrastructure.
+- **Frontend**: Developed using **Angular** for a responsive, component-driven UI.
+- **Data Storage**: Use of relational databases for structured data; potential MongoDB for unstructured data.
+- **Cloud Platform**: Primarily designed for deployment on **Azure**, with flexibility for other cloud providers if needed.
+
+## Regulatory Constraints
+- Compliance with **GDPR** for handling personal employee data.
+
+## Cost Constraints
+- Use open-source solutions and affordable services to keep infrastructure costs low.
+
+
+
+==== architecture/03_context_and_scope.md ====
+# 3. Context and Scope
+
+## Context
+The Full Stack Team platform is designed for companies to manage their HR needs across multiple clients or departments within a unified platform.
+
+## Scope
+The platform includes:
+- Employee profiles, project assignments, contract management, billing, and time tracking.
+- Integration with cloud infrastructure (Azure) for scalability.
+- CI/CD pipelines to automate deployment and updates.
+
+## Interfaces
+- **User Interface**: Web application (Angular) for HR staff and managers.
+- **API Interface**: RESTful API endpoints for external integrations.
+- **Database Interface**: SQL Server (or PostgreSQL) and MongoDB for data persistence.
+
+
+
+==== architecture/04_solution_strategy.md ====
+# 4. Solution Strategy
+
+## Architectural Approach
+- **Multitenancy**: Implemented at the database level to support multiple clients with isolated data.
+- **CI/CD**: Use GitHub Actions to automate testing, building, and deployment.
+- **Secrets Management**: Use Azure Key Vault to store sensitive information.
+- **Containerization**: Use Docker for consistent development and deployment environments.
+
+
+
+==== architecture/05_building_block_view.md ====
+# 5. Building Block View
+
+## Main Components
+- **Backend API**: ASP.NET Core service providing the core functionality and business logic.
+- **Frontend**: Angular application for interacting with the platform.
+- **Database**: SQL Server or PostgreSQL for structured data, MongoDB for unstructured or flexible data.
+- **Authentication**: Use Auth0 or Azure AD B2C for user authentication and authorization.
+
+
+
+==== architecture/06_runtime_view.md ====
+# 6. Runtime View
+
+## Common Scenarios
+
+1. **User Login**: User authenticates via Auth0 or Azure AD B2C; receives JWT for API access.
+2. **Employee Management**: HR user creates/updates employee profiles, which are stored in the database.
+3. **Time Tracking**: User records work hours; data is processed and stored in SQL Server.
+4. **Billing Process**: System calculates billing based on recorded work hours and generates an invoice.
+
+
+
+==== architecture/07_deployment_view.md ====
+# 7. Deployment View
+
+## Target Environments
+- **Local Development**: Docker Compose setup for backend and frontend.
+- **Staging/Production**: Deployed to Azure using CI/CD pipelines.
+
+## Infrastructure Components
+- **App Services**: Hosting for backend API and Angular frontend.
+- **Databases**: SQL Server for primary data, MongoDB for flexible storage.
+- **Secrets**: Azure Key Vault for secure storage of API keys and secrets.
+
+
+
+==== architecture/08_crosscutting_concepts.md ====
+# 8. Crosscutting Concepts
+
+## Security
+- **Authentication**: Managed via JWT and Auth0/Azure AD B2C.
+- **Authorization**: Role-based access control for different user levels.
+
+## Logging and Monitoring
+- **Logging**: Use Serilog for structured logging.
+- **Monitoring**: Azure Monitor to track application health.
+
+## Configuration Management
+- Store configuration settings in Azure App Configuration or environment variables.
+
+
+
+==== architecture/09_architecture_decisions.md ====
+# 9. Architecture Decisions
+
+## Key Decisions
+1. **.NET Core for Backend**: Chosen for performance, scalability, and developer familiarity.
+2. **Angular for Frontend**: Provides a responsive and modular UI framework.
+3. **Multitenant Database**: Supports isolation of client data in a shared environment.
+4. **Azure as Primary Cloud Platform**: Ensures scalability and integrates well with the chosen stack.
+5. **Secrets Management with Azure Key Vault**: Securely stores and manages sensitive information.
+
+
+
+==== architecture/10_quality_requirements.md ====
+# 10. Quality Requirements
+
+## Performance
+- Must support concurrent usage by multiple tenants without performance degradation.
+
+## Security
+- Compliance with GDPR for user data protection.
+- Role-based access control for data and feature access.
+
+## Reliability
+- Continuous integration and deployment to maintain uptime and stability.
+
+
+
+==== architecture/11_risks_and_technical_debt.md ====
+# 11. Risks and Technical Debt
+
+## Potential Risks
+- **Security Vulnerabilities**: Risk of data leakage across tenants.
+- **Cloud Vendor Lock-In**: Heavy reliance on Azure could limit future portability.
+
+## Technical Debt
+- **Scaling Multitenant Solution**: Potential need for database optimization as the number of tenants grows.
+- **API Rate Limits**: Consider rate limiting and caching mechanisms to handle high traffic.
+
+
+
+==== architecture/12_glossary.md ====
+# 12. Glossary
+
+- **HR**: Human Resources.
+- **Multitenant**: Architecture allowing multiple clients to use a single instance of the software with isolated data.
+- **CI/CD**: Continuous Integration and Continuous Deployment, automating testing and deployment.
+- **JWT**: JSON Web Token, a standard for secure token-based authentication.
+- **GDPR**: General Data Protection Regulation, governing data protection in the EU.
+
+
+
+==== architecture/README.md ====
+# The Full Stack Team Documentation
+
+Welcome to **The Full Stack Team** documentation. This documentation provides a comprehensive guide to understanding, deploying, and contributing to the project. It follows the [Arc42](https://arc42.org/) template for structured architectural documentation.
+
+## Table of Contents
+
+1. [Introduction and Goals](01_introduction_and_goals.md)
+2. [Constraints](02_constraints.md)
+3. [Context and Scope](03_context_and_scope.md)
+4. [Solution Strategy](04_solution_strategy.md)
+5. [Building Block View](05_building_block_view.md)
+6. [Runtime View](06_runtime_view.md)
+7. [Deployment View](07_deployment_view.md)
+8. [Crosscutting Concepts](08_crosscutting_concepts.md)
+9. [Architecture Decisions](09_architecture_decisions.md)
+10. [Quality Requirements](10_quality_requirements.md)
+11. [Risks and Technical Debt](11_risks_and_technical_debt.md)
+12. [Glossary](12_glossary.md)
+
+## How to Use This Documentation
+
+- **Developers**: Understand the architecture, components, and design decisions to contribute effectively.
+- **Contributors**: Follow the guidelines to add new features or report issues.
+- **Stakeholders**: Get an overview of the project's goals, constraints, and strategic decisions.
+
+## Getting Started
+
+- Begin with the [Introduction and Goals](01_introduction_and_goals.md) to understand the purpose and objectives of the project.
+- Review the [Building Block View](05_building_block_view.md) for a breakdown of the system components.
+- Check the [Architecture Decisions](09_architecture_decisions.md) to understand the rationale behind key choices.
+
+## Contributing
+
+We welcome contributions! Please see the [Contributing Guidelines](../CONTRIBUTING.md) in the main repository for more information.
+
+## License
+
+This project is licensed under the [Apache 2.0 License](../LICENSE).
+
+
+
+==== architecture/arc42-template-EN.md ====
+
+
+# Introduction and Goals
+
+Describes the relevant requirements and the driving forces that software
+architects and development team must consider. These include
+
+-   underlying business goals,
+
+-   essential features,
+
+-   essential functional requirements,
+
+-   quality goals for the architecture and
+
+-   relevant stakeholders and their expectations
+
+## Requirements Overview
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+Short description of the functional requirements, driving forces,
+extract (or abstract) of requirements. Link to (hopefully existing)
+requirements documents (with version number and information where to
+find it).
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+From the point of view of the end users a system is created or modified
+to improve support of a business activity and/or improve the quality.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+Short textual description, probably in tabular use-case format. If
+requirements documents exist this overview should refer to these
+documents.
+
+Keep these excerpts as short as possible. Balance readability of this
+document with potential redundancy w.r.t to requirements documents.
+
+See [Introduction and Goals](https://docs.arc42.org/section-1/) in the
+arc42 documentation.
+
+## Quality Goals
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+The top three (max five) quality goals for the architecture whose
+fulfillment is of highest importance to the major stakeholders. We
+really mean quality goals for the architecture. Don’t confuse them with
+project goals. They are not necessarily identical.
+
+Consider this overview of potential topics (based upon the ISO 25010
+standard):
+
+![Categories of Quality
+Requirements](images/01_2_iso-25010-topics-EN.drawio.png)
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+You should know the quality goals of your most important stakeholders,
+since they will influence fundamental architectural decisions. Make sure
+to be very concrete about these qualities, avoid buzzwords. If you as an
+architect do not know how the quality of your work will be judged…
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+A table with quality goals and concrete scenarios, ordered by priorities
+
+## Stakeholders
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+Explicit overview of stakeholders of the system, i.e. all person, roles
+or organizations that
+
+-   should know the architecture
+
+-   have to be convinced of the architecture
+
+-   have to work with the architecture or with code
+
+-   need the documentation of the architecture for their work
+
+-   have to come up with decisions about the system or its development
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+You should know all parties involved in development of the system or
+affected by the system. Otherwise, you may get nasty surprises later in
+the development process. These stakeholders determine the extent and the
+level of detail of your work and its results.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+Table with role names, person names, and their expectations with respect
+to the architecture and its documentation.
+
+| Role/Name   | Contact        | Expectations       |
+|-------------|----------------|--------------------|
+| *\<Role-1>* | *\<Contact-1>* | *\<Expectation-1>* |
+| *\<Role-2>* | *\<Contact-2>* | *\<Expectation-2>* |
+
+# Architecture Constraints
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+Any requirement that constraints software architects in their freedom of
+design and implementation decisions or decision about the development
+process. These constraints sometimes go beyond individual systems and
+are valid for whole organizations and companies.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+Architects should know exactly where they are free in their design
+decisions and where they must adhere to constraints. Constraints must
+always be dealt with; they may be negotiable, though.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+Simple tables of constraints with explanations. If needed you can
+subdivide them into technical constraints, organizational and political
+constraints and conventions (e.g. programming or versioning guidelines,
+documentation or naming conventions)
+
+See [Architecture Constraints](https://docs.arc42.org/section-2/) in the
+arc42 documentation.
+
+# Context and Scope
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+Context and scope - as the name suggests - delimits your system (i.e.
+your scope) from all its communication partners (neighboring systems and
+users, i.e. the context of your system). It thereby specifies the
+external interfaces.
+
+If necessary, differentiate the business context (domain specific inputs
+and outputs) from the technical context (channels, protocols, hardware).
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+The domain interfaces and technical interfaces to communication partners
+are among your system’s most critical aspects. Make sure that you
+completely understand them.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+Various options:
+
+-   Context diagrams
+
+-   Lists of communication partners and their interfaces.
+
+See [Context and Scope](https://docs.arc42.org/section-3/) in the arc42
+documentation.
+
+## Business Context
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+Specification of **all** communication partners (users, IT-systems, …)
+with explanations of domain specific inputs and outputs or interfaces.
+Optionally you can add domain specific formats or communication
+protocols.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+All stakeholders should understand which data are exchanged with the
+environment of the system.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+All kinds of diagrams that show the system as a black box and specify
+the domain interfaces to communication partners.
+
+Alternatively (or additionally) you can use a table. The title of the
+table is the name of your system, the three columns contain the name of
+the communication partner, the inputs, and the outputs.
+
+**\<Diagram or Table>**
+
+**\<optionally: Explanation of external domain interfaces>**
+
+## Technical Context
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+Technical interfaces (channels and transmission media) linking your
+system to its environment. In addition a mapping of domain specific
+input/output to the channels, i.e. an explanation which I/O uses which
+channel.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+Many stakeholders make architectural decision based on the technical
+interfaces between the system and its context. Especially infrastructure
+or hardware designers decide these technical interfaces.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+E.g. UML deployment diagram describing channels to neighboring systems,
+together with a mapping table showing the relationships between channels
+and input/output.
+
+**\<Diagram or Table>**
+
+**\<optionally: Explanation of technical interfaces>**
+
+**\<Mapping Input/Output to Channels>**
+
+# Solution Strategy
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+A short summary and explanation of the fundamental decisions and
+solution strategies, that shape system architecture. It includes
+
+-   technology decisions
+
+-   decisions about the top-level decomposition of the system, e.g.
+    usage of an architectural pattern or design pattern
+
+-   decisions on how to achieve key quality goals
+
+-   relevant organizational decisions, e.g. selecting a development
+    process or delegating certain tasks to third parties.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+These decisions form the cornerstones for your architecture. They are
+the foundation for many other detailed decisions or implementation
+rules.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+Keep the explanations of such key decisions short.
+
+Motivate what was decided and why it was decided that way, based upon
+problem statement, quality goals and key constraints. Refer to details
+in the following sections.
+
+See [Solution Strategy](https://docs.arc42.org/section-4/) in the arc42
+documentation.
+
+# Building Block View
+
+<div class="formalpara-title">
+
+**Content**
+
+</div>
+
+The building block view shows the static decomposition of the system
+into building blocks (modules, components, subsystems, classes,
+interfaces, packages, libraries, frameworks, layers, partitions, tiers,
+functions, macros, operations, data structures, …) as well as their
+dependencies (relationships, associations, …)
+
+This view is mandatory for every architecture documentation. In analogy
+to a house this is the *floor plan*.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+Maintain an overview of your source code by making its structure
+understandable through abstraction.
+
+This allows you to communicate with your stakeholder on an abstract
+level without disclosing implementation details.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+The building block view is a hierarchical collection of black boxes and
+white boxes (see figure below) and their descriptions.
+
+![Hierarchy of building blocks](images/05_building_blocks-EN.png)
+
+**Level 1** is the white box description of the overall system together
+with black box descriptions of all contained building blocks.
+
+**Level 2** zooms into some building blocks of level 1. Thus it contains
+the white box description of selected building blocks of level 1,
+together with black box descriptions of their internal building blocks.
+
+**Level 3** zooms into selected building blocks of level 2, and so on.
+
+See [Building Block View](https://docs.arc42.org/section-5/) in the
+arc42 documentation.
+
+## Whitebox Overall System
+
+Here you describe the decomposition of the overall system using the
+following white box template. It contains
+
+-   an overview diagram
+
+-   a motivation for the decomposition
+
+-   black box descriptions of the contained building blocks. For these
+    we offer you alternatives:
+
+    -   use *one* table for a short and pragmatic overview of all
+        contained building blocks and their interfaces
+
+    -   use a list of black box descriptions of the building blocks
+        according to the black box template (see below). Depending on
+        your choice of tool this list could be sub-chapters (in text
+        files), sub-pages (in a Wiki) or nested elements (in a modeling
+        tool).
+
+-   (optional:) important interfaces, that are not explained in the
+    black box templates of a building block, but are very important for
+    understanding the white box. Since there are so many ways to specify
+    interfaces why do not provide a specific template for them. In the
+    worst case you have to specify and describe syntax, semantics,
+    protocols, error handling, restrictions, versions, qualities,
+    necessary compatibilities and many things more. In the best case you
+    will get away with examples or simple signatures.
+
+***\<Overview Diagram>***
+
+Motivation  
+*\<text explanation>*
+
+Contained Building Blocks  
+*\<Description of contained building block (black boxes)>*
+
+Important Interfaces  
+*\<Description of important interfaces>*
+
+Insert your explanations of black boxes from level 1:
+
+If you use tabular form you will only describe your black boxes with
+name and responsibility according to the following schema:
+
+| **Name**         | **Responsibility** |
+|------------------|--------------------|
+| *\<black box 1>* |  *\<Text>*         |
+| *\<black box 2>* |  *\<Text>*         |
+
+If you use a list of black box descriptions then you fill in a separate
+black box template for every important building block . Its headline is
+the name of the black box.
+
+### \<Name black box 1>
+
+Here you describe \<black box 1> according the the following black box
+template:
+
+-   Purpose/Responsibility
+
+-   Interface(s), when they are not extracted as separate paragraphs.
+    This interfaces may include qualities and performance
+    characteristics.
+
+-   (Optional) Quality-/Performance characteristics of the black box,
+    e.g.availability, run time behavior, ….
+
+-   (Optional) directory/file location
+
+-   (Optional) Fulfilled requirements (if you need traceability to
+    requirements).
+
+-   (Optional) Open issues/problems/risks
+
+*\<Purpose/Responsibility>*
+
+*\<Interface(s)>*
+
+*\<(Optional) Quality/Performance Characteristics>*
+
+*\<(Optional) Directory/File Location>*
+
+*\<(Optional) Fulfilled Requirements>*
+
+*\<(optional) Open Issues/Problems/Risks>*
+
+### \<Name black box 2>
+
+*\<black box template>*
+
+### \<Name black box n>
+
+*\<black box template>*
+
+### \<Name interface 1>
+
+…
+
+### \<Name interface m>
+
+## Level 2
+
+Here you can specify the inner structure of (some) building blocks from
+level 1 as white boxes.
+
+You have to decide which building blocks of your system are important
+enough to justify such a detailed description. Please prefer relevance
+over completeness. Specify important, surprising, risky, complex or
+volatile building blocks. Leave out normal, simple, boring or
+standardized parts of your system
+
+### White Box *\<building block 1>*
+
+…describes the internal structure of *building block 1*.
+
+*\<white box template>*
+
+### White Box *\<building block 2>*
+
+*\<white box template>*
+
+…
+
+### White Box *\<building block m>*
+
+*\<white box template>*
+
+## Level 3
+
+Here you can specify the inner structure of (some) building blocks from
+level 2 as white boxes.
+
+When you need more detailed levels of your architecture please copy this
+part of arc42 for additional levels.
+
+### White Box \<\_building block x.1\_\>
+
+Specifies the internal structure of *building block x.1*.
+
+*\<white box template>*
+
+### White Box \<\_building block x.2\_\>
+
+*\<white box template>*
+
+### White Box \<\_building block y.1\_\>
+
+*\<white box template>*
+
+# Runtime View
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+The runtime view describes concrete behavior and interactions of the
+system’s building blocks in form of scenarios from the following areas:
+
+-   important use cases or features: how do building blocks execute
+    them?
+
+-   interactions at critical external interfaces: how do building blocks
+    cooperate with users and neighboring systems?
+
+-   operation and administration: launch, start-up, stop
+
+-   error and exception scenarios
+
+Remark: The main criterion for the choice of possible scenarios
+(sequences, workflows) is their **architectural relevance**. It is
+**not** important to describe a large number of scenarios. You should
+rather document a representative selection.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+You should understand how (instances of) building blocks of your system
+perform their job and communicate at runtime. You will mainly capture
+scenarios in your documentation to communicate your architecture to
+stakeholders that are less willing or able to read and understand the
+static models (building block view, deployment view).
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+There are many notations for describing scenarios, e.g.
+
+-   numbered list of steps (in natural language)
+
+-   activity diagrams or flow charts
+
+-   sequence diagrams
+
+-   BPMN or EPCs (event process chains)
+
+-   state machines
+
+-   …
+
+See [Runtime View](https://docs.arc42.org/section-6/) in the arc42
+documentation.
+
+## \<Runtime Scenario 1>
+
+-   *\<insert runtime diagram or textual description of the scenario>*
+
+-   *\<insert description of the notable aspects of the interactions
+    between the building block instances depicted in this diagram.>*
+
+## \<Runtime Scenario 2>
+
+## …
+
+## \<Runtime Scenario n>
+
+# Deployment View
+
+<div class="formalpara-title">
+
+**Content**
+
+</div>
+
+The deployment view describes:
+
+1.  technical infrastructure used to execute your system, with
+    infrastructure elements like geographical locations, environments,
+    computers, processors, channels and net topologies as well as other
+    infrastructure elements and
+
+2.  mapping of (software) building blocks to that infrastructure
+    elements.
+
+Often systems are executed in different environments, e.g. development
+environment, test environment, production environment. In such cases you
+should document all relevant environments.
+
+Especially document a deployment view if your software is executed as
+distributed system with more than one computer, processor, server or
+container or when you design and construct your own hardware processors
+and chips.
+
+From a software perspective it is sufficient to capture only those
+elements of an infrastructure that are needed to show a deployment of
+your building blocks. Hardware architects can go beyond that and
+describe an infrastructure to any level of detail they need to capture.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+Software does not run without hardware. This underlying infrastructure
+can and will influence a system and/or some cross-cutting concepts.
+Therefore, there is a need to know the infrastructure.
+
+Maybe a highest level deployment diagram is already contained in section
+3.2. as technical context with your own infrastructure as ONE black box.
+In this section one can zoom into this black box using additional
+deployment diagrams:
+
+-   UML offers deployment diagrams to express that view. Use it,
+    probably with nested diagrams, when your infrastructure is more
+    complex.
+
+-   When your (hardware) stakeholders prefer other kinds of diagrams
+    rather than a deployment diagram, let them use any kind that is able
+    to show nodes and channels of the infrastructure.
+
+See [Deployment View](https://docs.arc42.org/section-7/) in the arc42
+documentation.
+
+## Infrastructure Level 1
+
+Describe (usually in a combination of diagrams, tables, and text):
+
+-   distribution of a system to multiple locations, environments,
+    computers, processors, .., as well as physical connections between
+    them
+
+-   important justifications or motivations for this deployment
+    structure
+
+-   quality and/or performance features of this infrastructure
+
+-   mapping of software artifacts to elements of this infrastructure
+
+For multiple environments or alternative deployments please copy and
+adapt this section of arc42 for all relevant environments.
+
+***\<Overview Diagram>***
+
+Motivation  
+*\<explanation in text form>*
+
+Quality and/or Performance Features  
+*\<explanation in text form>*
+
+Mapping of Building Blocks to Infrastructure  
+*\<description of the mapping>*
+
+## Infrastructure Level 2
+
+Here you can include the internal structure of (some) infrastructure
+elements from level 1.
+
+Please copy the structure from level 1 for each selected element.
+
+### *\<Infrastructure Element 1>*
+
+*\<diagram + explanation>*
+
+### *\<Infrastructure Element 2>*
+
+*\<diagram + explanation>*
+
+…
+
+### *\<Infrastructure Element n>*
+
+*\<diagram + explanation>*
+
+# Cross-cutting Concepts
+
+<div class="formalpara-title">
+
+**Content**
+
+</div>
+
+This section describes overall, principal regulations and solution ideas
+that are relevant in multiple parts (= cross-cutting) of your system.
+Such concepts are often related to multiple building blocks. They can
+include many different topics, such as
+
+-   models, especially domain models
+
+-   architecture or design patterns
+
+-   rules for using specific technology
+
+-   principal, often technical decisions of an overarching (=
+    cross-cutting) nature
+
+-   implementation rules
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+Concepts form the basis for *conceptual integrity* (consistency,
+homogeneity) of the architecture. Thus, they are an important
+contribution to achieve inner qualities of your system.
+
+Some of these concepts cannot be assigned to individual building blocks,
+e.g. security or safety.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+The form can be varied:
+
+-   concept papers with any kind of structure
+
+-   cross-cutting model excerpts or scenarios using notations of the
+    architecture views
+
+-   sample implementations, especially for technical concepts
+
+-   reference to typical usage of standard frameworks (e.g. using
+    Hibernate for object/relational mapping)
+
+<div class="formalpara-title">
+
+**Structure**
+
+</div>
+
+A potential (but not mandatory) structure for this section could be:
+
+-   Domain concepts
+
+-   User Experience concepts (UX)
+
+-   Safety and security concepts
+
+-   Architecture and design patterns
+
+-   "Under-the-hood"
+
+-   development concepts
+
+-   operational concepts
+
+Note: it might be difficult to assign individual concepts to one
+specific topic on this list.
+
+![Possible topics for crosscutting
+concepts](images/08-concepts-EN.drawio.png)
+
+See [Concepts](https://docs.arc42.org/section-8/) in the arc42
+documentation.
+
+## *\<Concept 1>*
+
+*\<explanation>*
+
+## *\<Concept 2>*
+
+*\<explanation>*
+
+…
+
+## *\<Concept n>*
+
+*\<explanation>*
+
+# Architecture Decisions
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+Important, expensive, large scale or risky architecture decisions
+including rationales. With "decisions" we mean selecting one alternative
+based on given criteria.
+
+Please use your judgement to decide whether an architectural decision
+should be documented here in this central section or whether you better
+document it locally (e.g. within the white box template of one building
+block).
+
+Avoid redundancy. Refer to section 4, where you already captured the
+most important decisions of your architecture.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+Stakeholders of your system should be able to comprehend and retrace
+your decisions.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+Various options:
+
+-   ADR ([Documenting Architecture
+    Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions))
+    for every important decision
+
+-   List or table, ordered by importance and consequences or:
+
+-   more detailed in form of separate sections per decision
+
+See [Architecture Decisions](https://docs.arc42.org/section-9/) in the
+arc42 documentation. There you will find links and examples about ADR.
+
+# Quality Requirements
+
+<div class="formalpara-title">
+
+**Content**
+
+</div>
+
+This section contains all quality requirements as quality tree with
+scenarios. The most important ones have already been described in
+section 1.2. (quality goals)
+
+Here you can also capture quality requirements with lesser priority,
+which will not create high risks when they are not fully achieved.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+Since quality requirements will have a lot of influence on architectural
+decisions you should know for every stakeholder what is really important
+to them, concrete and measurable.
+
+See [Quality Requirements](https://docs.arc42.org/section-10/) in the
+arc42 documentation.
+
+## Quality Tree
+
+<div class="formalpara-title">
+
+**Content**
+
+</div>
+
+The quality tree (as defined in ATAM – Architecture Tradeoff Analysis
+Method) with quality/evaluation scenarios as leafs.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+The tree structure with priorities provides an overview for a sometimes
+large number of quality requirements.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+The quality tree is a high-level overview of the quality goals and
+requirements:
+
+-   tree-like refinement of the term "quality". Use "quality" or
+    "usefulness" as a root
+
+-   a mind map with quality categories as main branches
+
+In any case the tree should include links to the scenarios of the
+following section.
+
+## Quality Scenarios
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+Concretization of (sometimes vague or implicit) quality requirements
+using (quality) scenarios.
+
+These scenarios describe what should happen when a stimulus arrives at
+the system.
+
+For architects, two kinds of scenarios are important:
+
+-   Usage scenarios (also called application scenarios or use case
+    scenarios) describe the system’s runtime reaction to a certain
+    stimulus. This also includes scenarios that describe the system’s
+    efficiency or performance. Example: The system reacts to a user’s
+    request within one second.
+
+-   Change scenarios describe a modification of the system or of its
+    immediate environment. Example: Additional functionality is
+    implemented or requirements for a quality attribute change.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+Scenarios make quality requirements concrete and allow to more easily
+measure or decide whether they are fulfilled.
+
+Especially when you want to assess your architecture using methods like
+ATAM you need to describe your quality goals (from section 1.2) more
+precisely down to a level of scenarios that can be discussed and
+evaluated.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+Tabular or free form text.
+
+# Risks and Technical Debts
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+A list of identified technical risks or technical debts, ordered by
+priority
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+“Risk management is project management for grown-ups” (Tim Lister,
+Atlantic Systems Guild.)
+
+This should be your motto for systematic detection and evaluation of
+risks and technical debts in the architecture, which will be needed by
+management stakeholders (e.g. project managers, product owners) as part
+of the overall risk analysis and measurement planning.
+
+<div class="formalpara-title">
+
+**Form**
+
+</div>
+
+List of risks and/or technical debts, probably including suggested
+measures to minimize, mitigate or avoid risks or reduce technical debts.
+
+See [Risks and Technical Debt](https://docs.arc42.org/section-11/) in
+the arc42 documentation.
+
+# Glossary
+
+<div class="formalpara-title">
+
+**Contents**
+
+</div>
+
+The most important domain and technical terms that your stakeholders use
+when discussing the system.
+
+You can also see the glossary as source for translations if you work in
+multi-language teams.
+
+<div class="formalpara-title">
+
+**Motivation**
+
+</div>
+
+You should clearly define your terms, so that all stakeholders
+
+-   have an identical understanding of these terms
+
+-   do not use synonyms and homonyms
+
+A table with columns \<Term> and \<Definition>.
+
+Potentially more columns in case you need translations.
+
+See [Glossary](https://docs.arc42.org/section-12/) in the arc42
+documentation.
+
+| Term        | Definition        |
+|-------------|-------------------|
+| *\<Term-1>* | *\<definition-1>* |
+| *\<Term-2>* | *\<definition-2>* |
+
+
+
+==== domain-model/README.md ====
+# TFST - Domain Model
+
+## Purpose
+This directory contains the core domain model documentation for The Full Stack Team (TFST). It defines the key entities, their relationships, and bounded contexts.
+
+## Bounded Contexts
+- [Identity & Access Management](identity_access_management.md)
+- [Professional Profiles](professional_profiles.md)
+- [Time Tracking & Reporting](time_tracking_reporting.md)
+- [Talent Hiring & Contracts](talent_hiring_contracts.md)
+- [Payments & Billing](payments_billing.md)
+- [Organizations & Team Management](organizations_team_management.md)
+
+## Next Steps
+- Define permissions and role management.
+- Refine AI-based talent matching.
+- Expand the hiring and payment workflows.
+
+
+
+==== domain-model/identity_access_management.md ====
+# Identity & Access Management
+
+## Overview
+Manages authentication, authorization, user roles, and security policies. Ensures proper access control within the platform.
+
+## Core Entities
+
+### **Entities Managed by Identity Server (OpenIddict)**
+These entities handle **authentication**, token issuance, and external identity providers.
+- **Account**: Represents an authenticated user.
+- **External Provider Credentials**: OAuth providers (Google, GitHub, etc.).
+- **Token**: OAuth2 Access & Refresh Tokens.
+- **MFA (Multi-Factor Authentication)**: Stores second-factor authentication data.
+
+### **Entities Managed by TFST API**
+These entities handle **authorization** within the platform.
+- **User**: Represents a person within TFST.
+- **Role**: Defines a user's level of access (Admin, Recruiter, Freelancer).
+- **Permissions**: Defines what actions roles can perform.
+
+## Relationships
+
+- **Identity Server**:
+  - **Account (1:1) User**: Every Account is linked to a User in TFST.
+  - **Account (1:N) External Provider Credentials**: A user can authenticate with multiple providers.
+  - **Account (1:N) Tokens**: A user can have multiple active tokens.
+
+- **TFST API**:
+  - **User (1:N) Roles**: A user can have multiple roles.
+  - **Role (1:N) Permissions**: Roles define permissions for system actions.
+
+```mermaid
+%%{init: {
+  "themeCSS": [
+    "[id*=Account] .er.entityBox { stroke: lightgreen; }",
+    "[id*=ExternalProviderCredentials] .er.entityBox { stroke: lightgreen; }",
+    "[id*=Token] .er.entityBox { stroke: lightgreen; }",
+    "[id*=MFA] .er.entityBox { stroke: lightgreen; }",
+    "[id*=User] .er.entityBox { stroke: lightblue; }",
+    "[id*=Role] .er.entityBox { stroke: lightblue; }",
+    "[id*=Permissions] .er.entityBox { stroke: lightblue; }"
+  ]
+}}%%
+erDiagram
+    Account ||--|| User : links_to
+    Account ||--o{ ExternalProviderCredentials : authenticates_with
+    Account ||--o{ Token : generates
+    Account ||--o{ MFA : secures
+    User ||--o{ Role : assigned
+    Role ||--o{ Permissions : grants    
+```
+
+## Separation of Responsibilities
+
+### **Identity Server (OpenIddict)**
+- Handles **authentication** (login, OAuth, MFA).
+- Issues **OAuth2 / OpenID Connect tokens**.
+- Manages **user sessions** and **refresh tokens**.
+
+### **TFST API**
+- **Validates tokens** for each request.
+- **Applies role-based access control (RBAC)**.
+- **Protects resources** using claims from tokens.
+
+## Key Features
+- User registration and authentication (Email, OAuth, SSO).
+- Role-based access control (RBAC).
+- Multi-factor authentication (MFA).
+- API token management for external integrations.
+
+## Future Enhancements
+- Fine-grained permission management.
+- Integration with enterprise authentication providers (Azure AD, Okta).
+
+
+
+==== domain-model/organizations_team_management.md ====
+# Organizations & Team Management
+
+## Overview
+Supports companies and agencies in managing their teams, job postings, and talent acquisitions.
+
+## Core Entities
+- **Organization**: Represents a company or agency hiring freelancers.
+- **User Organization Membership**: A link between users and organizations.
+- **Recruiter**: A specialized user role within an organization.
+
+## Relationships
+- **User (0:N) Organizations**: A user can belong to multiple organizations.
+- **Organization (1:N) Job Posts**: Companies post multiple jobs.
+
+```mermaid
+erDiagram
+    User ||--o{ Organization : belongs_to
+    Organization ||--o{ JobPost : creates
+    Organization ||--o{ UserOrganizationMembership : manages
+    UserOrganizationMembership ||--|| User : links
+```
+
+## Key Features
+- Multi-user organization management.
+- Role-based access for recruiters and HR teams.
+- Centralized dashboard for tracking job posts and hires.
+
+## Future Enhancements
+- AI-driven hiring insights and team recommendations.
+
+
+
+==== domain-model/payments_billing.md ====
+# Payments & Billing
+
+## Overview
+Handles secure payments, invoicing, and escrow-based transactions.
+
+## Core Entities
+- **Payment**: Represents a financial transaction between a freelancer and a client.
+- **Invoice**: A generated document detailing work completed and payment requested.
+- **Escrow**: A system to hold funds securely until contract completion.
+
+## Relationships
+- **Contract (1:1) Payment**: Payments are tied to contracts.
+- **User (1:N) Invoices**: A freelancer can issue multiple invoices.
+
+```mermaid
+erDiagram
+    Contract ||--|| Payment : tied_to
+    User ||--o{ Invoice : issues
+    Payment ||--o{ Escrow : secures
+```
+
+
+## Key Features
+- Secure escrow-based payments.
+- Automated invoicing based on work completion.
+- Support for multiple payment methods (PayPal, Stripe, Crypto).
+
+## Future Enhancements
+- Blockchain-based escrow for transparent payments.
+- Multi-party escrow and milestone-based payments.
+
+
+
+==== domain-model/professional_profiles.md ====
+# Professional Profiles
+
+## Overview
+The **Professional Profile** module defines the identity of freelancers within TFST. It includes details such as skills, experience, certifications, and reputation.  
+To ensure a **standardized and interoperable** representation of professional skills and occupations, TFST adopts the **European Skills, Competences, Qualifications, and Occupations (ESCO)** framework as the foundation for professional profiles.
+
+## Alignment with ESCO
+ESCO provides a structured **taxonomy** of skills, occupations, and qualifications, which TFST integrates directly. This allows:
+- **Standardized skill representation** across different industries and regions.
+- **Compatibility with European and international job markets.**
+- **Support for 28 languages** without additional translation effort.
+- **Better AI-driven recommendations** by leveraging a unified dataset.
+
+[See ESCO here](https://esco.ec.europa.eu/)
+
+## Core Entities
+
+### **Professional Profile**
+- Represents a freelancer’s **identity** and a professional background.
+- Linked to **ESCO-based skills, occupations, and qualifications**.
+- Contains **experience, endorsements, and reputation scoring**.
+
+### **Experience**
+- Work history including **roles, responsibilities, and durations**.
+- Mapped to **ESCO occupations** for standardized job classification.
+
+### **Skills**
+- Skills are based on **ESCO’s structured taxonomy**.
+- Each skill has:
+  - **ESCO ID** → Unique identifier from ESCO.
+  - **Name** → Standardized name from ESCO.
+  - **Category** → Categorized based on ESCO’s classification.
+  - **Source** → (ESCO, O*NET, SFIA, etc.) in case additional sources are integrated.
+
+### **Certifications**
+- Represents **validated qualifications** from recognized institutions.
+- Can be linked to **ESCO qualifications** when available.
+- Includes:
+  - **Certificate Name**
+  - **Issuing Institution**
+  - **ESCO Qualification Reference (if applicable)**
+
+### **Portfolio**
+- Work samples that showcase a freelancer’s expertise.
+- Can include links to **GitHub, Dribbble, Behance**, or other platforms.
+
+### **Reputation**
+- Ratings and feedback from completed projects.
+- AI-driven **credibility scoring** based on work history and endorsements.
+
+## Relationships
+- **User (1:0..1) Professional Profile** → Only freelancers have a professional profile.
+- **Professional Profile (1:N) Experience** → A freelancer can have multiple job experiences.
+- **Professional Profile (1:N) Skills** → A freelancer has multiple skills.
+- **Professional Profile (1:N) Certifications** → A freelancer can hold multiple certifications.
+- **Professional Profile (1:N) Portfolio Items** → Multiple projects linked to a profile.
+- **Professional Profile (1:N) Reputation Scores** → Different reputation metrics based on feedback.
+
+
+```mermaid
+erDiagram
+    User ||--|| ProfessionalProfile : has
+    ProfessionalProfile ||--o{ Experience : contains
+    ProfessionalProfile ||--o{ Skills : includes
+    ProfessionalProfile ||--o{ Certifications : holds
+    ProfessionalProfile ||--o{ Portfolio : showcases
+    ProfessionalProfile ||--o{ Reputation : builds
+```
+
+## API Endpoints
+TFST exposes an API to manage professional profiles using ESCO data.
+
+### **Search ESCO Skills**
+`GET /skills?query=software development&language=en`
+```json
+[
+  { "id": "s-001", "name": "Software Development", "category": "Digital Skills", "source": "ESCO" },
+  { "id": "s-002", "name": "Cloud Computing", "category": "IT Skills", "source": "ESCO" }
+]
+```
+
+### **Get ESCO Occupations**
+`GET /occupations?query=cloud architect`
+```json
+[
+  { "id": "p-101", "name": "Cloud Architect", "isco_code": "2523", "source": "ESCO" }
+]
+```
+
+### **Associate Skills to a Profile**
+`POST /professional-profiles/{id}/skills`
+```json
+{
+  "skills": ["s-001", "s-002"]
+}
+```
+
+## Future Enhancements
+- **AI-based skill gap analysis** → Suggest missing skills based on ESCO recommendations.
+- **Automated profile completion** → Use ESCO metadata to suggest relevant experiences and qualifications.
+- **Integration with LinkedIn & GitHub** → Import existing skills and projects.
+
+## Why ESCO?
+Using **ESCO as the foundation** for TFST’s professional profiles ensures that:
+- Skills and occupations **follow an international standard**.
+- The system is **future-proof**, supporting integrations with global job markets.
+- Multilingual support is **natively available**.
+- TFST can **extend ESCO** by integrating O*NET, SFIA, and MAPHA where necessary.
+
+
+
+==== domain-model/talent_hiring_contracts.md ====
+# Talent Hiring & Contracts
+
+## Overview
+Manages job postings, applications, interviews, contracts, and hiring workflows.
+
+## Core Entities
+- **Job Post**: A listing created by a client or recruiter to hire freelancers.
+- **Application**: A freelancer's submission to a job post.
+- **Interview**: The hiring process, including technical screenings.
+- **Contract**: A formal agreement between a client and a freelancer.
+
+## Relationships
+- **Organization (1:N) Job Posts**: A company can post multiple jobs.
+- **Job Post (1:N) Applications**: A job can receive multiple applications.
+- **Application (1:1) Contract**: A contract is created upon hiring.
+
+```mermaid
+erDiagram
+    Organization ||--o{ JobPost : creates
+    JobPost ||--o{ Application : receives
+    Application ||--|| Contract : results_in
+    Contract ||--|| User : binds
+```
+
+## Key Features
+- AI-based talent matching.
+- One-click application system.
+- Smart contract execution for milestone payments.
+
+## Future Enhancements
+- AI-driven job descriptions.
+- Decentralized arbitration system for contract disputes.
+
+
+
+==== domain-model/time_tracking_reporting.md ====
+# Time Tracking & Reporting
+
+## Overview
+The **Time Tracking & Reporting** module provides freelancers with a built-in tool to log work hours, manage time entries, and generate reports or invoices based on hourly rates.
+
+This tool is **free for all freelancers** registered on TFST and integrates with the **Payments & Billing** module to facilitate automated invoicing.
+
+## Core Entities
+
+### **Time Entry**
+- Represents a freelancer’s logged work session.
+- Includes:
+  - **Date** → The date when the work was done.
+  - **Hours Worked** → Total number of hours worked on that date.
+  - **Project Reference** → Links the entry to a specific project.
+  - **Task Reference (Optional)** → Links the entry to a specific task.
+  - **Hourly Rate** → Defined by the freelancer or contract.
+- **Flexible Input**:
+  - Freelancers **can log hours without specifying a start/end time**.
+  - Example:  
+    - ✅ **"Worked 5 hours today on Project X."**  
+    - ✅ **"Spent 3 hours on API Development this week."**
+
+### **Project**
+- Represents a freelance job or contract where time entries are recorded.
+- Includes:
+  - **Client Reference** → Links the project to a specific client.
+  - **Freelancer Reference** → Assigned freelancer.
+  - **Hourly Rate** → Base rate for invoicing.
+  - **Status** → (Active, Completed, Canceled).
+
+### **Invoice (Linked to Payments & Billing)**
+- Invoices can be **automatically generated** from tracked hours.
+- Calculation:  
+  `Total Amount = Total Hours Worked x Hourly Rate`
+- Invoices are stored in the **Payments & Billing** module.
+
+### **Time Report**
+- A summarized view of logged hours per:
+  - **Project**
+  - **Client**
+  - **Time Period**
+  - **Task** (if applicable)
+- Used for internal tracking or invoicing purposes.
+
+## Relationships
+- **Freelancer (1:N) Time Entries** → A freelancer logs multiple time entries.
+- **Project (1:N) Time Entries** → A project accumulates multiple time logs.
+- **Time Entry (1:1) Invoice** → Time logs can be grouped into invoices.
+- **Freelancer (1:N) Reports** → Freelancers generate reports from tracked hours.
+
+```mermaid
+erDiagram
+    Freelancer ||--o{ TimeEntry : logs
+    TimeEntry ||--|| Project : belongs_to
+    TimeEntry ||--o| Invoice : billed_in
+    Freelancer ||--o{ TimeReport : generates
+    Project ||--o{ TimeEntry : accumulates
+```
+
+## Key Features
+- **Simple Time Logging**
+  - Freelancers select a **date** and input total **hours worked**.
+  - No need for start/end times.
+  
+- **Project-based Hourly Rates**
+  - Set different rates per client or project.
+  - Supports **fixed-price** or **hourly** contracts.
+
+- **Automated Invoice Generation**
+  - Converts time entries into **invoices** (when enabled).
+  - Supports **partial payments** for ongoing projects.
+
+- **Comprehensive Time Reports**
+  - Filters by **date range, project, client**.
+  - Export to **PDF, XLSX, CSV** for client reporting.
+
+## API Endpoints
+
+### **Log Time Entry**
+`POST /time-entries`
+```json
+{
+  "freelancer_id": "f-001",
+  "project_id": "p-101",
+  "date": "2025-03-05",
+  "hours_worked": 5,
+  "hourly_rate": 50.00
+}
+```
+
+### **Retrieve Time Entries**
+`GET /time-entries?freelancer_id=f-001&period=last_week`
+```json
+[
+  { "id": "t-001", "project": "Website Development", "date": "2025-03-04", "hours": 5, "rate": 50.00, "total": 250.00 },
+  { "id": "t-002", "project": "API Development", "date": "2025-03-03", "hours": 3, "rate": 60.00, "total": 180.00 }
+]
+```
+
+### **Generate Report**
+`GET /time-reports?freelancer_id=f-001&period=this_month`
+```json
+{
+  "total_hours": 120,
+  "total_earnings": 6000.00,
+  "breakdown": [
+    { "project": "Website Development", "hours": 40, "earnings": 2000.00 },
+    { "project": "API Development", "hours": 80, "earnings": 4000.00 }
+  ]
+}
+```
+
+## Future Enhancements
+- **AI-based time tracking** → Smart recommendations for logging hours.
+- **Task-Level Tracking** → Assign time entries to specific tasks.
+- **Mobile App Support** → Native mobile app for real-time tracking.
+- **Blockchain Validation** → Immutable proof of work logs.
+
+
+
+==== features/README.md ====
+# Features Overview
+
+This directory contains the core features of TFST, structured into different categories.
+
+## Features Structure
+- [Users & Identity](users_identity.md)
+- [Professional Identity & Reputation](professional_identity.md)
+- [Talent Discovery & Hiring](talent_discovery.md)
+- [Contracts & Payments](contracts_payments.md)
+- [AI & Smart Contracts](ai_smart_contracts.md)
+- [System Events & Logs](system_events.md)
+
+Each feature is documented with a **user story**, describing its purpose and future enhancements.
+
+
+
+==== features/ai_smart_contracts.md ====
+# AI & Smart Contracts
+
+## Feature: AI-Based Talent Matching
+**User Story:**  
+_As a recruiter, I want the system to recommend the best candidates based on skills and past work, so I can quickly find the right talent._
+
+### Next Level:
+- Personalized ranking models
+- Real-time job-to-talent matching
+
+## Feature: Smart Contracts for Secure Agreements
+**User Story:**  
+_As a client, I want a contract that auto-executes payments upon completion, so I don’t have to manage transactions manually._
+
+### Next Level:
+- Multi-party escrow
+- Decentralized arbitration
+
+
+
+
+==== features/contracts_payments.md ====
+# Contracts & Payments
+
+## Feature: Contract & Agreement
+**User Story:**  
+_As a client, I want to establish a contract with a freelancer, so our agreement is formalized._
+
+### Next Level:
+- Smart contract auto-execution
+- Milestone-based payments
+
+## Feature: Payment & Escrow
+**User Story:**  
+_As a freelancer, I want to receive secure payments, so I am guaranteed to be paid for my work._
+
+### Next Level:
+- Blockchain-based escrow
+- Automated invoicing
+
+
+
+
+==== features/professional_identity.md ====
+# Professional Identity & Reputation
+
+## Feature: Profile & Reputation System
+**User Story:**  
+_As a freelancer, I want to showcase my skills, experience, and past work, so I can attract potential clients._
+
+### Next Level:
+- AI-enhanced credibility scoring
+- Endorsements from past clients
+
+## Feature: Portfolio & Work Proof
+**User Story:**  
+_As a professional, I want to attach my work samples (GitHub repos, design portfolios, etc.), so I can prove my capabilities._
+
+### Next Level:
+- Verified case studies
+- Client feedback integration
+
+
+
+
+==== features/system_events.md ====
+# System Events & Logs
+
+## Feature: Notifications & Activity Tracking
+**User Story:**  
+_As a user, I want to receive notifications for job updates, applications, and payments, so I stay informed._
+
+### Next Level:
+- Customizable alerts
+- In-app vs. email notifications
+
+## Feature: Audit Logs & Security
+**User Story:**  
+_As an admin, I want a detailed activity log for all transactions, so I can ensure compliance and prevent fraud._
+
+### Next Level:
+- Blockchain-based immutable audit trail
+
+
+
+
+==== features/talent_discovery.md ====
+# Talent Discovery & Hiring
+
+## Feature: Job Posting & Search
+**User Story:**  
+_As a client, I want to create job posts with detailed requirements, so I can attract the right freelancers._
+
+### Next Level:
+- AI-based recommendations for job descriptions
+
+## Feature: Freelancer Application Process
+**User Story:**  
+_As a freelancer, I want to apply to relevant job posts, so I can secure work opportunities._
+
+### Next Level:
+- One-click applications
+- Pre-filtering based on reputation & skills
+
+## Feature: Interview & Screening
+**User Story:**  
+_As a recruiter, I want to conduct technical assessments before hiring, so I can ensure candidate quality._
+
+### Next Level:
+- AI-assisted screening
+- Automated coding tests
+
+
+
+
+==== features/time_tracking_features.md ====
+# Time Tracking & Reporting Features
+
+## Feature: Freelancer Time Tracking Tool
+- **User Story:**  
+  *As a freelancer, I want a simple and integrated time tracking tool, so I can log my work hours, manage my time efficiently, and generate reports and invoices effortlessly.*
+- **Next Level:**  
+  - AI-powered suggestions for time logging.  
+  - Smart reminders based on work patterns.  
+  - Blockchain-based proof-of-work validation.  
+
+## Feature: Project-Based Time Logging
+- **User Story:**  
+  *As a freelancer, I want to log hours against specific projects, so I can track my work distribution across multiple clients.*
+- **Next Level:**  
+  - Task-level tracking.  
+  - Pre-filled reports based on project history.  
+
+## Feature: Automated Invoice Generation
+- **User Story:**  
+  *As a freelancer, I want to convert my logged hours into invoices, so I can streamline my billing process without manual calculations.*
+- **Next Level:**  
+  - Auto-generated invoice templates.  
+  - Customizable billing periods and payment terms.  
+
+## Feature: Time Reports & Analytics
+- **User Story:**  
+  *As a freelancer, I want to generate time reports, so I can analyze my productivity and share summaries with clients.*
+- **Next Level:**  
+  - Visual dashboards with earnings breakdown.  
+  - Export options (PDF, CSV, XLSX).  
+
+## Feature: Free Time Tracking for All Users
+- **User Story:**  
+  *As a freelancer, I want access to a professional time tracking tool for free, so I don’t need to pay for third-party alternatives like Toggl or Clockify.*
+- **Next Level:**  
+  - Premium add-ons for advanced analytics.  
+  - Integration with external platforms (Google Calendar, Trello, Jira).  
+
+
+
+==== features/users_identity.md ====
+# Users & Identity
+
+## Feature: User Registration & Identity Management
+**User Story:**  
+_As a freelancer/client, I want to create a profile with my personal details, so I can start applying/posting jobs._
+
+### Next Level:
+- KYC verification
+- Proof of work validation
+
+
+
+
