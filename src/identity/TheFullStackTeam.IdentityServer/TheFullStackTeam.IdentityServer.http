@@ -1,0 +1,6 @@
+@TheFullStackTeam.IdentityServer_HostAddress = http://localhost:5268
+
+GET {{TheFullStackTeam.IdentityServer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

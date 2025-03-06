@@ -3,6 +3,24 @@ networks:
     driver: bridge
 
 services:
+  tfst-identityserver:
+    image: ${DOCKER_REGISTRY-}tfstidentityserver
+    networks:
+      - tfst-network
+    ports:
+      - "7200:7200"  # HTTP
+      - "7201:7201"  # HTTPS
+    build:
+      context: ./identity
+      dockerfile: TheFullStackTeam.IdentityServer/Dockerfile
+    depends_on:
+      - tfst-sqlserver
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ./identity/TheFullStackTeam.IdentityServer/.env:/app/.env:ro
+
   thefullstackteam.api:
     image: ${DOCKER_REGISTRY-}thefullstackteamapi
     networks:
@@ -11,16 +29,17 @@ services:
       - "7100:7100"  # HTTP
       - "7101:7101"  # HTTPS
     build:
-      context: .
+      context: ./api
       dockerfile: TheFullStackTeam.API/Dockerfile
     depends_on:
+      - tfst-identityserver
       - tfst-sqlserver
       - tfst-rabbitmq
       - tfst-seq
       - tfst-mongo
     volumes:
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
-      - ./TheFullStackTeam.API/.env:/app/.env:ro
+      - ./api/TheFullStackTeam.API/.env:/app/.env:ro
 
   tfst-sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
