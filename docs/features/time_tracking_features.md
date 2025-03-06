@@ -35,3 +35,12 @@
 - **Next Level:**  
   - Premium add-ons for advanced analytics.  
   - Integration with external platforms (Google Calendar, Trello, Jira).  
+
+## Feature: **Time Validation & Approval**
+- **User Story:**  
+  *As a project manager, I want to review and approve logged hours before they are invoiced, so I can ensure accuracy and accountability.*
+- **Next Level:**  
+  - Admin dashboard for **manual approval workflows**.  
+  - Automatic validation using **time tracking integrations**.  
+  - AI-based verification based on **activity patterns and commits**.  
+  - **Escrow-based smart contracts** for automated payment upon approval.

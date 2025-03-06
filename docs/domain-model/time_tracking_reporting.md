@@ -58,6 +58,25 @@ erDiagram
     Project ||--o{ TimeEntry : accumulates
 ```
 
+## **Validation & Approval Workflows**
+As the system evolves, different levels of validation will be introduced:
+
+1. **Self-Managed Mode (Default)**
+   - Freelancers log their own hours without external validation.
+   - Designed for **personal tracking and reporting**.
+
+2. **Supervised Validation (For Consultancies & Teams)**
+   - Project managers can **review and approve hours** before invoicing.
+   - Supports **custom approval workflows** (e.g., weekly or monthly reviews).
+
+3. **Automated Validation (Future)**
+   - Integration with **time tracking tools** (e.g., Toggl, Clockify, Jira).
+   - AI-based validation using **activity logs, commits, and project interactions**.
+
+4. **Smart Contracts for Payments (Future)**
+   - Validated hours trigger **automatic payments** via **escrow-based smart contracts**.
+   - Ensures transparency between freelancers and clients.
+
 ## Key Features
 - **Simple Time Logging**
   - Freelancers select a **date** and input total **hours worked**.
@@ -74,43 +93,6 @@ erDiagram
 - **Comprehensive Time Reports**
   - Filters by **date range, project, client**.
   - Export to **PDF, XLSX, CSV** for client reporting.
-
-## API Endpoints
-
-### **Log Time Entry**
-`POST /time-entries`
-```json
-{
-  "freelancer_id": "f-001",
-  "project_id": "p-101",
-  "date": "2025-03-05",
-  "hours_worked": 5,
-  "hourly_rate": 50.00
-}
-```
-
-### **Retrieve Time Entries**
-`GET /time-entries?freelancer_id=f-001&period=last_week`
-```json
-[
-  { "id": "t-001", "project": "Website Development", "date": "2025-03-04", "hours": 5, "rate": 50.00, "total": 250.00 },
-  { "id": "t-002", "project": "API Development", "date": "2025-03-03", "hours": 3, "rate": 60.00, "total": 180.00 }
-]
-```
-
-### **Generate Report**
-`GET /time-reports?freelancer_id=f-001&period=this_month`
-```json
-{
-  "total_hours": 120,
-  "total_earnings": 6000.00,
-  "breakdown": [
-    { "project": "Website Development", "hours": 40, "earnings": 2000.00 },
-    { "project": "API Development", "hours": 80, "earnings": 4000.00 }
-  ]
-}
-```
-
 ## Future Enhancements
 - **AI-based time tracking** → Smart recommendations for logging hours.
 - **Task-Level Tracking** → Assign time entries to specific tasks.
