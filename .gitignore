@@ -418,4 +418,35 @@ FodyWeavers.xsd
 
 # macOS metadata files
 .DS_Store
+
+# Rider-specific files (JetBrains Rider)
+.idea/
+*.iml
+
+# VSCode specific files
+.vscode/
+*.code-workspace
+
+# Environment files (Common)
+.env
+.env.*
+
+# MacOS files
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Docker Compose overrides/local files
+docker-compose.override.yml
+
+# Angular build output
+dist/
+.angular/
+
+# Node.js and Angular tooling files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/

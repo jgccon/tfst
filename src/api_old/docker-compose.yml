@@ -1,0 +1,95 @@
+networks:
+  tfst-network:
+    driver: bridge
+
+services:
+  thefullstackteam.api:
+    image: ${DOCKER_REGISTRY-}thefullstackteamapi
+    networks:
+      - tfst-network
+    ports:
+      - "7100:7100"  # HTTP
+      - "7101:7101"  # HTTPS
+    build:
+      context: .
+      dockerfile: TheFullStackTeam.API/Dockerfile
+    depends_on:
+      - tfst-sqlserver
+      - tfst-rabbitmq
+      - tfst-seq
+      - tfst-mongo
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ./TheFullStackTeam.API/.env:/app/.env:ro
+
+  tfst-sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      - tfst-network
+    user: root
+    container_name: SqlServerContainer
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong@Passw0rd"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./infrastructure/docker/sqlserver-data:/var/opt/mssql/data
+
+  tfst-rabbitmq:
+    image: rabbitmq:3-management
+    networks:
+      - tfst-network
+    hostname: rabbitmq
+    container_name: RabbitMqContainer
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbituser
+      RABBITMQ_DEFAULT_PASS: Rabbit123*
+    ports:
+      - "5672:5672"  # AMQP
+      - "15672:15672" # Management
+    volumes:
+      - ./infrastructure/docker/rabbitmq-data:/var/lib/rabbitmq
+
+  tfst-seq:
+    image: datalust/seq:latest
+    networks:
+      - tfst-network
+    container_name: SeqContainer
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_API_KEY: "SeqApiKey"
+    ports:
+      - "5341:80"  # Web interface
+      - "5342:443" # HTTPS interface
+    volumes:
+      - ./infrastructure/docker/seq-data:/data
+
+  tfst-mongo:
+    image: mongo:latest
+    networks:
+      - tfst-network
+    container_name: MongoDbContainer
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: examplepassword
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./infrastructure/docker/mongo-data:/data/db
+
+  tfst-mongo-express:
+    image: mongo-express:latest
+    networks:
+      - tfst-network
+    container_name: MongoExpressContainer
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: examplepassword
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_URL: mongodb://root:examplepassword@tfst-mongo:27017/
+    ports:
+      - "8081:8081"
+    restart: on-failure
+    depends_on:
+      - tfst-mongo
