@@ -1,4 +1,4 @@
-@TFST.API_HostAddress = http://localhost:5266
+@TFST.API_HostAddress = http://localhost:5252
 
 GET {{TFST.API_HostAddress}}/weatherforecast/
 Accept: application/json

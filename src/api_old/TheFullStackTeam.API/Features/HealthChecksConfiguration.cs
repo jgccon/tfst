@@ -2,7 +2,7 @@
 using TheFullStackTeam.Common.Configuration;
 using TheFullStackTeam.Common.Constants;
 
-namespace TheFullStackTeam.API.HealthChecks;
+namespace TheFullStackTeam.API.Features;
 public static class HealthChecksConfiguration
 {
     public static void AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration)
