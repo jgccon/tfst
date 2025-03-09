@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.API", "TFST.API\TFST.API.csproj", "{6C6627C5-B734-48C2-A233-313355253A9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.API", "src\TFST.API\TFST.API.csproj", "{6C6627C5-B734-48C2-A233-313355253A9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.API.UnitTests", "TFST.API.UnitTests\TFST.API.UnitTests.csproj", "{B1B9239A-C201-44EE-9E5F-984D6DB9B333}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.API.UnitTests", "src\TFST.API.UnitTests\TFST.API.UnitTests.csproj", "{B1B9239A-C201-44EE-9E5F-984D6DB9B333}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.API.IntegrationTests", "src\TFST.API.IntegrationTests\TFST.API.IntegrationTests.csproj", "{D887C80A-41F1-4B8E-9DB3-909BA0D9C331}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.API.IntegrationTests", "TFST.API.IntegrationTests\TFST.API.IntegrationTests.csproj", "{D887C80A-41F1-4B8E-9DB3-909BA0D9C331}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
