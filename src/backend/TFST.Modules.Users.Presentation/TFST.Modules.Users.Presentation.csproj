@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TFST.Modules.Users.Application\TFST.Modules.Users.Application.csproj" />
+    <ProjectReference Include="..\TFST.Modules.Users.Persistence\TFST.Modules.Users.Persistence.csproj" />
+    <ProjectReference Include="..\TFST.SharedKernel.Domain\TFST.SharedKernel.Domain.csproj" />
+    <ProjectReference Include="..\TFST.SharedKernel.Persistence\TFST.SharedKernel.Persistence.csproj" />
     <ProjectReference Include="..\TFST.SharedKernel.Presentation\TFST.SharedKernel.Presentation.csproj" />
   </ItemGroup>
 

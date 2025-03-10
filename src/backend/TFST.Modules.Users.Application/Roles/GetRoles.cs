@@ -1,14 +1,14 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using TFST.Modules.Users.Application.Expressions;
 using TFST.Modules.Users.Application.Models;
 using TFST.Modules.Users.Persistence;
-using TFST.Persistence;
 
 namespace TFST.Modules.Users.Application.Roles;
 
-public record GetRolesQuery() : IRequest<List<RoleProjection>>;
+public record GetRolesQuery() : IRequest<List<Role>>;
 
-public class GetRolesHandler : IRequestHandler<GetRolesQuery, List<RoleProjection>>
+public class GetRolesHandler : IRequestHandler<GetRolesQuery, List<Role>>
 {
     private readonly UsersDbContext _dbContext;
 
@@ -17,10 +17,10 @@ public class GetRolesHandler : IRequestHandler<GetRolesQuery, List<RoleProjectio
         _dbContext = dbContext;
     }
 
-    public async Task<List<RoleProjection>> Handle(GetRolesQuery request, CancellationToken cancellationToken)
+    public async Task<List<Role>> Handle(GetRolesQuery request, CancellationToken cancellationToken)
     {
         return await _dbContext.Roles
-            .Select(r => new RoleProjection(r.Id, r.Name))
+            .Select(RoleExpressions.Projection)
             .ToListAsync(cancellationToken);
     }
 }

@@ -6,26 +6,26 @@ using TFST.Modules.Users.Persistence;
 
 namespace TFST.Modules.Users.Application.Users;
 
-public record GetUserByIdQuery(Guid Id) : IRequest<User>;
+public record GetUserByMonikerQuery(string Moniker) : IRequest<User>;
 
-public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, User>
+public class GetUserByMonikerHandler : IRequestHandler<GetUserByMonikerQuery, User>
 {
     private readonly UsersDbContext _dbContext;
 
-    public GetUserByIdHandler(UsersDbContext dbContext)
+    public GetUserByMonikerHandler(UsersDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+    public async Task<User> Handle(GetUserByMonikerQuery request, CancellationToken cancellationToken)
     {
         var user = await _dbContext.Users
-            .Where(u => u.Id == request.Id)
+            .Where(u => u.Moniker == request.Moniker)
             .Select(UserExpressions.Projection)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (user is null)
-            throw new KeyNotFoundException($"User with ID {request.Id} not found.");
+            throw new KeyNotFoundException($"User with moniker '{request.Moniker}' not found.");
 
         return user;
     }

@@ -1,79 +1,70 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using TFST.Modules.Users.Application.Users;
 using TFST.SharedKernel.Presentation;
 
 namespace TFST.Modules.Users.Presentation.Controllers;
 
-[Tags("Identity")]
+[Tags("Users")]
 [Authorize]
+[Route("users")]
 public class UsersController : ApiControllerBase
 {
-    private static readonly List<dynamic> Users = new()
-    {
-        new { Id = Guid.NewGuid(), Name = "Alice", Email = "alice@example.com" },
-        new { Id = Guid.NewGuid(), Name = "Bob", Email = "bob@example.com" }
-    };
+    private readonly IMediator _mediator;
 
-    [HttpGet]
-    public IActionResult GetUsers()
+    public UsersController(IMediator mediator)
     {
-        return Ok(Users);
+        _mediator = mediator;
     }
 
-    [HttpGet("{id:guid}")]
-    public IActionResult GetUserById(Guid id)
+    [HttpGet("me")]
+    public async Task<IActionResult> GetCurrentUser()
     {
-        var user = Users.FirstOrDefault(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound(new { Message = "User not found" });
-        }
+        var user = await _mediator.Send(new GetCurrentUserQuery(User));
         return Ok(user);
     }
 
+
+    [HttpGet("{moniker}")]
+    public async Task<IActionResult> GetUserByMoniker(string moniker)
+    {
+        var user = await _mediator.Send(new GetUserByMonikerQuery(moniker));
+        return Ok(user);
+    }
+
+    [HttpPut("me")]
+    public async Task<IActionResult> UpdateCurrentUser([FromBody] UpdateCurrentUserCommand command)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
+        {
+            return Unauthorized(new { Message = "Invalid user token." });
+        }
+
+        var updatedUser = await _mediator.Send(new UpdateCurrentUserCommand(userId, command.FirstName, command.LastName));
+        return Ok(updatedUser);
+    }
+
     [HttpPost]
-    public IActionResult CreateUser([FromBody] dynamic newUser)
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
     {
-        var user = new
-        {
-            Id = Guid.NewGuid(),
-            newUser.Name,
-            newUser.Email
-        };
-        Users.Add(user);
-        return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
+        var user = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetUserByIdQuery), new { id = user.Id }, user);
     }
 
-    [HttpPut("{id:guid}")]
-    public IActionResult UpdateUser(Guid id, [FromBody] dynamic updatedUser)
+    [HttpDelete("me")]
+    public async Task<IActionResult> DeleteUser()
     {
-        var index = Users.FindIndex(u => u.Id == id);
-        if (index == -1)
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
         {
-            return NotFound(new { Message = "User not found" });
+            return Unauthorized(new { Message = "Invalid user token." });
         }
 
-        Users[index] = new
-        {
-            Id = id,
-            updatedUser.Name,
-            updatedUser.Email
-        };
-
-        return Ok(Users[index]);
-    }
-
-    [HttpDelete("{id:guid}")]
-    public IActionResult DeleteUser(Guid id)
-    {
-        var user = Users.FirstOrDefault(u => u.Id == id);
-        if (user == null)
-        {
-            return NotFound(new { Message = "User not found" });
-        }
-
-        Users.Remove(user);
-        return NoContent();
+        var result = await _mediator.Send(new DeleteCurrentUserCommand(userId));
+        return result ? NoContent() : NotFound(new { Message = "User not found" });
     }
 }

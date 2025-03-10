@@ -1,6 +1,6 @@
-using Scalar.AspNetCore;
-using Microsoft.OpenApi.Models;
 using TFST.API.Extensions;
+using TFST.Modules.Users.Presentation.Extensions;
+
 
 namespace TFST.API
 {
@@ -12,7 +12,9 @@ namespace TFST.API
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApiConfiguration();
-            builder.Services.AddJwtAuthentication(builder.Configuration); // Autenticación JWT
+            builder.Services.AddJwtAuthentication(builder.Configuration);
+
+            builder.Services.AddUsersModule();
 
             var app = builder.Build();
 
@@ -20,7 +22,7 @@ namespace TFST.API
             app.UseAuthorization();
             app.UseOpenApiConfiguration();
 
-            app.MapControllers();
+            app.UseUsersModule();
             app.Run();
         }
     }

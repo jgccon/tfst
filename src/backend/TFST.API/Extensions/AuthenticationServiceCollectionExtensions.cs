@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using TFST.API.Configuration;
+using TFST.SharedKernel.Configuration;
 
 namespace TFST.API.Extensions;
 

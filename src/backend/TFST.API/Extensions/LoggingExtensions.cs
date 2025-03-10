@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
-namespace TFST.API.Extensions;
+﻿namespace TFST.API.Extensions;
 
 public static class LoggingExtensions
 {

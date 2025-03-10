@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TFST.Modules.Users.Domain.Entities;
 
-namespace TFST.Persistence;
+namespace TFST.Modules.Users.Persistence;
 
 public class UsersDbContext : DbContext
 {

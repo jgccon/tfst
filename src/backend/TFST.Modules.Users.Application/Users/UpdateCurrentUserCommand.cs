@@ -6,21 +6,24 @@ using TFST.Modules.Users.Persistence;
 
 namespace TFST.Modules.Users.Application.Users;
 
-public record UpdateUserCommand(Guid UserId, string FirstName, string LastName) : IRequest<User>;
+public record UpdateCurrentUserCommand(Guid UserId, string FirstName, string LastName) : IRequest<User>;
 
-public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, User>
+public class UpdateCurrentUserHandler : IRequestHandler<UpdateCurrentUserCommand, User>
 {
     private readonly UsersDbContext _dbContext;
 
-    public UpdateUserHandler(UsersDbContext dbContext) => _dbContext = dbContext;
+    public UpdateCurrentUserHandler(UsersDbContext dbContext)
+    {
+        _dbContext = dbContext;
+    }
 
-    public async Task<User> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(UpdateCurrentUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _dbContext.Users
             .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
 
         if (user is null)
-            throw new KeyNotFoundException($"User with ID {request.UserId} not found.");
+            throw new KeyNotFoundException("User not found.");
 
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;

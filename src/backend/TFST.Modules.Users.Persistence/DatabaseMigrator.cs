@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Retry;
 
-namespace TFST.Persistence;
+namespace TFST.Modules.Users.Persistence;
 
 public class DatabaseMigrator
 {

@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using TFST.Persistence;
 using TFST.SharedKernel.Domain.Entities;
 using TFST.SharedKernel.Domain.Services;
 

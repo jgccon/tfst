@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TFST.Modules.Users.Application.Roles;
 using TFST.SharedKernel.Presentation;
 
 namespace TFST.Modules.Users.Presentation.Controllers;
@@ -22,6 +23,6 @@ public class RolesController : ApiControllerBase
     public async Task<IActionResult> GetAllRoles()
     {
         var roles = await _mediator.Send(new GetRolesQuery());
-        return Ok(roles.Select(r => new RoleModel(r.Id, r.Name)));
+        return Ok(roles);
     }
 }

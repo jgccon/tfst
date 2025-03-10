@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TFST.Domain.Base;
-
+using TFST.SharedKernel.Domain.Entities;
 
 namespace TFST.Persistence.EntityConfigurations;
 
