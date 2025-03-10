@@ -16,6 +16,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\TFST.Modules.Users.Domain\TFST.Modules.Users.Domain.csproj" />
+		<ProjectReference Include="..\TFST.SharedKernel.Configuration\TFST.SharedKernel.Configuration.csproj" />
 	</ItemGroup>
 
 </Project>
