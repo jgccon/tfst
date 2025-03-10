@@ -6,15 +6,14 @@ namespace TFST.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApiConfiguration();
             builder.Services.AddJwtAuthentication(builder.Configuration);
-
-            builder.Services.AddUsersModule();
+            builder.Services.AddUsersModule(builder.Configuration);
 
             var app = builder.Build();
 
@@ -22,7 +21,7 @@ namespace TFST.API
             app.UseAuthorization();
             app.UseOpenApiConfiguration();
 
-            app.UseUsersModule();
+            await app.UseUsersModuleAsync(app.Services, builder.Configuration);
             app.Run();
         }
     }
