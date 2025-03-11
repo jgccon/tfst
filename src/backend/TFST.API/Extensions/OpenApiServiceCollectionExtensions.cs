@@ -1,3 +1,4 @@
+using Microsoft.Azure.Amqp.Framing;
 using Microsoft.OpenApi.Models;
 using Scalar.AspNetCore;
 
@@ -5,7 +6,7 @@ namespace TFST.API.Extensions;
 
 public static class OpenApiServiceCollectionExtensions
 {
-    public static IServiceCollection AddOpenApiConfiguration(this IServiceCollection services)
+    public static IServiceCollection AddOpenApiConfiguration(this IServiceCollection services, IWebHostEnvironment env)
     {
         services.AddOpenApi(options =>
         {
@@ -28,6 +29,18 @@ public static class OpenApiServiceCollectionExtensions
                         Url = new Uri(Constants.LicenseInfo["url"])
                     }
                 };
+
+                var servers = new List<OpenApiServer>();
+
+                if (env.IsDevelopment())
+                {
+                    servers.Add(new OpenApiServer { Url = "https://localhost:5000", Description = "Local Development" });
+                }
+
+                servers.Add(new OpenApiServer { Url = "https://api.tfst.xyz", Description = "Production" });
+                servers.Add(new OpenApiServer { Url = "https://api.tfst.dev", Description = "Staging" });
+
+                document.Servers = servers;
 
                 document.Tags =
                 [

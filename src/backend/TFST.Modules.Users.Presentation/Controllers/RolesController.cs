@@ -7,9 +7,9 @@ using TFST.SharedKernel.Presentation;
 
 namespace TFST.Modules.Users.Presentation.Controllers;
 
-[Tags("Identity")]
-
+[Tags("Users")]
 [Authorize(Roles = "admin")]
+[Route("roles")]
 public class RolesController : ApiControllerBase
 {
     private readonly IMediator _mediator;

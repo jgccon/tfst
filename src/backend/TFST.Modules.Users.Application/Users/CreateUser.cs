@@ -6,7 +6,7 @@ using TFST.Modules.Users.Persistence;
 
 namespace TFST.Modules.Users.Application.Users;
 
-public record CreateUserCommand(string Email, string FirstName, string LastName) : IRequest<User>;
+public record CreateUserCommand(CreateUserModel User) : IRequest<User>;
 
 public class CreateUserHandler : IRequestHandler<CreateUserCommand, User>
 {
@@ -20,7 +20,7 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, User>
     public async Task<User> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var existingUser = await _dbContext.Users
-            .AnyAsync(u => u.Email == request.Email, cancellationToken);
+            .AnyAsync(u => u.Email == request.User.Email, cancellationToken);
         if (existingUser)
         {
             throw new InvalidOperationException("User with this email already exists.");
@@ -29,9 +29,9 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, User>
         var user = new Domain.Entities.User
         {
             Id = Guid.NewGuid(),
-            Email = request.Email,
-            FirstName = request.FirstName,
-            LastName = request.LastName
+            Email = request.User.Email,
+            FirstName = request.User.FirstName,
+            LastName = request.User.LastName
         };
 
         _dbContext.Users.Add(user);

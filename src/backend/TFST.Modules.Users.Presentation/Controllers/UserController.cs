@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using TFST.Modules.Users.Application.Models;
 using TFST.Modules.Users.Application.Users;
 using TFST.SharedKernel.Presentation;
 
@@ -36,7 +37,7 @@ public class UsersController : ApiControllerBase
     }
 
     [HttpPut("me")]
-    public async Task<IActionResult> UpdateCurrentUser([FromBody] UpdateCurrentUserCommand command)
+    public async Task<IActionResult> UpdateCurrentUser([FromBody] UpdateUserModel model)
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
         if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var userId))
@@ -44,14 +45,14 @@ public class UsersController : ApiControllerBase
             return Unauthorized(new { Message = "Invalid user token." });
         }
 
-        var updatedUser = await _mediator.Send(new UpdateCurrentUserCommand(userId, command.FirstName, command.LastName));
+        var updatedUser = await _mediator.Send(new UpdateCurrentUserCommand(userId, model));
         return Ok(updatedUser);
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserModel model)
     {
-        var user = await _mediator.Send(command);
+        var user = await _mediator.Send(new CreateUserCommand(model));
         return CreatedAtAction(nameof(GetUserByIdQuery), new { id = user.Id }, user);
     }
 

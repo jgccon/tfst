@@ -6,7 +6,7 @@ using TFST.Modules.Users.Persistence;
 
 namespace TFST.Modules.Users.Application.Users;
 
-public record UpdateCurrentUserCommand(Guid UserId, string FirstName, string LastName) : IRequest<User>;
+public record UpdateCurrentUserCommand(Guid Id, UpdateUserModel User) : IRequest<Application.Models.User>;
 
 public class UpdateCurrentUserHandler : IRequestHandler<UpdateCurrentUserCommand, User>
 {
@@ -20,13 +20,13 @@ public class UpdateCurrentUserHandler : IRequestHandler<UpdateCurrentUserCommand
     public async Task<User> Handle(UpdateCurrentUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _dbContext.Users
-            .FirstOrDefaultAsync(u => u.Id == request.UserId, cancellationToken);
+            .FirstOrDefaultAsync(u => u.Id == request.Id, cancellationToken);
 
         if (user is null)
             throw new KeyNotFoundException("User not found.");
 
-        user.FirstName = request.FirstName;
-        user.LastName = request.LastName;
+        user.FirstName = request.User.FirstName;
+        user.LastName = request.User.LastName;
         user.UpdatedAt = DateTime.UtcNow;
 
         await _dbContext.SaveChangesAsync(cancellationToken);

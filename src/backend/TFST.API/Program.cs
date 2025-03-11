@@ -19,7 +19,7 @@ namespace TFST.API
             builder.Services.AddSettings(builder.Configuration);
 
             builder.Services.AddControllers();
-            builder.Services.AddOpenApiConfiguration();
+            builder.Services.AddOpenApiConfiguration(builder.Environment);
             builder.Services.AddJwtAuthentication(builder.Configuration);
             builder.Services.AddUsersModule(builder.Configuration);
 
@@ -27,10 +27,13 @@ namespace TFST.API
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
+            app.MapControllers();
             app.UseOpenApiConfiguration();
 
             await app.UseUsersModuleAsync(app.Services, builder.Configuration);
             app.Run();
+
+
         }
     }
 }

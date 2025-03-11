@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TFST.Modules.Users.Application.Models;
 using TFST.Modules.Users.Application.Users;
 using TFST.SharedKernel.Presentation;
 
 namespace TFST.Modules.Users.Presentation.Controllers.Admin;
 
-[Tags("Identity")]
+[Tags("Admin")]
 [Authorize(Roles = "admin")]
 [Route("admin/users")]
 public class AdminUsersController : ApiControllerBase
@@ -41,9 +42,9 @@ public class AdminUsersController : ApiControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command)
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserModel model)
     {
-        var user = await _mediator.Send(command);
+        var user = await _mediator.Send(new CreateUserCommand(model));
         return CreatedAtAction(nameof(GetUserById), new { id = user.Id }, user);
     }
 

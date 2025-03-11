@@ -11,7 +11,8 @@ services:
       - tfst.sql_server
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!
+      - ASPNETCORE_URLS=https://+:5000
+      - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True
     networks:
       - tfst_network
 
