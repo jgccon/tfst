@@ -1,0 +1,51 @@
+services:
+  tfst.api:
+    container_name: tfst.api
+    image: tfst/api
+    build:
+      context: .
+      dockerfile: backend/TFST.API/Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - tfst.sql_server
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!
+    networks:
+      - tfst_network
+
+  # tfst.identity_server:
+  #   container_name: tfst.identity_server
+  #   image: tfst/identity_server
+  #   build:
+  #     context: .
+  #     dockerfile: backend/TFST.Identity/Dockerfile
+  #   ports:
+  #     - "5001:5001"
+  #   depends_on:
+  #     - tfst.sql_server
+  #   networks:
+  #     - tfst_network
+
+  tfst.sql_server:
+    container_name: tfst.sql_server
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    environment:
+      SA_PASSWORD: "YourStrongPassword!"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      - tfst_network
+
+volumes:
+  mssql_data:
+    name: tfst_mssql_data
+
+networks:
+  tfst_network:
+    driver: bridge

@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.Modules.ProfessionalPr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.Modules.ProfessionalProfiles.Persistence", "backend\TFST.Modules.ProfessionalProfiles.Persistence\TFST.Modules.ProfessionalProfiles.Persistence.csproj", "{FED8E4E9-D4BB-4081-BDA5-3B374982F2E5}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{FED8E4E9-D4BB-4081-BDA5-3B374982F2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FED8E4E9-D4BB-4081-BDA5-3B374982F2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FED8E4E9-D4BB-4081-BDA5-3B374982F2E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
