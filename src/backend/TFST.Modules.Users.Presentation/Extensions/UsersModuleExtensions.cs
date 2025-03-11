@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using TFST.Modules.Users.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace TFST.Modules.Users.Presentation.Extensions;
 
@@ -10,7 +11,8 @@ public static class UsersModuleExtensions
 {
     public static IServiceCollection AddUsersModule(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<UsersDbContext>();
+        services.AddDbContext<UsersDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         services.AddScoped<DatabaseMigrator>();
         services.AddScoped<DatabaseSeeder>();
 

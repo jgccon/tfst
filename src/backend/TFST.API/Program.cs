@@ -1,5 +1,6 @@
 using TFST.API.Extensions;
 using TFST.Modules.Users.Presentation.Extensions;
+using TFST.SharedKernel.Configuration;
 
 
 namespace TFST.API
@@ -14,6 +15,8 @@ namespace TFST.API
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
+
+            builder.Services.AddSettings(builder.Configuration);
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApiConfiguration();

@@ -14,7 +14,7 @@ public static class DatabaseServiceCollectionExtensions
 
         // Register database migrator
         services.AddScoped<DatabaseMigrator>();
-
+        services.AddScoped<DatabaseSeeder>();
         return services;
     }
 }

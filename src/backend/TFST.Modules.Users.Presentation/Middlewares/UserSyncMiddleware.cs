@@ -20,6 +20,12 @@ public class UserSyncMiddleware
 
     public async Task Invoke(HttpContext context, UsersDbContext dbContext)
     {
+        if (context.User?.Identity is not { IsAuthenticated: true })
+        {
+            await _next(context);
+            return;
+        }
+
         var userIdClaim = context.User.FindFirst(ClaimTypes.NameIdentifier);
         var emailClaim = context.User.FindFirst(ClaimTypes.Email);
         var firstNameClaim = context.User.FindFirst(ClaimTypes.GivenName);

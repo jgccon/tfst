@@ -14,8 +14,8 @@ public static class MediatRServiceCollectionExtensions
         });
 
         services.AddHttpContextAccessor();
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestLoggingPipelineBehavior<,>));
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestExceptionHandlerBehavior<,>));
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestLoggingPipelineBehavior<,>));
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestExceptionHandlerBehavior<,>));
 
         return services;
     }
