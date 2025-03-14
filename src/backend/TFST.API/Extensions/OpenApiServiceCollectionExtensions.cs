@@ -44,8 +44,9 @@ public static class OpenApiServiceCollectionExtensions
 
                 document.Tags =
                 [
-                    new OpenApiTag { Name = "Identity", Description = "User Operations" },
-                    new OpenApiTag { Name = "Projects", Description = "Project Management" }
+                    new OpenApiTag { Name = "Admin", Description = "Protected Management Operations" },
+                    new OpenApiTag { Name = "Users", Description = "User Operations" },
+                    new OpenApiTag { Name = "Profiles", Description = "Professional Profiles" }
                 ];
 
                 return Task.CompletedTask;

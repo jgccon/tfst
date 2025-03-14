@@ -73,5 +73,4 @@ if (builder.Configuration.GetValue<bool>("FeatureFlags:MigrateAtStartup"))
     dbContext.Database.Migrate();
 }
 
-
 app.Run();

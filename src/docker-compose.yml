@@ -16,7 +16,6 @@ services:
       - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True
     networks:
       - tfst_network
-  
   tfst.auth:
     container_name: tfst.auth
     image: tfst/auth
@@ -24,16 +23,15 @@ services:
       context: .
       dockerfile: backend/TFST.AuthServer/Dockerfile
     ports:
-      - "5001:5001"
+      - "6000:6000"
     depends_on:
       - tfst.sql_server
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:5001
+      - ASPNETCORE_URLS=https://+:6000
       - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True
     networks:
       - tfst_network
-
   tfst.sql_server:
     container_name: tfst.sql_server
     image: "mcr.microsoft.com/mssql/server:2022-latest"
@@ -41,13 +39,18 @@ services:
       SA_PASSWORD: "YourStrongPassword!"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer"
+      MSSQL_TCP_PORT: "1433"
     ports:
       - "1433:1433"
     volumes:
       - mssql_data:/var/opt/mssql
     networks:
       - tfst_network
-
+    healthcheck:
+      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "YourStrongPassword!", "-Q", "SELECT 1" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
 volumes:
   mssql_data:
     name: tfst_mssql_data
