@@ -12,9 +12,12 @@ public class ProfessionalProfilesDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // TODO: move to EntityTypeConfigurations (/Configurations)
-        modelBuilder.Entity<ProfessionalProfile>()
-            .HasIndex(p => p.UserId)
-            .IsUnique();
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.HasDefaultSchema("profiles");
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProfessionalProfilesDbContext).Assembly);
     }
+
+    // TODO: add EntityTypeConfigurations (/Configurations)
 }

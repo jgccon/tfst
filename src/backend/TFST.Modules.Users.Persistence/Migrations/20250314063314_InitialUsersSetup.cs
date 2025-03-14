@@ -6,13 +6,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TFST.Modules.Users.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialUsersSetup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "users");
+
             migrationBuilder.CreateTable(
                 name: "Permissions",
+                schema: "users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -28,6 +32,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Roles",
+                schema: "users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -43,6 +48,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Users",
+                schema: "users",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -62,6 +68,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "RolePermissions",
+                schema: "users",
                 columns: table => new
                 {
                     RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -73,12 +80,14 @@ namespace TFST.Modules.Users.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_RolePermissions_Permissions_PermissionId",
                         column: x => x.PermissionId,
+                        principalSchema: "users",
                         principalTable: "Permissions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_RolePermissions_Roles_RoleId",
                         column: x => x.RoleId,
+                        principalSchema: "users",
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -86,6 +95,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserRoles",
+                schema: "users",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -97,12 +107,14 @@ namespace TFST.Modules.Users.Persistence.Migrations
                     table.ForeignKey(
                         name: "FK_UserRoles_Roles_RoleId",
                         column: x => x.RoleId,
+                        principalSchema: "users",
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserRoles_Users_UserId",
                         column: x => x.UserId,
+                        principalSchema: "users",
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -110,16 +122,19 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolePermissions_PermissionId",
+                schema: "users",
                 table: "RolePermissions",
                 column: "PermissionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
+                schema: "users",
                 table: "UserRoles",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
+                schema: "users",
                 table: "Users",
                 column: "Email",
                 unique: true);
@@ -129,19 +144,24 @@ namespace TFST.Modules.Users.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RolePermissions");
+                name: "RolePermissions",
+                schema: "users");
 
             migrationBuilder.DropTable(
-                name: "UserRoles");
+                name: "UserRoles",
+                schema: "users");
 
             migrationBuilder.DropTable(
-                name: "Permissions");
+                name: "Permissions",
+                schema: "users");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Roles",
+                schema: "users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Users",
+                schema: "users");
         }
     }
 }

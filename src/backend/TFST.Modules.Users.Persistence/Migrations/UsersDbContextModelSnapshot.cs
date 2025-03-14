@@ -17,6 +17,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("users")
                 .HasAnnotation("ProductVersion", "9.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -43,7 +44,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("Permissions", "users");
                 });
 
             modelBuilder.Entity("TFST.Modules.Users.Domain.Entities.Role", b =>
@@ -67,7 +68,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", "users");
                 });
 
             modelBuilder.Entity("TFST.Modules.Users.Domain.Entities.RolePermission", b =>
@@ -82,7 +83,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("RolePermissions");
+                    b.ToTable("RolePermissions", "users");
                 });
 
             modelBuilder.Entity("TFST.Modules.Users.Domain.Entities.User", b =>
@@ -125,7 +126,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", "users");
                 });
 
             modelBuilder.Entity("TFST.Modules.Users.Domain.Entities.UserRole", b =>
@@ -140,7 +141,7 @@ namespace TFST.Modules.Users.Persistence.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", "users");
                 });
 
             modelBuilder.Entity("TFST.Modules.Users.Domain.Entities.RolePermission", b =>
