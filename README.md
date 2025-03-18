@@ -61,34 +61,50 @@ TFST is built with **modern, scalable** technologies, but **remains open to impr
 ### Prerequisites
 Ensure you have the following installed:
 - **Git**
-- **.NET SDK 8.0**
+- **.NET SDK 10.0**
 - **Node.js (v18.x) and npm**
 - **Angular CLI**
-- **Docker (optional)**
+- **Docker**
 
 ### Steps
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/JGCarmona-Consulting/tfst.git
+   git clone https://github.com/jgccon/tfst.git
    cd tfst
    ```
 
-2. **Backend Setup**:
+2. **Development Certificate Setup**:
    ```bash
-   cd src/api
+   cd src
+   # Create directory for certificates if it doesn't exist
+   mkdir -p certs
+   # Generate self-signed development certificate
+   dotnet dev-certs https -ep ./certs/tfst_dev_cert.pfx -p Password123*
+   # Trust the certificate (only needed for local development)
+   dotnet dev-certs https --trust
+   ```
+
+3. **Backend Setup**:
+   ```bash
+   cd src/backend/TFST.API
    dotnet build
    ```
 
-3. **Frontend Setup**:
+4. **Frontend Setup**:
    ```bash
    cd ../webapp
    npm install
    ng serve
    ```
 
-4. **Run the Application Locally**:
+5. **Run with Docker**:
    ```bash
-   dotnet run --project src/api
+   docker-compose up -d
+   ```
+   
+6. **Run the Application Locally** (Alternative to Docker):
+   ```bash
+   dotnet run --project src/backend/TFST.API
    ng serve --project webapp
    ```
 

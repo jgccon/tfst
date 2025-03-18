@@ -13,7 +13,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:5000
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password123*
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/tfst_dev_cert.pfx
       - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True
+    volumes:
+      - ./certs:/app/certs:ro
     networks:
       - tfst_network
   tfst.auth:
@@ -29,7 +33,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:6000
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password123*
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/tfst_dev_cert.pfx
       - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True
+    volumes:
+      - ./certs:/app/certs:ro
     networks:
       - tfst_network
   tfst.sql_server:
