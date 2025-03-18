@@ -1,5 +1,7 @@
 # Code of Conduct
 
+👉 **[Versión en Español](../docs/CODE_OF_CONDUCT.md)**
+
 ## Our Pledge
 
 In the interest of fostering an open, inclusive, and welcoming environment, we, as contributors and maintainers, pledge to make participation in our project and community a harassment-free experience for everyone. This includes, but is not limited to, people of all ages, body sizes, disabilities, ethnicities, gender identities and expressions, levels of experience, nationalities, personal appearances, races, religions, and sexual orientations.

@@ -3,6 +3,8 @@
 
 Thank you for considering contributing to **The Full Stack Team**! Your contributions are invaluable for improving the platform and building a robust open-source management solution for freelancers and professionals. This guide provides instructions and best practices for contributing to the project.
 
+👉 **[Guía en Español](../docs/CONTRIBUTING-es.md)**
+
 ## Table of Contents
 
 - [How to Contribute](#how-to-contribute)

@@ -1,5 +1,7 @@
 # The Full Stack Team (TFST)
 
+👉 **[Versión en Español](../docs/README-es.md)**
+
 **TFST** is an open-source platform designed to revolutionize **freelance and project management** by integrating **transparency, smart contracts, and decentralized trust mechanisms**. It provides professionals, businesses, and recruiters with the tools they need to manage **clients, projects, contracts, billing, and work hours**—all in a **scalable, multitenant** environment.
 
 ## 🌍 Why TFST?
@@ -116,7 +118,7 @@ Ensure you have the following installed:
 We welcome contributions! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ## Documentation
-For detailed documentation, refer to the `/docs` folder or visit our [documentation page](docs/README.md).
+For detailed documentation, refer to the `/docs` folder. And we will styart working on a pair of decumentation web sites doon. Well keep you informed.
 
 ## License
 Licensed under the MIT License. See [LICENSE](LICENSE) for more details.
