@@ -60,7 +60,7 @@ TFST is built with **modern, scalable** technologies, but **remains open to impr
 
 ## ⚡ Installation
 
-### Prerequisites
+## Prerequisites
 Ensure you have the following installed:
 - **Git**
 - **.NET SDK 10.0**
@@ -68,47 +68,71 @@ Ensure you have the following installed:
 - **Angular CLI**
 - **Docker**
 
-### Steps
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/jgccon/tfst.git
-   cd tfst
-   ```
+# Setup Instructions
 
-2. **Development Certificate Setup**:
-   ```bash
-   cd src
-   # Create directory for certificates if it doesn't exist
-   mkdir -p certs
-   # Generate self-signed development certificate
-   dotnet dev-certs https -ep ./certs/tfst_dev_cert.pfx -p Password123*
-   # Trust the certificate (only needed for local development)
-   dotnet dev-certs https --trust
-   ```
+## 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/jgccon/tfst.git
+cd tfst
+```
 
-3. **Backend Setup**:
-   ```bash
-   cd src/backend/TFST.API
-   dotnet build
-   ```
+## 2️⃣ Development Certificate Setup
+Before running the solution, you need to generate a development certificate:
 
-4. **Frontend Setup**:
-   ```bash
-   cd ../webapp
-   npm install
+```bash
+cd src
+# Create directory for certificates if it doesn't exist
+mkdir -p certs
+# Generate self-signed development certificate
+dotnet dev-certs https -ep ./certs/tfst_dev_cert.pfx -p Password123*
+# Trust the certificate (only needed for local development)
+dotnet dev-certs https --trust
+```
+
+## 3️⃣ Backend Setup (TFST.API)
+The backend solution is in **.NET** and should be run from **Visual Studio**.
+
+1. **Open the solution in Visual Studio**  
+   - Open `TFST.sln` using **Visual Studio 2022** (Requires .NET 7+).
+   - Select **TFST.API** as the startup project.
+
+2. **Run the backend**  
+   - Use `Ctrl + F5` or press `Run` in Visual Studio.
+
+## 4️⃣ Frontend Setup (Clients)
+The clients are located in `/src/clients/`, and each one is an independent solution.  
+
+👉 **Each client has its own `README.md` with detailed instructions**.
+
+### How to open the clients:
+- Open each client with **Visual Studio Code** or any other editor.
+- Client locations:
+```
+  /src/clients/full-stack-team
+  /src/clients/tfst-app
+  /src/clients/tfst-dev
+```
+- To run an Angular client:
+```bash
+  cd src/clients/tfst-app
+  npm install
+  ng serve
+```
+
+## 5️⃣ Run with Docker (Optional)
+If you prefer to run everything using Docker:
+```bash
+docker-compose up -d
+```
+
+## 6️⃣ Run the Application Locally
+If not using Docker:
+1. **Run the backend from Visual Studio**.
+2. **Manually start the frontend**:
+```bash
+   cd src/clients/tfst-app
    ng serve
-   ```
-
-5. **Run with Docker**:
-   ```bash
-   docker-compose up -d
-   ```
-   
-6. **Run the Application Locally** (Alternative to Docker):
-   ```bash
-   dotnet run --project src/backend/TFST.API
-   ng serve --project webapp
-   ```
+```
 
 # CI/CD with Azure DevOps
 
