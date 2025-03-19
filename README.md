@@ -1,5 +1,7 @@
 # The Full Stack Team (TFST)
 
+👉 **[Versión en Español](../docs/README-es.md)**
+
 **TFST** is an open-source platform designed to revolutionize **freelance and project management** by integrating **transparency, smart contracts, and decentralized trust mechanisms**. It provides professionals, businesses, and recruiters with the tools they need to manage **clients, projects, contracts, billing, and work hours**—all in a **scalable, multitenant** environment.
 
 ## 🌍 Why TFST?
@@ -58,39 +60,79 @@ TFST is built with **modern, scalable** technologies, but **remains open to impr
 
 ## ⚡ Installation
 
-### Prerequisites
+## Prerequisites
 Ensure you have the following installed:
 - **Git**
-- **.NET SDK 8.0**
+- **.NET SDK 10.0**
 - **Node.js (v18.x) and npm**
 - **Angular CLI**
-- **Docker (optional)**
+- **Docker**
 
-### Steps
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/JGCarmona-Consulting/tfst.git
-   cd tfst
-   ```
+# Setup Instructions
 
-2. **Backend Setup**:
-   ```bash
-   cd src/api
-   dotnet build
-   ```
+## 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/jgccon/tfst.git
+cd tfst
+```
 
-3. **Frontend Setup**:
-   ```bash
-   cd ../webapp
-   npm install
+## 2️⃣ Development Certificate Setup
+Before running the solution, you need to generate a development certificate:
+
+```bash
+cd src
+# Create directory for certificates if it doesn't exist
+mkdir -p certs
+# Generate self-signed development certificate
+dotnet dev-certs https -ep ./certs/tfst_dev_cert.pfx -p Password123*
+# Trust the certificate (only needed for local development)
+dotnet dev-certs https --trust
+```
+
+## 3️⃣ Backend Setup (TFST.API)
+The backend solution is in **.NET** and should be run from **Visual Studio**.
+
+1. **Open the solution in Visual Studio**  
+   - Open `TFST.sln` using **Visual Studio 2022** (Requires .NET 7+).
+   - Select **TFST.API** as the startup project.
+
+2. **Run the backend**  
+   - Use `Ctrl + F5` or press `Run` in Visual Studio.
+
+## 4️⃣ Frontend Setup (Clients)
+The clients are located in `/src/clients/`, and each one is an independent solution.  
+
+👉 **Each client has its own `README.md` with detailed instructions**.
+
+### How to open the clients:
+- Open each client with **Visual Studio Code** or any other editor.
+- Client locations:
+```
+  /src/clients/full-stack-team
+  /src/clients/tfst-app
+  /src/clients/tfst-dev
+```
+- To run an Angular client:
+```bash
+  cd src/clients/tfst-app
+  npm install
+  ng serve
+```
+
+## 5️⃣ Run with Docker (Optional)
+If you prefer to run everything using Docker:
+```bash
+docker-compose up -d
+```
+
+## 6️⃣ Run the Application Locally
+If not using Docker:
+1. **Run the backend from Visual Studio**.
+2. **Manually start the frontend**:
+```bash
+   cd src/clients/tfst-app
    ng serve
-   ```
-
-4. **Run the Application Locally**:
-   ```bash
-   dotnet run --project src/api
-   ng serve --project webapp
-   ```
+```
 
 # CI/CD with Azure DevOps
 
@@ -100,7 +142,7 @@ Ensure you have the following installed:
 We welcome contributions! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ## Documentation
-For detailed documentation, refer to the `/docs` folder or visit our [documentation page](docs/README.md).
+For detailed documentation, refer to the `/docs` folder. And we will styart working on a pair of decumentation web sites doon. Well keep you informed.
 
 ## License
 Licensed under the MIT License. See [LICENSE](LICENSE) for more details.
