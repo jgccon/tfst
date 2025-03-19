@@ -391,10 +391,6 @@ FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 *.code-workspace
 
 # Local History for Visual Studio Code
@@ -418,3 +414,42 @@ FodyWeavers.xsd
 /src/api/infrastructure/docker/seq-data
 /src/api/infrastructure/docker/rabbitmq-data
 /src/api/infrastructure/docker/mongo-data
+.secrets
+
+# macOS metadata files
+.DS_Store
+
+# Rider-specific files (JetBrains Rider)
+.idea/
+*.iml
+
+# VSCode specific files
+.vscode/
+*.code-workspace
+
+# Environment files (Common)
+.env
+.env.*
+
+# MacOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Docker Compose overrides/local files
+docker-compose.override.yml
+
+# Angular build output
+dist/
+.angular/
+
+# Node.js and Angular tooling files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+
+# Folder for dev certificates
+[Cc]erts/
