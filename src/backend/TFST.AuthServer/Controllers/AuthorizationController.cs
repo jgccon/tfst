@@ -1,53 +1,60 @@
 ﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using System.Security.Claims;
+using static OpenIddict.Abstractions.OpenIddictConstants;
 
 namespace TFST.AuthServer.Controllers;
 
 [ApiController]
 [Route("connect")]
-public class AccountController : ControllerBase
+public class AuthorizationController(
+    IOpenIddictApplicationManager applicationManager
+    ) : ControllerBase
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly IOpenIddictApplicationManager _applicationManager = applicationManager;
 
-    public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
-    {
-        _signInManager = signInManager;
-        _userManager = userManager;
-    }
-
-    [HttpPost("token")]
+    [HttpPost("token"), Produces("application/json")]
     public async Task<IActionResult> Exchange()
     {
-        var request = HttpContext.GetOpenIddictServerRequest() ??
-                      throw new InvalidOperationException("No se pudo obtener la solicitud.");
+        var request = HttpContext.GetOpenIddictServerRequest() ?? throw new Exception("Request is null");
 
-        if (request.IsPasswordGrantType()) // Login con usuario y contraseña
+        if (request.IsClientCredentialsGrantType())
         {
-            var user = await _userManager.FindByEmailAsync(request.Username);
-            if (user is null || !await _userManager.CheckPasswordAsync(user, request.Password))
+            if (string.IsNullOrEmpty(request.ClientId))
             {
-                return Unauthorized("Usuario o contraseña incorrectos.");
+                return BadRequest("ClientId is missing.");
             }
 
-            var claims = new List<Claim>
+            var application = await _applicationManager.FindByClientIdAsync(request.ClientId)
+                ?? throw new InvalidOperationException("The application cannot be found.");
+
+            var identity = new ClaimsIdentity(TokenValidationParameters.DefaultAuthenticationType, Claims.Name, Claims.Role);
+
+            identity.SetClaim(Claims.Subject, await _applicationManager.GetClientIdAsync(application));
+            identity.SetClaim(Claims.Name, await _applicationManager.GetDisplayNameAsync(application));
+
+            identity.SetDestinations(static claim =>
             {
-                new Claim(OpenIddictConstants.Claims.Subject, user.Id),
-                new Claim(OpenIddictConstants.Claims.Email, user.Email)
-            };
+                if (claim.Subject is null)
+                {
+                    return [Destinations.AccessToken];
+                }
 
-            var identity = new ClaimsIdentity(claims, TokenValidationParameters.DefaultAuthenticationType);
-            var principal = new ClaimsPrincipal(identity);
-            principal.SetScopes(OpenIddictConstants.Scopes.Email, OpenIddictConstants.Scopes.Profile);
+                return claim.Type switch
+                {
+                    Claims.Name when claim.Subject.HasScope(Scopes.Profile)
+                        => [Destinations.AccessToken, Destinations.IdentityToken],
 
-            return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+                    _ => [Destinations.AccessToken]
+                };
+            });
+
+            return SignIn(new ClaimsPrincipal(identity), OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
         }
 
-        return BadRequest("Grant type no soportado.");
+        throw new NotImplementedException("The specified grant is not implemented.");
     }
 }
