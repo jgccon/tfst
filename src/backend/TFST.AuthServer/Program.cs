@@ -49,20 +49,48 @@ builder.Services.AddOpenIddict()
     .AddServer(options =>
     {
         // Enable the token endpoint.
-        options.SetTokenEndpointUris("connect/token");
+        options.SetTokenEndpointUris("connect/token")
+                .SetAuthorizationEndpointUris("connect/authorize")
+                .SetUserInfoEndpointUris("connect/userinfo");
 
-        // Enable the client credentials flow.
-        options.AllowClientCredentialsFlow();
+        // Flows OAuth 2.0/OpenID Connect
+        options.AllowPasswordFlow()
+               .AllowRefreshTokenFlow()
+               .AllowClientCredentialsFlow();
+
+        // Configurations tokens
+        options.AcceptAnonymousClients()
+               .UseAspNetCore()
+               .EnableTokenEndpointPassthrough()
+               .EnableAuthorizationEndpointPassthrough()
+               .EnableUserInfoEndpointPassthrough();
+
+        // Configurations of lifetime and properties tokens
+        options.SetAccessTokenLifetime(TimeSpan.FromHours(2))
+               .SetRefreshTokenLifetime(TimeSpan.FromDays(7))
+               .SetRefreshTokenReuseLeeway(TimeSpan.FromMinutes(2));
 
         // Register the signing and encryption credentials.
         options.AddDevelopmentEncryptionCertificate()
                .AddDevelopmentSigningCertificate();
 
+        // Register scopes soported by the application.
+        options.RegisterScopes("api", "offline_access");
+
         // Register the ASP.NET Core host and configure the ASP.NET Core options.
         options.UseAspNetCore()
                .EnableTokenEndpointPassthrough();
     }
+).AddValidation(options =>
+    {
+        // Import the configuration from the local OpenIddict server instance.
+        options.UseLocalServer();
+
+        // Register the ASP.NET Core host.
+        options.UseAspNetCore();
+    }
 );
+
 
 builder.Services.AddControllersWithViews();
 

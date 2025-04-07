@@ -30,6 +30,30 @@ public class Worker(IServiceProvider serviceProvider) : IHostedService
                 }
             });
         }
+
+        if (await manager.FindByClientIdAsync("angular_app") is null)
+        {
+            await manager.CreateAsync(new OpenIddictApplicationDescriptor
+            {
+                ClientId = "angular_app",
+                ClientSecret = "secreto-seguro-para-produccion",
+                DisplayName = "Aplicación Angular",
+                RedirectUris = { new Uri("https://tu-app-angular.com/callback") },
+                PostLogoutRedirectUris = { new Uri("https://tu-app-angular.com") },
+                Permissions =
+            {
+                Permissions.Endpoints.Authorization,
+                Permissions.Endpoints.Token,
+                Permissions.GrantTypes.AuthorizationCode,
+                Permissions.GrantTypes.RefreshToken,
+                Permissions.ResponseTypes.Code,
+                Permissions.Scopes.Email,
+                Permissions.Scopes.Profile,
+                Permissions.Scopes.Roles,
+                "api" // Scope custom
+            }
+            });
+        }
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
