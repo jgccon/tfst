@@ -52,7 +52,6 @@ public class Worker(IServiceProvider serviceProvider) : IHostedService
                 Permissions.Scopes.Email,
                 Permissions.Scopes.Profile,
                 Permissions.Scopes.Roles,
-                Permissions.Prefixes.Scope + Scopes.OfflineAccess,
                 Permissions.Prefixes.Scope + "api" // Scope custom
             }
             });

@@ -3,14 +3,9 @@ using TFST.AuthServer.Models;
 
 namespace TFST.AuthServer.Services;
 
-public class OpenIddictService
+public class OpenIddictService(IOpenIddictApplicationManager applicationManager)
 {
-    private readonly IOpenIddictApplicationManager _applicationManager;
-
-    public OpenIddictService(IOpenIddictApplicationManager applicationManager)
-    {
-        _applicationManager = applicationManager;
-    }
+    private readonly IOpenIddictApplicationManager _applicationManager = applicationManager;
 
     public async Task<OpenIddictApplicationModel?> GetApplicationAsync(string clientId)
     {

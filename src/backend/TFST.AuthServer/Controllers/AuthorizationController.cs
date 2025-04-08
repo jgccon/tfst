@@ -7,7 +7,6 @@ using OpenIddict.Abstractions;
 using OpenIddict.Server.AspNetCore;
 using System.Security.Claims;
 using System.Collections.Immutable;
-using TFST.AuthServer.Persistence;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 using Microsoft.AspNetCore.Authorization;
 using TFST.AuthServer.Services;
@@ -22,7 +21,6 @@ public class AuthorizationController(
     SignInManager<IdentityUser> signInManager,
     UserManager<IdentityUser> userManager,
     ILogger<AuthorizationController> logger,
-    AuthDbContext context,
     PkceService pkceService
     ) : Controller
 {
@@ -30,7 +28,6 @@ public class AuthorizationController(
     private readonly SignInManager<IdentityUser> _signInManager = signInManager;
     private readonly UserManager<IdentityUser> _userManager = userManager;
     private readonly ILogger<AuthorizationController> _logger = logger;
-    private readonly AuthDbContext _context = context;
     private readonly PkceService _pkceService = pkceService;
 
     [HttpPost("token"), Produces("application/json")]
@@ -38,20 +35,10 @@ public class AuthorizationController(
     {
         var request = HttpContext.GetOpenIddictServerRequest() ?? throw new InvalidOperationException("Request is null");
 
-        if (request.IsAuthorizationCodeGrantType())  // Add this condition
+        if (request.IsAuthorizationCodeGrantType())
         {
             // Handle authorization code grant type
             return await HandleAuthorizationCodeGrantType(request);
-        }
-        else if (request.IsPasswordGrantType())
-        {
-            // password flow
-            return await HandlePasswordGrantType(request);
-        }
-        else if (request.IsRefreshTokenGrantType())
-        {
-            // validate refresh token
-            return await HandleRefreshTokenGrantType(request);
         }
         else if (request.IsClientCredentialsGrantType())
         {
@@ -66,8 +53,6 @@ public class AuthorizationController(
     [IgnoreAntiforgeryToken]
     public async Task<IActionResult> Authorize()
     {
-        _logger.LogInformation("----------ENTRANDO---------");
-
         var request = HttpContext.GetOpenIddictServerRequest() ??
             throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
@@ -109,35 +94,27 @@ public class AuthorizationController(
     {
         try
         {
-            _logger.LogInformation("Iniciando intercambio de código de autorización");
             var result = await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
             if (!result.Succeeded)
             {
-                _logger.LogWarning("Fallo en la autenticación del token");
+                _logger.LogWarning("Failed to authenticate user.");
                 return ForbidWithError("invalid_grant", "The authorization code is invalid.");
             }
-
-            // Loguear los claims disponibles para depuración
-            _logger.LogInformation("Claims disponibles: {@Claims}",
-                result.Principal?.Claims.Select(c => new { c.Type, c.Value }));
-
-            // Obtener el email del principal
+           
             var email = result.Principal?.Identity?.Name;
             if (string.IsNullOrEmpty(email))
             {
-                _logger.LogWarning("No se encontró el email en los claims");
-                return ForbidWithError("invalid_grant", "No se pudo identificar al usuario.");
+                _logger.LogWarning("Don't find user email.");
+                return ForbidWithError("invalid_grant", "Don't find user email.");
             }
 
-            // Buscar el usuario por email
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                _logger.LogWarning("No se encontró el usuario con email: {Email}", email);
-                return ForbidWithError("invalid_grant", "Usuario no encontrado.");
+                _logger.LogWarning("User not found: {Email}", email);
+                return ForbidWithError("invalid_grant", "User not found.");
             }
 
-            // Create a new ClaimsPrincipal containing the claims that will be used to create the tokens
             var principal = await CreateClaimsPrincipalAsync(user, result.Principal!.GetScopes());
 
             return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
@@ -148,76 +125,7 @@ public class AuthorizationController(
             return ForbidWithError("server_error", "An unexpected error occurred.");
         }
     }
-
-    private async Task<IActionResult> HandlePasswordGrantType(OpenIddictRequest request)
-    {
-        try
-        {
-            if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password))
-            {
-                return ForbidWithError("invalid_grant", "Username or password is missing.");
-            }
-
-            var user = await _userManager.FindByNameAsync(request.Username);
-            if (user is null)
-            {
-                return ForbidWithError("invalid_grant", "Username or password is incorrect.");
-            }
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: true);
-            if (!result.Succeeded)
-            {
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account is locked: {Email}", user.Email);
-                    return ForbidWithError("account_locked", "The user account is locked.");
-                }
-
-                _logger.LogWarning("Invalid login attempt: {Email}", user.Email);
-                return ForbidWithError("invalid_grant", "Username or password is incorrect.");
-            }
-
-            var principal = await CreateClaimsPrincipalAsync(user, request.GetScopes());
-
-            return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An error occurred during password grant: {Message}", ex.Message);
-            return ForbidWithError("server_error", "An unexpected error occurred.");
-        }
-    }
-
-    private async Task<IActionResult> HandleRefreshTokenGrantType(OpenIddictRequest request)
-    {
-        try
-        {
-            var result = await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-            if (!result.Succeeded)
-            {
-                return ForbidWithError("invalid_grant", "Refresh token is missing.");
-            }
-
-            var user = await _userManager.GetUserAsync(result.Principal) ??
-                throw new InvalidOperationException("The user principal cannot be resolved.");
-
-            if (!await _userManager.IsEmailConfirmedAsync(user) ||
-                await _userManager.IsLockedOutAsync(user))
-            {
-                return ForbidWithError("invalid_grant", "User is not active.");
-            }
-
-            var principal = await CreateClaimsPrincipalAsync(user, result.Principal.GetScopes());
-
-            return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An error occurred during refresh token grant: {Message}", ex.Message);
-            return ForbidWithError("server_error", "An unexpected error occurred.");
-        }
-    }
-
+    
     private async Task<IActionResult> HandleClientCredentialsGrantType(OpenIddictRequest request)
     {
         if (string.IsNullOrEmpty(request.ClientId))

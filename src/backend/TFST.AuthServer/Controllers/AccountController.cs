@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Abstractions;
-using System.Text;
 using TFST.AuthServer.Models;
 using TFST.AuthServer.Persistence;
 using TFST.AuthServer.Services;
@@ -15,7 +14,6 @@ public class AccountController(
     SignInManager<IdentityUser> signInManager,
     UserManager<IdentityUser> userManager,
     AuthDbContext context,
-    IOpenIddictApplicationManager applicationManager,
     OpenIddictService openIddictService,
     PkceService pkceService) : Controller
 {
@@ -23,7 +21,6 @@ public class AccountController(
     private readonly UserManager<IdentityUser> _userManager = userManager;
     private readonly ILogger<AccountController> _logger = logger;
     private readonly AuthDbContext _context = context;
-    private readonly IOpenIddictApplicationManager _applicationManager = applicationManager;
     private readonly OpenIddictService _openIddictService = openIddictService;
     private readonly PkceService _pkceService = pkceService;
 
@@ -153,7 +150,4 @@ public class AccountController(
             }
         }
     }
-
-
-
 }

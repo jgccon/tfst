@@ -3,21 +3,15 @@ using System.Text;
 
 namespace TFST.AuthServer.Services;
 
-public class PkceService
+public class PkceService(IDistributedCache cache)
 {
-    private readonly IDistributedCache _cache;
-
-    public PkceService(IDistributedCache cache)
-    {
-        _cache = cache;
-    }
+    private readonly IDistributedCache _cache = cache;
 
     public async Task<(string codeChallenge, string state)> CreatePkceAsync()
     {
         var codeVerifier = GenerateSecureRandomString();
         var state = GenerateSecureRandomString();
 
-        // Guardar el code_verifier usando el state como clave
         await _cache.SetStringAsync(
             $"pkce_{state}",
             codeVerifier,
@@ -34,7 +28,7 @@ public class PkceService
         var codeVerifier = await _cache.GetStringAsync($"pkce_{state}");
         if (codeVerifier != null)
         {
-            // Remover después de usar
+            // Remove after use
             await _cache.RemoveAsync($"pkce_{state}");
         }
         return codeVerifier;

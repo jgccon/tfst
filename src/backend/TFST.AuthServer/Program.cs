@@ -52,48 +52,35 @@ builder.Services.AddOpenIddict()
     // Register the OpenIddict server components.
     .AddServer(options =>
     {
-        // Enable the token endpoint.
         options.SetTokenEndpointUris("connect/token")
                 .SetAuthorizationEndpointUris("connect/authorize")
                 .SetUserInfoEndpointUris("connect/userinfo");
 
-        // Configura los flujos de OAuth 2.0/OpenID Connect permitidos:
-        // - Password flow: permite autenticación directa con usuario/contraseña
-        // - Refresh token flow: permite renovar tokens de acceso
-        // - Client credentials flow: para autenticación de aplicaciones cliente
-        // - Authorization code flow: para aplicaciones web que requieren autorización del usuario
         options.AllowPasswordFlow()
                .AllowRefreshTokenFlow()
                .AllowClientCredentialsFlow()
                .AllowAuthorizationCodeFlow();
 
-        // Configurations tokens
         options.AcceptAnonymousClients()
                .UseAspNetCore()
                .EnableTokenEndpointPassthrough()
                .EnableAuthorizationEndpointPassthrough()
                .EnableUserInfoEndpointPassthrough();
 
-        // Configurations of lifetime and properties tokens
         options.SetAccessTokenLifetime(TimeSpan.FromHours(2))
                .SetRefreshTokenLifetime(TimeSpan.FromDays(7))
                .SetRefreshTokenReuseLeeway(TimeSpan.FromMinutes(2));
 
-        // Register the signing and encryption credentials.
         options.AddDevelopmentEncryptionCertificate()
                .AddDevelopmentSigningCertificate();
 
-        // Register scopes soported by the application.
-        options.RegisterScopes("api", "offline_access");
-
-        // Register the ASP.NET Core host and configure the ASP.NET Core options.
         options.UseAspNetCore()
                .EnableTokenEndpointPassthrough();
 
         // Register scopes supported by the application
         options.RegisterScopes(
             "api",
-            "offline_access",  // Agregar offline_access
+            "offline_access",
             OpenIddictConstants.Scopes.Email,
             OpenIddictConstants.Scopes.Profile,
             OpenIddictConstants.Scopes.Roles
@@ -101,10 +88,7 @@ builder.Services.AddOpenIddict()
     }
 ).AddValidation(options =>
     {
-        // Import the configuration from the local OpenIddict server instance.
         options.UseLocalServer();
-
-        // Register the ASP.NET Core host.
         options.UseAspNetCore();
     }
 );
