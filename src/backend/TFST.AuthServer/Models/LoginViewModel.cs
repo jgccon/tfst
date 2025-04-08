@@ -4,7 +4,7 @@ namespace TFST.AuthServer.Models;
 
 public class LoginViewModel
 {
-    [Required(ErrorMessage = "{{0} is required")]
+    [Required(ErrorMessage = "{0} is required")]
     [EmailAddress(ErrorMessage = "{0} is not a valid email address")]
     [StringLength(50, ErrorMessage = "{0} must be between {2} and {1} characters.", MinimumLength = 10)]
     [DataType(DataType.EmailAddress)]

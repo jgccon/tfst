@@ -39,18 +39,21 @@ public class Worker(IServiceProvider serviceProvider) : IHostedService
                 ClientSecret = "secreto-seguro-para-produccion",
                 DisplayName = "Aplicación Angular",
                 RedirectUris = { new Uri("https://tu-app-angular.com/callback") },
-                PostLogoutRedirectUris = { new Uri("https://tu-app-angular.com") },
+                PostLogoutRedirectUris = { new Uri("https://tu-app-angular.com/login") },
                 Permissions =
             {
                 Permissions.Endpoints.Authorization,
+                Permissions.Endpoints.EndSession,
                 Permissions.Endpoints.Token,
                 Permissions.GrantTypes.AuthorizationCode,
                 Permissions.GrantTypes.RefreshToken,
                 Permissions.ResponseTypes.Code,
+                Permissions.ResponseTypes.CodeIdToken,
                 Permissions.Scopes.Email,
                 Permissions.Scopes.Profile,
                 Permissions.Scopes.Roles,
-                "api" // Scope custom
+                Permissions.Prefixes.Scope + Scopes.OfflineAccess,
+                Permissions.Prefixes.Scope + "api" // Scope custom
             }
             });
         }

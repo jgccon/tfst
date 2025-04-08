@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using OpenIddict.Abstractions;
 using TFST.AuthServer.Extensions;
 using TFST.AuthServer.Persistence;
+using TFST.AuthServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,10 +57,15 @@ builder.Services.AddOpenIddict()
                 .SetAuthorizationEndpointUris("connect/authorize")
                 .SetUserInfoEndpointUris("connect/userinfo");
 
-        // Flows OAuth 2.0/OpenID Connect
+        // Configura los flujos de OAuth 2.0/OpenID Connect permitidos:
+        // - Password flow: permite autenticación directa con usuario/contraseña
+        // - Refresh token flow: permite renovar tokens de acceso
+        // - Client credentials flow: para autenticación de aplicaciones cliente
+        // - Authorization code flow: para aplicaciones web que requieren autorización del usuario
         options.AllowPasswordFlow()
                .AllowRefreshTokenFlow()
-               .AllowClientCredentialsFlow();
+               .AllowClientCredentialsFlow()
+               .AllowAuthorizationCodeFlow();
 
         // Configurations tokens
         options.AcceptAnonymousClients()
@@ -80,6 +89,15 @@ builder.Services.AddOpenIddict()
         // Register the ASP.NET Core host and configure the ASP.NET Core options.
         options.UseAspNetCore()
                .EnableTokenEndpointPassthrough();
+
+        // Register scopes supported by the application
+        options.RegisterScopes(
+            "api",
+            "offline_access",  // Agregar offline_access
+            OpenIddictConstants.Scopes.Email,
+            OpenIddictConstants.Scopes.Profile,
+            OpenIddictConstants.Scopes.Roles
+        );
     }
 ).AddValidation(options =>
     {
@@ -91,21 +109,36 @@ builder.Services.AddOpenIddict()
     }
 );
 
+builder.Services.AddScoped<OpenIddictService>();
+builder.Services.AddScoped<PkceService>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
+builder.Services.AddControllersWithViews(options =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+});
 
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 if (builder.Configuration.GetValue<bool>("FeatureFlags:MigrateAtStartup"))
 {

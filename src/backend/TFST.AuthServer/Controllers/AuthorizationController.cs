@@ -9,31 +9,41 @@ using System.Security.Claims;
 using System.Collections.Immutable;
 using TFST.AuthServer.Persistence;
 using static OpenIddict.Abstractions.OpenIddictConstants;
+using Microsoft.AspNetCore.Authorization;
+using TFST.AuthServer.Services;
 
 namespace TFST.AuthServer.Controllers;
 
 [ApiController]
 [Route("connect")]
+[AllowAnonymous]
 public class AuthorizationController(
     IOpenIddictApplicationManager applicationManager,
     SignInManager<IdentityUser> signInManager,
     UserManager<IdentityUser> userManager,
     ILogger<AuthorizationController> logger,
-    AuthDbContext context
-    ) : ControllerBase
+    AuthDbContext context,
+    PkceService pkceService
+    ) : Controller
 {
     private readonly IOpenIddictApplicationManager _applicationManager = applicationManager;
     private readonly SignInManager<IdentityUser> _signInManager = signInManager;
     private readonly UserManager<IdentityUser> _userManager = userManager;
     private readonly ILogger<AuthorizationController> _logger = logger;
     private readonly AuthDbContext _context = context;
+    private readonly PkceService _pkceService = pkceService;
 
     [HttpPost("token"), Produces("application/json")]
     public async Task<IActionResult> Exchange()
     {
         var request = HttpContext.GetOpenIddictServerRequest() ?? throw new InvalidOperationException("Request is null");
 
-        if (request.IsPasswordGrantType())
+        if (request.IsAuthorizationCodeGrantType())  // Add this condition
+        {
+            // Handle authorization code grant type
+            return await HandleAuthorizationCodeGrantType(request);
+        }
+        else if (request.IsPasswordGrantType())
         {
             // password flow
             return await HandlePasswordGrantType(request);
@@ -52,10 +62,12 @@ public class AuthorizationController(
         throw new NotImplementedException("The specified grant is not implemented.");
     }
 
-    [HttpGet("authorize")]
+    [HttpGet("authorize"), Produces("application/json")]
     [IgnoreAntiforgeryToken]
     public async Task<IActionResult> Authorize()
     {
+        _logger.LogInformation("----------ENTRANDO---------");
+
         var request = HttpContext.GetOpenIddictServerRequest() ??
             throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
 
@@ -70,7 +82,71 @@ public class AuthorizationController(
 
         var principal = await CreateClaimsPrincipalAsync(user, request.GetScopes());
 
+        if (!principal.HasClaim(c => c.Type == Claims.Subject))
+        {
+            principal.AddIdentity(new ClaimsIdentity(new[]
+            {
+            new Claim(Claims.Subject, user.Id)
+        }));
+        }
+
         return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+    }
+
+    [HttpGet("code-verifier"), Produces("application/json")]
+    public async Task<IActionResult> GetCodeVerifier([FromQuery] string state)
+    {
+        var codeVerifier = await _pkceService.GetCodeVerifierAsync(state);
+        if (codeVerifier == null)
+        {
+            return NotFound(new { error = "Code verifier not found or expired" });
+        }
+
+        return Ok(new { code_verifier = codeVerifier });
+    }
+
+    private async Task<IActionResult> HandleAuthorizationCodeGrantType(OpenIddictRequest request)
+    {
+        try
+        {
+            _logger.LogInformation("Iniciando intercambio de código de autorización");
+            var result = await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+            if (!result.Succeeded)
+            {
+                _logger.LogWarning("Fallo en la autenticación del token");
+                return ForbidWithError("invalid_grant", "The authorization code is invalid.");
+            }
+
+            // Loguear los claims disponibles para depuración
+            _logger.LogInformation("Claims disponibles: {@Claims}",
+                result.Principal?.Claims.Select(c => new { c.Type, c.Value }));
+
+            // Obtener el email del principal
+            var email = result.Principal?.Identity?.Name;
+            if (string.IsNullOrEmpty(email))
+            {
+                _logger.LogWarning("No se encontró el email en los claims");
+                return ForbidWithError("invalid_grant", "No se pudo identificar al usuario.");
+            }
+
+            // Buscar el usuario por email
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                _logger.LogWarning("No se encontró el usuario con email: {Email}", email);
+                return ForbidWithError("invalid_grant", "Usuario no encontrado.");
+            }
+
+            // Create a new ClaimsPrincipal containing the claims that will be used to create the tokens
+            var principal = await CreateClaimsPrincipalAsync(user, result.Principal!.GetScopes());
+
+            return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while handling the authorization code grant: {Message}", ex.Message);
+            return ForbidWithError("server_error", "An unexpected error occurred.");
+        }
     }
 
     private async Task<IActionResult> HandlePasswordGrantType(OpenIddictRequest request)
