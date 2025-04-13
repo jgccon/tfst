@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using TFST.AuthServer.Infrastructure.Configuration;
 using TFST.AuthServer.Infrastructure.Workers;
 using TFST.AuthServer.Persistence;
 
@@ -10,10 +12,10 @@ public static class ApplicationInitializationExtensions
     {
         using var scope = app.ApplicationServices.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<AuthDbContext>();
-
+        var options = scope.ServiceProvider.GetRequiredService<IOptions<AuthServerOptions>>();
         await dbContext.Database.MigrateAsync();
 
-        var worker = new Worker(app.ApplicationServices);
+        var worker = new Worker(app.ApplicationServices, options);
         await worker.StartAsync(default);
     }
 }

@@ -10,25 +10,97 @@ using System.Collections.Immutable;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 using Microsoft.AspNetCore.Authorization;
 using TFST.AuthServer.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace TFST.AuthServer.Controllers;
 
 [ApiController]
-[Route("connect")]
 [AllowAnonymous]
 public class AuthorizationController(
+    IOpenIddictScopeManager scopeManager,
+    UserManager<IdentityUser> userManager,
+    //
     IOpenIddictApplicationManager applicationManager,
     SignInManager<IdentityUser> signInManager,
-    UserManager<IdentityUser> userManager,
     ILogger<AuthorizationController> logger,
     PkceService pkceService
     ) : Controller
 {
+    private readonly IOpenIddictScopeManager _scopeManager = scopeManager;
+    private readonly UserManager<IdentityUser> _userManager = userManager;
+    //
     private readonly IOpenIddictApplicationManager _applicationManager = applicationManager;
     private readonly SignInManager<IdentityUser> _signInManager = signInManager;
-    private readonly UserManager<IdentityUser> _userManager = userManager;
     private readonly ILogger<AuthorizationController> _logger = logger;
     private readonly PkceService _pkceService = pkceService;
+
+    /*
+
+        [HttpGet("authorize")]
+        [HttpPost("authorize")]
+        [Produces("application/json")]
+        [IgnoreAntiforgeryToken]
+        public async Task<IActionResult> Authorize()
+        {
+            var request = HttpContext.GetOpenIddictServerRequest() ??
+                throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
+
+            if (!User.Identity?.IsAuthenticated ?? false)
+            {
+                var properties = new AuthenticationProperties
+                {
+                    RedirectUri = Request.PathBase + Request.Path +
+                        QueryString.Create(Request.HasFormContentType ?
+                            Request.Form.ToList() :
+                            Request.Query.ToList())
+                };
+
+                return Challenge(
+                    authenticationSchemes: [OpenIddictServerAspNetCoreDefaults.AuthenticationScheme],
+                    properties: properties);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user is null)
+            {
+                return Forbid();
+            }
+
+            var identity = new ClaimsIdentity(
+                authenticationType: TokenValidationParameters.DefaultAuthenticationType,
+                nameType: Claims.Name,
+                roleType: Claims.Role);
+
+            identity.AddClaim(new Claim(Claims.Subject, user.Id));
+            identity.AddClaim(new Claim(Claims.Name, user.UserName ?? string.Empty));
+            identity.AddClaim(new Claim(Claims.Email, user.Email ?? string.Empty));
+
+            var roles = await _userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+            {
+                identity.AddClaim(new Claim(Claims.Role, role));
+            }
+
+            var scopes = request.GetScopes();
+            identity.SetScopes(scopes);
+
+            identity.SetResources(await _scopeManager.ListResourcesAsync(identity.GetScopes()).ToListAsync());
+            identity.SetDestinations(GetDestinations);
+
+            return SignIn(new ClaimsPrincipal(identity), OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
+        }
+
+        private static IEnumerable<string> GetDestinations(Claim claim)
+        {
+            yield return Destinations.AccessToken;
+
+            if (claim.Type is Claims.Name or Claims.Email)
+            {
+                yield return Destinations.IdentityToken;
+            }
+        }
+    */
+    //
 
     [HttpPost("token"), Produces("application/json")]
     public async Task<IActionResult> Exchange()
@@ -47,35 +119,6 @@ public class AuthorizationController(
         }
 
         throw new NotImplementedException("The specified grant is not implemented.");
-    }
-
-    [HttpGet("authorize"), Produces("application/json")]
-    [IgnoreAntiforgeryToken]
-    public async Task<IActionResult> Authorize()
-    {
-        var request = HttpContext.GetOpenIddictServerRequest() ??
-            throw new InvalidOperationException("The OpenID Connect request cannot be retrieved.");
-
-        var result = await HttpContext.AuthenticateAsync();
-        if (!result.Succeeded)
-        {
-            return Challenge();
-        }
-
-        var user = await _userManager.GetUserAsync(result.Principal) ??
-            throw new InvalidOperationException("The user details cannot be retrieved.");
-
-        var principal = await CreateClaimsPrincipalAsync(user, request.GetScopes());
-
-        if (!principal.HasClaim(c => c.Type == Claims.Subject))
-        {
-            principal.AddIdentity(new ClaimsIdentity(new[]
-            {
-            new Claim(Claims.Subject, user.Id)
-        }));
-        }
-
-        return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
 
     [HttpGet("code-verifier"), Produces("application/json")]
@@ -100,7 +143,7 @@ public class AuthorizationController(
                 _logger.LogWarning("Failed to authenticate user.");
                 return ForbidWithError("invalid_grant", "The authorization code is invalid.");
             }
-           
+
             var email = result.Principal?.Identity?.Name;
             if (string.IsNullOrEmpty(email))
             {
@@ -125,7 +168,7 @@ public class AuthorizationController(
             return ForbidWithError("server_error", "An unexpected error occurred.");
         }
     }
-    
+
     private async Task<IActionResult> HandleClientCredentialsGrantType(OpenIddictRequest request)
     {
         if (string.IsNullOrEmpty(request.ClientId))
