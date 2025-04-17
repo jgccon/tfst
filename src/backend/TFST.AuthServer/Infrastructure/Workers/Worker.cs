@@ -28,17 +28,22 @@ public class Worker(IServiceProvider serviceProvider, IOptions<AuthServerOptions
                 ClientId = _options.TfstApp.ClientId,
                 ClientType = ClientTypes.Public,
                 DisplayName = _options.TfstApp.DisplayName,
+                PostLogoutRedirectUris = { new Uri(_options.TfstApp.PostLogoutRedirectUris) },
                 Permissions =
                 {
                     Permissions.Endpoints.Authorization,
                     Permissions.Endpoints.EndSession,
                     Permissions.Endpoints.Token,
+
                     Permissions.GrantTypes.AuthorizationCode,
+                    Permissions.GrantTypes.ClientCredentials,
                     Permissions.GrantTypes.RefreshToken,
+
                     Permissions.ResponseTypes.Code,
+                    Permissions.Prefixes.Scope + Scopes.OpenId,
                     Permissions.Scopes.Email,
                     Permissions.Scopes.Profile,
-                    Permissions.Scopes.Roles
+                    Permissions.Scopes.Roles,
                 },
                 Requirements =
                 {

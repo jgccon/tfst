@@ -1,0 +1,45 @@
+@using Microsoft.Extensions.Primitives
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Denegado - TFST</title>
+    <!--bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <h2 class="mb-0">Cerrar sesión</h2>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="lead text-left">Are you sure you want to sign out?</p>
+
+                        <form asp-controller="Authorization" asp-action="Logout" method="post">
+                            @* Flow the request parameters so they can be received by the LogoutPost action: *@
+                            @foreach (var parameter in Context.Request.HasFormContentType ?
+                                                        (IEnumerable<KeyValuePair<string, StringValues>>)Context.Request.Form :
+                                                        Context.Request.Query)
+                            {
+                                <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+                            }
+
+                            <input class="btn btn-lg btn-success" name="Confirm" type="submit" value="Yes" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

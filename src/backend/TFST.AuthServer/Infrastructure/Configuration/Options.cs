@@ -13,6 +13,7 @@ public class ClientOptions
     public string? ClientSecret { get; set; }
     public string DisplayName { get; set; } = string.Empty;
     public List<string> RedirectUris { get; set; } = [];
+    public string PostLogoutRedirectUris { get; set; } = string.Empty;
 }
 
 public class ApiScopeOptions

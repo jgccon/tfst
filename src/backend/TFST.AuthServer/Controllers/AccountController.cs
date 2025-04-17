@@ -1,71 +1,46 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OpenIddict.Abstractions;
 using TFST.AuthServer.Models;
-using TFST.AuthServer.Persistence;
-using TFST.AuthServer.Services;
 
 namespace TFST.AuthServer.Controllers;
 
-[AllowAnonymous]
-public class AccountController(
-    ILogger<AccountController> logger,
-    SignInManager<IdentityUser> signInManager,
-    UserManager<IdentityUser> userManager,
-    AuthDbContext context,
-    OpenIddictService openIddictService,
-    PkceService pkceService) : Controller
+public class AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager) : Controller
 {
-    private readonly SignInManager<IdentityUser> _signInManager = signInManager;
     private readonly UserManager<IdentityUser> _userManager = userManager;
-    private readonly ILogger<AccountController> _logger = logger;
-    private readonly AuthDbContext _context = context;
-    private readonly OpenIddictService _openIddictService = openIddictService;
-    private readonly PkceService _pkceService = pkceService;
+    private readonly SignInManager<IdentityUser> _signInManager = signInManager;
 
     [HttpGet]
-    public IActionResult Register() => View();
+    public IActionResult Register()
+    {
+        return View();
+    }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register(RegisterViewModel viewModel)
+    public async Task<IActionResult> Register(RegisterViewModel model)
     {
-        if (!ModelState.IsValid) return View(viewModel);
-
-        await using var transaction = await _context.Database.BeginTransactionAsync();
-        try
+        if (ModelState.IsValid)
         {
-            var user = new IdentityUser { UserName = viewModel.Email, Email = viewModel.Email };
-            var result = await _userManager.CreateAsync(user, viewModel.Password!);
-
-            if (!result.Succeeded)
+            var user = new IdentityUser
             {
-                HandleIdentityErrors(result);
-                return View(viewModel);
+                UserName = model.Email,
+                Email = model.Email
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Login));
             }
 
-            /* var addRoleResult = await _userManager.AddToRoleAsync(user, "USER");
-            if (!addRoleResult.Succeeded)
+            foreach (var error in result.Errors)
             {
-                HandleIdentityErrors(addRoleResult);
-                await transaction.RollbackAsync();
-                ModelState.AddModelError(string.Empty, "Can't add user to role.");
-                return View(viewModel);
-            } */
-
-            await transaction.CommitAsync();
-            TempData["SuccessMessage"] = "Registered successfully!";
-            return RedirectToAction(nameof(Login));
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An unexpected error occurred: {Message}", ex.Message);
-            await transaction.RollbackAsync();
-            ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again later.");
-            return View(viewModel);
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
 
+        return View(model);
     }
 
     [HttpGet]
@@ -79,75 +54,47 @@ public class AccountController(
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
     {
-        if (!ModelState.IsValid)
+        ViewData["ReturnUrl"] = returnUrl;
+
+        if (ModelState.IsValid)
         {
-            return View(model);
-        }
+            var result = await _signInManager.PasswordSignInAsync(
+                model.Email,
+                model.Password,
+                model.RememberMe,
+                lockoutOnFailure: false);
 
-        var result = await _signInManager.PasswordSignInAsync(
-            model.Email!, model.Password!, model.RememberMe, lockoutOnFailure: true);
-
-        if (result.Succeeded)
-        {
-            _logger.LogInformation("User {Email} logged in.", model.Email);
-
-            var application = await _openIddictService.GetApplicationAsync("angular_app");
-            if (application is null)
+            if (result.Succeeded)
             {
-                ModelState.AddModelError(string.Empty, "Application configuration not found.");
-                return View(model);
+                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
-
-            var redirectUri = application.RedirectUris.FirstOrDefault()?.ToString();
-            if (string.IsNullOrEmpty(redirectUri))
+            else
             {
-                ModelState.AddModelError(string.Empty, "No redirect URI configured.");
-                return View(model);
+                ModelState.AddModelError(string.Empty, "Intento de inicio de sesión no válido.");
             }
-
-            var (codeChallenge, state) = await _pkceService.CreatePkceAsync();
-
-            var routeValues = new
-            {
-                client_id = application.ClientId,
-                redirect_uri = redirectUri,
-                response_type = "code",
-                scopes = string.Join(" ", application.Scopes.Concat(["api", "offline_access"])),
-                state = state,
-                code_challenge = codeChallenge,
-                code_challenge_method = "S256"
-            };
-
-            return RedirectToAction("authorize", "authorization", routeValues);
         }
 
-        if (result.IsLockedOut)
-        {
-            _logger.LogWarning("User {Email} account locked.", model.Email);
-            ModelState.AddModelError(string.Empty, "User account is locked.");
-            return View(model);
-        }
-
-        ModelState.AddModelError(string.Empty, "Email or password is incorrect.");
         return View(model);
     }
 
-    private void HandleIdentityErrors(IdentityResult result)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Logout()
     {
-        foreach (var error in result.Errors)
-        {
-            switch (error.Code)
-            {
-                case "DuplicateUserName":
-                    ModelState.AddModelError(nameof(RegisterViewModel.Email), "El correo electrónico ya está registrado.");
-                    break;
-                case "DuplicateEmail":
-                    ModelState.AddModelError(nameof(RegisterViewModel.Email), "El correo electrónico ya está registrado.");
-                    break;
-                default:
-                    ModelState.AddModelError(string.Empty, error.Description);
-                    break;
-            }
-        }
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
+
+    [HttpGet]
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 }

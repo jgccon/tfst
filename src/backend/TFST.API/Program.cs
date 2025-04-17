@@ -56,6 +56,6 @@ app.UseOpenApiConfiguration();
 
 await app.UseUsersModuleAsync(app.Services, builder.Configuration);
 
-app.MapGet("api", [Authorize] (ClaimsPrincipal user) => $"{user.Identity!.Name} is allowed to access the API.");
+app.MapGet("api", [Authorize] (ClaimsPrincipal user) => $"{user.Identity!.Name} lograste acceder al API.");
 
 app.Run();

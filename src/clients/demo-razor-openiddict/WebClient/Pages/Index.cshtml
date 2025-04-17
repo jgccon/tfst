@@ -1,0 +1,29 @@
+﻿@page
+@using Microsoft.AspNetCore.Authentication
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<button type="button" class="btn btn-outline-success">Iniciar sesión</button>
+<button type="button" class="btn btn-outline-danger">Cerrar sesión</button>
+
+<div class="text-center">
+    <h1 class="display-4">Instrucciones</h1>
+    <p>primero debes loguearte para poder acceder y luego clickea <a href="/api">API</a> para llamar al API.</p>
+</div>
+
+@if (User.Identity!.IsAuthenticated)
+{
+    <h2>Bienvenido @User.Identity.Name</h2>
+
+    <ul>
+        @foreach (var claim in @User.Claims)
+        {
+            <li>@claim.Type: @claim.Value</li>
+        }
+        <li>token de acceso (access_token): @(await HttpContext.GetTokenAsync("access_token"))</li>
+        <li>token de identidad (id_token): @(await HttpContext.GetTokenAsync("id_token"))</li>
+    </ul>
+}
