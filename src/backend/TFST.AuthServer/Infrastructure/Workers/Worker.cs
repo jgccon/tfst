@@ -36,7 +36,6 @@ public class Worker(IServiceProvider serviceProvider, IOptions<AuthServerOptions
                     Permissions.Endpoints.Token,
 
                     Permissions.GrantTypes.AuthorizationCode,
-                    Permissions.GrantTypes.ClientCredentials,
                     Permissions.GrantTypes.RefreshToken,
 
                     Permissions.ResponseTypes.Code,

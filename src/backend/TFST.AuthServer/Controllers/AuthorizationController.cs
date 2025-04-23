@@ -21,7 +21,8 @@ public class AuthorizationController(
     IOpenIddictScopeManager scopeManager,
     SignInManager<IdentityUser> signInManager,
     UserManager<IdentityUser> userManager,
-    IOptions<AuthServerOptions> options
+    IOptions<AuthServerOptions> options,
+    ILogger<AuthorizationController> logger
     ) : Controller
 {
     private readonly IOpenIddictApplicationManager _applicationManager = applicationManager;
@@ -30,6 +31,7 @@ public class AuthorizationController(
     private readonly SignInManager<IdentityUser> _signInManager = signInManager;
     private readonly UserManager<IdentityUser> _userManager = userManager;
     private readonly AuthServerOptions _options = options.Value;
+    private readonly ILogger<AuthorizationController> _logger = logger;
 
     [HttpGet("~/connect/authorize")]
     [HttpPost("~/connect/authorize")]
@@ -90,6 +92,8 @@ public class AuthorizationController(
         // Retrieve the profile of the logged in user.
         var user = await _userManager.GetUserAsync(result.Principal) ??
             throw new InvalidOperationException("The user details cannot be retrieved.");
+
+        _logger.LogWarning("User {UserId} is authenticated.", user.Id);
 
         // Retrieve the application details from the database.
         var application = await _applicationManager.FindByClientIdAsync(request.ClientId) ??
@@ -171,6 +175,7 @@ public class AuthorizationController(
 
             // In every other case, render the consent form.
             default:
+                _logger.LogWarning("DEFAULT CASE");
                 return View(new AuthorizeViewModel
                 {
                     ApplicationName = await _applicationManager.GetLocalizedDisplayNameAsync(application),
@@ -340,54 +345,46 @@ public class AuthorizationController(
     }
 
     [Authorize(AuthenticationSchemes = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)]
-    [HttpGet("~/connect/userinfo")]
+    [HttpGet("~/connect/userinfo"), HttpPost("~/connect/userinfo"), Produces("application/json")]
     public async Task<IActionResult> Userinfo()
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user == null)
+        if (user is null)
         {
             return Challenge(
                 authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
                 properties: new AuthenticationProperties(new Dictionary<string, string?>
                 {
-                    [OpenIddictServerAspNetCoreConstants.Properties.Error] = OpenIddictConstants.Errors.InvalidToken,
+                    [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
                     [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "El token de acceso no es válido."
                 }));
         }
 
-        var claims = new Dictionary<string, object>();
-
-        var scopes = User.GetScopes();
-
-        claims["sub"] = await _userManager.GetUserIdAsync(user);
-
-        if (scopes.Contains("profile"))
+        var claims = new Dictionary<string, object>(StringComparer.Ordinal)
         {
-            claims["name"] = user.UserName;
-            claims["preferred_username"] = user.UserName;
+            // Note: the "sub" claim is a mandatory claim and must be included in the JSON response.
+            [Claims.Subject] = await _userManager.GetUserIdAsync(user)
+        };
+
+        if (User.HasScope(Scopes.Email))
+        {
+            claims[Claims.Email] = await _userManager.GetEmailAsync(user) ?? string.Empty;
+            claims[Claims.EmailVerified] = await _userManager.IsEmailConfirmedAsync(user);
         }
 
-        if (scopes.Contains("email"))
+        if (User.HasScope(Scopes.Roles))
         {
-            claims["email"] = await _userManager.GetEmailAsync(user);
-            claims["email_verified"] = await _userManager.IsEmailConfirmedAsync(user);
+            claims[Claims.Role] = await _userManager.GetRolesAsync(user);
         }
 
-        if (scopes.Contains("phone"))
+        if (User.HasScope(Scopes.Profile))
         {
-            claims["phone_number"] = await _userManager.GetPhoneNumberAsync(user);
-            claims["phone_number_verified"] = await _userManager.IsPhoneNumberConfirmedAsync(user);
+            claims[Claims.Username] = await _userManager.GetUserNameAsync(user) ?? string.Empty;
         }
 
-        if (scopes.Contains(_options.ApiScopes[0].Name))
+        if (User.HasScope(_options.ApiScopes[0].Name))
         {
             claims[_options.ApiScopes[0].Name] = true;
-        }
-
-        if (scopes.Contains("roles"))
-        {
-            var roles = await _userManager.GetRolesAsync(user);
-            claims["roles"] = roles.ToArray();
         }
 
         return Ok(claims);

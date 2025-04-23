@@ -4,10 +4,11 @@ using TFST.AuthServer.Models;
 
 namespace TFST.AuthServer.Controllers;
 
-public class AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager) : Controller
+public class AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger) : Controller
 {
     private readonly UserManager<IdentityUser> _userManager = userManager;
     private readonly SignInManager<IdentityUser> _signInManager = signInManager;
+    private readonly ILogger<AccountController> _logger = logger;
 
     [HttpGet]
     public IActionResult Register()
@@ -66,13 +67,24 @@ public class AccountController(UserManager<IdentityUser> userManager, SignInMana
 
             if (result.Succeeded)
             {
-                if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                if (string.IsNullOrEmpty(returnUrl))
                 {
+                    _logger.LogWarning("Redirección nula");
+                    ModelState.AddModelError(string.Empty, "Error en la redirección de autenticación.");
+                    return View(model);
+                }
+
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    _logger.LogWarning("Redirección local");
+                    _logger.LogWarning("Redirección: {ReturnUrl}", returnUrl);
                     return Redirect(returnUrl);
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    _logger.LogWarning("Redirección no local");
+                    ModelState.AddModelError(string.Empty, "Error en la redirección de autenticación.");
+                    return View(model);
                 }
             }
             else
@@ -86,10 +98,16 @@ public class AccountController(UserManager<IdentityUser> userManager, SignInMana
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Logout()
+    public async Task<IActionResult> Logout(string? returnUrl = null)
     {
         await _signInManager.SignOutAsync();
-        return RedirectToAction("Index", "Home");
+
+        return SignOut(
+            authenticationSchemes: new[]
+            {
+                OpenIddict.Validation.AspNetCore.OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme,
+                OpenIddict.Server.AspNetCore.OpenIddictServerAspNetCoreDefaults.AuthenticationScheme
+            });
     }
 
     [HttpGet]
