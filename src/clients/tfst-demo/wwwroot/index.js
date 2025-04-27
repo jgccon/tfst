@@ -2,7 +2,7 @@
 oidc.Log.setLevel(oidc.Log.INFO);
 
 const userManager = new oidc.UserManager({
-    authority: 'https://localhost:44319',
+    authority: 'https://localhost:6001',
     scope: 'openid profile email roles offline_access TFST_API',
     client_id: 'tfst_clientwebapp',
     redirect_uri: window.location.origin + '/signin-callback.html',
@@ -48,7 +48,7 @@ async function callApi() {
             return;
         }
 
-        const response = await fetch('https://localhost:44379/api', {
+        const response = await fetch('https://localhost:5001/api', {
             headers: {
                 'Authorization': `Bearer ${user.access_token}`
             }
