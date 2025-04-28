@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using OpenIddict.Abstractions;
 using Quartz;
 using TFST.AuthServer.Extensions;
 using TFST.AuthServer.Infrastructure.Configuration;
