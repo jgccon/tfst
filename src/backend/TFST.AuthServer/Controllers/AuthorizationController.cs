@@ -96,6 +96,10 @@ public class AuthorizationController(
         _logger.LogWarning("User {UserId} is authenticated.", user.Id);
 
         // Retrieve the application details from the database.
+        if (request.ClientId is null)
+        {
+            throw new InvalidOperationException("The ClientId cannot be null.");
+        }
         var application = await _applicationManager.FindByClientIdAsync(request.ClientId) ??
             throw new InvalidOperationException("Details concerning the calling client application cannot be found.");
 
@@ -148,10 +152,13 @@ public class AuthorizationController(
                 // Automatically create a permanent authorization to avoid requiring explicit consent
                 // for future authorization or token requests containing the same scopes.
                 var authorization = authorizations.LastOrDefault();
+                var clientId = await _applicationManager.GetIdAsync(application) ??
+                    throw new InvalidOperationException("The application ID cannot be retrieved.");
+
                 authorization ??= await _authorizationManager.CreateAsync(
                     identity: identity,
                     subject: await _userManager.GetUserIdAsync(user),
-                    client: await _applicationManager.GetIdAsync(application),
+                    client: clientId,
                     type: AuthorizationTypes.Permanent,
                     scopes: identity.GetScopes());
 
@@ -178,8 +185,8 @@ public class AuthorizationController(
                 _logger.LogWarning("DEFAULT CASE");
                 return View(new AuthorizeViewModel
                 {
-                    ApplicationName = await _applicationManager.GetLocalizedDisplayNameAsync(application),
-                    Scope = request.Scope
+                    ApplicationName = await _applicationManager.GetLocalizedDisplayNameAsync(application) ?? string.Empty,
+                    Scope = request.Scope ?? string.Empty
                 });
         }
     }
@@ -196,6 +203,10 @@ public class AuthorizationController(
             throw new InvalidOperationException("The user details cannot be retrieved.");
 
         // Retrieve the application details from the database.
+        if (request.ClientId is null)
+        {
+            throw new InvalidOperationException("The ClientId cannot be null.");
+        }
         var application = await _applicationManager.FindByClientIdAsync(request.ClientId) ??
             throw new InvalidOperationException("Details concerning the calling client application cannot be found.");
 
@@ -244,10 +255,12 @@ public class AuthorizationController(
         // Automatically create a permanent authorization to avoid requiring explicit consent
         // for future authorization or token requests containing the same scopes.
         var authorization = authorizations.LastOrDefault();
+        var clientId = await _applicationManager.GetIdAsync(application) ??
+            throw new InvalidOperationException("The application ID cannot be retrieved.");
         authorization ??= await _authorizationManager.CreateAsync(
             identity: identity,
             subject: await _userManager.GetUserIdAsync(user),
-            client: await _applicationManager.GetIdAsync(application),
+            client: clientId,
             type: AuthorizationTypes.Permanent,
             scopes: identity.GetScopes());
 
@@ -270,20 +283,8 @@ public class AuthorizationController(
     [ActionName(nameof(Logout)), HttpPost("~/connect/logout"), ValidateAntiForgeryToken]
     public async Task<IActionResult> LogoutPost()
     {
-        // Ask ASP.NET Core Identity to delete the local and external cookies created
-        // when the user agent is redirected from the external identity provider
-        // after a successful authentication flow (e.g Google or Facebook).
         await _signInManager.SignOutAsync();
-
-        // Returning a SignOutResult will ask OpenIddict to redirect the user agent
-        // to the post_logout_redirect_uri specified by the client application or to
-        // the RedirectUri specified in the authentication properties if none was set.
-        return SignOut(
-            authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-            properties: new AuthenticationProperties
-            {
-                RedirectUri = "/"
-            });
+        return SignOut(authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
     }
 
     [HttpPost("~/connect/token"), IgnoreAntiforgeryToken, Produces("application/json")]
@@ -298,7 +299,9 @@ public class AuthorizationController(
             var result = await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
 
             // Retrieve the user profile corresponding to the authorization code/refresh token.
-            var user = await _userManager.FindByIdAsync(result.Principal.GetClaim(Claims.Subject));
+            string userId = result.Principal?.GetClaim(Claims.Subject) ??
+                throw new InvalidOperationException("The user identifier cannot be extracted from the principal.");
+            var user = await _userManager.FindByIdAsync(userId);
             if (user is null)
             {
                 return Forbid(
@@ -344,52 +347,6 @@ public class AuthorizationController(
         throw new InvalidOperationException("The specified grant type is not supported.");
     }
 
-    [Authorize(AuthenticationSchemes = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)]
-    [HttpGet("~/connect/userinfo"), HttpPost("~/connect/userinfo"), Produces("application/json")]
-    public async Task<IActionResult> Userinfo()
-    {
-        var user = await _userManager.GetUserAsync(User);
-        if (user is null)
-        {
-            return Challenge(
-                authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
-                properties: new AuthenticationProperties(new Dictionary<string, string?>
-                {
-                    [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
-                    [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] = "El token de acceso no es válido."
-                }));
-        }
-
-        var claims = new Dictionary<string, object>(StringComparer.Ordinal)
-        {
-            // Note: the "sub" claim is a mandatory claim and must be included in the JSON response.
-            [Claims.Subject] = await _userManager.GetUserIdAsync(user)
-        };
-
-        if (User.HasScope(Scopes.Email))
-        {
-            claims[Claims.Email] = await _userManager.GetEmailAsync(user) ?? string.Empty;
-            claims[Claims.EmailVerified] = await _userManager.IsEmailConfirmedAsync(user);
-        }
-
-        if (User.HasScope(Scopes.Roles))
-        {
-            claims[Claims.Role] = await _userManager.GetRolesAsync(user);
-        }
-
-        if (User.HasScope(Scopes.Profile))
-        {
-            claims[Claims.Username] = await _userManager.GetUserNameAsync(user) ?? string.Empty;
-        }
-
-        if (User.HasScope(_options.ApiScopes[0].Name))
-        {
-            claims[_options.ApiScopes[0].Name] = true;
-        }
-
-        return Ok(claims);
-    }
-
     private static IEnumerable<string> GetDestinations(Claim claim)
     {
         // Note: by default, claims are NOT automatically included in the access and identity tokens.
@@ -401,7 +358,7 @@ public class AuthorizationController(
             case Claims.Name or Claims.PreferredUsername:
                 yield return Destinations.AccessToken;
 
-                if (claim.Subject.HasScope(Scopes.Profile))
+                if (claim.Subject?.HasScope(Scopes.Profile) == true)
                     yield return Destinations.IdentityToken;
 
                 yield break;
@@ -409,7 +366,7 @@ public class AuthorizationController(
             case Claims.Email:
                 yield return Destinations.AccessToken;
 
-                if (claim.Subject.HasScope(Scopes.Email))
+                if (claim.Subject?.HasScope(Scopes.Email) == true)
                     yield return Destinations.IdentityToken;
 
                 yield break;
@@ -417,7 +374,7 @@ public class AuthorizationController(
             case Claims.Role:
                 yield return Destinations.AccessToken;
 
-                if (claim.Subject.HasScope(Scopes.Roles))
+                if (claim.Subject?.HasScope(Scopes.Roles) == true)
                     yield return Destinations.IdentityToken;
 
                 yield break;

@@ -125,6 +125,12 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
 app.UseRouting();
 app.UseCors();
 app.UseHttpsRedirection();

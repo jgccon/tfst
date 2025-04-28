@@ -36,7 +36,7 @@ public class AccountController(
                 Email = model.Email
             };
 
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Password!);
 
             if (result.Succeeded)
             {
@@ -100,8 +100,8 @@ public class AccountController(
         if (ModelState.IsValid)
         {
             var result = await _signInManager.PasswordSignInAsync(
-                model.Email,
-                model.Password,
+                model.Email!,
+                model.Password!,
                 model.RememberMe,
                 lockoutOnFailure: false);
 
