@@ -1,71 +1,71 @@
 # Demo Client Application
 
-## Introducción
+## Introduction
 
-El cliente de demostración (tfst-demo) es una aplicación web simple que implementa autenticación OpenID Connect utilizando la biblioteca oidc-client-ts. Interactúa con TFST.AuthServer para autenticación y TFST.API para acceder a recursos protegidos.
+The demo client (tfst-demo) is a simple web application that implements OpenID Connect authentication using the oidc-client-ts library. It interacts with TFST.AuthServer for authentication and TFST.API to access protected resources.
 
-## Rol en la Arquitectura
+## Role in Architecture
 
-El cliente de demostración actúa como un consumidor de la API, permitiendo a los usuarios realizar operaciones que requieren autenticación. Se comunica con el servidor de autenticación para obtener tokens de acceso y utiliza estos tokens para acceder a los recursos protegidos en la API.
+The demo client acts as an API consumer, allowing users to perform operations that require authentication. It communicates with the authentication server to obtain access tokens and uses these tokens to access protected resources in the API.
 
-## Comunicación con la API
+## Communication with the API
 
-1. **Autenticación**: El cliente envía las credenciales del usuario al servidor de autenticación. Si las credenciales son válidas, el servidor devuelve un token de acceso.
+1. **Authentication**: The client sends user credentials to the authentication server. If the credentials are valid, the server returns an access token.
    
-2. **Acceso a Recursos**: Con el token de acceso, el cliente puede realizar solicitudes a la API. El token se incluye en el encabezado de autorización de cada solicitud.
+2. **Resource Access**: With the access token, the client can make requests to the API. The token is included in the authorization header of each request.
 
-3. **Manejo de Errores**: El cliente debe manejar errores de autenticación y autorización, proporcionando mensajes claros al usuario en caso de que se produzcan problemas.
+3. **Error Handling**: The client must handle authentication and authorization errors, providing clear messages to the user if problems occur.
 
-## Configuración
+## Configuration
 
-Para configurar el cliente de demostración, asegúrese de que los siguientes parámetros estén correctamente establecidos:
+To configure the demo client, ensure the following parameters are correctly set:
 
-- **URL del Servidor de Autenticación**: La dirección del servidor de autenticación TFST.AuthServer.
-- **URL de la API**: La dirección de la API de TFST que el cliente utilizará para realizar solicitudes.
+- **Authentication Server URL**: The address of the TFST.AuthServer authentication server.
+- **API URL**: The address of the TFST API that the client will use to make requests.
 
-## Componentes Principales
+## Main Components
 
-### 1. Configuración de OIDC
+### 1. OIDC Configuration
 
 ```javascript
 const userManager = new oidc.UserManager({
-    authority: 'https://localhost:6001',                    // URL del AuthServer
-    client_id: 'tfst_clientwebapp',                        // ID del cliente registrado
-    response_type: 'code',                                 // Flujo de código de autorización
-    scope: 'openid profile email roles offline_access TFST_API', // Scopes solicitados
+    authority: 'https://localhost:6001',                    // AuthServer URL
+    client_id: 'tfst_clientwebapp',                        // Registered client ID
+    response_type: 'code',                                 // Authorization code flow
+    scope: 'openid profile email roles offline_access TFST_API', // Requested scopes
     redirect_uri: `${window.location.origin}/signin-callback.html`,
     post_logout_redirect_uri: `${window.location.origin}/index.html`,
-    automaticSilentRenew: true,                           // Renovación automática de tokens
+    automaticSilentRenew: true,                           // Automatic token renewal
     includeIdTokenInSilentRenew: true
 });
 ```
 
-### 2. Flujo de Autenticación PKCE
+### 2. PKCE Authentication Flow
 
-El flujo PKCE (Proof Key for Code Exchange) se maneja automáticamente por oidc-client-ts:
+The PKCE (Proof Key for Code Exchange) flow is automatically handled by oidc-client-ts:
 
-1. **Inicio de Sesión**:
+1. **Login**:
 ```javascript
 async function login() {
     try {
-        // Genera automáticamente code_verifier y code_challenge
+        // Automatically generates code_verifier and code_challenge
         await userManager.signinRedirect();
     } catch (error) {
-        console.error('Error durante el login:', error);
+        console.error('Error during login:', error);
     }
 }
 ```
 
-2. **Callback de Autenticación** (signin-callback.html):
+2. **Authentication Callback** (signin-callback.html):
 ```javascript
-// Procesa la respuesta de autenticación y valida el code_verifier
+// Processes authentication response and validates code_verifier
 await userManager.signinCallback();
 ```
 
-### 3. Gestión de Tokens
+### 3. Token Management
 
 ```javascript
-// Obtener usuario y tokens actuales
+// Get current user and tokens
 const user = await userManager.getUser();
 if (user) {
     console.log('Access Token:', user.access_token);
@@ -73,23 +73,23 @@ if (user) {
     console.log('Refresh Token:', user.refresh_token);
 }
 
-// Renovar tokens
+// Renew tokens
 async function refreshToken() {
     try {
         await userManager.signinSilent();
-        console.log('Token renovado exitosamente');
+        console.log('Token successfully renewed');
     } catch (error) {
-        console.error('Error al renovar el token:', error);
+        console.error('Error renewing token:', error);
     }
 }
 ```
 
-### 4. Llamadas a la API
+### 4. API Calls
 
 ```javascript
 async function callApi() {
     const user = await userManager.getUser();
-    if (!user) throw new Error('No autenticado');
+    if (!user) throw new Error('Not authenticated');
 
     const response = await fetch('https://localhost:5001/api', {
         headers: {
@@ -97,12 +97,12 @@ async function callApi() {
         }
     });
 
-    if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+    if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
     return await response.text();
 }
 ```
 
-### 5. Cierre de Sesión
+### 5. Logout
 
 ```javascript
 async function logout() {
@@ -110,43 +110,43 @@ async function logout() {
 }
 ```
 
-## Eventos y Manejo del Estado
+## Events and State Management
 
 ```javascript
 userManager.events.addUserLoaded(user => {
-    console.log('Usuario cargado:', user);
+    console.log('User loaded:', user);
 });
 
 userManager.events.addSilentRenewError(error => {
-    console.error('Error en renovación silenciosa:', error);
+    console.error('Silent renewal error:', error);
 });
 
 userManager.events.addAccessTokenExpiring(() => {
-    console.log('Token a punto de expirar');
+    console.log('Token about to expire');
 });
 ```
 
-## Flujo Completo de Autenticación
+## Complete Authentication Flow
 
-1. Usuario hace clic en "Login"
+1. User clicks "Login"
 2. userManager.signinRedirect():
-   - Genera code_verifier y code_challenge
-   - Redirecciona al AuthServer
-3. Usuario se autentica en AuthServer
-4. AuthServer redirecciona a signin-callback.html
+   - Generates code_verifier and code_challenge
+   - Redirects to AuthServer
+3. User authenticates in AuthServer
+4. AuthServer redirects to signin-callback.html
 5. userManager.signinCallback():
-   - Valida la respuesta
-   - Almacena tokens
-   - Redirecciona a la aplicación
+   - Validates the response
+   - Stores tokens
+   - Redirects to application
 
-## Seguridad
+## Security
 
-- PKCE protege contra ataques de intercepción de código de autorización
-- Los tokens se almacenan en memoria
-- Renovación automática de tokens configurada
-- Validación de audiencia y emisor en tokens
+- PKCE protects against authorization code interception attacks
+- Tokens are stored in memory
+- Automatic token renewal configured
+- Audience and issuer validation in tokens
 
-## Configuración Requerida en AuthServer
+## Required Configuration in AuthServer
 
 ```json
 {
@@ -162,10 +162,10 @@ userManager.events.addAccessTokenExpiring(() => {
 }
 ```
 
-## Buenas Prácticas
+## Good Practices
 
-1. Manejar errores de autenticación y API apropiadamente
-2. Implementar interceptores para renovación automática de tokens
-3. Validar estado de autenticación antes de llamadas a la API
-4. Utilizar HTTPS en producción
-5. Mantener las URLs de redirección actualizadas
+1. Handle authentication and API errors appropriately
+2. Implement interceptors for automatic token renewal
+3. Validate authentication status before API calls
+4. Use HTTPS in production
+5. Keep redirect URLs updated

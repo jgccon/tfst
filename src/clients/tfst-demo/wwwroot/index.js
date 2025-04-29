@@ -16,7 +16,7 @@ async function login() {
     try {
         await userManager.signinRedirect();
     } catch (error) {
-        console.error('Error durante el login:', error);
+        console.error('Error during login:', error);
     }
 }
 
@@ -24,7 +24,7 @@ async function logout() {
     try {
         await userManager.signoutRedirect();
     } catch (error) {
-        console.error('Error durante el logout:', error);
+        console.error('Error during logout:', error);
     }
 }
 
@@ -33,10 +33,10 @@ async function refreshToken() {
         const user = await userManager.getUser();
         if (user) {
             await userManager.signinSilent();
-            console.log('Token refrescado exitosamente');
+            console.log('Token refreshed successfully');
         }
     } catch (error) {
-        console.error('Error al refrescar el token:', error);
+        console.error('Error refreshing token:', error);
     }
 }
 
@@ -44,7 +44,7 @@ async function callApi() {
     try {
         const user = await userManager.getUser();
         if (!user) {
-            console.error('Usuario no autenticado');
+            console.error('User not authenticated');
             return;
         }
 
@@ -61,7 +61,7 @@ async function callApi() {
         const data = await response.text();
         return data;
     } catch (error) {
-        console.error('Error llamando a la API:', error);
+        console.error('Error calling API:', error);
         throw error;
     }
 }

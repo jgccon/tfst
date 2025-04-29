@@ -11,6 +11,19 @@ const userManager = new oidc.UserManager({
     automaticSilentRenew: true,
 });
 ```
+## 1.1.Descubrimiento de Metadatos del Proveedor (OIDC Discovery)
+Antes de iniciar cualquier flujo de autenticación, `oidc-client-ts` utiliza la `authority` configurada (`https://localhost:6001`) para descubrir automáticamente las características y endpoints del AuthServer. Esto lo hace consultando el endpoint de descubrimiento de metadatos, típicamente ubicado en:
+
+`https://localhost:6001/.well-known/openid-configuration`
+
+Este endpoint devuelve un documento JSON que contiene, entre otras cosas:
+
+- Las URLs exactas para los endpoints de autorización (`authorization_endpoint`), token (`token_endpoint`), userinfo (`userinfo_endpoint`), etc.
+- Los métodos de firma soportados para los ID Tokens.
+- Los scopes soportados.
+- La ubicación de las claves públicas del servidor (JWKS endpoint).
+
+`oidc-client-ts` utiliza esta información para configurar internamente las URLs correctas y validar los tokens recibidos, haciendo que la configuración en el cliente sea más simple y menos propensa a errores si las URLs cambian en el servidor (siempre que el `authority` base se mantenga).
 
 ## 2. Flujo de Autenticación
 

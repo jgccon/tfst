@@ -1,12 +1,12 @@
 @model RegisterViewModel
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registro - TFST</title>
+    <title>Register - TFST</title>
     <!--bootstrap 5-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -17,10 +17,9 @@
 <body>
     <div class="container bg-ligth main-content">
         <main role="main" class="pb-3">
-
             <div class="card">
                 <div class="card-body">
-                    <h3 class="card-title text-center">Registro de usuario</h3>
+                    <h3 class="card-title text-center">User Registration</h3>
                     <form asp-area="Identity" asp-controller="Account" asp-action="Register" method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 
@@ -29,36 +28,32 @@
 
                                 <div class="mb-3">
                                     <label asp-for="Email"></label>
-                                    <input asp-for="Email" class="form-control"
-                                        placeholder="Ingresa un correo electrónico">
+                                    <input asp-for="Email" class="form-control" placeholder="Enter your email">
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
 
                                 <div class="mb-3">
                                     <label asp-for="Password"></label>
-                                    <input asp-for="Password" class="form-control" placeholder="Ingresa la contraseña">
+                                    <input asp-for="Password" class="form-control" placeholder="Enter your password">
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
 
                                 <div class="mb-3">
                                     <label asp-for="ConfirmPassword"></label>
                                     <input asp-for="ConfirmPassword" class="form-control"
-                                        placeholder="Ingresa la confirmación de la contraseña">
+                                        placeholder="Confirm your password">
                                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                                 </div>
 
                                 <div>
-                                    <button type="submit" class="btn btn-primary w-100 btn-lg">Registrarse</button>
+                                    <button type="submit" class="btn btn-primary w-100 btn-lg">Register</button>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <p>¿Ya tienes una cuenta? <a asp-controller="Account" asp-action="Login">Iniciar sesión</a></p>
+                    <p>Already have an account? <a asp-controller="Account" asp-action="Login">Sign in</a></p>
                 </div>
             </div>
 

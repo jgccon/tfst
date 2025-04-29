@@ -1,26 +1,26 @@
-# Guía de Resolución de Problemas
+# Troubleshooting Guide
 
-## Problemas Comunes
+## Common Issues
 
-### Problema 1: Fallo en la Autenticación
-- **Descripción**: Los usuarios no pueden autenticarse.
-- **Solución**: Asegúrese de que el AuthServer esté ejecutándose y que se estén utilizando las credenciales de cliente correctas. Revise los logs para ver mensajes de error.
+### Issue 1: Authentication Failure
+- **Description**: Users cannot authenticate.
+- **Solution**: Ensure that AuthServer is running and that the correct client credentials are being used. Check logs for error messages.
 
-### Problema 2: API No Responde
-- **Descripción**: La API no responde a las solicitudes.
-- **Solución**: Verifique que el servicio de API esté activo y funcionando. Compruebe las configuraciones de red y asegúrese de que el endpoint de la API esté correctamente especificado.
+### Issue 2: API Not Responding
+- **Description**: The API is not responding to requests.
+- **Solution**: Verify that the API service is up and running. Check network configurations and ensure the API endpoint is correctly specified.
 
-### Problema 3: Errores de Configuración de OpenIddict
-- **Descripción**: Errores relacionados con la configuración de OpenIddict.
-- **Solución**: Revise la configuración de OpenIddict en los archivos de configuración. Asegúrese de que todos los parámetros requeridos estén configurados correctamente.
+### Issue 3: OpenIddict Configuration Errors
+- **Description**: Errors related to OpenIddict configuration.
+- **Solution**: Review OpenIddict configuration in configuration files. Make sure all required parameters are properly configured.
 
-## Consejos de Depuración
-- Utilice el registro (logging) para capturar información detallada sobre el comportamiento de la aplicación.
-- Revise la salida de la consola en busca de errores o advertencias en tiempo de ejecución.
-- Consulte la documentación para verificar cualquier configuración que pueda haberse pasado por alto.
+## Debugging Tips
+- Use logging to capture detailed information about application behavior.
+- Review console output for errors or warnings during runtime.
+- Check documentation to verify any configuration that might have been overlooked.
 
-## Recursos Adicionales
-- [Documentación de OpenIddict](https://documentation.openiddict.com/)
-- [Documentación de la API](./architecture/api.md)
+## Additional Resources
+- [OpenIddict Documentation](https://documentation.openiddict.com/)
+- [API Documentation](./architecture/api.md)
 
-Esta guía tiene como objetivo ayudar a los usuarios a resolver problemas comunes encontrados mientras se utilizan los proyectos TFST.AuthServer, TFST.API y tfst-demo.
+This guide aims to help users resolve common issues encountered while using TFST.AuthServer, TFST.API, and tfst-demo projects.

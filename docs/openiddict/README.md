@@ -1,26 +1,26 @@
-# TFST Documentation
+# TFST Openiddict Documentation
 
-Bienvenido a la documentación de los proyectos TFST.AuthServer, TFST.API y tfst-demo. Esta guía está diseñada para ayudar a los usuarios y desarrolladores a comprender la arquitectura, configuración, implementación y seguridad de los proyectos.
+Welcome to the documentation for TFST.AuthServer, TFST.API, and tfst-demo projects. This guide is designed to help users and developers understand the architecture, configuration, implementation, and security of the projects.
 
-## Contenido
+## Content
 
-- **Arquitectura**
-  - [Descripción general](architecture/overview.md): Una visión general de la arquitectura de los proyectos y cómo interactúan entre sí.
-  - [TFST.AuthServer](architecture/auth-server.md): Detalles sobre el proyecto TFST.AuthServer, sus componentes y su integración con OpenIddict.
-  - [TFST.API](architecture/api.md): Información sobre el proyecto TFST.API, sus endpoints y flujo de datos.
-  - [tfst-demo](architecture/demo-client.md): Explicación del cliente tfst-demo y su papel en la arquitectura general.
+- **Architecture**
+  - [Overview](architecture/overview.md): A general view of the projects' architecture and how they interact.
+  - [TFST.AuthServer](architecture/auth-server.md): Details about the TFST.AuthServer project, its components, and OpenIddict integration.
+  - [TFST.API](architecture/api.md): Information about the TFST.API project, its endpoints, and data flow.
+  - [tfst-demo](architecture/demo-client.md): Explanation of the tfst-demo client and its role in the overall architecture.
 
-- **Despliegue**
-  - [Instalación](deployment/installation.md): Instrucciones paso a paso para instalar y desplegar los proyectos.
+- **Deployment**
+  - [Installation](deployment/installation.md): Step-by-step instructions for installing and deploying the projects.
 
-- **Seguridad**
-  - [Visión general de OpenIddict](security/openiddict-overview.md): Información sobre OpenIddict y su uso en los proyectos.
-  - [Flujo de autenticación](security/authentication-flow.md): Descripción del flujo de autenticación implementado.
-  - [Autorización](security/authorization.md): Mecanismos de autorización, incluyendo roles y permisos.
+- **Security**
+  - [OpenIddict Overview](security/openiddict-overview.md): Information about OpenIddict and its use in the projects.
+  - [Authentication Flow](security/authentication-flow.md): Description of the implemented authentication flow.
+  - [Authorization](security/authorization.md): Authorization mechanisms, including roles and permissions.
 
-- **Solución de problemas**
-  - [Troubleshooting](troubleshooting.md): Soluciones a problemas comunes y consejos de solución de problemas.
+- **Troubleshooting**
+  - [Troubleshooting](troubleshooting.md): Solutions to common problems and troubleshooting tips.
 
-## Navegación
+## Navigation
 
-Utiliza los enlaces anteriores para navegar a través de la documentación y encontrar la información que necesitas. Si tienes preguntas o necesitas más ayuda, no dudes en consultar los tutoriales o la sección de solución de problemas.
+Use the links above to navigate through the documentation and find the information you need. If you have questions or need additional help, don't hesitate to check the tutorials or troubleshooting section.

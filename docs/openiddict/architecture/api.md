@@ -1,11 +1,11 @@
 # TFST.API
 
-## Propósito
-TFST.API actúa como servidor de recursos que protege los endpoints mediante tokens JWT emitidos por TFST.AuthServer. Implementa OpenIddict.Validation para la validación de tokens y gestión de autorización.
+## Purpose
+TFST.API acts as a resource server that protects endpoints using JWT tokens issued by TFST.AuthServer. It implements OpenIddict.Validation for token validation and authorization management.
 
-## Componentes Principales
+## Main Components
 
-### 1. Configuración OpenIddict
+### 1. OpenIddict Configuration
 ```csharp
 builder.Services.AddOpenIddict()
     .AddValidation(options =>
@@ -18,39 +18,39 @@ builder.Services.AddOpenIddict()
     });
 ```
 
-### 2. Seguridad y Validación de Tokens
+### 2. Security and Token Validation
 - **Issuer**: `https://localhost:6001/`
 - **Audience**: `resource_server`
-- **Encryption Key**: Clave simétrica compartida con AuthServer
-- **Validación automatizada de**:
-  - Firma del token
-  - Tiempo de expiración
-  - Audiencia válida
-  - Issuer correcto
+- **Encryption Key**: Shared symmetric key with AuthServer
+- **Automated validation of**:
+  - Token signature
+  - Expiration time
+  - Valid audience
+  - Correct issuer
 
-### 3. Configuración CORS
-- Orígenes permitidos configurados en appsettings:
-  - Por defecto: `http://localhost:7000`
-- Headers: Permite cualquier header
-- Métodos: Permite cualquier método HTTP
+### 3. CORS Configuration
+- Allowed origins configured in appsettings:
+  - Default: `http://localhost:7000`
+- Headers: Allows any header
+- Methods: Allows any HTTP method
 
-### 4. Autenticación y Autorización
-- Esquema: OpenIddictValidationAspNetCoreDefaults
-- Middleware configurado en pipeline:
+### 4. Authentication and Authorization
+- Scheme: OpenIddictValidationAspNetCoreDefaults
+- Middleware configured in pipeline:
   ```csharp
   app.UseAuthentication();
   app.UseAuthorization();
   ```
-- Protección de endpoints mediante atributo [Authorize]
+- Endpoint protection using [Authorize] attribute
 
-### 5. Flujo de Solicitudes
-1. Cliente envía request con Bearer token
-2. Middleware valida el token con OpenIddict
-3. Si es válido, se establece ClaimsPrincipal
-4. Se ejecuta el endpoint si autorización es correcta
+### 5. Request Flow
+1. Client sends request with Bearer token
+2. Middleware validates the token with OpenIddict
+3. If valid, ClaimsPrincipal is established
+4. The endpoint is executed if authorization is correct
 
-### 6. Configuración del Entorno
-- Desarrollo:
+### 6. Environment Configuration
+- Development:
   ```json
   {
     "OpenIddict": {
@@ -63,21 +63,21 @@ builder.Services.AddOpenIddict()
   }
   ```
 
-## Aspectos de Seguridad
-- HTTPS obligatorio en producción
-- Validación completa de tokens JWT
-- CORS configurado para orígenes específicos
-- Claves de encriptación gestionadas por configuración
-- Claims del usuario disponibles vía ClaimsPrincipal
+## Security Aspects
+- HTTPS mandatory in production
+- Full validation of JWT tokens
+- CORS configured for specific origins
+- Encryption keys managed by configuration
+- User claims available via ClaimsPrincipal
 
-## Endpoints Protegidos
-Todos los endpoints bajo `/api` requieren autenticación válida mediante token JWT.
-Ejemplo:
+## Protected Endpoints
+All endpoints under `/api` require valid authentication via JWT token.
+Example:
 ```csharp
 [Authorize]
 [Route("api/[controller]")]
 public class ResourceController : ControllerBase
 {
-    // Endpoints protegidos
+    // Protected endpoints
 }
 ```

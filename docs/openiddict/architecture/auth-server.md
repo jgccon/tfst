@@ -1,11 +1,11 @@
 # TFST.AuthServer
 
-## Propósito
-TFST.AuthServer es el servidor de autenticación/autorización que implementa OpenID Connect y OAuth 2.0 usando OpenIddict. Gestiona la autenticación de usuarios y emite tokens JWT para acceder a recursos protegidos.
+## Purpose
+TFST.AuthServer is the authentication/authorization server that implements OpenID Connect and OAuth 2.0 using OpenIddict. It manages user authentication and issues JWT tokens for accessing protected resources.
 
-## Componentes Principales
+## Main Components
 
-### 1. Configuración OpenIddict
+### 1. OpenIddict Configuration
 ```csharp
 builder.Services.AddOpenIddict()
     .AddServer(options =>
@@ -15,20 +15,20 @@ builder.Services.AddOpenIddict()
                .SetTokenEndpointUris("connect/token")
                .SetUserInfoEndpointUris("connect/userinfo");
 
-        // Flujos permitidos
+        // Allowed flows
         options.AllowAuthorizationCodeFlow()
               .AllowRefreshTokenFlow()
-              .RequireProofKeyForCodeExchange(); // PKCE obligatorio
+              .RequireProofKeyForCodeExchange(); // PKCE required
 ```
-### 2. Scopes Soportados
-- Scopes Estándar:
-    - `openid`: Autenticación OpenID Connect
-    - `profile`: Información básica del usuario
-    - `email`: Correo electrónico
-    - `roles`: Roles del usuario
+### 2. Supported Scopes
+- Standard Scopes:
+    - `openid`: OpenID Connect Authentication
+    - `profile`: Basic user information
+    - `email`: Email address
+    - `roles`: User roles
 
-- Scopes Personalizados:
-    - `TFST_API`: Scope personalizado que otorga acceso a TFST.API ya que configura la audiencia del token con `resource_server`.
+- Custom Scopes:
+    - `TFST_API`: Custom scope that grants access to TFST.API as it configures the token audience with `resource_server`.
 
     ```json
     "ApiScopes": [
@@ -39,27 +39,27 @@ builder.Services.AddOpenIddict()
     ]
     ```
 
-### 3. Seguridad y Tokens
+### 3. Security and Tokens
 - PKCE (Proof Key for Code Exchange):
-    - Obligatorio para el flujo de código de autorización
-    - Protege contra ataques de intercepción
-    - Implementado automáticamente por OpenIddict
+    - Required for the authorization code flow
+    - Protects against interception attacks
+    - Automatically implemented by OpenIddict
 
-- Emisión de Tokens:
+- Token Issuance:
 ```csharp
-// JWT con claims del usuario
+// JWT with user claims
 identity.SetClaim(Claims.Subject, userId)
        .SetClaim(Claims.Email, email)
        .SetClaim(Claims.Name, username)
        .SetClaims(Claims.Role, roles);
 ```	
 
-- Validación:
+- Validation:
     - Issuer: `https://localhost:6001/`
     - Audience: `resource_server`
-    - Encryption Key: Clave simétrica configurada
+    - Encryption Key: Configured symmetric key
 
-### 4. Clientes Registrados
+### 4. Registered Clients
 ```json
 {
   "AuthServer": {
@@ -76,40 +76,40 @@ identity.SetClaim(Claims.Subject, userId)
 }
 ```
 
-### 5. Almacenamiento
-- Base de datos SQL Server con esquema `auth`
-- Tablas principales:
-    - `Users`: Usuarios y credenciales
-    - `OpenIddictApplications`: Clientes registrados
-    - `OpenIddictAuthorizations`: Autorizaciones
-    - `OpenIddictTokens`: Tokens emitidos
-    - `OpenIddictScopes`: Scopes soportados
+### 5. Storage
+- SQL Server database with `auth` schema
+- Main tables:
+    - `Users`: Users and credentials
+    - `OpenIddictApplications`: Registered clients
+    - `OpenIddictAuthorizations`: Authorizations
+    - `OpenIddictTokens`: Issued tokens
+    - `OpenIddictScopes`: Supported scopes
 
-### 6. Proceso de Autenticación
-    1. Cliente solicita autorización con PKCE
-    2. Usuario se autentica (si es necesario)
-    3. AuthServer valida credenciales
-    4. Se emite código de autorización
-    5. Cliente intercambia código por tokens
-    6. Se emiten access_token y refresh_token
+### 6. Authentication Process
+    1. Client requests authorization with PKCE
+    2. User authenticates (if necessary)
+    3. AuthServer validates credentials
+    4. Authorization code is issued
+    5. Client exchanges code for tokens
+    6. Access_token and refresh_token are issued
 
 ### 7. Refresh Tokens
-    - Duración configurable (por defecto 14 días)
-    - Almacenados en `OpenIddictTokens`
-    - Rotación automática al usar
-    - Validación de usuario activo en cada uso
+    - Configurable duration (14 days by default)
+    - Stored in `OpenIddictTokens`
+    - Automatic rotation when used
+    - Active user validation on each use
 
-## Aspectos de Seguridad
-    - HTTPS obligatorio en producción
-    - Tokens encriptados con clave simétrica
-    - PKCE obligatorio para clientes públicos
-    - Validación de redirect_uri
-    - Almacenamiento seguro de secretos
-    - Rate limiting en endpoints críticos
+## Security Aspects
+    - HTTPS required in production
+    - Tokens encrypted with symmetric key
+    - PKCE required for public clients
+    - Redirect_uri validation
+    - Secure storage of secrets
+    - Rate limiting on critical endpoints
 
-## Endpoints Principales
-- `/connect/authorize`: Inicio del flujo de autorización
-- `/connect/token`: Emisión de tokens y refresh de tokens
-- `/connect/userinfo`: Información del usuario
-- `/Account/Login`: UI de login
-- `/Account/Register`: UI de registro
+## Main Endpoints
+- `/connect/authorize`: Start of authorization flow
+- `/connect/token`: Token issuance and refresh
+- `/connect/userinfo`: User information
+- `/Account/Login`: Login UI
+- `/Account/Register`: Registration UI

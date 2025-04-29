@@ -142,7 +142,7 @@ If not using Docker:
 We welcome contributions! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ## Documentation
-For detailed documentation, refer to the `/docs` folder. And we will styart working on a pair of decumentation web sites doon. Well keep you informed.
+For detailed documentation, refer to the `/docs` folder. And we will start working on a pair of documentation web sites soon. We'll keep you informed.
 
 ## License
 Licensed under the MIT License. See [LICENSE](LICENSE) for more details.

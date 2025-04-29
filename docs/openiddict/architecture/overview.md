@@ -1,23 +1,23 @@
-# Visión General de la Arquitectura
+# Architecture Overview
 
-Este documento proporciona una visión general de la arquitectura de los proyectos TFST.AuthServer, TFST.API y tfst-demo, detallando cómo interactúan entre sí.
+This document provides an overview of the architecture of TFST.AuthServer, TFST.API, and tfst-demo projects, detailing how they interact with each other.
 
 ## TFST.AuthServer
 
-TFST.AuthServer es el componente central de autenticación que utiliza OpenIddict para gestionar la autenticación de usuarios. Proporciona un flujo de trabajo seguro para la emisión de tokens y la validación de credenciales.
+TFST.AuthServer is the central authentication component that uses OpenIddict to manage user authentication. It provides a secure workflow for token issuance and credential validation.
 
 ## TFST.API
 
-TFST.API actúa como la interfaz entre los clientes y el servidor de autenticación. Expone varios endpoints que permiten a los clientes interactuar con los recursos protegidos, utilizando tokens de acceso emitidos por el AuthServer.
+TFST.API acts as the interface between clients and the authentication server. It exposes various endpoints that allow clients to interact with protected resources, using access tokens issued by the AuthServer.
 
 ## tfst-demo
 
-El cliente tfst-demo es una aplicación de ejemplo que demuestra cómo interactuar con TFST.API. Utiliza el flujo de autenticación proporcionado por TFST.AuthServer para obtener tokens y acceder a los recursos.
+The tfst-demo client is a sample application that demonstrates how to interact with TFST.API. It uses the authentication flow provided by TFST.AuthServer to obtain tokens and access resources.
 
-## Interacción entre Componentes
+## Component Interaction
 
-1. **Autenticación**: Los usuarios se autentican a través de TFST.AuthServer, que valida las credenciales y emite un token de acceso.
-2. **Acceso a la API**: El cliente tfst-demo utiliza el token de acceso para realizar solicitudes a TFST.API.
-3. **Protección de Recursos**: TFST.API valida el token de acceso en cada solicitud para garantizar que solo los usuarios autenticados puedan acceder a los recursos.
+1. **Authentication**: Users authenticate through TFST.AuthServer, which validates credentials and issues an access token.
+2. **API Access**: The tfst-demo client uses the access token to make requests to TFST.API.
+3. **Resource Protection**: TFST.API validates the access token on each request to ensure only authenticated users can access resources.
 
-Esta arquitectura modular permite una fácil escalabilidad y mantenimiento, asegurando que cada componente pueda evolucionar de manera independiente mientras se mantiene la integridad del sistema en su conjunto.
+This modular architecture allows for easy scalability and maintenance, ensuring that each component can evolve independently while maintaining system integrity as a whole.

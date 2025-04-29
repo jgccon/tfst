@@ -57,7 +57,6 @@ public class AccountController(
     {
         if (string.IsNullOrEmpty(returnUrl))
         {
-            _logger.LogWarning("Intento de acceso directo al login");
             return Redirect(_options.TfstApp.PostLogoutRedirectUris);
         }
 
@@ -66,7 +65,6 @@ public class AccountController(
             if (!Url.IsLocalUrl(returnUrl) ||
                 !returnUrl.StartsWith("/connect/authorize", StringComparison.OrdinalIgnoreCase))
             {
-                _logger.LogWarning("URL de retorno inválida: {ReturnUrl}", returnUrl);
                 return Redirect(_options.TfstApp.PostLogoutRedirectUris);
             }
 
@@ -77,7 +75,6 @@ public class AccountController(
 
             if (!isValidUrl)
             {
-                _logger.LogWarning("URL de retorno no contiene los parámetros requeridos: {ReturnUrl}", returnUrl);
                 return Redirect(_options.TfstApp.PostLogoutRedirectUris);
             }
 
@@ -86,7 +83,7 @@ public class AccountController(
         }
         catch
         {
-            _logger.LogWarning("Error procesando returnUrl");
+            _logger.LogError("Error processing returnUrl");
             return Redirect(_options.TfstApp.PostLogoutRedirectUris);
         }
     }
@@ -109,27 +106,23 @@ public class AccountController(
             {
                 if (string.IsNullOrEmpty(returnUrl))
                 {
-                    _logger.LogWarning("Redirección nula");
-                    ModelState.AddModelError(string.Empty, "Error en la redirección de autenticación.");
+                    ModelState.AddModelError(string.Empty, "Error in the return url.");
                     return View(model);
                 }
 
                 if (Url.IsLocalUrl(returnUrl))
                 {
-                    _logger.LogWarning("Redirección local");
-                    _logger.LogWarning("Redirección: {ReturnUrl}", returnUrl);
                     return Redirect(returnUrl);
                 }
                 else
                 {
-                    _logger.LogWarning("Redirección no local");
-                    ModelState.AddModelError(string.Empty, "Error en la redirección de autenticación.");
+                    ModelState.AddModelError(string.Empty, "Error in the return url.");
                     return View(model);
                 }
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Intento de inicio de sesión no válido.");
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
         }
 

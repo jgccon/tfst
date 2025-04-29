@@ -35,14 +35,14 @@ public class UserinfoController : Controller
             var user = await _userManager.GetUserAsync(User);
             if (user is null)
             {
-                _logger.LogWarning("Usuario no encontrado para el token proporcionado");
+                _logger.LogWarning("User not found");
                 return Challenge(
                     authenticationSchemes: OpenIddictServerAspNetCoreDefaults.AuthenticationScheme,
                     properties: new AuthenticationProperties(new Dictionary<string, string?>
                     {
                         [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidToken,
                         [OpenIddictServerAspNetCoreConstants.Properties.ErrorDescription] =
-                            "El token de acceso no está asociado a un usuario válido."
+                            "Access token is no longer valid."
                     }));
             }
 
@@ -58,7 +58,7 @@ public class UserinfoController : Controller
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al procesar la solicitud userinfo");
+            _logger.LogError(ex, "Error processing user info request");
             return StatusCode(500);
         }
     }

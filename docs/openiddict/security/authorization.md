@@ -1,92 +1,92 @@
-# Flujo de Autorización (Acceso a Recursos Protegidos)
+# Authorization Flow (Protected Resource Access)
 
-Este flujo describe cómo la aplicación cliente (la SPA JavaScript) utiliza los tokens obtenidos en el flujo de autenticación OIDC (específicamente el `access_token`) para acceder a la API protegida.
+This flow describes how the client application (JavaScript SPA) uses the tokens obtained in the OIDC authentication flow (specifically the `access_token`) to access the protected API.
 
-Asumimos que el usuario ya ha completado exitosamente el flujo de autenticación y que el cliente ha obtenido y almacenado un `access_token` válido y no expirado (esto es manejado automáticamente por `oidc-client-ts`).
+We assume that the user has successfully completed the authentication flow and that the client has obtained and stored a valid, non-expired `access_token` (this is automatically handled by `oidc-client-ts`).
 
-## 1. Preparación de la Solicitud en el Cliente
+## 1. Request Preparation in the Client
 
-1.  El cliente, la aplicación JavaScript (SPA) necesita hacer una llamada a un endpoint protegido en la API (el Resource Server).
-2.  Antes de enviar la solicitud HTTP (GET, POST, PUT, DELETE, etc.) al endpoint de la API, el cliente recupera el `access_token` almacenado localmente. Esto se hace usualmente llamando a `userManager.getUser()` después de que el usuario se ha autenticado y cargado.
-3.  El cliente incluye el `access_token` en el encabezado HTTP `Authorization`. El formato estándar es usar el esquema `Bearer` seguido de un espacio y el token.
+1. The client, the JavaScript application (SPA) needs to make a call to a protected endpoint in the API (the Resource Server).
+2. Before sending the HTTP request (GET, POST, PUT, DELETE, etc.) to the API endpoint, the client retrieves the locally stored `access_token`. This is usually done by calling `userManager.getUser()` after the user has authenticated and loaded.
+3. The client includes the `access_token` in the HTTP `Authorization` header. The standard format is to use the `Bearer` scheme followed by a space and the token.
 
-    Ejemplo de cómo se vería la solicitud HTTP saliente desde el navegador (usando Fetch API):
+    Example of how the outgoing HTTP request from the browser would look (using Fetch API):
 
     ```javascript
-    const user = await userManager.getUser(); // Obtener el usuario y sus tokens almacenados
+    const user = await userManager.getUser(); // Get the stored user and their tokens
 
     if (user && user.access_token) {
-        const url = 'https://localhost:5001/api/datosprotegidos'; // URL del endpoint protegido en la API
+        const url = 'https://localhost:5001/api/protecteddata'; // Protected API endpoint URL
 
         fetch(url, {
-            method: 'GET', // O POST, PUT, DELETE, etc.
+            method: 'GET', // Or POST, PUT, DELETE, etc.
             headers: {
-                'Authorization': `Bearer ${user.access_token}`, // Incluir el Access Token
-                'Content-Type': 'application/json' // Si se envía un cuerpo JSON
+                'Authorization': `Bearer ${user.access_token}`, // Include Access Token
+                'Content-Type': 'application/json' // If sending a JSON body
             }
         })
         .then(response => {
             if (!response.ok) {
-                // Manejar errores (ej. 401 Unauthorized, 403 Forbidden)
-                console.error('Error al acceder a la API:', response.status);
+                // Handle errors (e.g., 401 Unauthorized, 403 Forbidden)
+                console.error('Error accessing API:', response.status);
                 if (response.status === 401) {
-                    // El token puede haber expirado o ser inválido.
-                    // oidc-client-ts con automaticSilentRenew debería manejar esto,
-                    // pero si falla, podría ser necesario redirigir al login.
+                    // Token might have expired or be invalid.
+                    // oidc-client-ts with automaticSilentRenew should handle this,
+                    // but if it fails, might need to redirect to login.
                 }
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return response.json(); // O response.text() si no es JSON
+            return response.json(); // Or response.text() if not JSON
         })
         .then(data => {
-            console.log('Datos de la API:', data);
-            // Procesar los datos recibidos de la API
+            console.log('API data:', data);
+            // Process data received from API
         })
         .catch(error => {
-            console.error('Hubo un problema con la solicitud fetch:', error);
-            // Manejar errores de red u otros errores
+            console.error('There was a problem with the fetch request:', error);
+            // Handle network or other errors
         });
     } else {
-        console.warn('Usuario no autenticado o access_token no disponible.');
-        // Quizás redirigir al login si no hay usuario
+        console.warn('User not authenticated or access_token not available.');
+        // Maybe redirect to login if no user
         // userManager.signinRedirect();
     }
     ```
 
-    Lo crucial es el encabezado `Authorization: Bearer [access_token_obtenido]`.
+    The crucial part is the `Authorization: Bearer [obtained_access_token]` header.
 
-## 2. Recepción y Validación en la API (Resource Server)
+## 2. Reception and Validation in the API (Resource Server)
 
-1.  La API (`TFST.API`) recibe la solicitud HTTP entrante.
-2.  El middleware de autenticación y autorización configurado en la API intercepta la solicitud **antes** de que llegue a la lógica de negocio (los controladores/endpoints específicos).
-3.  Este middleware:
-    * Extrae el token del encabezado `Authorization`.
-    * Realiza la validación del `access_token`. Para un JWT (JSON Web Token) emitido por OpenIddict, esto típicamente implica:
-        * Verificar la **firma** del token utilizando la clave pública o el certificado del AuthServer OpenIddict para asegurar que el token no ha sido manipulado.
-        * Verificar el **emisor** (`iss` claim) para asegurarse de que el token proviene del AuthServer esperado.
-        * Verificar la **audiencia** (`aud` claim) para asegurarse de que el token está destinado a esta API específica (el `aud` claim en el token debe coincidir con un identificador configurado para la API como recurso en OpenIddict).
-        * Verificar la **fecha de expiración** (`exp` claim) para asegurarse de que el token aún es válido.
-        * Otras validaciones como `nbf` (Not Before) y `iat` (Issued At).
-    * Si el token es válido, el middleware autentica al usuario asociado con el token dentro del contexto de la solicitud HTTP actual. Los claims del token (como `sub`, `name`, `email`, `roles`, etc.) se convierten en las identidades y principios del usuario disponibles para la lógica de negocio de la API.
-4.  Después de la autenticación (validación del token), el middleware de autorización de la API verifica si el usuario autenticado (basado en los claims del token) tiene los permisos necesarios para acceder al endpoint solicitado. Esto podría basarse en `scopes`, `roles`, o políticas de autorización más granulares definidas en la API (ej. usando atributos `[Authorize(Roles = "Admin")]` o `[Authorize(Policy = "RequiresApiAccess")]` en los controladores).
+1. The API (`TFST.API`) receives the incoming HTTP request.
+2. The authentication and authorization middleware configured in the API intercepts the request **before** it reaches the business logic (specific controllers/endpoints).
+3. This middleware:
+    * Extracts the token from the `Authorization` header.
+    * Performs `access_token` validation. For a JWT (JSON Web Token) issued by OpenIddict, this typically involves:
+        * Verifying the token **signature** using AuthServer OpenIddict's public key or certificate to ensure the token hasn't been tampered with.
+        * Verifying the **issuer** (`iss` claim) to ensure the token comes from the expected AuthServer.
+        * Verifying the **audience** (`aud` claim) to ensure the token is intended for this specific API (the `aud` claim in the token must match an identifier configured for the API as a resource in OpenIddict).
+        * Verifying the **expiration date** (`exp` claim) to ensure the token is still valid.
+        * Other validations like `nbf` (Not Before) and `iat` (Issued At).
+    * If the token is valid, the middleware authenticates the user associated with the token within the current HTTP request context. The token's claims (like `sub`, `name`, `email`, `roles`, etc.) become the user's identities and principals available to the API's business logic.
+4. After authentication (token validation), the API's authorization middleware verifies if the authenticated user (based on token claims) has the necessary permissions to access the requested endpoint. This could be based on `scopes`, `roles`, or more granular authorization policies defined in the API (e.g., using `[Authorize(Roles = "Admin")]` or `[Authorize(Policy = "RequiresApiAccess")]` attributes on controllers).
 
-## 3. Resultado de la Autorización
+## 3. Authorization Result
 
-1.  **Si el Token es Válido y el Usuario está Autorizado:**
-    * La solicitud pasa las comprobaciones de autenticación y autorización.
-    * El request llega al controlador/método de acción de la API.
-    * La lógica de negocio de la API se ejecuta, procesa la solicitud y devuelve los datos o la respuesta apropiada al cliente (ej. estado HTTP 200 OK).
-2.  **Si el Token es Inválido o el Usuario No está Autorizado:**
-    * El middleware de autenticación o autorización intercepta la solicitud.
-    * La API rechaza la solicitud antes de que llegue a la lógica de negocio.
-    * La API devuelve un código de estado HTTP de error al cliente:
-        * `401 Unauthorized`: Usualmente indica que la autenticación falló (el token falta, es inválido, expiró, la firma es incorrecta, etc.).
-        * `403 Forbidden`: Usualmente indica que el usuario está autenticado (el token es válido), pero no tiene los permisos (roles/scopes/claims) necesarios para acceder a este recurso en particular.
+1.  **If the Token is Valid and the User is Authorized:**
+    * The request passes the authentication and authorization checks.
+    * The request reaches the API controller/action method.
+    * The API's business logic executes, processes the request, and returns the appropriate data or response to the client (e.g., HTTP status 200 OK).
+2.  **If the Token is Invalid or the User is Not Authorized:**
+    * The authentication or authorization middleware intercepts the request.
+    * The API rejects the request before it reaches the business logic.
+    * The API returns an error HTTP status code to the client:
+        * `401 Unauthorized`: Usually indicates that authentication failed (the token is missing, invalid, expired, the signature is incorrect, etc.).
+        * `403 Forbidden`: Usually indicates that the user is authenticated (the token is valid), but does not have the necessary permissions (roles/scopes/claims) to access this particular resource.
 
-## 4. Renovación y Reintento (Manejado por OIDC Client TS)
+## 4. Renewal and Retry (Handled by OIDC Client TS)
 
-* Si el cliente recibe un `401 Unauthorized` (por ejemplo, porque el `access_token` acaba de expirar), `oidc-client-ts` (si `automaticSilentRenew` está habilitado) intentará automáticamente renovar el `access_token` en segundo plano usando el `refresh_token` (si se obtuvo).
-* Si la renovación es exitosa, el `userManager` se actualizará con el nuevo `access_token`. La aplicación cliente puede entonces reintentar la llamada a la API con el nuevo token.
-* Si la renovación falla (por ejemplo, el `refresh_token` ha expirado o ha sido revocado), `oidc-client-ts` puede disparar un evento (`accessTokenExpiring`, `accessTokenExpired`) y la aplicación cliente necesitará redirigir al usuario para que se vuelva a autenticar completamente (volver al paso 2.1 del flujo de autenticación).
+* If the client receives a `401 Unauthorized` (for example, because the `access_token` just expired), `oidc-client-ts` (if `automaticSilentRenew` is enabled) will automatically try to renew the `access_token` in the background using the `refresh_token` (if obtained).
+* If the renewal is successful, the `userManager` will be updated with the new `access_token`. The client application can then retry the API call with the new token.
+* If the renewal fails (for example, the `refresh_token` has expired or has been revoked), `oidc-client-ts` may trigger an event (`accessTokenExpiring`, `accessTokenExpired`) and the client application will need to redirect the user to re-authenticate completely (return to step 2.1 of the authentication flow).
 
-Este flujo de autorización es la forma estándar en que las SPAs acceden a APIs protegidas utilizando tokens JWT emitidos por un servidor OAuth 2.0 / OIDC.
+This authorization flow is the standard way SPAs access protected APIs using JWTs issued by an OAuth 2.0 / OIDC server.

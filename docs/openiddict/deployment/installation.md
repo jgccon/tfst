@@ -1,32 +1,32 @@
-# Instalación y Despliegue de TFST.AuthServer, TFST.API y tfst-demo
+# Installation and Deployment of TFST.AuthServer, TFST.API and tfst-demo
 
-Este documento proporciona instrucciones paso a paso para instalar y desplegar los proyectos TFST.AuthServer, TFST.API y tfst-demo.
+This document provides step by step instructions for installing and deploying TFST.AuthServer, TFST.API and tfst-demo projects.
 
-## Requisitos Previos
+## Prerequisites
 
-Antes de comenzar con la instalación, asegúrate de tener los siguientes requisitos previos:
+Before you begin with the installation, ensure you have the following prerequisites:
 
-- .NET SDK (versión específica)
-- Base de datos (SQL Server)
+- .NET SDK (specific version)
+- Database (SQL Server)
 
-## Pasos de Instalación
+## Installation Steps
 
-### 1. Clonar el Repositorio
+### 1. Clone the Repository
 
-Clona el repositorio de GitHub que contiene los proyectos:
+Clone the GitHub repository containing the projects:
 
 ```bash
 git clone https://github.com/jgccon/tfst.git
 cd tfst
 ```
 
-### 2. Configurar la Base de Datos
+### 2. Configure the Database
 
-Crea una base de datos en tu sistema de gestión de bases de datos y configura las cadenas de conexión en los archivos de configuración correspondientes.
+Create a database in your database management system and configure the connection strings in the corresponding configuration files.
 
-### 3. Instalar Dependencias
+### 3. Install Dependencies
 
-Para cada proyecto, navega a la carpeta del proyecto y ejecuta el siguiente comando para instalar las dependencias:
+For each project, navigate to the project folder and run the following command to install the dependencies:
 
 ```bash
 cd TFST.AuthServer
@@ -36,22 +36,22 @@ cd ../TFST.API
 dotnet restore
 ```
 
-### 4. Configurar Variables de Entorno
+### 4. Configure Environment Variables
 
-Asegúrate de configurar las variables de entorno necesarias para cada proyecto. Esto puede incluir cadenas de conexión, claves secretas y otros parámetros de configuración.
+Make sure to configure the necessary environment variables for each project. This may include connection strings, secret keys, and other configuration parameters.
 
-### 5. Ejecutar Migraciones
+### 5. Run Migrations
 
-Ejecuta las migraciones de la base de datos para inicializar la estructura de la base de datos:
+Run the database migrations to initialize the database structure:
 
 ```bash
 cd TFST.AuthServer
 dotnet ef database update
 ```
 
-### 6. Iniciar los Proyectos
+### 6. Start the Projects
 
-Inicia cada uno de los proyectos en sus respectivas carpetas:
+Start each of the projects in their respective folders:
 
 ```bash
 cd TFST.AuthServer
@@ -64,9 +64,9 @@ cd ../tfst-demo
 dotnet run
 ```
 
-## Verificación
+## Verification
 
-Una vez que todos los proyectos estén en funcionamiento, verifica que puedas acceder a las siguientes URL:
+Once all projects are running, verify that you can access the following URLs:
 
 - TFST.API: `https://localhost:5001`
 - TFST.AuthServer: `https://localhost:6001`
