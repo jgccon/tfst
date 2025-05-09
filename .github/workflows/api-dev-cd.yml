@@ -6,8 +6,11 @@ on:
     branches:
       - dev
     paths:
-      - 'src/api/**'
-
+      - 'src/backend/TFST.API/**'
+      - 'src/backend/TFST.Modules.**/**'
+      - 'src/backend/TFST.SharedKernel.**/**'
+      - '.github/workflows/api-dev-cd.yml'
+      - '.github/workflows/deploy-api.yml'
   workflow_dispatch:
 
 jobs:
