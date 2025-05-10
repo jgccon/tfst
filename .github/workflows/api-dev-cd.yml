@@ -13,6 +13,10 @@ on:
       - '.github/workflows/deploy-api.yml'
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy_api:
     uses: ./.github/workflows/deploy-api.yml
