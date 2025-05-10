@@ -1,0 +1,79 @@
+# .github/workflows/deploy-container-project.yml
+name: Deploy Containerized Backend Project
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: "The target environment (e.g., dev, prod)"
+      dockerfile_path:
+        required: true
+        type: string
+        description: "Path to the Dockerfile (e.g., src/backend/TFST.AuthServer/Dockerfile)"
+      context:
+        required: true
+        type: string
+        description: "Build context for Docker (e.g., ./src)"
+      image_name:
+        required: true
+        type: string
+        description: "Name of the image (e.g., tfst/authserver)"
+      app_service_name:
+        required: true
+        type: string
+        description: "Azure App Service name"
+      acr_login_server:
+        required: true
+        type: string
+        description: "ACR login server (e.g., tfstregistry.azurecr.io)"
+    secrets:
+      AZURE_CLIENT_ID:
+        required: true
+      AZURE_TENANT_ID:
+        required: true
+      AZURE_SUBSCRIPTION_ID:
+        required: true
+      AZURE_CREDENTIALS:
+        required: true
+      ACR_USERNAME:
+        required: true
+      ACR_PASSWORD:
+        required: true
+
+jobs:
+  deploy_container:
+    runs-on: ubuntu-latest
+    name: Deploy container to ${{ inputs.environment }}
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Docker login to ACR
+        run: |
+          echo "${{ secrets.ACR_PASSWORD }}" | docker login ${{ inputs.acr_login_server }} --username ${{ secrets.ACR_USERNAME }} --password-stdin
+
+      - name: Build and push Docker image
+        run: |
+          IMAGE_TAG=${{ inputs.acr_login_server }}/${{ inputs.image_name }}:${{ inputs.environment }}
+          echo "Building and pushing image: $IMAGE_TAG"
+          docker build -f ${{ inputs.dockerfile_path }} -t $IMAGE_TAG ${{ inputs.context }}
+          docker push $IMAGE_TAG
+          echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+        id: build_push
+
+      - name: Deploy to Azure Web App (container)
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ inputs.app_service_name }}
+          images: ${{ steps.build_push.outputs.image_tag }}
