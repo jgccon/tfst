@@ -1,0 +1,23 @@
+# .github/workflows/webapp-dev-deploy.yml
+name: Deploy Angular WebApp to DEV
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - src/clients/tfst-app/**
+
+  workflow_dispatch:
+
+jobs:
+  deploy_tfst_app_dev:
+    uses: ./.github/workflows/deploy-angular.yml
+    with:
+      environment: dev
+      working_directory: src/clients/tfst-app/TFST-Front
+      app_service_name: tfst-app-dev
+    secrets:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}

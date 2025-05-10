@@ -9,8 +9,10 @@ on:
       - 'src/backend/TFST.API/**'
       - 'src/backend/TFST.Modules.**/**'
       - 'src/backend/TFST.SharedKernel.**/**'
+      - 'src/TFST.sln'
       - '.github/workflows/api-dev-cd.yml'
       - '.github/workflows/deploy-api.yml'
+
   workflow_dispatch:
 
 permissions:
@@ -19,14 +21,14 @@ permissions:
 
 jobs:
   deploy_api:
-    uses: ./.github/workflows/deploy-api.yml
+    uses: ./.github/workflows/deploy-backend-project.yml
     with:
       environment: dev
       branch: dev
-      working_directory: src/api
-      solution_name: TheFullStackTeam.Backend.sln
+      project_path: src/backend/TFST.API/TFST.API.csproj
       app_service_name: tfst-api-dev
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      AZURE_PUBLISH_PROFILE: ${{ secrets.AZURE_PUBLISH_PROFILE_API }}
