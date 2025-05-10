@@ -33,6 +33,7 @@ var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 policy.AllowAnyHeader()
       .AllowAnyMethod()
+      .AllowCredentials()
       .WithOrigins(allowedOrigins)));
 
 builder.Services.AddSettings(builder.Configuration);
