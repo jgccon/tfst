@@ -65,6 +65,11 @@ jobs:
             --configuration Release \
             --output ${{ github.workspace }}/publish
 
+      - name: Debug contents of publish directory
+        run: |
+          echo "Publish contents:"
+          ls -R ${{ github.workspace }}/publish
+
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
