@@ -1,0 +1,39 @@
+# .github/workflows/backend-ci.yml
+name: Backend CI
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - main
+    paths:
+      - 'src/backend/**'
+      - 'src/TFST.sln'
+      - '.github/workflows/backend-ci.yml'
+  workflow_dispatch:
+
+jobs:
+  build_backend:
+    name: Build and Test Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '10.0.100-preview.1.25120.13'
+
+      - name: Restore .NET packages
+        run: dotnet restore TFST.sln
+        working-directory: src
+
+      - name: Build Solution
+        run: dotnet build TFST.sln --configuration Release --no-restore
+        working-directory: src
+
+      - name: Run Tests
+        run: dotnet test TFST.sln --configuration Release --no-build --logger trx
+        working-directory: src

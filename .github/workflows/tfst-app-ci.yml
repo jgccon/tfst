@@ -1,0 +1,19 @@
+# .github/workflows/tfst-app-ci.yml
+name: TFST App CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+    paths:
+      - src/clients/tfst-app/**
+
+  workflow_dispatch:
+
+jobs:
+  build_prod:
+    uses: ./.github/workflows/build-angular.yml
+    with:
+      branch: ${{ github.head_ref || github.ref_name }}
+      working_directory: src/clients/tfst-app/TFST-Front
