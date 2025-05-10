@@ -23,7 +23,7 @@ jobs:
       environment: dev
       dockerfile_path: src/backend/TFST.AuthServer/Dockerfile
       context: ./src
-      image_name: tfst/authserver
+      image_name: tfst-auth
       app_service_name: tfst-auth-dev
       acr_login_server: tfstregistry.azurecr.io
     secrets:

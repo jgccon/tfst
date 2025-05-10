@@ -65,10 +65,11 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          IMAGE_TAG=${{ inputs.acr_login_server }}/${{ inputs.image_name }}:${{ github.sha }}
+          IMAGE_TAG=${{ inputs.acr_login_server }}/${{ inputs.image_name }}:${{ inputs.environment }}
+          echo "Building and pushing image: $IMAGE_TAG"
           docker build -f ${{ inputs.dockerfile_path }} -t $IMAGE_TAG ${{ inputs.context }}
           docker push $IMAGE_TAG
-          echo "##vso[task.setvariable variable=image_tag;isOutput=true]$IMAGE_TAG"
+          echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
         id: build_push
 
       - name: Deploy to Azure Web App (container)

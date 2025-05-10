@@ -26,7 +26,7 @@ jobs:
       environment: dev
       dockerfile_path: src/backend/TFST.API/Dockerfile
       context: ./src
-      image_name: tfst/API
+      image_name: tfst-api
       app_service_name: tfst-api-dev
       acr_login_server: tfstregistry.azurecr.io
     secrets:
