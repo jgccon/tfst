@@ -1,5 +1,5 @@
 # .github/workflows/auth-prod-cd.yml
-name: Deploy Auth Server to PROD
+name: Deploy Auth Server Container to PROD
 
 on:
   push:
@@ -15,14 +15,19 @@ permissions:
 
 jobs:
   deploy_auth:
-    uses: ./.github/workflows/deploy-backend-project.yml
+    uses: ./.github/workflows/deploy-container-project.yml
     with:
       environment: prod
-      branch: main
-      project_path: src/backend/TFST.AuthServer/TFST.AuthServer.csproj
-      app_service_name: tfst-auth-prod
+      dockerfile_path: src/backend/TFST.AuthServer/Dockerfile
+      context: ./src
+      image_name: tfst-auth
+      app_service_name: tfst-auth-dev
+      acr_login_server: tfstregistry.azurecr.io
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_PUBLISH_PROFILE: ${{ secrets.AZURE_PUBLISH_PROFILE_AUTH }}
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+      ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+

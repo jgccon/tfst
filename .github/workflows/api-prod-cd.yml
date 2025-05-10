@@ -1,5 +1,5 @@
 # .github/workflows/api-prod-cd.yml
-name: Deploy API to PROD
+name: Deploy API Container to PROD
 
 on:
   push:
@@ -21,14 +21,18 @@ permissions:
     
 jobs:
   deploy_api:
-    uses: ./.github/workflows/deploy-backend-project.yml
+    uses: ./.github/workflows/deploy-container-project.yml
     with:
       environment: prod
-      branch: main
-      project_path: src/backend/TFST.API/TFST.API.csproj
-      app_service_name: tfst-api-prod
+      dockerfile_path: src/backend/TFST.API/Dockerfile
+      context: ./src
+      image_name: tfst-api
+      app_service_name: tfst-api-dev
+      acr_login_server: tfstregistry.azurecr.io
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      AZURE_PUBLISH_PROFILE: ${{ secrets.AZURE_PUBLISH_PROFILE_API }}
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+      ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
