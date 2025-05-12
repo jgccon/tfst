@@ -57,7 +57,7 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '10.0.100-preview.1.25120.13'
+          dotnet-version: '9.0'
 
       - name: Publish .NET Project
         run: |
