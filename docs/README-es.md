@@ -132,9 +132,26 @@ Si no usas Docker:
    ng serve
 ```
 
+## 7️⃣ Gestión de Variables y Secretos
+TFST ahora utiliza una configuración claramente separada para cada entorno:
+
+- ✅ `appsettings.Development.json` contiene **valores predeterminados no sensibles** (puertos locales, indicadores).
+- 🔐 Los secretos (p. ej., cadenas de conexión a la base de datos, claves de cifrado, contraseñas) se administran mediante:
+   - Archivo `.env` (al ejecutarse en Docker Compose)
+   - `dotnet user-secrets` (para desarrollo local fuera de contenedores)
+   - Variables de entorno o Azure Key Vault (en App Services)
+
+📌 Asegúrate de **configurar tus secretos correctamente** antes de ejecutar la aplicación:
+```bash
+cd src/backend/TFST.API
+dotnet user-secrets set 'ConnectionStrings:DefaultConnection' '...'
+```
+Puedes consultar la estructura de ejemplo en .env.example y ajustarla según sea necesario.
+
+
 # CI/CD con Azure DevOps
 
-[YA REALIZADO AQUI](https://dev.azure.com/jgcarmona/TheFullStackTeam/)
+<!-- TODO: Agregar imagen de CI/CD -->
 
 ## Guía de Contribución
 ¡Damos la bienvenida a contribuciones! Consulta [CONTRIBUTING-es.md](CONTRIBUTING-es.md) para más detalles.

@@ -8,7 +8,12 @@ using TFST.SharedKernel.Configuration;
 
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddEnvironmentVariables();
+
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddUserSecrets<Program>(optional: true)
+    .AddEnvironmentVariables(prefix: "TFST_"); 
 
 builder.Services.AddOpenIddict()
     .AddValidation(options =>

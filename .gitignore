@@ -409,11 +409,6 @@ FodyWeavers.xsd
 # Binaries and objects
 **/bin/
 **/obj/
-/src/api/TheFullStackTeam.API/.env
-/src/api/infrastructure/docker/sqlserver-data
-/src/api/infrastructure/docker/seq-data
-/src/api/infrastructure/docker/rabbitmq-data
-/src/api/infrastructure/docker/mongo-data
 .secrets
 
 # macOS metadata files
@@ -430,6 +425,7 @@ FodyWeavers.xsd
 # Environment files (Common)
 .env
 .env.*
+!.env.example
 
 # MacOS files
 .DS_Store
