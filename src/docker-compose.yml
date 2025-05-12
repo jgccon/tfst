@@ -6,13 +6,14 @@ services:
       context: .
       dockerfile: backend/TFST.API/Dockerfile
     ports:
-      - "5000:5000"
+      - "5001:5001" # HTTPS
+      - "5000:5000" # HTTP
     depends_on:
       - tfst.sql_server
       - tfst.auth
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:5000
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Password123*
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/tfst_dev_cert.pfx
       - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True
@@ -27,12 +28,13 @@ services:
       context: .
       dockerfile: backend/TFST.AuthServer/Dockerfile
     ports:
-      - "6000:6000"
+      - "6001:6001" # HTTPS
+      - "6000:6000" # HTTP
     depends_on:
       - tfst.sql_server
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:6000
+      - ASPNETCORE_URLS=https://+:6001;http://+:6000
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Password123*
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/tfst_dev_cert.pfx
       - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True

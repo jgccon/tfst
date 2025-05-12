@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Authentication in progress...</title>
+</head>
+
+<body>
+    <p>Processing authentication...</p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client-ts/2.0.2/browser/oidc-client-ts.min.js"></script>
+    <script src="./index.js"></script>
+    <script>
+        (async () => {
+            try {
+                await userManager.signinCallback();
+                window.location.href = '/index.html';
+            } catch (error) {
+                console.error('Error in signin callback:', error);
+                window.location.href = '/index.html';
+            }
+        })();
+    </script>
+</body>
+
+</html>

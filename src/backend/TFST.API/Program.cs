@@ -1,39 +1,62 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using OpenIddict.Validation.AspNetCore;
+using System.Security.Claims;
 using TFST.API.Extensions;
 using TFST.Modules.Users.Presentation.Extensions;
 using TFST.SharedKernel.Configuration;
 
 
-namespace TFST.API
-{
-    public class Program
+var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables();
+
+builder.Services.AddOpenIddict()
+    .AddValidation(options =>
     {
-        public static async Task Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Configuration
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables();
+        var issuer = builder.Configuration.GetSection("OpenIddict:Issuer").Get<string>() ?? throw new ArgumentNullException("OpenIddict:Issuer");
+        var audience = builder.Configuration.GetSection("OpenIddict:Audience").Get<string>() ?? throw new ArgumentNullException("OpenIddict:Audience");
+        options.SetIssuer(issuer);
+        options.AddAudiences(audience);
 
-            builder.Services.AddSettings(builder.Configuration);
+        var encryptionKey = builder.Configuration["Security:EncryptionKey"] ?? throw new ArgumentNullException("Security:EncryptionKey");
+        options.AddEncryptionKey(new SymmetricSecurityKey(
+            Convert.FromBase64String(encryptionKey)));
 
-            builder.Services.AddControllers();
-            builder.Services.AddOpenApiConfiguration(builder.Environment);
-            builder.Services.AddJwtAuthentication(builder.Configuration);
-            builder.Services.AddUsersModule(builder.Configuration);
+        // Register the System.Net.Http integration.
+        options.UseSystemNetHttp();
 
-            var app = builder.Build();
+        // Register the ASP.NET Core host.
+        options.UseAspNetCore();
+    });
 
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
-            app.MapControllers();
-            app.UseOpenApiConfiguration();
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
+policy.AllowAnyHeader()
+      .AllowAnyMethod()
+      .AllowCredentials()
+      .WithOrigins(allowedOrigins)));
 
-            await app.UseUsersModuleAsync(app.Services, builder.Configuration);
-            app.Run();
+builder.Services.AddSettings(builder.Configuration);
 
+builder.Services.AddControllers();
+builder.Services.AddOpenApiConfiguration(builder.Environment);
+builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.AddUsersModule(builder.Configuration);
 
-        }
-    }
-}
+builder.Services.AddAuthentication(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+builder.Services.AddAuthorization();
+
+var app = builder.Build();
+
+app.UseCors();
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+app.UseOpenApiConfiguration();
+
+await app.UseUsersModuleAsync(app.Services, builder.Configuration);
+
+app.MapGet("api", [Authorize] (ClaimsPrincipal user) => $"Message: User {user.Identity!.Name} accessed the protected resource API.");
+
+app.Run();

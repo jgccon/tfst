@@ -1,4 +1,4 @@
-@TFST.AuthServer_HostAddress = http://localhost:5113
+@TFST.AuthServer_HostAddress = http://localhost:6000
 
 GET {{TFST.AuthServer_HostAddress}}/weatherforecast/
 Accept: application/json
