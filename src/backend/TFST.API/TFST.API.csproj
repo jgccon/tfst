@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TFST.Modules.Users.Presentation\TFST.Modules.Users.Presentation.csproj" />
     <ProjectReference Include="..\TFST.SharedKernel.Configuration\TFST.SharedKernel.Configuration.csproj" />
+    <ProjectReference Include="..\TFST.SharedKernel.Hosting\TFST.SharedKernel.Hosting.csproj" />
   </ItemGroup>
 
 </Project>

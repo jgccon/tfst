@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Quartz;
+using static OpenIddict.Abstractions.OpenIddictConstants;
 using TFST.AuthServer.Extensions;
 using TFST.AuthServer.Infrastructure.Configuration;
 using TFST.AuthServer.Persistence;
-using static OpenIddict.Abstractions.OpenIddictConstants;
+using TFST.SharedKernel.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -126,6 +127,8 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthorization();
+
+builder.WebHost.UseSmartPortConfiguration("http://*:6000", "https://*:6001");
 
 var app = builder.Build();
 

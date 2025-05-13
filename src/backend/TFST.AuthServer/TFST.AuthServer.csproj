@@ -26,4 +26,8 @@
     <PackageReference Include="Quartz.Extensions.Hosting" Version="3.14.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TFST.SharedKernel.Hosting\TFST.SharedKernel.Hosting.csproj" />
+  </ItemGroup>
+
 </Project>

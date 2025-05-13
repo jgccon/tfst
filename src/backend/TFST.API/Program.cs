@@ -5,7 +5,7 @@ using System.Security.Claims;
 using TFST.API.Extensions;
 using TFST.Modules.Users.Presentation.Extensions;
 using TFST.SharedKernel.Configuration;
-
+using TFST.SharedKernel.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +50,8 @@ builder.Services.AddUsersModule(builder.Configuration);
 
 builder.Services.AddAuthentication(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
 builder.Services.AddAuthorization();
+
+builder.WebHost.UseSmartPortConfiguration("http://*:5000", "https://*:5001");
 
 var app = builder.Build();
 
