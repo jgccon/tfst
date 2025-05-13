@@ -1,6 +1,6 @@
 # TFST Developer Portal (tfst.dev)
 
-This is the **technical documentation and open-source hub** for developers and contributors.
+This directory contains the technical documentation portal for TFST (`https://tfst.dev`), powered by Docusaurus. This is the **technical documentation and open-source hub** for developers and contributors.
 
 ## Purpose
 
@@ -25,3 +25,19 @@ The **tfst.dev** site serves as the **developer reference** for TFST’s archite
 
 This will likely be a **static documentation site** using Docusaurus, Astro, or a similar framework.
 
+## Local development
+
+```bash
+cd src/clients/tfst-dev
+npm install
+npm run start
+```
+
+## Build
+```bash
+npm run build
+```
+The generated static site will be in the build/ folder.
+
+## Purpose
+This portal serves as a reference for developers, contributors, and integrators working with TFST.
