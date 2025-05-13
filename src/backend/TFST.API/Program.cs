@@ -50,13 +50,16 @@ builder.Services.AddUsersModule(builder.Configuration);
 
 builder.Services.AddAuthentication(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
 builder.Services.AddAuthorization();
-
+builder.Services.AddHealthChecks();
 builder.WebHost.UseSmartPortConfiguration("http://*:5000", "https://*:5001");
 
 var app = builder.Build();
 
 app.UseCors();
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection(); // Only for development
+}
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
@@ -64,6 +67,7 @@ app.UseOpenApiConfiguration();
 
 await app.UseUsersModuleAsync(app.Services, builder.Configuration);
 
+app.MapHealthChecks("/health");
 app.MapGet("api", [Authorize] (ClaimsPrincipal user) => $"Message: User {user.Identity!.Name} accessed the protected resource API.");
 
 app.Run();

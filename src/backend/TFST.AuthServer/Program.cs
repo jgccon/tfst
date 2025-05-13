@@ -125,9 +125,8 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
           .WithOrigins(allowedOrigins)));
 
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddAuthorization();
-
+builder.Services.AddHealthChecks();
 builder.WebHost.UseSmartPortConfiguration("http://*:6000", "https://*:6001");
 
 var app = builder.Build();
@@ -140,17 +139,18 @@ if (!app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseCors();
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection(); // Only for development
+}
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+app.MapHealthChecks("/health");
+app.MapControllerRoute(name: "default", pattern: "{controller=Account}/{action=Login}/{id?}");
 
 if (builder.Configuration.GetValue<bool>("FeatureFlags:MigrateAtStartup"))
 {
     await app.InitializeDatabaseAsync();
 }
-
 app.Run();
