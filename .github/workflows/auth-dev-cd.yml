@@ -1,5 +1,5 @@
 # .github/workflows/auth-dev-cd.yml
-name: Deploy AuthServer Container to DEV
+name: Deploy Auth Server Container to DEV
 
 on:
   push:
