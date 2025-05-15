@@ -1,3 +1,9 @@
+---
+id: 03-context-and-scope
+title: Context and Scope
+sidebar_position: 3
+---
+
 # 3. Context and Scope
 
 ## Context

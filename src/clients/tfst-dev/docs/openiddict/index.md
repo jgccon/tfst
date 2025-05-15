@@ -1,3 +1,10 @@
+---
+id: openiddict
+title: OpenIdDict
+description: Welcome to the documentation for TFST.AuthServer, TFST.API, and tfst-demo projects.
+sidebar_position: 3
+---
+
 # TFST Openiddict Documentation
 
 Welcome to the documentation for TFST.AuthServer, TFST.API, and tfst-demo projects. This guide is designed to help users and developers understand the architecture, configuration, implementation, and security of the projects.

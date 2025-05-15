@@ -1,3 +1,9 @@
+---
+id: 05-building-block-view
+title: Building Block View
+sidebar_position: 5
+---
+
 # 5. Building Block View
 
 ## Main Components

@@ -1,3 +1,9 @@
+---
+id: 04-solution-strategy
+title: Solution Strategy
+sidebar_position: 4
+---
+
 # 4. Solution Strategy
 
 ## Architectural Approach

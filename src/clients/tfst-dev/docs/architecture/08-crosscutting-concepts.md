@@ -1,3 +1,9 @@
+---
+id: 08-crosscutting-concepts
+title: Crosscutting Concepts
+sidebar_position: 8
+---
+
 # 8. Crosscutting Concepts
 
 ## Security
@@ -28,5 +34,5 @@ TFST follows the **GDPR (General Data Protection Regulation)** for European user
 
 #### **Data Protection Officer (DPO)**
 For any privacy-related concerns or to exercise data rights, users can contact:  
-📧 **privacy@tfst.xyz**
+📧 **juan@jgcarmona.com**
 

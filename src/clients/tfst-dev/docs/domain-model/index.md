@@ -1,4 +1,10 @@
-# TFST - Domain Model
+---
+id: domain_model
+title: Domain Model
+sidebar_position: 0
+---
+
+# Domain Model
 
 ## Purpose
 This directory contains the core domain model documentation for The Full Stack Team (TFST). It defines the key entities, their relationships, and bounded contexts.

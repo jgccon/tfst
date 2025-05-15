@@ -1,3 +1,9 @@
+---
+id: 01-introduction-and-goals
+title: Introduction and Goals
+sidebar_position: 1
+---
+
 # 1. Introduction and Goals
 
 ## Purpose

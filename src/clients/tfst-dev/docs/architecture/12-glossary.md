@@ -1,3 +1,9 @@
+---
+id: 12-glossary
+title: Glossary
+sidebar_position: 12
+---
+
 # 12. Glossary
 
 - **HR**: Human Resources.

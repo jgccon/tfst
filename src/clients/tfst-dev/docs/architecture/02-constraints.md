@@ -1,3 +1,8 @@
+---
+id: 02-constraints
+title: Constraints
+sidebar_position: 2
+---
 # 2. Constraints
 
 ## Technical Constraints

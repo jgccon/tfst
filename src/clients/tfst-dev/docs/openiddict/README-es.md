@@ -1,4 +1,4 @@
-# TFST Documentación Openiddict
+# Openiddict [Esp]
 
 Bienvenido a la documentación de los proyectos TFST.AuthServer, TFST.API y tfst-demo. Esta guía está diseñada para ayudar a los usuarios y desarrolladores a comprender la arquitectura, configuración, implementación y seguridad de los proyectos.
 

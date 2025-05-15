@@ -1,3 +1,9 @@
+---
+id: 09-architecture-decisions
+title: Architecture Decisions
+sidebar_position: 9
+---
+
 # 9. Architecture Decisions
 
 ## Key Decisions

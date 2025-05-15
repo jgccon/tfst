@@ -1,3 +1,9 @@
+---
+id: 06-runtime-view
+title: Runtime View
+sidebar_position: 6
+---
+
 # 6. Runtime View
 
 ## Common Scenarios

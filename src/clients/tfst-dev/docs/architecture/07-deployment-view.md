@@ -1,3 +1,9 @@
+---
+id: 07-deployment-view
+title: Deployment View
+sidebar_position: 7
+---
+
 # 7. Deployment View
 
 ## Target Environments

@@ -1,3 +1,9 @@
+---
+id: 11-risks-and-technical-debt
+title: Risks and Technical Debt
+sidebar_position: 11
+---
+
 # 11. Risks and Technical Debt
 
 ## Potential Risks

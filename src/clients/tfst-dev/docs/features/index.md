@@ -1,3 +1,9 @@
+---
+id: features
+title: Features
+sidebar_position: 1
+---
+
 # Features Overview
 
 This directory contains the core features of TFST, structured into different categories.

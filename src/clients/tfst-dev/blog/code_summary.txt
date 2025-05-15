@@ -1,3 +1,20 @@
+==== 2019-05-28-first-blog-post.md ====
+---
+slug: first-blog-post
+title: First Blog Post
+authors: [juangcarmona, alexanderardila]
+tags: [hola, docusaurus]
+---
+
+Lorem ipsum dolor sit amet...
+
+<!-- truncate -->
+
+...consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
+
+
+
+==== 2019-05-29-long-blog-post.md ====
 ---
 slug: long-blog-post
 title: Long Blog Post
@@ -42,3 +59,89 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
+
+
+
+==== 2021-08-26-welcome/index.md ====
+---
+slug: welcome
+title: Welcome
+authors: [juangcarmona, alexanderardila]
+tags: [facebook, hello, docusaurus]
+---
+
+[Docusaurus blogging features](https://docusaurus.io/docs/blog) are powered by the [blog plugin](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog).
+
+Here are a few tips you might find useful.
+
+<!-- truncate -->
+
+Simply add Markdown files (or folders) to the `blog` directory.
+
+Regular blog authors can be added to `authors.yml`.
+
+The blog post date can be extracted from filenames, such as:
+
+- `2019-05-30-welcome.md`
+- `2019-05-30-welcome/index.md`
+
+A blog post folder can be convenient to co-locate blog post images:
+
+![Docusaurus Plushie](./docusaurus-plushie-banner.jpeg)
+
+The blog supports tags as well!
+
+**And if you don't want a blog**: just delete this directory, and use `blog: false` in your Docusaurus config.
+
+
+
+==== authors.yml ====
+juangcarmona:
+  name: Juan G. Carmona
+  title: CTO & Founder at The Full-Stack Team
+  url: https://github.com/juangcarmona
+  image_url: https://github.com/juangcarmona.png
+  page: true
+  socials:
+    github: juangcarmona
+    linkedin: juangcarmona
+    newsletter: https://jgcarmona.com
+
+alexanderardila:
+  name: Alexander Ardila
+  title: Full-Stack Engineer at The Full-Stack Team
+  url: https://github.com/jaardila-3
+  
+  image_url: https://github.com/jaardila-3.png
+  page:
+    permalink: '/authors/alexander-ardila'
+  socials:
+    github: alexander-ardila
+    linkedin: alexanderardila
+    x: alexardiladev
+
+
+
+==== tags.yml ====
+facebook:
+  label: Facebook
+  permalink: /facebook
+  description: Facebook tag description
+
+hello:
+  label: Hello
+  permalink: /hello
+  description: Hello tag description
+
+docusaurus:
+  label: Docusaurus
+  permalink: /docusaurus
+  description: Docusaurus tag description
+
+hola:
+  label: Hola
+  permalink: /hola
+  description: Hola tag description
+
+
+
