@@ -1,3 +1,8 @@
+---
+id: overview
+title: Overview
+---
+
 # Architecture Overview
 
 This document provides an overview of the architecture of TFST.AuthServer, TFST.API, and tfst-demo projects, detailing how they interact with each other.

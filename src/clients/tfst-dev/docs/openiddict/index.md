@@ -12,18 +12,18 @@ Welcome to the documentation for TFST.AuthServer, TFST.API, and tfst-demo projec
 ## Content
 
 - **Architecture**
-  - [Overview](architecture/overview.md): A general view of the projects' architecture and how they interact.
-  - [TFST.AuthServer](architecture/auth-server.md): Details about the TFST.AuthServer project, its components, and OpenIddict integration.
-  - [TFST.API](architecture/api.md): Information about the TFST.API project, its endpoints, and data flow.
-  - [tfst-demo](architecture/demo-client.md): Explanation of the tfst-demo client and its role in the overall architecture.
+  - [Overview](./architecture/overview.md): A general view of the projects' architecture and how they interact.
+  - [TFST.AuthServer](./architecture/auth-server.md): Details about the TFST.AuthServer project, its components, and OpenIddict integration.
+  - [TFST.API](./architecture/api.md): Information about the TFST.API project, its endpoints, and data flow.
+  - [tfst-demo](./architecture/demo-client.md): Explanation of the tfst-demo client and its role in the overall architecture.
 
 - **Deployment**
-  - [Installation](deployment/installation.md): Step-by-step instructions for installing and deploying the projects.
+  - [Installation](./deployment/installation.md): Step-by-step instructions for installing and deploying the projects.
 
 - **Security**
-  - [OpenIddict Overview](security/openiddict-overview.md): Information about OpenIddict and its use in the projects.
-  - [Authentication Flow](security/authentication-flow.md): Description of the implemented authentication flow.
-  - [Authorization](security/authorization.md): Authorization mechanisms, including roles and permissions.
+  - [OpenIddict Overview](./security/openiddict-overview.md): Information about OpenIddict and its use in the projects.
+  - [Authentication Flow](./security/authentication-flow.md): Description of the implemented authentication flow.
+  - [Authorization](./security/authorization.md): Authorization mechanisms, including roles and permissions.
 
 - **Troubleshooting**
   - [Troubleshooting](troubleshooting.md): Solutions to common problems and troubleshooting tips.

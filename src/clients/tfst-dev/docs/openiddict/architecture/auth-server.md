@@ -1,3 +1,8 @@
+---
+id: auth-server
+title: Auth Server
+---
+
 # TFST.AuthServer
 
 ## Purpose

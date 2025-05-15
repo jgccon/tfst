@@ -1,3 +1,8 @@
+---
+id: authorization
+title: Authorization
+---
+
 # Authorization Flow (Protected Resource Access)
 
 This flow describes how the client application (JavaScript SPA) uses the tokens obtained in the OIDC authentication flow (specifically the `access_token`) to access the protected API.
