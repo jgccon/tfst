@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 type FeatureItem = {
   title: string;
    Img: string;
+
   description: ReactNode;
 };
 
@@ -57,6 +58,7 @@ function Feature({ title, Img, description }: FeatureItem) {
     <div className={clsx("col col--6")}>
       <div className="text--center">
          <img src={Img} className={styles.featureSvg} alt={title} />
+
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
