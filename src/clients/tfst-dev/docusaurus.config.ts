@@ -10,7 +10,7 @@ const config: Config = {
   url: 'https://tfst.dev',
   baseUrl: '/',
 
-  organizationName: 'full-stack-team', // GitHub org
+  organizationName: 'jgccon', // GitHub org
   projectName: 'tfst', // GitHub repo
 
   onBrokenLinks: 'throw',
