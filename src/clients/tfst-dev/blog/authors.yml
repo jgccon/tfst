@@ -1,0 +1,22 @@
+juangcarmona:
+  name: Juan G. Carmona
+  title: CTO & Founder at The Full-Stack Team
+  url: https://github.com/juangcarmona
+  image_url: https://github.com/juangcarmona.png
+  page: true
+  socials:
+    github: juangcarmona
+    linkedin: juangcarmona
+    x: juangcarmona_
+
+alexanderardila:
+  name: Alexander Ardila
+  title: Full-Stack Engineer at The Full-Stack Team
+  url: https://github.com/alexander-ardila
+  image_url: https://github.com/alexander-ardila.png
+  page:
+    permalink: '/authors/alexander-ardila'
+  socials:
+    github: alexander-ardila
+    linkedin: alexanderardila
+    x: alexardiladev
