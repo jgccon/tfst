@@ -1,3 +1,8 @@
+---
+id: demo-client
+title: Demo Client
+---
+
 # Demo Client Application
 
 ## Introduction

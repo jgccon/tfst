@@ -1,3 +1,8 @@
+---
+id: troubleshooting
+title: Troubleshooting
+---
+
 # Troubleshooting Guide
 
 ## Common Issues

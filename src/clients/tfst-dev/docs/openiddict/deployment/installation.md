@@ -1,3 +1,8 @@
+---
+id: installation
+title: Installation
+---
+
 # Installation and Deployment of TFST.AuthServer, TFST.API and tfst-demo
 
 This document provides step by step instructions for installing and deploying TFST.AuthServer, TFST.API and tfst-demo projects.
