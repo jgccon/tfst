@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "projects",          
   "projects": {
-    "TFST-Front": {
+    "tfst-app": {                          
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "TFST-Front:build:production"
+              "buildTarget": "tfst-app:build:production"  
             },
             "development": {
-              "buildTarget": "TFST-Front:build:development"
+              "buildTarget": "tfst-app:build:development" 
             }
           },
           "defaultConfiguration": "development"
