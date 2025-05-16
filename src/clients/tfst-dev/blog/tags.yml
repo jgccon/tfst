@@ -1,19 +1,44 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+release:
+  label: Release
+  permalink: /tags/release
+  description: Platform updates, changelogs, and new feature announcements.
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+tfst:
+  label: TFST
+  permalink: /tags/tfst
+  description: Everything related to The Full-Stack Team platform.
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+documentation:
+  label: Documentation
+  permalink: /tags/documentation
+  description: Posts about writing, updating, or structuring technical docs.
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+architecture:
+  label: Architecture
+  permalink: /tags/architecture
+  description: System design, decisions, and technical overviews.
+
+contributing:
+  label: Contributing
+  permalink: /tags/contributing
+  description: Guidelines and tips for contributing to the TFST project.
+
+smart-contracts:
+  label: Smart Contracts
+  permalink: /tags/smart-contracts
+  description: Blockchain logic and automation in TFST workflows.
+
+esco:
+  label: ESCO
+  permalink: /tags/esco
+  description: Integration with the European Skills and Occupations framework.
+
+ci-cd:
+  label: CI/CD
+  permalink: /tags/ci-cd
+  description: Automation, pipelines, and DevOps practices.
+
+openiddict:
+  label: OpenIddict
+  permalink: /tags/openiddict
+  description: Authentication and identity management with OpenIddict.

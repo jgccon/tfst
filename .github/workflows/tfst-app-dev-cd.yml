@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/deploy-angular.yml
     with:
       environment: dev
-      working_directory: src/clients/tfst-app/TFST-Front
+      working_directory: src/clients/tfst-app
       app_service_name: tfst-app-dev
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}

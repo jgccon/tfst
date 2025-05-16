@@ -1,114 +1,125 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: 'The Full-Stack Team Developer Portal',
-  tagline: 'Technical docs for The Full-Stack Team contributors and integrators',
-  favicon: 'img/favicon.ico',
+  title: "The Full-Stack Team Developer Portal",
+  tagline:
+    "Technical docs for The Full-Stack Team contributors and integrators",
+  favicon: "img/favicon.ico",
 
-  url: 'https://tfst.dev',
-  baseUrl: '/',
+  url: "https://tfst.dev",
+  baseUrl: "/",
 
-  organizationName: 'full-stack-team', // GitHub org
-  projectName: 'tfst', // GitHub repo
+  organizationName: "jgccon", // GitHub org
+  projectName: "tfst", // GitHub repo
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
 
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'es'],
+    defaultLocale: "en",
+    locales: ["en", "es"],
+    localeConfigs: {
+      en: { label: "English" },
+      es: { label: "Español", direction: "ltr" },
+    },
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/full-stack-team/tfst/edit/main/src/clients/tfst-dev/',
+          sidebarPath: "./sidebars.ts",
+          editUrl:
+            "https://github.com/full-stack-team/tfst/edit/main/src/clients/tfst-dev/",
         },
         blog: {
           showReadingTime: true,
           feedOptions: {
-            type: ['rss', 'atom'],
+            type: ["rss", "atom"],
             xslt: true,
           },
-          editUrl: 'https://github.com/full-stack-team/tfst/edit/main/src/clients/tfst-dev/',
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          editUrl:
+            "https://github.com/full-stack-team/tfst/edit/main/src/clients/tfst-dev/",
+          onInlineTags: "warn",
+          onInlineAuthors: "warn",
+          onUntruncatedBlogPosts: "warn",
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       } satisfies Preset.Options,
     ],
   ],
 
   themeConfig: {
-    image: 'img/tfst-social-card.jpg',
+    image: "img/tfst-social-card.jpg",
     navbar: {
-      title: 'The Full-Stack Team Docs',
+      title: "The Full-Stack Team Docs",
       logo: {
-        alt: 'The Full-Stack Team Logo',
-        src: 'img/logo.svg',
+        alt: "The Full-Stack Team Logo",
+        src: "img/logo.svg",
       },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Docs',
+          type: "docSidebar",
+          sidebarId: "tutorialSidebar",
+          position: "left",
+          label: "Docs",
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        { to: "/blog", label: "Blog", position: "left" },
         {
-          href: 'https://github.com/full-stack-team/tfst',
-          label: 'GitHub',
-          position: 'right',
+          type: "localeDropdown",
+          position: "left",
+        },
+        {
+          href: "https://github.com/full-stack-team/tfst",
+          label: "GitHub",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
+          title: "Docs",
           items: [
             {
-              label: 'Architecture',
-              to: '/docs/architecture',
+              label: "Architecture",
+              to: "/docs/architecture",
             },
             {
-              label: 'API Reference',
-              to: '/docs/api-reference',
+              label: "API Reference",
+              to: "/docs/api-reference",
             },
             {
-              label: 'Contributing',
-              to: '/docs/contribution-guide',
+              label: "Contributing",
+              to: "/docs/contribution-guide",
             },
           ],
         },
         {
-          title: 'Community',
+          title: "Community",
           items: [
             {
-              label: 'GitHub Discussions',
-              href: 'https://github.com/full-stack-team/tfst/discussions',
+              label: "GitHub Discussions",
+              href: "https://github.com/full-stack-team/tfst/discussions",
             },
           ],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
             {
-              label: 'Roadmap',
-              to: '/docs/roadmap',
+              label: "Roadmap",
+              to: "/docs/roadmap",
             },
             {
-              label: 'Blog',
-              to: '/blog',
+              label: "Blog",
+              to: "/blog",
             },
           ],
         },
