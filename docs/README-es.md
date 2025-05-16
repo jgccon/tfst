@@ -19,7 +19,7 @@ Incluye:
 - 💡 **Arquitectura** (basada en arc42)
 - 🔐 **Autenticación con OpenIddict**
 - 👤 **Perfiles profesionales basados en ESCO**
-- 🧱 **Modelo de dominio y guías funcionales**
+- 🧱 **Dominio y guías funcionales**
 - 🔌 **Referencia de APIs e integración**
 - 🌍 **Soporte multilingüe**
 

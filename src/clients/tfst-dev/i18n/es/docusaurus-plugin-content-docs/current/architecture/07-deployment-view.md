@@ -1,6 +1,6 @@
 ---
 id: 07-deployment-view
-title: Deployment View
+title: Vista de Despliegue
 sidebar_position: 7
 ---
 

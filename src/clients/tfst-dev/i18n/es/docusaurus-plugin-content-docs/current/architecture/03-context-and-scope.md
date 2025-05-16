@@ -1,6 +1,6 @@
 ---
 id: 03-context-and-scope
-title: Context and Scope
+title: Contexto y Alcance
 sidebar_position: 3
 ---
 

@@ -1,6 +1,6 @@
 ---
 id: 01-introduction-and-goals
-title: Introduction and Goals
+title: Introducción y Objetivos
 sidebar_position: 1
 ---
 

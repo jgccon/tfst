@@ -4,7 +4,7 @@
     "description": "The label for version current"
   },
   "sidebar.tutorialSidebar.category.Domain Model": {
-    "message": "Modelo de Dominio",
+    "message": "Dominio",
     "description": "The label for category Domain Model in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Features": {

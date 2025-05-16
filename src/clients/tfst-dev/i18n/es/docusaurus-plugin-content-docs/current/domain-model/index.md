@@ -4,10 +4,10 @@ title: Domain Model
 sidebar_position: 0
 ---
 
-# Modelo de Dominio
+# Dominio
 
 ## Propósito
-Este directorio contiene la documentación principal del modelo de dominio para The Full Stack Team (TFST). Define las entidades clave, sus relaciones y los contextos delimitados.
+Este directorio contiene la documentación principal del dominio de The Full Stack Team (TFST). Define las entidades clave, sus relaciones y los contextos delimitados.
 
 ## Contextos delimitados
 - [Gestión de identidades y accesos](identity-access-management.md)

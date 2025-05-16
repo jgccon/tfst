@@ -1,6 +1,6 @@
 ---
 id: 05-building-block-view
-title: Building Block View
+title: Vista de Componentes
 sidebar_position: 5
 ---
 

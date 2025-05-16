@@ -1,6 +1,6 @@
 ---
 id: 04-solution-strategy
-title: Solution Strategy
+title: Estrategia de Solución
 sidebar_position: 4
 ---
 

@@ -1,10 +1,10 @@
 ---
 id: 10-quality-requirements
-title: Quality Requirements
+title: Requisitos de Calidad
 sidebar_position: 10
 ---
 
-#10. Requisitos de Calidad
+# 10. Requisitos de Calidad
 
 ## Rendimiento
 - Debe ser compatible con el uso simultáneo de múltiples usuarios sin afectar el rendimiento.
