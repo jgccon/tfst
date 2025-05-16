@@ -131,8 +131,8 @@ docker-compose up
 
 Once you're up and running, check out:
 
-- [Code of Conduct](../code-of-conduct)
-- [Contribution Guidelines](../contributing)
+- [Code of Conduct](../community/CODE_OF_CONDUCT.md)
+- [Contribution Guidelines](../community/index.md)
 
 And consider contributing to the roadmap, writing docs, or helping triage issues.
 

@@ -1,10 +1,6 @@
 ---
 id: 05-building-block-view
-<<<<<<< HEAD
-title: Building Block View
-=======
 title: Vista de Componentes
->>>>>>> fix/clean-merge-main
 sidebar_position: 5
 ---
 

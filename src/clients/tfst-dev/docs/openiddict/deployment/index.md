@@ -1,11 +1,6 @@
 ---
-<<<<<<<< HEAD:src/clients/tfst-dev/docs/openiddict/deployment/installation.md
-id: installation
-title: Installation
-========
 id: deployment
 title: Deployment
->>>>>>>> fix/clean-merge-main:src/clients/tfst-dev/docs/openiddict/deployment/index.md
 ---
 
 # Installation and Deployment of TFST.AuthServer, TFST.API and tfst-demo

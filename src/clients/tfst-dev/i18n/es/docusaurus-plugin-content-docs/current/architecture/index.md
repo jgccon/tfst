@@ -1,20 +1,12 @@
 ---
 id: index
-<<<<<<< HEAD
-title: Architecture
-sidebar_position: 2
----
-# Documentación de la arquitectura del equipo Full Stack
-
-Bienvenido a la sección de arquitectura del **equipo Full Stack**. Esta documentación sigue el modelo [arc42](https://arc42.org/) para ofrecer una visión estructurada y completa de la arquitectura del sistema, incluyendo las decisiones de diseño, la estructura y los atributos de calidad.
-=======
-title: Architectura (arc42)
+title: Arquitectura (arc42)
 sidebar_position: 3
 ---
-# The Full-Stack Team - Architectura (arc42) 
 
-Bienvenido a la sección de arquitectura de **The Full-Stack Team**. Esta documentación sigue el modelo [arc42](https://arc42.org/) para ofrecer una visión estructurada y completa de la arquitectura del sistema, incluyendo las decisiones de diseño, la estructura y los atributos de calidad.
->>>>>>> fix/clean-merge-main
+# Documentación de Arquitectura del Equipo Full-Stack
+
+Bienvenido a la sección de arquitectura del **Equipo Full-Stack**. Esta documentación sigue el modelo [arc42](https://arc42.org/) para ofrecer una visión estructurada y completa de la arquitectura del sistema, incluyendo las decisiones de diseño, la estructura y los atributos de calidad.
 
 ## Secciones
 
@@ -28,22 +20,16 @@ Bienvenido a la sección de arquitectura de **The Full-Stack Team**. Esta docume
 8. [Conceptos transversales](08-crosscutting-concepts.md)
 9. [Decisiones de arquitectura](09-architecture-decisions.md)
 10. [Requisitos de calidad](10-quality-requirements.md)
-11. [Riesgos y Deuda Técnica](11-risks-and-technical-debt.md)
+11. [Riesgos y deuda técnica](11-risks-and-technical-debt.md)
 12. [Glosario](12-glossary.md)
 
 ## ¿Quién debería leer esto?
 
-<<<<<<< HEAD
 - **Desarrolladores**: Conozcan la estructura y los componentes del sistema para contribuir eficazmente.
-- **Contribuyentes**: Comprendan las restricciones, las decisiones y las directrices antes de proponer cambios.
+- **Contribuyentes**: Comprendan las restricciones, decisiones y directrices antes de proponer cambios.
 - **Partes interesadas**: Adquieran un conocimiento profundo de la intención y la hoja de ruta del sistema.
-=======
-- **Desarrolladores**: Conoce la estructura y los componentes del sistema para contribuir eficazmente.
-- **Contribuyentes**: Comprende las restricciones, las decisiones y las directrices antes de proponer cambios.
-- **Partes interesadas**: Adquiere un conocimiento profundo de la intención y la hoja de ruta del sistema.
->>>>>>> fix/clean-merge-main
 
-Recursos relacionados
+## Recursos relacionados
 
 - [Instrucciones de contribución](https://github.com/jgccon/tfst/blob/dev/docs/CONTRIBUTING-es.md)
 - [Licencia de Apache 2.0](https://github.com/jgccon/tfst/blob/dev/LICENSE)

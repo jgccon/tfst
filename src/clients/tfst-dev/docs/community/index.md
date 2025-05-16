@@ -14,7 +14,7 @@ Thank you for considering contributing to **The Full-Stack Team**! Your contribu
 - [Getting Started](#getting-started)
 - [Branching Strategy](#branching-strategy)
 - [Pull Request Process](#pull-request-process)
-- [Contact](#contact)
+<!-- - [Contact](#contact) -->
 
 ## How to Contribute
 

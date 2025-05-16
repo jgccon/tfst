@@ -1,18 +1,10 @@
 ---
 id: 08-crosscutting-concepts
-<<<<<<< HEAD
-title: Crosscutting Concepts
-sidebar_position: 8
----
-
-#8. Conceptos transversales
-=======
 title: Conceptos Transversales
 sidebar_position: 8
 ---
 
 # 8. Conceptos transversales
->>>>>>> fix/clean-merge-main
 
 ## Seguridad
 - **Autenticación**: Gestionada mediante JWT y Auth0/Azure AD B2C.

@@ -1,10 +1,6 @@
 ---
 id: 02-constraints
-<<<<<<< HEAD
-title: Constraints
-=======
 title: Restricciones
->>>>>>> fix/clean-merge-main
 sidebar_position: 2
 ---
 # 2. Limitaciones

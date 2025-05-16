@@ -1,11 +1,7 @@
 ---
 id: openiddict-overview
-<<<<<<<< HEAD:src/clients/tfst-dev/docs/openiddict/security/openiddict-overview.md
-title: Openiddict Overview
-========
 title: Overview
 sidebar_position: 0
->>>>>>>> fix/clean-merge-main:src/clients/tfst-dev/docs/openiddict/security/index.md
 ---
 
 # OpenIddict Overview

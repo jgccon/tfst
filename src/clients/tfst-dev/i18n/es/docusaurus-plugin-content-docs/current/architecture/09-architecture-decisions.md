@@ -1,10 +1,6 @@
 ---
 id: 09-architecture-decisions
-<<<<<<< HEAD
-title: Architecture Decisions
-=======
 title: Decisiones de Arquitectura
->>>>>>> fix/clean-merge-main
 sidebar_position: 9
 ---
 

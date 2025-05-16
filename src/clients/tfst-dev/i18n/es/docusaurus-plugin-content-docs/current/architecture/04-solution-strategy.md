@@ -1,10 +1,6 @@
 ---
 id: 04-solution-strategy
-<<<<<<< HEAD
-title: Solution Strategy
-=======
 title: Estrategia de Solución
->>>>>>> fix/clean-merge-main
 sidebar_position: 4
 ---
 
