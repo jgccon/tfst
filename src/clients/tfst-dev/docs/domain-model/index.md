@@ -1,13 +1,21 @@
 ---
 id: domain_model
 title: Domain Model
+<<<<<<< HEAD
+sidebar_position: 0
+=======
 sidebar_position: 1
+>>>>>>> fix/clean-merge-main
 ---
 
 # Domain Model
 
 ## Purpose
+<<<<<<< HEAD
+This directory contains the core domain model documentation for The Full Stack Team (TFST). It defines the key entities, their relationships, and bounded contexts.
+=======
 This directory contains the core domain model documentation for The Full-Stack Team (TFST). It defines the key entities, their relationships, and bounded contexts.
+>>>>>>> fix/clean-merge-main
 
 ## Bounded Contexts
 - [Identity & Access Management](identity-access-management.md)

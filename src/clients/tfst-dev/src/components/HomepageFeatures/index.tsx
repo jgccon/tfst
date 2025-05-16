@@ -12,6 +12,15 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
+<<<<<<< HEAD
+    Img: "img/onboarding.svg",
+    title: (
+      <Translate
+        id="homepage.feature.onboarding.title"
+        description="Title for the onboarding feature"
+      >
+        Start with Onboarding
+=======
     Img: "img/recognition.svg",
     title: (
       <Translate
@@ -19,18 +28,36 @@ const FeatureList: FeatureItem[] = [
         description="Título de la función de incorporación"
       >
         Let your work speak for itself
+>>>>>>> fix/clean-merge-main
       </Translate>
     ),
     description: (
       <Translate
+<<<<<<< HEAD
+        id="homepage.feature.onboarding.description"
+        description="Description for the onboarding feature"
+      >
+        From day one, TFST streamlines onboarding — setting roles, contracts,
+        and access in motion with precision and clarity.
+=======
         id="homepage.feature.recognition.description"
         description="Descripción de la función de incorporación"
       >
         Build a technical profile based on real contributions and smart contracts. Forget cover letters — your work is your voice.
+>>>>>>> fix/clean-merge-main
       </Translate>
     ),
   },
   {
+<<<<<<< HEAD
+    Img: "img/experience.svg",
+    title: (
+      <Translate
+        id="homepage.feature.experience.title"
+        description="Title for the experience feature"
+      >
+        Grow with Experience
+=======
     Img: "img/talent.svg",
     title: (
       <Translate
@@ -38,18 +65,36 @@ const FeatureList: FeatureItem[] = [
         description="Título de la función de talento"
       >
         Hire talent without intermediaries
+>>>>>>> fix/clean-merge-main
       </Translate>
     ),
     description: (
       <Translate
+<<<<<<< HEAD
+        id="homepage.feature.experience.description"
+        description="Description for the experience feature"
+      >
+        Track time, performance, and development across projects. Build skills
+        aligned with ESCO and fuel real growth.
+=======
         id="homepage.feature.talent.description"
         description="Descripción de la función de talento"
       >
         Validated profiles, direct contracts, complete traceability. No inflated fees, no shady filters — just real talent.
+>>>>>>> fix/clean-merge-main
       </Translate>
     ),
   },
   {
+<<<<<<< HEAD
+    Img: "img/develop.svg",
+    title: (
+      <Translate
+        id="homepage.feature.collaboration.title"
+        description="Title for the collaboration feature"
+      >
+        Collaborate and Build
+=======
     Img: "img/reputation.svg",
     title: (
       <Translate
@@ -57,18 +102,36 @@ const FeatureList: FeatureItem[] = [
         description="Título de la función de reputación"
       >
         Grow your reputation through real work
+>>>>>>> fix/clean-merge-main
       </Translate>
     ),
     description: (
       <Translate
+<<<<<<< HEAD
+        id="homepage.feature.collaboration.description"
+        description="Description for the collaboration feature"
+      >
+        Developers, managers, and contributors co-create in TFST. Modular by
+        design. Transparent by default. Welcome to the full stack.
+=======
         id="homepage.feature.reputation.description"
         description="Descripción de la función de reputación"
       >
         Every logged hour, every delivered project, every review builds your reputation. Your profile becomes your proof.
+>>>>>>> fix/clean-merge-main
       </Translate>
     ),
   },
   {
+<<<<<<< HEAD
+    Img: "img/welcoming.svg",
+    title: (
+      <Translate
+        id="homepage.feature.welcome.title"
+        description="Title for the welcome feature"
+      >
+        Welcome to the Team
+=======
     Img: "img/control.svg",
     title: (
       <Translate
@@ -76,14 +139,23 @@ const FeatureList: FeatureItem[] = [
         description="Título de la función de control"
       >
         Manage everything from a single place
+>>>>>>> fix/clean-merge-main
       </Translate>
     ),
     description: (
       <Translate
+<<<<<<< HEAD
+        id="homepage.feature.welcome.description"
+        description="Description for the welcome feature"
+      >
+        TFST is more than a platform — it’s a shared space for people, ideas,
+        and progress. Let’s build it together.
+=======
         id="homepage.feature.control.description"
         description="Descripción de la función de control"
       >
        Contracts, roles, time tracking, payments — for yourself or your whole team. TFST gives you full visibility and operational control, now and as it grows.
+>>>>>>> fix/clean-merge-main
       </Translate>
     ),
   },

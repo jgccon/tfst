@@ -32,3 +32,8 @@ Bienvenido a **TFST**, la plataforma de código abierto para la gestión de tale
 
 ### 🤝 ¿Listo para contribuir?
 Esto no es solo código. Es una comunidad que construye algo ambicioso. [Contribuye](./community) al proyecto y ayúdanos a mejorarlo.
+=======
+title: Welcome to The Full-Stack Team
+---
+Este es el punto de entrada para los colaboradores y desarrolladores del Equipo Full-Stack.
+

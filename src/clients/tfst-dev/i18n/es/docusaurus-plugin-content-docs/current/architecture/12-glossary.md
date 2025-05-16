@@ -1,6 +1,10 @@
 ---
 id: 12-glossary
+<<<<<<< HEAD
+title: Glossary
+=======
 title: Glosario
+>>>>>>> fix/clean-merge-main
 sidebar_position: 12
 ---
 
