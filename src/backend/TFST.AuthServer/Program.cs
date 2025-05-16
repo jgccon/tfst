@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Quartz;
+using static OpenIddict.Abstractions.OpenIddictConstants;
 using TFST.AuthServer.Extensions;
 using TFST.AuthServer.Infrastructure.Configuration;
 using TFST.AuthServer.Persistence;
-using static OpenIddict.Abstractions.OpenIddictConstants;
+using TFST.SharedKernel.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +53,11 @@ builder.Services.AddQuartz(options =>
 // Register the Quartz.NET service and configure it to block shutdown until jobs are complete.
 builder.Services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
 
-builder.Configuration.AddEnvironmentVariables();
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddUserSecrets<Program>(optional: true)
+    .AddEnvironmentVariables(prefix: "TFST_");
 
 builder.Services.AddOpenIddict()
 
@@ -120,8 +125,9 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
           .WithOrigins(allowedOrigins)));
 
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddAuthorization();
+builder.Services.AddHealthChecks();
+builder.WebHost.UseSmartPortConfiguration("http://*:6000", "https://*:6001");
 
 var app = builder.Build();
 
@@ -133,17 +139,18 @@ if (!app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseCors();
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection(); // Only for development
+}
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+app.MapHealthChecks("/health");
+app.MapControllerRoute(name: "default", pattern: "{controller=Account}/{action=Login}/{id?}");
 
 if (builder.Configuration.GetValue<bool>("FeatureFlags:MigrateAtStartup"))
 {
     await app.InitializeDatabaseAsync();
 }
-
 app.Run();

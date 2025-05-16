@@ -6,21 +6,23 @@ services:
       context: .
       dockerfile: backend/TFST.API/Dockerfile
     ports:
-      - "5001:5001" # HTTPS
       - "5000:5000" # HTTP
+      - "5001:5001" # HTTPS
     depends_on:
       - tfst.sql_server
       - tfst.auth
+    env_file:
+      - .env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:5001;http://+:5000
+      - ASPNETCORE_URLS=http://+:5000;https://+:5001
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Password123*
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/tfst_dev_cert.pfx
-      - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True
     volumes:
       - ./certs:/app/certs:ro
     networks:
       - tfst_network
+
   tfst.auth:
     container_name: tfst.auth
     image: tfst/auth
@@ -28,25 +30,29 @@ services:
       context: .
       dockerfile: backend/TFST.AuthServer/Dockerfile
     ports:
-      - "6001:6001" # HTTPS
       - "6000:6000" # HTTP
+      - "6001:6001" # HTTPS
     depends_on:
       - tfst.sql_server
+    env_file:
+      - .env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:6001;http://+:6000
+      - ASPNETCORE_URLS=http://+:6000;https://+:6001
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Password123*
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/tfst_dev_cert.pfx
-      - ConnectionStrings__DefaultConnection=Server=tfst.sql_server;Database=TFST;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True
     volumes:
       - ./certs:/app/certs:ro
     networks:
       - tfst_network
+
   tfst.sql_server:
     container_name: tfst.sql_server
     image: "mcr.microsoft.com/mssql/server:2022-latest"
+    env_file:
+      - .env
     environment:
-      SA_PASSWORD: "YourStrongPassword!"
+      SA_PASSWORD: ${MSSQL_SA_PASSWORD}
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Developer"
       MSSQL_TCP_PORT: "1433"
@@ -56,11 +62,7 @@ services:
       - mssql_data:/var/opt/mssql
     networks:
       - tfst_network
-    healthcheck:
-      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "YourStrongPassword!", "-Q", "SELECT 1" ]
-      interval: 10s
-      retries: 5
-      start_period: 10s
+
 volumes:
   mssql_data:
     name: tfst_mssql_data

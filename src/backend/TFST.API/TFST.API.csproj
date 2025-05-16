@@ -14,6 +14,7 @@
     <PackageReference Include="Azure.Messaging.EventHubs" Version="5.11.6" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -32,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TFST.Modules.Users.Presentation\TFST.Modules.Users.Presentation.csproj" />
     <ProjectReference Include="..\TFST.SharedKernel.Configuration\TFST.SharedKernel.Configuration.csproj" />
+    <ProjectReference Include="..\TFST.SharedKernel.Hosting\TFST.SharedKernel.Hosting.csproj" />
   </ItemGroup>
 
 </Project>
