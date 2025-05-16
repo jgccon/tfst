@@ -1,7 +1,7 @@
 
-# Contribuir a The Full Stack Team
+# Contribuir a The Full-Stack Team
 
-¡Gracias por considerar contribuir a **The Full Stack Team**! Tus aportaciones son invaluables para mejorar la plataforma y construir una solución de gestión robusta para freelancers y profesionales. Esta guía proporciona instrucciones y mejores prácticas para contribuir al proyecto.
+¡Gracias por considerar contribuir a **The Full-Stack Team**! Tus aportaciones son invaluables para mejorar la plataforma y construir una solución de gestión robusta para freelancers y profesionales. Esta guía proporciona instrucciones y mejores prácticas para contribuir al proyecto.
 
 ## Tabla de Contenidos
 

@@ -1,6 +1,6 @@
 # Full-Stack Team Website
 
-This is the official website of **The Full Stack Team (TFST)**, designed to present our mission, community, and resources.
+This is the official website of **The Full-Stack Team (TFST)**, designed to present our mission, community, and resources.
 
 ## Purpose
 

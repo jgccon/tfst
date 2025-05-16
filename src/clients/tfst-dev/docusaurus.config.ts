@@ -88,6 +88,7 @@ const config: Config = {
           title: "Docs",
           items: [
             {
+<<<<<<< HEAD
               label: "Architecture",
               to: "/docs/architecture",
             },
@@ -98,6 +99,22 @@ const config: Config = {
             {
               label: "Contributing",
               to: "/docs/contribution-guide",
+=======
+              label: "Domain",
+              to: "/docs/domain-model",
+            },
+            {
+              label: "Features",
+              to: "/docs/features",
+            },
+            {
+              label: "Architecture",
+              to: "/docs/architecture",
+            },
+            {
+              label: "Contributing",
+              to: "/docs/community",
+>>>>>>> fix/clean-merge-main
             },
           ],
         },
@@ -106,7 +123,11 @@ const config: Config = {
           items: [
             {
               label: "GitHub Discussions",
+<<<<<<< HEAD
               href: "https://github.com/full-stack-team/tfst/discussions",
+=======
+              href: "https://github.com/jgccon/tfst/discussions",
+>>>>>>> fix/clean-merge-main
             },
           ],
         },
@@ -124,7 +145,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} The Full-Stack Team. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} The Full-Stack Team.`,
     },
     prism: {
       theme: prismThemes.github,

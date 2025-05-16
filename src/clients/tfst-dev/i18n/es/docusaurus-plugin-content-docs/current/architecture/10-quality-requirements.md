@@ -1,10 +1,18 @@
 ---
 id: 10-quality-requirements
+<<<<<<< HEAD
 title: Quality Requirements
 sidebar_position: 10
 ---
 
 #10. Requisitos de Calidad
+=======
+title: Requisitos de Calidad
+sidebar_position: 10
+---
+
+# 10. Requisitos de Calidad
+>>>>>>> fix/clean-merge-main
 
 ## Rendimiento
 - Debe ser compatible con el uso simultáneo de múltiples usuarios sin afectar el rendimiento.

@@ -1,5 +1,6 @@
 ---
 id: index
+<<<<<<< HEAD
 title: Architecture
 sidebar_position: 2
 ---
@@ -7,6 +8,15 @@ sidebar_position: 2
 # The Full Stack Team Architecture Documentation
 
 Welcome to **The Full Stack Team** architecture section. This documentation follows the [arc42](https://arc42.org/) template to provide a structured, comprehensive view of the system’s architecture — including design decisions, structure, and quality attributes.
+=======
+title: Architecture (arc42)
+sidebar_position: 3
+---
+
+# The Full-Stack Team - Architecture Documentation
+
+Welcome to **The Full-Stack Team** architecture section. This documentation follows the [arc42](https://arc42.org/) template to provide a structured, comprehensive view of the system’s architecture — including design decisions, structure, and quality attributes.
+>>>>>>> fix/clean-merge-main
 
 ## Sections
 

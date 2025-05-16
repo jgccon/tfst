@@ -327,6 +327,7 @@
     "message": "Descripción predeterminada aquí",
     "description": "Descripción de la función"
   },
+<<<<<<< HEAD
   "feature.onboarding.title": {
     "message": "Comienza con la incorporación",
     "description": "Título de la función de incorporación"
@@ -390,5 +391,38 @@
   "homepage.feature.welcome.description": {
     "message": "TFST es más que una plataforma: es un espacio compartido para personas, ideas y progreso. Construyámoslo juntos.",
     "description": "Description for the welcome feature"
+=======
+  "homepage.feature.recognition.title": {
+    "message": "Deja que tu trabajo hable por ti",
+    "description": "Título de la función de incorporación"
+  },
+  "homepage.feature.recognition.description": {
+    "message": "Construye un perfil técnico basado en contribuciones reales y contratos inteligentes. Olvídate de las cartas de presentación: aquí tu trabajo es tu mejor presentación.",
+    "description": "Descripción de la función de incorporación"
+  },
+  "homepage.feature.talent.title": {
+    "message": "Contrata sin intermediarios",
+    "description": "Título de la función de acceso a talento"
+  },
+  "homepage.feature.talent.description": {
+    "message": "Perfiles validados, contratos directos y trazabilidad completa. Sin comisiones abusivas, sin filtros opacos: solo talento real, accesible al instante.",
+    "description": "Descripción de la función de acceso a talento"
+  },
+  "homepage.feature.reputation.title": {
+    "message": "Haz crecer tu reputación con trabajo real",
+    "description": "Título de la función de reputación"
+  },
+  "homepage.feature.reputation.description": {
+    "message": "Cada hora registrada, cada proyecto entregado y cada feedback recibido refuerza tu identidad profesional. Tu perfil es tu historial técnico auditable.",
+    "description": "Descripción de la función de reputación"
+  },
+  "homepage.feature.control.title": {
+    "message": "Gestiona todo desde un único lugar",
+    "description": "Título de la función de control operativo"
+  },
+  "homepage.feature.control.description": {
+    "message": "Contratos, roles, seguimiento de tiempo y pagos — para ti o para todo tu equipo. TFST te da visibilidad total y control operativo, ahora y a medida que crece.",
+    "description": "Descripción de la función de control operativo"
+>>>>>>> fix/clean-merge-main
   }
 }

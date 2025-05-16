@@ -1,6 +1,6 @@
 # 📚 La documentación oficial de TFST se ha trasladado
 
-Toda la documentación del proyecto **The Full Stack Team** ahora se encuentra disponible en:
+Toda la documentación del proyecto **The Full-Stack Team** ahora se encuentra disponible en:
 
 👉 [https://tfst.dev](https://tfst.dev)
 
@@ -19,7 +19,7 @@ Incluye:
 - 💡 **Arquitectura** (basada en arc42)
 - 🔐 **Autenticación con OpenIddict**
 - 👤 **Perfiles profesionales basados en ESCO**
-- 🧱 **Modelo de dominio y guías funcionales**
+- 🧱 **Dominio y guías funcionales**
 - 🔌 **Referencia de APIs e integración**
 - 🌍 **Soporte multilingüe**
 

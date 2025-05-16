@@ -1,5 +1,6 @@
 ---
 id: 03-context-and-scope
+<<<<<<< HEAD
 title: Context and Scope
 sidebar_position: 3
 ---
@@ -8,6 +9,16 @@ sidebar_position: 3
 
 ## Contexto
 La plataforma Full Stack Team está diseñada para que las empresas gestionen sus necesidades de RR. HH. de múltiples clientes o departamentos dentro de una plataforma unificada.
+=======
+title: Contexto y Alcance
+sidebar_position: 3
+---
+
+# 3. Contexto y Alcance
+
+## Contexto
+La plataforma Full-Stack Team está diseñada para que las empresas gestionen sus necesidades de RR. HH. de múltiples clientes o departamentos dentro de una plataforma unificada.
+>>>>>>> fix/clean-merge-main
 
 ## Alcance
 La plataforma incluye:

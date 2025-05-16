@@ -1,6 +1,10 @@
 ---
 id: 06-runtime-view
+<<<<<<< HEAD
 title: Runtime View
+=======
+title: Vista de Ejecución
+>>>>>>> fix/clean-merge-main
 sidebar_position: 6
 ---
 
