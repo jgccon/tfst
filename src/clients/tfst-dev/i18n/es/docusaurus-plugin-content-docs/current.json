@@ -1,0 +1,34 @@
+{
+  "version.label": {
+    "message": "Siguiente",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Domain Model": {
+    "message": "Dominio",
+    "description": "The label for category Domain Model in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Features": {
+    "message": "Funcionalidades",
+    "description": "The label for category Features in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Architecture": {
+    "message": "Arquitectura",
+    "description": "The label for category Architecture in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.OpenIdDict": {
+    "message": "OpenIdDict",
+    "description": "The label for category OpenIdDict in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.architecture": {
+    "message": "arquitectura",
+    "description": "The label for category architecture in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.deployment": {
+    "message": "despliegue",
+    "description": "The label for category deployment in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.security": {
+    "message": "seguridad",
+    "description": "The label for category security in sidebar tutorialSidebar"
+  }
+}

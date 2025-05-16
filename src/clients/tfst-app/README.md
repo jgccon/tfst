@@ -22,4 +22,3 @@ The **tfst.app** site is the core **SaaS platform** where businesses and profess
 ## Deployment
 
 This is a **fully functional web application** that interacts with TFST’s backend services.
-

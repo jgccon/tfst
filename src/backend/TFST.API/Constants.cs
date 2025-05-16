@@ -3,9 +3,9 @@ namespace TFST.API;
 public static class Constants
 {
     public const string AppName = "The  Full Stack Team.Api";
-    public const string Title = "The Full Stack Team REST API";
+    public const string Title = "The Full-Stack Team REST API";
     public const string Description = @"
-Welcome to the The Full Stack Team API documentation!
+Welcome to the The Full-Stack Team API documentation!
 
 This API provides... 
 
@@ -15,7 +15,7 @@ Happy coding!
 ";
     public static readonly Dictionary<string, string> Contact = new()
     {
-        { "name", "Juan García Carmona" },
+        { "name", "Juan G Carmona" },
         { "url", "https://jgcarmona.com/contact" },
         { "email", "juan@jgcarmona.com" }
     };

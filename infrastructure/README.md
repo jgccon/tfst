@@ -1,8 +1,8 @@
 
-# The Full Stack Team Infrastructure
+# The Full-Stack Team Infrastructure
 
 ## Introduction
-This repository contains the main infrastructure project for **The Full Stack Team** application, built with Terraform and Terragrunt. The Terraform configurations are organized into reusable modules, while Terragrunt keeps the environment-specific configurations DRY.
+This repository contains the main infrastructure project for **The Full-Stack Team** application, built with Terraform and Terragrunt. The Terraform configurations are organized into reusable modules, while Terragrunt keeps the environment-specific configurations DRY.
 
 ## Security and Best Practices
 Since this is a public repository, follow these guidelines to ensure security:

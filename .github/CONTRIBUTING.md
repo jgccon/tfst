@@ -1,7 +1,7 @@
 
-# Contributing to The Full Stack Team
+# Contributing to The Full-Stack Team
 
-Thank you for considering contributing to **The Full Stack Team**! Your contributions are invaluable for improving the platform and building a robust open-source management solution for freelancers and professionals. This guide provides instructions and best practices for contributing to the project.
+Thank you for considering contributing to **The Full-Stack Team**! Your contributions are invaluable for improving the platform and building a robust open-source management solution for freelancers and professionals. This guide provides instructions and best practices for contributing to the project.
 
 👉 **[Guía en Español](../docs/CONTRIBUTING-es.md)**
 
@@ -12,7 +12,7 @@ Thank you for considering contributing to **The Full Stack Team**! Your contribu
 - [Getting Started](#getting-started)
 - [Branching Strategy](#branching-strategy)
 - [Pull Request Process](#pull-request-process)
-- [Contact](#contact)
+<!-- - [Contact](#contact) -->
 
 ## How to Contribute
 

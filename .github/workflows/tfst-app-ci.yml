@@ -16,4 +16,4 @@ jobs:
     uses: ./.github/workflows/build-angular.yml
     with:
       branch: ${{ github.head_ref || github.ref_name }}
-      working_directory: src/clients/tfst-app/TFST-Front
+      working_directory: src/clients/tfst-app

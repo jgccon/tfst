@@ -1,4 +1,4 @@
-# The Full Stack Team (TFST)
+# The Full-Stack Team (TFST)
 
 👉 **[Versión en Español](../docs/README-es.md)**
 
@@ -41,18 +41,18 @@ TFST is built with **modern, scalable** technologies, but **remains open to impr
 
 ## 📌 Roadmap  
 
-### **MVP (First 3 Months)**  
+### **MVP**  
 ✅ Freelancer & client **registration** with KYC validation.  
 ✅ Profile system with **skill-based filtering**.  
 ✅ Initial hiring and **smart contract-based payments**.  
 
-### **Phase 2 (Next 6 Months)**  
+### **Phase 2**  
 ✅ Full **project management** with time tracking & automated payments.  
 ✅ **Reputation system** based on client validation and technical assessments.  
 ✅ **Consulting marketplace** for mentorship & training.  
 
 ### **Challenges We Are Tackling**  
-✅ **Scalability** → Microservices architecture to **support high traffic**.  
+✅ **Scalability** → We are currently building a Modular Monolith but might evolve towards a Microservices architecture to **support high traffic**.  
 ✅ **Security** → Smart contract auditing & **data protection**.  
 ✅ **User Experience** → Simple & intuitive UI/UX for **high conversion rates**.  
 

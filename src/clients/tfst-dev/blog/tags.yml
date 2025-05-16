@@ -1,0 +1,44 @@
+release:
+  label: Release
+  permalink: /tags/release
+  description: Platform updates, changelogs, and new feature announcements.
+
+tfst:
+  label: TFST
+  permalink: /tags/tfst
+  description: Everything related to The Full-Stack Team platform.
+
+documentation:
+  label: Documentation
+  permalink: /tags/documentation
+  description: Posts about writing, updating, or structuring technical docs.
+
+architecture:
+  label: Architecture
+  permalink: /tags/architecture
+  description: System design, decisions, and technical overviews.
+
+contributing:
+  label: Contributing
+  permalink: /tags/contributing
+  description: Guidelines and tips for contributing to the TFST project.
+
+smart-contracts:
+  label: Smart Contracts
+  permalink: /tags/smart-contracts
+  description: Blockchain logic and automation in TFST workflows.
+
+esco:
+  label: ESCO
+  permalink: /tags/esco
+  description: Integration with the European Skills and Occupations framework.
+
+ci-cd:
+  label: CI/CD
+  permalink: /tags/ci-cd
+  description: Automation, pipelines, and DevOps practices.
+
+openiddict:
+  label: OpenIddict
+  permalink: /tags/openiddict
+  description: Authentication and identity management with OpenIddict.
