@@ -1,9 +1,11 @@
-
+---
+id: intro
+title: Community
+sidebar_position: 5
+---
 # Contributing to The Full-Stack Team
 
 Thank you for considering contributing to **The Full-Stack Team**! Your contributions are invaluable for improving the platform and building a robust open-source management solution for freelancers and professionals. This guide provides instructions and best practices for contributing to the project.
-
-👉 **[Guía en Español](../docs/CONTRIBUTING-es.md)**
 
 ## Table of Contents
 
@@ -36,7 +38,7 @@ Please read and adhere to our [Code of Conduct](CODE_OF_CONDUCT.md) to foster a 
    cd tfst
    ```
 3. **Set Up the Project**:
-   - Follow the [Installation Guide](README.md#installation) to set up the backend and frontend locally.
+   - Follow the [Installation Guide](../install/index.md) to set up the backend and frontend locally.
 
 ## Branching Strategy
 

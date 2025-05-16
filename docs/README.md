@@ -1,6 +1,6 @@
 # 📚 TFST Documentation Has Moved
 
-All official documentation for **The Full Stack Team** project is now hosted at:
+All official documentation for **The Full-Stack Team** project is now hosted at:
 
 👉 [https://tfst.dev](https://tfst.dev)
 

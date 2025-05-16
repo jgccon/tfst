@@ -1,6 +1,6 @@
 ---
 id: 06-runtime-view
-title: Runtime View
+title: Vista de Ejecución
 sidebar_position: 6
 ---
 

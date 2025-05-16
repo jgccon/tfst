@@ -1,6 +1,6 @@
 ---
 id: 12-glossary
-title: Glossary
+title: Glosario
 sidebar_position: 12
 ---
 

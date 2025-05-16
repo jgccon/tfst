@@ -1,6 +1,6 @@
 ---
 id: 02-constraints
-title: Constraints
+title: Restricciones
 sidebar_position: 2
 ---
 # 2. Limitaciones

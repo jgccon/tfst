@@ -1,6 +1,6 @@
 ---
 id: 09-architecture-decisions
-title: Architecture Decisions
+title: Decisiones de Arquitectura
 sidebar_position: 9
 ---
 
