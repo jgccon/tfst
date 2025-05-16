@@ -1,11 +1,11 @@
 ---
 id: index
-title: Architectura (arc42)
+title: Architecture (arc42)
 sidebar_position: 3
 ---
-# The Full-Stack Team - Architectura (arc42) 
+# El Equipo Full-Stack - Documentación de Arquitectura
 
-Bienvenido a la sección de arquitectura de **The Full-Stack Team**. Esta documentación sigue el modelo [arc42](https://arc42.org/) para ofrecer una visión estructurada y completa de la arquitectura del sistema, incluyendo las decisiones de diseño, la estructura y los atributos de calidad.
+Bienvenido a la sección de arquitectura del **Equipo Full-Stack**. Esta documentación sigue el modelo [arc42](https://arc42.org/) para ofrecer una visión estructurada y completa de la arquitectura del sistema, incluyendo las decisiones de diseño, la estructura y los atributos de calidad.
 
 ## Secciones
 
@@ -24,9 +24,9 @@ Bienvenido a la sección de arquitectura de **The Full-Stack Team**. Esta docume
 
 ## ¿Quién debería leer esto?
 
-- **Desarrolladores**: Conoce la estructura y los componentes del sistema para contribuir eficazmente.
-- **Contribuyentes**: Comprende las restricciones, las decisiones y las directrices antes de proponer cambios.
-- **Partes interesadas**: Adquiere un conocimiento profundo de la intención y la hoja de ruta del sistema.
+- **Desarrolladores**: Conozcan la estructura y los componentes del sistema para contribuir eficazmente.
+- **Contribuyentes**: Comprendan las restricciones, las decisiones y las directrices antes de proponer cambios.
+- **Partes interesadas**: Adquieran un conocimiento profundo de la intención y la hoja de ruta del sistema.
 
 Recursos relacionados
 

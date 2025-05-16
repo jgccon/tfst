@@ -2,9 +2,8 @@
 id: intro
 title: The Full-Stack Team
 sidebar_position: 0
-slug: /
 ---
-# The Full-Stack Team (TFST)
+# El Equipo Full-Stack (TFST)
 
 > 🛠️ El punto de encuentro para los expertos en código, infraestructura y transparencia.
 
@@ -23,12 +22,11 @@ Bienvenido a **TFST**, la plataforma de código abierto para la gestión de tale
 - Porque te importa la **calidad del software** y quieres trabajar en un entorno **modular y escalable**.
 - Porque crees en la **transparencia y la descentralización** como principios arquitectónicos.
 - Porque quieres formar parte de algo que **combina IA, contratos inteligentes y código limpio**.
-
 ## 🔍 Próximos pasos
 
 <!-- - Revisa el [tutorial de 5 minutos](tutorial.md) -->
-- Explora la sección [Arquitectura](/docs/architecture/introduction-and-goals)
-- Consulta el [Código de Conducta](/docs/code-of-conduct) y empieza a contribuir.
+- Explora la sección [Arquitectura](/docs/architecture)
+- Consulta el [Código de Conducta](/docs/community) y empieza a contribuir.
 
 ---
 

@@ -3,9 +3,9 @@ id: intro
 title: Community
 sidebar_position: 5
 ---
-# Contribuyendo al The Full-Stack Team
+# Contribuyendo al Equipo Full-Stack
 
-¡Gracias por considerar contribuir al **The Full-Stack Team**! Tus contribuciones son invaluables para mejorar la plataforma y crear una solución robusta de gestión de código abierto para freelancers y profesionales. Esta guía proporciona instrucciones y buenas prácticas para contribuir al proyecto.
+¡Gracias por considerar contribuir al **Equipo Full-Stack**! Tus contribuciones son invaluables para mejorar la plataforma y crear una solución robusta de gestión de código abierto para freelancers y profesionales. Esta guía proporciona instrucciones y buenas prácticas para contribuir al proyecto.
 
 ## Índice
 
@@ -14,22 +14,20 @@ sidebar_position: 5
 - [Introducción](#getting-started)
 - [Estrategia de Ramificación](#branching-strategy)
 - [Proceso de Solicitud de Incorporación](#pull-request-process)
-- [Contacto](#contact)
+<!-- - [Contacto](#contact) -->
 
-## Cómo Contribuir
+## Cómo Contribuir  {#how-to-contribute}
 
 Agradecemos diversos tipos de contribuciones, incluyendo:
-- Reportar errores y enviar solicitudes de funcionalidades.
+- Reportar errores y enviar solicitudes de funcionalidad.
 - Redactar documentación y mejorar la existente.
-- Contribuir con código para nuevas funcionalidades, corrección de errores y mejoras.
+- Contribuir con código para nuevas funcionalidades, corrección de errores y mejoras. - Mejorar la cobertura de pruebas y garantizar la estabilidad de la plataforma.
 
-- Mejorar la cobertura de pruebas y garantizar la estabilidad de la plataforma.
-
-## Código de Conducta
+## Código de Conducta{#code-of-conduct}
 
 Lea y respete nuestro [Código de Conducta](CODE_OF_CONDUCT.md) para fomentar una comunidad acogedora y respetuosa.
 
-## Primeros pasos
+## Primeros pasos {#getting-started}
 
 1. **Bifurcar el repositorio**:
 
@@ -44,7 +42,7 @@ cd tfst
 
 - Siga la [Guía de instalación](../install/index.md) para configurar el backend y el frontend localmente.
 
-## Estrategia de ramificación
+## Gestión de ramas {#branching-strategy}
 
 Nuestro proyecto sigue la siguiente estrategia de ramificación:
 
@@ -59,7 +57,7 @@ Nuestro proyecto sigue la siguiente estrategia de ramificación:
 - Solo un grupo restringido de colaboradores puede crear PR para **main**.
 - Las PR para **main** se utilizan para implementaciones de producción.
 
-## Proceso de solicitud de extracción
+## Flujo de trabajo para Pull Requests {#pull-request-process}
 
 1. **Crear una rama**: 
 ```bash
@@ -71,13 +69,13 @@ git checkout -b feature/your-feature-name
 git add . git commit -m "Añadir descripción de los cambios"
 git push origin feature/your-feature-name
 ```
-4. **Abrir una solicitud de extracción**:
+4. **Abrir un Pull Request**:
 - Acceder al repositorio original en GitHub.
-- Hacer clic en la pestaña **Solicitudes de extracción** y luego en **Nueva solicitud de extracción**.
-- Proporcionar un título descriptivo y resumir los cambios en la descripción de la solicitud de extracción.
-- Vincular la solicitud de extracción a las incidencias relevantes usando `#issue-number`.
+- Hacer clic en la pestaña **Solicitudes de extracción** y luego en **Nueva Pull Request**.
+- Proporcionar un título descriptivo y resumir los cambios en la descripción de la Pull Request.
+- Vincular la Pull Request a las incidencias relevantes usando `#issue-number`.
 
-5. **Revisar y fusionar**: Un responsable del proyecto revisará tu solicitud de extracción. Prepárate para realizar ajustes según los comentarios.
+5. **Revisar y fusionar**: Un responsable del proyecto revisará tu Pull Request. Prepárate para realizar ajustes según los comentarios.
 
 ## Comunicación y soporte
 

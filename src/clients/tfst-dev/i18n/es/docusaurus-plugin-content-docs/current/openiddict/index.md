@@ -11,12 +11,12 @@ Bienvenido a la documentación de los proyectos TFST.AuthServer, TFST.API y tfst
 ## Contenido
 
 - **Arquitectura**
-- [Descripción general](./architecture/index.md): Una visión general de la arquitectura de los proyectos y cómo interactúan.
+- [Descripción general](../architecture/index.md): Una visión general de la arquitectura de los proyectos y cómo interactúan.
 - [TFST.AuthServer](./architecture/auth-server.md): Detalles sobre el proyecto TFST.AuthServer, sus componentes y la integración con OpenIddict.
 - [TFST.API](./architecture/api.md): Información sobre el proyecto TFST.API, sus endpoints y el flujo de datos. - [tfst-demo](./architecture/demo-client.md): Explicación del cliente tfst-demo y su rol en la arquitectura general.
 
 - **Implementación**
-- [Instalación](./deployment/index.md): Instrucciones paso a paso para la instalación e implementación de los proyectos.
+- [Instalación](../install/index.md): Instrucciones paso a paso para la instalación e implementación de los proyectos.
 
 - **Seguridad**
 - [Descripción general de OpenIddict](./security/index.md): Información sobre OpenIddict y su uso en los proyectos.

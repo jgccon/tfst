@@ -107,10 +107,10 @@ Es posible que tengas que actualizar la cadena de conexión dentro de la configu
 Asegúrate de que `certs/tfst_dev_cert.pfx` exista y sea de confianza. De lo contrario, vuelve a ejecutar la configuración del certificado.
 
 ### 🐘 Tiempos de espera de la base de datos
-Comprueba que tu servicio SQL esté en ejecución y sea accesible desde tu host/contenedor.
+Verifique que su servicio SQL esté en ejecución y sea accesible desde su host/contenedor.
 
 ### ⚡ Errores de Angular
-Prueba a eliminar `node_modules/` y reinstalar las dependencias:
+Intenta eliminar `node_modules/` y reinstalar las dependencias:
 
 ```bash
 rm -rf node_modules package-lock.json
@@ -129,10 +129,10 @@ docker-compose up
 
 ## 🤝 Contribuye
 
-Una vez que estés en funcionamiento, consulta:
+Una vez que estés listo, consulta:
 
-- [Código de conducta](../code-of-conduct)
-- [Pautas de contribución](../contributing)
+- [Código de conducta](../community/CODE_OF_CONDUCT.md)
+- [Pautas de contribución](../community/index.md)
 
 Y considera contribuir a la hoja de ruta, escribir documentación o ayudar a resolver problemas.
 

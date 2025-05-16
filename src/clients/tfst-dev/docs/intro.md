@@ -24,12 +24,11 @@ Welcome to **TFST**, the open-source platform for talent management, smart contr
 - Because you care about **software quality** and want to work in a **modular and scalable** environment.
 - Because you believe in **transparency and decentralization** as architectural principles.
 - Because you want to be part of something that **combines AI, smart contracts, and clean code**.
-
 ## 🔍 Next steps
 
 <!-- - Review the [5-minute tutorial](tutorial.md) -->
-- Explore the [Architecture](/docs/architecture/introduction-and-goals) section
-- Check out the [Code of Conduct](/docs/code-of-conduct) and start contributing
+- Explore the [Architecture](/docs/architecture) section
+- Check out the [Code of Conduct](/docs/community) and start contributing
 
 ---
 
