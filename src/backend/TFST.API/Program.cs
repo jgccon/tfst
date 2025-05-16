@@ -5,10 +5,15 @@ using System.Security.Claims;
 using TFST.API.Extensions;
 using TFST.Modules.Users.Presentation.Extensions;
 using TFST.SharedKernel.Configuration;
-
+using TFST.SharedKernel.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddEnvironmentVariables();
+
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddUserSecrets<Program>(optional: true)
+    .AddEnvironmentVariables(prefix: "TFST_"); 
 
 builder.Services.AddOpenIddict()
     .AddValidation(options =>
@@ -45,11 +50,16 @@ builder.Services.AddUsersModule(builder.Configuration);
 
 builder.Services.AddAuthentication(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
 builder.Services.AddAuthorization();
+builder.Services.AddHealthChecks();
+builder.WebHost.UseSmartPortConfiguration("http://*:5000", "https://*:5001");
 
 var app = builder.Build();
 
 app.UseCors();
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection(); // Only for development
+}
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
@@ -57,6 +67,7 @@ app.UseOpenApiConfiguration();
 
 await app.UseUsersModuleAsync(app.Services, builder.Configuration);
 
+app.MapHealthChecks("/health");
 app.MapGet("api", [Authorize] (ClaimsPrincipal user) => $"Message: User {user.Identity!.Name} accessed the protected resource API.");
 
 app.Run();
