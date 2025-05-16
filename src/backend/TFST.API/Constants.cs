@@ -15,7 +15,7 @@ Happy coding!
 ";
     public static readonly Dictionary<string, string> Contact = new()
     {
-        { "name", "Juan Garc�a Carmona" },
+        { "name", "Juan G Carmona" },
         { "url", "https://jgcarmona.com/contact" },
         { "email", "juan@jgcarmona.com" }
     };
