@@ -8,11 +8,11 @@ sidebar_position: 1
 Este directorio contiene las funciones principales de TFST, estructuradas en diferentes categorías.
 
 ## Estructura de funciones
-- [Usuarios e identidad](users_identity.md)
-- [Identidad y reputación profesional](professional_identity.md)
-- [Descubrimiento y contratación de talento](talent_discovery.md)
-- [Contratos y pagos](contracts_payments.md)
-- [IA y contratos inteligentes](ai_smart_contracts.md)
-- [Eventos y registros del sistema](system_events.md)
+- [Usuarios e identidad](users-identity.md)
+- [Identidad y reputación profesional](professional-identity.md)
+- [Descubrimiento y contratación de talento](talent-discovery.md)
+- [Contratos y pagos](contracts-payments.md)
+- [IA y contratos inteligentes](ai-smart-contracts.md)
+- [Eventos y registros del sistema](system-events.md)
 
 Cada función se documenta con una **historia de usuario** que describe su propósito y futuras mejoras.
