@@ -1,10 +1,6 @@
 ---
 id: roadmap
 title: Roadmap
-<<<<<<< HEAD
----
-Funciones planificadas e hitos de desarrollo.
-=======
 sidebar_position: 6
 ---
 
@@ -23,4 +19,3 @@ sidebar_position: 6
 ## **Retos que estamos abordando** 
 ✅ **Escalabilidad** → Actualmente estamos construyendo un Monolito Modular, pero podríamos evolucionar hacia una arquitectura de Microservicios para **soportar alto tráfico**. 
 ✅ **Seguridad** → Auditoría de contratos inteligentes y **protección de datos**. ✅ **Experiencia de usuario** → Interfaz de usuario (IU)/UX sencilla e intuitiva para **altas tasas de conversión**.
->>>>>>> fix/clean-merge-main

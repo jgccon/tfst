@@ -4,11 +4,7 @@
     "description": "The label for version current"
   },
   "sidebar.tutorialSidebar.category.Domain Model": {
-<<<<<<< HEAD
-    "message": "Modelo de Dominio",
-=======
     "message": "Dominio",
->>>>>>> fix/clean-merge-main
     "description": "The label for category Domain Model in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Features": {

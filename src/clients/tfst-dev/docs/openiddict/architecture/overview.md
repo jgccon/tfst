@@ -1,10 +1,6 @@
 ---
 id: overview
-<<<<<<<< HEAD:src/clients/tfst-dev/docs/openiddict/architecture/overview.md
-title: Overview
-========
 title: Architecture
->>>>>>>> fix/clean-merge-main:src/clients/tfst-dev/docs/openiddict/architecture/index.md
 ---
 
 # Architecture Overview

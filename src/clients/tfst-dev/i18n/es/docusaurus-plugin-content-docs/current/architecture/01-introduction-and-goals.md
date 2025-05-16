@@ -1,10 +1,6 @@
 ---
 id: 01-introduction-and-goals
-<<<<<<< HEAD
-title: Introduction and Goals
-=======
 title: Introducción y Objetivos
->>>>>>> fix/clean-merge-main
 sidebar_position: 1
 ---
 

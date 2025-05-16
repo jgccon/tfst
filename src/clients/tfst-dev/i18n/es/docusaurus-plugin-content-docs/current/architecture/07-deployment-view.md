@@ -1,10 +1,6 @@
 ---
 id: 07-deployment-view
-<<<<<<< HEAD
-title: Deployment View
-=======
 title: Vista de Despliegue
->>>>>>> fix/clean-merge-main
 sidebar_position: 7
 ---
 

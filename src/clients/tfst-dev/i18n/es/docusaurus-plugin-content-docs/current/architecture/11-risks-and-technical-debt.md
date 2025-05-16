@@ -1,18 +1,10 @@
 ---
 id: 11-risks-and-technical-debt
-<<<<<<< HEAD
-title: Risks and Technical Debt
-sidebar_position: 11
----
-
-#11. Riesgos y deuda técnica
-=======
 title: Riesgos y Deuda Técnica
 sidebar_position: 11
 ---
 
 # 11. Riesgos y deuda técnica
->>>>>>> fix/clean-merge-main
 
 ## Riesgos potenciales
 - **Vulnerabilidades de seguridad**: Riesgo de fuga de datos entre inquilinos.
