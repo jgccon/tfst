@@ -1,6 +1,7 @@
 ---
 id: openiddict-overview
-title: Openiddict Overview
+title: Overview
+sidebar_position: 0
 ---
 
 # OpenIddict Overview

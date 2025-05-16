@@ -1,6 +1,6 @@
 ---
-id: installation
-title: Installation
+id: deployment
+title: Deployment
 ---
 
 # Installation and Deployment of TFST.AuthServer, TFST.API and tfst-demo

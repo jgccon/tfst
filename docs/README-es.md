@@ -1,6 +1,6 @@
 # 📚 La documentación oficial de TFST se ha trasladado
 
-Toda la documentación del proyecto **The Full Stack Team** ahora se encuentra disponible en:
+Toda la documentación del proyecto **The Full-Stack Team** ahora se encuentra disponible en:
 
 👉 [https://tfst.dev](https://tfst.dev)
 

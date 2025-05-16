@@ -7,7 +7,7 @@ sidebar_position: 3
 # 3. Context and Scope
 
 ## Context
-The Full Stack Team platform is designed for companies to manage their HR needs across multiple clients or departments within a unified platform.
+The Full-Stack Team platform is designed for companies to manage their HR needs across multiple clients or departments within a unified platform.
 
 ## Scope
 The platform includes:

@@ -327,68 +327,36 @@
     "message": "Descripción predeterminada aquí",
     "description": "Descripción de la función"
   },
-  "feature.onboarding.title": {
-    "message": "Comienza con la incorporación",
+  "homepage.feature.recognition.title": {
+    "message": "Deja que tu trabajo hable por ti",
     "description": "Título de la función de incorporación"
   },
-  "feature.onboarding.description": {
-    "message": "Desde el primer día, TFST optimiza la incorporación, implementando roles, contratos y acceso con precisión y claridad.",
+  "homepage.feature.recognition.description": {
+    "message": "Construye un perfil técnico basado en contribuciones reales y contratos inteligentes. Olvídate de las cartas de presentación: aquí tu trabajo es tu mejor presentación.",
     "description": "Descripción de la función de incorporación"
   },
-  "feature.experience.title": {
-    "message": "Crece con la experiencia",
-    "description": "Título de la función de experiencia"
+  "homepage.feature.talent.title": {
+    "message": "Contrata sin intermediarios",
+    "description": "Título de la función de acceso a talento"
   },
-  "feature.experience.description": {
-    "message": "Monitorea el tiempo, el rendimiento y el desarrollo en todos los proyectos. Desarrolla habilidades alineadas con las de ESCO e impulsa un crecimiento real.",
-    "description": "Descripción de la función de experiencia"
+  "homepage.feature.talent.description": {
+    "message": "Perfiles validados, contratos directos y trazabilidad completa. Sin comisiones abusivas, sin filtros opacos: solo talento real, accesible al instante.",
+    "description": "Descripción de la función de acceso a talento"
   },
-  "feature.collaboration.title": {
-    "message": "Colabora y construye",
-    "description": "Título de la función de colaboración"
+  "homepage.feature.reputation.title": {
+    "message": "Haz crecer tu reputación con trabajo real",
+    "description": "Título de la función de reputación"
   },
-  "feature.collaboration.description": {
-    "message": "Desarrolladores, administradores y colaboradores cocrean en TFST. Modular por diseño. Transparente por defecto. Bienvenidos a la plataforma completa.",
-    "description": "Descripción de la función de colaboración"
+  "homepage.feature.reputation.description": {
+    "message": "Cada hora registrada, cada proyecto entregado y cada feedback recibido refuerza tu identidad profesional. Tu perfil es tu historial técnico auditable.",
+    "description": "Descripción de la función de reputación"
   },
-  "feature.welcome.title": {
-    "message": "Bienvenidos al equipo",
-    "description": "Título de la función de bienvenida"
+  "homepage.feature.control.title": {
+    "message": "Gestiona todo desde un único lugar",
+    "description": "Título de la función de control operativo"
   },
-  "feature.welcome.description": {
-    "message": "TFST es más que una plataforma: es un espacio compartido para personas, ideas y progreso. Construyámoslo juntos.",
-    "description": "Descripción de la función de bienvenida"
-  },
-  "homepage.feature.onboarding.title": {
-    "message": "Comienza con la incorporación",
-    "description": "Título de la función de incorporación"
-  },
-  "homepage.feature.onboarding.description": {
-    "message": "Desde el primer día, TFST optimiza la incorporación, implementando roles, contratos y acceso con precisión y claridad.",
-    "description": "Descripción de la función de incorporación"
-  },
-  "homepage.feature.experience.title": {
-    "message": "Crece con la experiencia",
-    "description": "Título de la función de experiencia"
-  },
-  "homepage.feature.experience.description": {
-    "message": "Monitorea el tiempo, el rendimiento y el desarrollo en todos los proyectos. Desarrolla habilidades alineadas con ESCO e impulsa un crecimiento real.",
-    "description": "Descripción de la función de experiencia"
-  },
-  "homepage.feature.collaboration.title": {
-    "message": "Colabora y construye",
-    "description": "Título de la función de colaboración"
-  },
-  "homepage.feature.collaboration.description": {
-    "message": "Desarrolladores, administradores y colaboradores cocrean en TFST. Modular por diseño. Transparente por defecto. Bienvenidos a la pila completa.",
-    "description": "Descripción de la función de colaboración"
-  },
-  "homepage.feature.welcome.title": {
-    "message": "Bienvenido al Equipo",
-    "description": "Title for the welcome feature"
-  },
-  "homepage.feature.welcome.description": {
-    "message": "TFST es más que una plataforma: es un espacio compartido para personas, ideas y progreso. Construyámoslo juntos.",
-    "description": "Description for the welcome feature"
+  "homepage.feature.control.description": {
+    "message": "Contratos, roles, seguimiento de tiempo y pagos — para ti o para todo tu equipo. TFST te da visibilidad total y control operativo, ahora y a medida que crece.",
+    "description": "Descripción de la función de control operativo"
   }
 }

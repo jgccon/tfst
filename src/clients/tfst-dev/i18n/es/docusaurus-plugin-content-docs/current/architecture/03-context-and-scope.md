@@ -4,10 +4,10 @@ title: Contexto y Alcance
 sidebar_position: 3
 ---
 
-#3. Contexto y Alcance
+# 3. Contexto y Alcance
 
 ## Contexto
-La plataforma Full Stack Team está diseñada para que las empresas gestionen sus necesidades de RR. HH. de múltiples clientes o departamentos dentro de una plataforma unificada.
+La plataforma Full-Stack Team está diseñada para que las empresas gestionen sus necesidades de RR. HH. de múltiples clientes o departamentos dentro de una plataforma unificada.
 
 ## Alcance
 La plataforma incluye:

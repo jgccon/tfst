@@ -12,82 +12,78 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    Img: "img/onboarding.svg",
+    Img: "img/recognition.svg",
     title: (
       <Translate
-        id="homepage.feature.onboarding.title"
-        description="Title for the onboarding feature"
+        id="homepage.feature.recognition.title"
+        description="Título de la función de incorporación"
       >
-        Start with Onboarding
+        Let your work speak for itself
       </Translate>
     ),
     description: (
       <Translate
-        id="homepage.feature.onboarding.description"
-        description="Description for the onboarding feature"
+        id="homepage.feature.recognition.description"
+        description="Descripción de la función de incorporación"
       >
-        From day one, TFST streamlines onboarding — setting roles, contracts,
-        and access in motion with precision and clarity.
+        Build a technical profile based on real contributions and smart contracts. Forget cover letters — your work is your voice.
       </Translate>
     ),
   },
   {
-    Img: "img/experience.svg",
+    Img: "img/talent.svg",
     title: (
       <Translate
-        id="homepage.feature.experience.title"
-        description="Title for the experience feature"
+        id="homepage.feature.talent.title"
+        description="Título de la función de talento"
       >
-        Grow with Experience
+        Hire talent without intermediaries
       </Translate>
     ),
     description: (
       <Translate
-        id="homepage.feature.experience.description"
-        description="Description for the experience feature"
+        id="homepage.feature.talent.description"
+        description="Descripción de la función de talento"
       >
-        Track time, performance, and development across projects. Build skills
-        aligned with ESCO and fuel real growth.
+        Validated profiles, direct contracts, complete traceability. No inflated fees, no shady filters — just real talent.
       </Translate>
     ),
   },
   {
-    Img: "img/develop.svg",
+    Img: "img/reputation.svg",
     title: (
       <Translate
-        id="homepage.feature.collaboration.title"
-        description="Title for the collaboration feature"
+        id="homepage.feature.reputation.title"
+        description="Título de la función de reputación"
       >
-        Collaborate and Build
+        Grow your reputation through real work
       </Translate>
     ),
     description: (
       <Translate
-        id="homepage.feature.collaboration.description"
-        description="Description for the collaboration feature"
+        id="homepage.feature.reputation.description"
+        description="Descripción de la función de reputación"
       >
-        Developers, managers, and contributors co-create in TFST. Modular by
-        design. Transparent by default. Welcome to the full stack.
+        Every logged hour, every delivered project, every review builds your reputation. Your profile becomes your proof.
       </Translate>
     ),
   },
   {
-    Img: "img/welcoming.svg",
+    Img: "img/control.svg",
     title: (
       <Translate
-        id="homepage.feature.welcome.title"
-        description="Title for the welcome feature"
+        id="homepage.feature.control.title"
+        description="Título de la función de control"
       >
-        Welcome to the Team
+        Manage everything from a single place
       </Translate>
     ),
     description: (
       <Translate
-        id="homepage.feature.welcome.description"
-        description="Description for the welcome feature"
+        id="homepage.feature.control.description"
+        description="Descripción de la función de control"
       >
-        TFST is more than a platform — it’s a shared space for people, ideas,
-        and progress. Let’s build it together.
+       Contracts, roles, time tracking, payments — for yourself or your whole team. TFST gives you full visibility and operational control, now and as it grows.
       </Translate>
     ),
   },
