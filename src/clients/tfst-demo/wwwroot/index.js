@@ -42,6 +42,23 @@ async function refreshToken() {
 
 async function callApi() {
     try {
+
+        const response = await fetch('https://localhost:5001/health');
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status} ${response.statusText} ${await response.text()}`);
+        }
+
+        const data = await response.text();
+        return data;
+    } catch (error) {
+        console.error('Fail calling API:', error);
+        throw error;
+    }
+}
+
+async function callApiToken() {
+    try {
         const user = await userManager.getUser();
         if (!user) {
             console.error('User not authenticated');
@@ -55,18 +72,14 @@ async function callApi() {
         });
 
         if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
+            throw new Error(`Error HTTP: ${response.status} ${response.statusText} ${await response.text()}`);
         }
 
         const data = await response.text();
         return data;
     } catch (error) {
-        console.error('Error calling API:', error);
+        console.error('Fail calling API:', error);
         throw error;
     }
 }
 
-window.login = login;
-window.logout = logout;
-window.refreshToken = refreshToken;
-window.callApi = callApi;

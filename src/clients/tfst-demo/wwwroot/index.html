@@ -30,6 +30,7 @@
             <button id="refresh-button" class="hidden">Refresh Token</button>
             <button id="logout-button" class="hidden">Logout</button>
             <button id="api-button" class="hidden">API</button>
+            <button id="token-button" class="hidden">API + Token</button>
         </div>
 
         <div id="user-info" class="user-info hidden">
@@ -48,6 +49,7 @@
         const refreshButton = document.getElementById('refresh-button');
         const logoutButton = document.getElementById('logout-button');
         const apiButton = document.getElementById('api-button');
+        const tokenButton = document.getElementById('token-button');
         const userInfo = document.getElementById('user-info');
         const loginStatus = document.getElementById('login-status');
         const claimsElement = document.getElementById('claims');
@@ -67,6 +69,17 @@
             }
         };
 
+        tokenButton.onclick = async () => {
+            try {
+                const result = await callApiToken();
+                if (result) {
+                    alert('API Response: ' + result);
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        };
+
         async function updateUI() {
             try {
                 const user = await userManager.getUser();
@@ -75,6 +88,7 @@
                     refreshButton.classList.remove('hidden');
                     logoutButton.classList.remove('hidden');
                     apiButton.classList.remove('hidden');
+                    tokenButton.classList.remove('hidden');
                     userInfo.classList.remove('hidden');
 
                     loginStatus.textContent = 'Authenticated';
@@ -85,6 +99,7 @@
                     refreshButton.classList.add('hidden');
                     logoutButton.classList.add('hidden');
                     apiButton.classList.add('hidden');
+                    tokenButton.classList.add('hidden');
                     userInfo.classList.add('hidden');
                 }
             } catch (error) {

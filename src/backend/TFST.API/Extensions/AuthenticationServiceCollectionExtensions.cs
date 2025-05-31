@@ -9,7 +9,7 @@ public static class AuthenticationServiceCollectionExtensions
 {
     public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>() ?? throw new ArgumentNullException("JwtSettings not configured.");
+        var jwtSettings = configuration.GetSection("TFST_JwtSettings").Get<JwtSettings>() ?? throw new ArgumentNullException("JwtSettings not configured.");
 
         if (string.IsNullOrEmpty(jwtSettings.Key))
         {

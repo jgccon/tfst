@@ -28,6 +28,7 @@ public class Worker(IServiceProvider serviceProvider, IOptions<AuthServerOptions
                 ClientId = _options.TfstApp.ClientId,
                 ClientType = ClientTypes.Public,
                 DisplayName = _options.TfstApp.DisplayName,
+                RedirectUris = { new Uri(_options.TfstApp.RedirectUris) },
                 PostLogoutRedirectUris = { new Uri(_options.TfstApp.PostLogoutRedirectUris) },
                 Permissions =
                 {
@@ -49,9 +50,6 @@ public class Worker(IServiceProvider serviceProvider, IOptions<AuthServerOptions
                     Requirements.Features.ProofKeyForCodeExchange,
                 }
             };
-
-            foreach (var redirectUri in _options.TfstApp.RedirectUris)
-                descriptor.RedirectUris.Add(new Uri(redirectUri));
 
             foreach (var apiScope in _options.ApiScopes)
                 descriptor.Permissions.Add(Permissions.Prefixes.Scope + apiScope.Name);

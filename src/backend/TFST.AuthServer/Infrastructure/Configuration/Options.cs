@@ -12,7 +12,7 @@ public class ClientOptions
     public string ClientId { get; set; } = string.Empty;
     public string? ClientSecret { get; set; }
     public string DisplayName { get; set; } = string.Empty;
-    public List<string> RedirectUris { get; set; } = [];
+    public string RedirectUris { get; set; } = string.Empty;
     public string PostLogoutRedirectUris { get; set; } = string.Empty;
 }
 
