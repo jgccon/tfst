@@ -7,19 +7,27 @@ import { LayoutService } from '../service/layout.service';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import {TranslateModule} from "@ngx-translate/core";
+import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '../../core/services/language.service';
 
 interface ILanguageOption {
-   name: string;
-   code:string;
-   img: string;
+  name: string;
+  code: string;
+  img: string;
 }
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [RouterModule, CommonModule, StyleClassModule, SelectModule, FormsModule, ButtonModule, TranslateModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    StyleClassModule,
+    SelectModule,
+    FormsModule,
+    ButtonModule,
+    TranslateModule,
+  ],
   template: ` <div class="layout-topbar">
     <div class="layout-topbar-logo-container">
       <button
@@ -73,21 +81,13 @@ interface ILanguageOption {
           >
             <ng-template #selectedItem let-selectedOption>
               <div class="flex items-center gap-2" *ngIf="selectedOption">
-              <img
-                  [src]="selectedOption.img"
-                   width="18px"
-                   height="18px"
-                />
+                <img [src]="selectedOption.img" width="18px" height="18px" />
                 <div>{{ selectedOption.name }}</div>
               </div>
             </ng-template>
             <ng-template let-country #item>
               <div class="flex items-center gap-2">
-                <img
-                  [src]="country.img"
-                  width="18px"
-                  height="18px"
-                />
+                <img [src]="country.img" width="18px" height="18px" />
                 <div>{{ country.name }}</div>
               </div>
             </ng-template>
@@ -99,29 +99,37 @@ interface ILanguageOption {
   </div>`,
 })
 export class AppTopbar {
-  selectedLanguage! : ILanguageOption;
+  selectedLanguage!: ILanguageOption;
   items!: MenuItem[];
 
   languages = signal<ILanguageOption[]>([
-    { name: 'English', code: 'en', img: 'https://hatscripts.github.io/circle-flags/flags/us.svg' },
-    { name: 'Spanish', code: 'es', img: 'https://hatscripts.github.io/circle-flags/flags/es.svg' },
+    {
+      name: 'English',
+      code: 'en',
+      img: 'https://hatscripts.github.io/circle-flags/flags/us.svg',
+    },
+    {
+      name: 'Spanish',
+      code: 'es',
+      img: 'https://hatscripts.github.io/circle-flags/flags/es.svg',
+    },
   ]);
 
   private _languageService = inject(LanguageService);
 
   constructor(public layoutService: LayoutService) {
-     this.checkLanguage();
+    this.checkLanguage();
   }
 
-  checkLanguage(){
+  checkLanguage() {
     const code = this._languageService.currentLang();
     const found = this.languages().find((x) => x.code === code);
-    console.log("found", found);
-    
+    console.log('found', found);
+
     this.selectedLanguage = found ?? this.languages()[0];
   }
 
-  changeLanguage(){
+  changeLanguage() {
     this._languageService.changeLanguage(this.selectedLanguage.code);
   }
 }
