@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -7,11 +7,19 @@ import { LayoutService } from '../service/layout.service';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import {TranslateModule} from "@ngx-translate/core";
+import { LanguageService } from '../../core/services/language.service';
+
+interface ILanguageOption {
+   name: string;
+   code:string;
+   img: string;
+}
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [RouterModule, CommonModule, StyleClassModule, SelectModule, FormsModule, ButtonModule],
+  imports: [RouterModule, CommonModule, StyleClassModule, SelectModule, FormsModule, ButtonModule, TranslateModule],
   template: ` <div class="layout-topbar">
     <div class="layout-topbar-logo-container">
       <button
@@ -59,6 +67,7 @@ import { ButtonModule } from 'primeng/button';
           <p-select
             [options]="languages()"
             [(ngModel)]="selectedLanguage"
+            (ngModelChange)="changeLanguage()"
             optionLabel="name"
             class="w-full"
           >
@@ -90,15 +99,29 @@ import { ButtonModule } from 'primeng/button';
   </div>`,
 })
 export class AppTopbar {
-  selectedLanguage = signal(
-    { name: 'English', img: 'https://hatscripts.github.io/circle-flags/flags/us.svg' }
-  );
+  selectedLanguage! : ILanguageOption;
   items!: MenuItem[];
 
-  languages = signal([
-    { name: 'English', img: 'https://hatscripts.github.io/circle-flags/flags/us.svg' },
-    { name: 'Spanish', img: 'https://hatscripts.github.io/circle-flags/flags/es.svg' },
+  languages = signal<ILanguageOption[]>([
+    { name: 'English', code: 'en', img: 'https://hatscripts.github.io/circle-flags/flags/us.svg' },
+    { name: 'Spanish', code: 'es', img: 'https://hatscripts.github.io/circle-flags/flags/es.svg' },
   ]);
 
-  constructor(public layoutService: LayoutService) {}
+  private _languageService = inject(LanguageService);
+
+  constructor(public layoutService: LayoutService) {
+     this.checkLanguage();
+  }
+
+  checkLanguage(){
+    const code = this._languageService.currentLang();
+    const found = this.languages().find((x) => x.code === code);
+    console.log("found", found);
+    
+    this.selectedLanguage = found ?? this.languages()[0];
+  }
+
+  changeLanguage(){
+    this._languageService.changeLanguage(this.selectedLanguage.code);
+  }
 }

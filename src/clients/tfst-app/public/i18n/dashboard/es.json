@@ -1,0 +1,16 @@
+{
+    "dashboard": {
+        "title": "Panel de control",
+        "description": "¡Bienvenido al panel de control! Aquí puedes encontrar una visión general de tus actividades y estadísticas.",
+        "stats": {
+            "totalUsers": "Usuarios Totales",
+            "activeUsers": "Usuarios Activos",
+            "newSignups": "Nuevas Inscripciones"
+        },
+        "actions": {
+            "viewDetails": "Ver Detalles",
+            "manageUsers": "Administrar Usuarios",
+            "settings": "Configuración"
+        }
+    }
+}
