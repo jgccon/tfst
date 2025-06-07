@@ -1,0 +1,14 @@
+{
+    "login": {
+        "title": "Iniciar sesión",
+        "description": "Por favor ingresa tus credenciales para acceder a tu cuenta.",
+        "fields": {
+            "username": "Nombre de usuario",
+            "password": "Contraseña"
+        },
+        "actions": {
+            "login": "Iniciar sesión",
+            "forgotPassword": "¿Olvidaste tu contraseña?"
+        }
+    }
+}
