@@ -1,3 +1,10 @@
 {
-    "common": "Welcome {{username}} to TFST"
+    "common": "Welcome {{username}} to TFST",
+    "menu": {
+        "dashboard": "Dashboard",
+        "projects": "Projects",
+        "clients": "Clients",
+        "reports": "Reports",
+        "configuration": "Configuration"
+    }
 }

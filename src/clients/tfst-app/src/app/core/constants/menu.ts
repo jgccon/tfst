@@ -1,17 +1,9 @@
-export const Menu = [
-    {
-        items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/'] }]
-    },
-    {
-        items: [{ label: 'Projects', icon: 'pi pi-fw pi-desktop', routerLink: ['/s'] }]
-    },
-    {
-        items: [{ label: 'Clients', icon: 'pi pi-fw pi-users', routerLink: ['/s'] }]
-    },
-    {
-        items: [{ label: 'Reports', icon: 'pi pi-fw pi-chart-line', routerLink: ['/s'] }]
-    },
-    {
-        items: [{ label: 'Configuration', icon: 'pi pi-fw pi-cog', routerLink: ['/s'] }]
-    },
+import { MenuItem } from 'primeng/api';
+
+export const Menu: MenuItem[] = [
+  { items: [{ label: 'menu.dashboard',   icon: 'pi pi-chart-bar',    routerLink: ['/'] }] },
+  { items: [{ label: 'menu.projects',    icon: 'pi pi-desktop',      routerLink: ['/projects'] }] },
+  { items: [{ label: 'menu.clients',     icon: 'pi pi-users',        routerLink: ['/clients'] }] },
+  { items: [{ label: 'menu.reports',     icon: 'pi pi-chart-line',   routerLink: ['/reports'] }] },
+  { items: [{ label: 'menu.configuration', icon: 'pi pi-cog',       routerLink: ['/config'] }] },
 ];
