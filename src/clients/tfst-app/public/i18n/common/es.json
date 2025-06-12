@@ -6,5 +6,9 @@
         "clients": "Clientes",
         "reports": "Reportes",
         "configuration": "Configuración"
+    },
+    "languages": {
+        "spanish": "Español",
+        "english": "Inglés"
     }
 }

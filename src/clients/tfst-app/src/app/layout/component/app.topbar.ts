@@ -78,17 +78,17 @@ interface ILanguageOption {
                    width="18px"
                    height="18px"
                 />
-                <div>{{ selectedOption.name }}</div>
+                <div>{{ selectedOption.name | translate }}</div>
               </div>
             </ng-template>
-            <ng-template let-country #item>
+            <ng-template let-language #item>
               <div class="flex items-center gap-2">
                 <img
-                  [src]="country.img"
+                  [src]="language.img"
                   width="18px"
                   height="18px"
                 />
-                <div>{{ country.name }}</div>
+                <div>{{ language.name | translate }}</div>
               </div>
             </ng-template>
           </p-select>
@@ -100,11 +100,11 @@ interface ILanguageOption {
 })
 export class AppTopbar {
   selectedLanguage! : ILanguageOption;
-  items!: MenuItem[];
+  items!: MenuItem[]; 
 
   languages = signal<ILanguageOption[]>([
-    { name: 'English', code: 'en', img: 'https://hatscripts.github.io/circle-flags/flags/us.svg' },
-    { name: 'Spanish', code: 'es', img: 'https://hatscripts.github.io/circle-flags/flags/es.svg' },
+    { name: 'languages.english', code: 'en', img: 'https://hatscripts.github.io/circle-flags/flags/us.svg' },
+    { name: 'languages.spanish', code: 'es', img: 'https://hatscripts.github.io/circle-flags/flags/es.svg' },
   ]);
 
   private _languageService = inject(LanguageService);
