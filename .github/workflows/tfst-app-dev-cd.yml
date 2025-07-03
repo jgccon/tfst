@@ -1,23 +1,34 @@
-# .github/workflows/webapp-dev-deploy.yml
-name: Deploy Angular WebApp to DEV
+# .github/workflows/tfst-app-dev-cd.yml
+name: Deploy tfst-app Container to DEV
 
 on:
   push:
     branches:
       - dev
     paths:
-      - src/clients/tfst-app/**
+      - 'src/clients/tfst-app/**'
+      - '.github/workflows/tfst-app-dev-cd.yml'
 
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  deploy_tfst_app_dev:
-    uses: ./.github/workflows/deploy-angular.yml
+  deploy_tfst_app:
+    uses: ./.github/workflows/deploy-container-project.yml
     with:
       environment: dev
-      working_directory: src/clients/tfst-app
+      dockerfile_path: src/clients/tfst-app/Dockerfile
+      context: ./src
+      image_name: tfst-app
       app_service_name: tfst-app-dev
+      acr_login_server: tfstregistry.azurecr.io
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+      ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
