@@ -65,28 +65,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.AuthServer", "backend\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFST.SharedKernel.Hosting", "backend\TFST.SharedKernel.Hosting\TFST.SharedKernel.Hosting.csproj", "{EE311397-EC93-4A05-995F-DA36B51E5E92}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "clients", "clients", "{722B7990-7615-47E4-9298-F445020CB82C}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "tfst-app", "clients\tfst-app\", "{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_52303"
-		Debug.AspNetCompiler.PhysicalPath = "clients\tfst-app\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52303\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_52303"
-		Release.AspNetCompiler.PhysicalPath = "clients\tfst-app\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_52303\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "52303"
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -333,18 +311,6 @@ Global
 		{EE311397-EC93-4A05-995F-DA36B51E5E92}.Release|x64.Build.0 = Release|Any CPU
 		{EE311397-EC93-4A05-995F-DA36B51E5E92}.Release|x86.ActiveCfg = Release|Any CPU
 		{EE311397-EC93-4A05-995F-DA36B51E5E92}.Release|x86.Build.0 = Release|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Debug|x64.Build.0 = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Debug|x86.Build.0 = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Release|x64.ActiveCfg = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Release|x64.Build.0 = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Release|x86.ActiveCfg = Debug|Any CPU
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -375,8 +341,6 @@ Global
 		{A3733B52-7AA3-AE53-6870-1524EDE359A8} = {B8139FA0-F65F-4165-9124-8BF32A089EA4}
 		{500794A9-6BAD-4F99-D4CF-E10D42FC3D5A} = {586F961C-AE40-4725-AA81-DCA30FF4FBF2}
 		{EE311397-EC93-4A05-995F-DA36B51E5E92} = {6E2EA680-3804-42CA-8486-124CB9567D83}
-		{722B7990-7615-47E4-9298-F445020CB82C} = {26398278-34BE-48C1-8B5A-8671D17C961C}
-		{041CF7D2-A34E-A5F2-3658-9835AA3B96FA} = {722B7990-7615-47E4-9298-F445020CB82C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B512325C-E320-4327-9EF0-FA698E197336}
