@@ -67,7 +67,7 @@ services:
     container_name: tfst.app
     build:
       context: ./clients/tfst-app
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     image: tfst/app
     ports:
       - "4200:4200"

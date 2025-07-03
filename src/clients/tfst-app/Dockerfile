@@ -1,18 +1,18 @@
-# Use official Node.js LTS image
-FROM node:22-slim
-
-# Set working directory
+# Build stage
+FROM node:22-slim AS builder
 WORKDIR /app
-
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy the rest of the application code
 COPY . .
+RUN npm run build -- --project=tfst-app --configuration=production
+# The build artifacts will be stored in the dist/tfst-app directory
 
-EXPOSE 4200
+# Production Nginx server
+FROM nginx:alpine
+# Copy the built application from the builder stage to the Nginx HTML directory
+COPY --from=builder /app/dist/tfst-app/browser /usr/share/nginx/html
+# Copy the Nginx configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
-CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
