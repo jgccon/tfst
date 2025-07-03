@@ -1,23 +1,23 @@
-# Use official Node.js LTS image
-FROM node:22-alpine
+# ─────── Stage 1: Build ───────
+FROM node:22-alpine AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
 COPY . .
-
-# Build the Docusaurus site (if needed)
 RUN npm run build
 
-# Expose the port Docusaurus runs on
-EXPOSE 3000
 
-# Start the Docusaurus server
-CMD ["npm", "run", "serve"]
+# ─────── Stage 2: Serve with NGINX ───────
+FROM nginx:alpine
+
+# Copy the built application from the builder stage to the Nginx HTML directory
+COPY --from=builder /app/build /usr/share/nginx/html
+# Copy the Nginx configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
