@@ -21,7 +21,7 @@ jobs:
     with:
       environment: dev
       dockerfile_path: src/clients/tfst-app/Dockerfile
-      context: ./src
+      context: ./src/clients/tfst-app
       image_name: tfst-app
       app_service_name: tfst-app-dev
       acr_login_server: tfstregistry.azurecr.io
