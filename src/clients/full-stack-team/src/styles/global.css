@@ -5,5 +5,15 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #0066cc;
+  --tfst-blue: #0066CC;
+  --tfst-blue-dark: #005BBB;
+  --tfst-gray: #333333;
+  --tfst-bg: #F9FAFB;
+}
+
+@layer utilities {
+  .text-tfst-blue { color: var(--tfst-blue); }
+  .bg-tfst-blue { background-color: var(--tfst-blue); }
+  .hover\:bg-tfst-blue-dark:hover { background-color: var(--tfst-blue-dark); }
+  /* ...y más según necesites */
 }

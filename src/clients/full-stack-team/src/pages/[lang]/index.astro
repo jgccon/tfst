@@ -1,0 +1,27 @@
+---
+// src/pages/[lang]/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t, defaultLocale, type Locale } from '../../i18n.ts';
+import Welcome from '../../components/Welcome.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } }
+  ];
+}
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<BaseLayout lang={locale} title={t(locale, 'home.title')}>
+<Welcome />
+ <section class="max-w-3xl mx-auto py-16 px-4 text-center">
+    <h1 class="text-4xl font-bold text-blue-600">{t(locale, 'home.title')}</h1>
+    <p class="mt-4 text-lg">{t(locale, 'home.subtitle')}</p>
+    <a href={`/${locale}/contact`} class="inline-block mt-6 bg-blue-600 text-white px-6 py-3 rounded">
+      {t(locale, 'home.cta')}
+    </a>
+  </section>
+</BaseLayout>

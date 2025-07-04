@@ -1,0 +1,32 @@
+---
+import { defaultLocale } from '../i18n.ts';
+const { lang = defaultLocale } = Astro.props;
+---
+
+<header class="w-full bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <!-- Left: Logo -->
+      <div class="flex items-center space-x-2">
+        <img src="/logo.svg" alt="TFST Logo" class="h-8 w-auto" />
+        <a href={`/${lang}/`} class="text-lg font-semibold text-gray-800 hover:text-blue-600 transition">
+          The Full-Stack Team
+        </a>
+      </div>
+
+      <!-- Right: Nav -->
+      <div class="flex items-center space-x-6">
+        <a href={`/${lang}/docs`} class="text-sm text-gray-700 hover:text-blue-600">Docs</a>
+        <a href={`/${lang}/blog`} class="text-sm text-gray-700 hover:text-blue-600">Blog</a>
+        <a href={`/${lang}/community`} class="text-sm text-gray-700 hover:text-blue-600">Community</a>
+        <a href={`/${lang}/contact`} class="text-sm text-gray-700 hover:text-blue-600">Contact</a>
+
+        <!-- Lang switch -->
+        <div class="text-sm text-gray-600">
+          <a href="/en/" class={lang === 'en' ? 'font-bold underline' : 'hover:underline'}>EN</a> |
+          <a href="/es/" class={lang === 'es' ? 'font-bold underline' : 'hover:underline'}>ES</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

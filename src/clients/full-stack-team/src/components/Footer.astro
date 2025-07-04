@@ -1,0 +1,16 @@
+---
+const { lang = "en" } = Astro.props;
+---
+
+<footer class="bg-gray-50 border-t py-6 text-sm text-gray-600">
+  <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
+    <div>
+      <p>© {new Date().getFullYear()} The Full-Stack Team</p>
+      <p>Powered by our <a href="https://github.com/jgccon/tfst/graphs/contributors" class="underline">CONTRIBUTORS</a></p>
+    </div>
+    <ul class="flex gap-4 mt-2 sm:mt-0">
+      <li><a href={`/${lang}/community`} class="hover:underline">Community</a></li>
+      <li><a href={`https://tfst.dev`} class="hover:underline" target="_blank">Development Documentation</a></li>
+    </ul>
+  </div>
+</footer>
