@@ -1,0 +1,20 @@
+---
+// src/pages/[lang]/blog.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t, defaultLocale, type Locale } from '../../i18n.ts';
+import Welcome from '../../components/Welcome.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } }
+  ];
+}
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<BaseLayout lang={locale} title={t(locale, 'home.title')}>
+BLOG GOES HERE!
+</BaseLayout>

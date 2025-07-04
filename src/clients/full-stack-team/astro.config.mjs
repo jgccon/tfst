@@ -22,7 +22,9 @@ export default defineConfig({
             filenameBase: 'the-full-stack-team-sitemap'
         }),
     ],
-
+  redirects: {
+    '/': '/en/',         // redirige raíz al inglés
+  },
   vite: {
     plugins: [tailwindcss()],
   },
