@@ -5,6 +5,7 @@ import { t, defaultLocale, type Locale } from "../../i18n.ts";
 import ProfessionalHero from "../../components/ProfessionalHero.astro";
 import ProfessionalPainPoints from "../../components/ProfessionalPainPoints.astro";
 import ProfessionalGains from "../../components/ProfessionalGains.astro";
+import ProfessionalHowItWorks from "../../components/ProfessionalHowItWorks.astro";
 
 export const getStaticPaths = getLocalizedPaths;
 
@@ -16,4 +17,5 @@ const locale = lang as Locale;
     <ProfessionalHero locale={locale} />
     <ProfessionalPainPoints locale={locale} />
     <ProfessionalGains locale={locale} />
+    <ProfessionalHowItWorks locale={locale} />
 </BaseLayout>

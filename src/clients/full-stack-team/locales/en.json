@@ -190,7 +190,23 @@
   "forProfessionals.gains.trustDesc": "Escrow, reputation, and dispute resolution are built in — so you don’t need to chase anyone or hope for the best.",
 
   "forProfessionals.gains.speed": "Faster onboarding, real results",
-  "forProfessionals.gains.speedDesc": "No agencies, no interviews, no delays. Find top talent and start building — days, not weeks."
+  "forProfessionals.gains.speedDesc": "No agencies, no interviews, no delays. Find top talent and start building — days, not weeks.",
+
+  
+  "forProfessionals.howTitle": "How TFST works for professionals",
+  "forProfessionals.howSubtitle": "Hiring talent has never been this easy, transparent, and secure.",
+
+  "forProfessionals.howSteps.0.title": "Post your project",
+  "forProfessionals.howSteps.0.desc": "Describe your need, timeline, and budget. TFST helps you write clear, actionable briefs using AI and templates.",
+
+  "forProfessionals.howSteps.1.title": "Get matched with top talent",
+  "forProfessionals.howSteps.1.desc": "Browse vetted developers ranked by skills, reputation, and past performance — or let the network recommend for you.",
+
+  "forProfessionals.howSteps.2.title": "Sign, track & pay in one place",
+  "forProfessionals.howSteps.2.desc": "Contracts, milestones, and payments are all managed on TFST. No paperwork, no hidden fees, full transparency.",
+
+  "forProfessionals.howSteps.3.title": "Review, rate, and repeat",
+  "forProfessionals.howSteps.3.desc": "Build long-term relationships with reliable developers — and help others by sharing your feedback."
 
 
 

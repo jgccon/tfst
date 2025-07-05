@@ -177,7 +177,22 @@
   "forProfessionals.gains.trustDesc": "Escrow, reputación y resolución de disputas están integrados — no necesitas perseguir a nadie ni cruzar los dedos.",
 
   "forProfessionals.gains.speed": "Incorporación rápida, resultados reales",
-  "forProfessionals.gains.speedDesc": "Sin agencias, sin entrevistas eternas, sin esperas. Encuentra talento top y empieza a construir — en días, no semanas."
+  "forProfessionals.gains.speedDesc": "Sin agencias, sin entrevistas eternas, sin esperas. Encuentra talento top y empieza a construir — en días, no semanas.",
+  
+  "forProfessionals.howTitle": "Cómo funciona TFST para profesionales",
+  "forProfessionals.howSubtitle": "Contratar talento nunca ha sido tan fácil, transparente y seguro.",
+
+  "forProfessionals.howSteps.0.title": "Publica tu proyecto",
+  "forProfessionals.howSteps.0.desc": "Describe lo que necesitas, el plazo y el presupuesto. TFST te ayuda a crear briefs claros y accionables con IA y plantillas.",
+
+  "forProfessionals.howSteps.1.title": "Recibe matches con talento top",
+  "forProfessionals.howSteps.1.desc": "Explora developers validados, clasificados por habilidades, reputación y experiencia previa — o deja que la red recomiende por ti.",
+
+  "forProfessionals.howSteps.2.title": "Firma, gestiona y paga en un solo lugar",
+  "forProfessionals.howSteps.2.desc": "Contratos, hitos y pagos se gestionan desde TFST. Sin papeleo, sin comisiones ocultas, con total transparencia.",
+
+  "forProfessionals.howSteps.3.title": "Valora y construye relaciones",
+  "forProfessionals.howSteps.3.desc": "Crea relaciones a largo plazo con developers fiables — y ayuda a otros dejando tu feedback."
 
 
 
