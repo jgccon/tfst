@@ -57,6 +57,16 @@
   "imprint.contactTitle": "Contact",
   "imprint.contact": "Email: juan@jgcarmona.com",
   "imprint.disclaimerTitle": "Disclaimer",
-  "imprint.disclaimer": "The information on this website is provided for general information purposes only. No liability is assumed for completeness, accuracy, or availability. This project is in an experimental phase (pre-production) and no guarantees are made regarding performance or data security."
+  "imprint.disclaimer": "The information on this website is provided for general information purposes only. No liability is assumed for completeness, accuracy, or availability. This project is in an experimental phase (pre-production) and no guarantees are made regarding performance or data security.",
 
+  "features.title": "Explore TFST Features",
+  "features.intro": "From hiring to payments, TFST brings transparency and trust to every team.",
+  "features.hr.title": "Decentralized HR",
+  "features.hr.description": "Manage employee profiles, contracts, and hiring with full transparency.",
+  "features.billing.title": "Time Tracking & Billing",
+  "features.billing.description": "Track work, bill clients, and manage payments with ease.",
+  "features.contracts.title": "Smart Contracts",
+  "features.contracts.description": "Digitally sign, manage, and execute contracts across organizations.",
+  "features.escrow.title": "Escrow & Payments",
+  "features.escrow.description": "Use blockchain-based escrow to ensure secure transactions."
 }
