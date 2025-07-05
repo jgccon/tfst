@@ -33,5 +33,30 @@
   "privacy.responsibilityTitle": "Disclaimer of Responsibility",
   "privacy.responsibility": "This software is provided 'as is', without warranty of any kind. The maintainers and contributors are not liable for any issues, data loss, or damages arising from the use of TFST while it remains in an experimental or pre-release phase.",
   "privacy.contactTitle": "Contact",
-  "privacy.contact": "If you have questions, contact us at juan@jgcarmona.com or contribute directly via GitHub: https://github.com/jgccon/tfst"
+  "privacy.contact": "If you have questions, contact us at juan@jgcarmona.com or contribute directly via GitHub: https://github.com/jgccon/tfst",
+
+"terms.title": "Terms & Conditions",
+  "terms.intro": "By accessing and using this website, you agree to be bound by these terms and conditions. If you do not agree with any part of these terms, please refrain from using the site.",
+  "terms.useTitle": "Use License",
+  "terms.use": "Permission is granted to view and use the materials on this website for personal, non-commercial use only. You may not modify, redistribute, or use any part of this site for commercial purposes without prior written consent.",
+  "terms.disclaimerTitle": "Disclaimer",
+  "terms.disclaimer": "This website is provided 'as is'. We make no warranties, expressed or implied, and hereby disclaim all other warranties including, without limitation, implied warranties of merchantability or fitness for a particular purpose. We do not warrant that the website will be error-free, secure, or continuously available.",
+  "terms.limitationsTitle": "Limitations",
+  "terms.limitations": "In no event shall the owner or contributors be liable for any damages (including, without limitation, loss of data, loss of profits, or interruption of service) arising out of the use or inability to use this website, even if we have been notified orally or in writing of the possibility of such damage.",
+  "terms.modificationsTitle": "Modifications",
+  "terms.modifications": "We may revise these terms of use at any time without notice. By using this website, you agree to be bound by the then-current version of these Terms and Conditions.",
+  "terms.contactTitle": "Contact",
+  "terms.contact": "If you have questions about these terms, you may contact us at juan@jgcarmona.com.",
+
+  "imprint.title": "Legal Notice (Impressum)",
+  "imprint.intro": "This website is maintained as a hobby and side project by the owner listed below. It is not intended for commercial use and may contain experimental or incomplete functionality.",
+  "imprint.ownerTitle": "Owner",
+  "imprint.owner": "Juan G Carmona",
+  "imprint.addressTitle": "Address",
+  "imprint.address": "Madrid, Spain",
+  "imprint.contactTitle": "Contact",
+  "imprint.contact": "Email: juan@jgcarmona.com",
+  "imprint.disclaimerTitle": "Disclaimer",
+  "imprint.disclaimer": "The information on this website is provided for general information purposes only. No liability is assumed for completeness, accuracy, or availability. This project is in an experimental phase (pre-production) and no guarantees are made regarding performance or data security."
+
 }

@@ -31,6 +31,29 @@
   "privacy.responsibilityTitle": "Exención de responsabilidad",
   "privacy.responsibility": "Este software se proporciona 'tal cual', sin ninguna garantía. Los mantenedores y colaboradores no son responsables de problemas, pérdidas de datos o daños derivados del uso de TFST mientras permanezca en fase experimental o de prueba.",
   "privacy.contactTitle": "Contacto",
-  "privacy.contact": "Si tienes preguntas, escríbenos a juan@jgcarmona.com o contribuye directamente en GitHub: https://github.com/jgccon/tfst"
+  "privacy.contact": "Si tienes preguntas, escríbenos a juan@jgcarmona.com o contribuye directamente en GitHub: https://github.com/jgccon/tfst",
 
+"terms.title": "Términos y Condiciones",
+  "terms.intro": "Al acceder y utilizar este sitio web, aceptas quedar sujeto a estos términos y condiciones. Si no estás de acuerdo con alguna parte de estos términos, por favor abstente de utilizar el sitio.",
+  "terms.useTitle": "Licencia de Uso",
+  "terms.use": "Se concede permiso para ver y utilizar los materiales de este sitio web únicamente con fines personales y no comerciales. No se permite modificar, redistribuir ni utilizar ninguna parte del sitio con fines comerciales sin consentimiento previo por escrito.",
+  "terms.disclaimerTitle": "Descargo de Responsabilidad",
+  "terms.disclaimer": "Este sitio web se proporciona 'tal cual'. No ofrecemos garantías, expresas o implícitas, y rechazamos cualquier otra garantía, incluyendo, sin limitación, garantías implícitas de comerciabilidad o adecuación para un propósito particular. No garantizamos que el sitio esté libre de errores, sea seguro o esté disponible de forma continua.",
+  "terms.limitationsTitle": "Limitaciones",
+  "terms.limitations": "En ningún caso el titular o los colaboradores serán responsables de ningún daño (incluyendo, sin limitación, pérdida de datos, lucro cesante o interrupción del servicio) que surja del uso o la imposibilidad de uso de este sitio web, incluso si se ha notificado previamente la posibilidad de tales daños.",
+  "terms.modificationsTitle": "Modificaciones",
+  "terms.modifications": "Nos reservamos el derecho de modificar estos términos de uso en cualquier momento y sin previo aviso. Al utilizar este sitio web, aceptas quedar sujeto a la versión vigente de los Términos y Condiciones.",
+  "terms.contactTitle": "Contacto",
+  "terms.contact": "Si tienes preguntas sobre estos términos, puedes escribirnos a juan@jgcarmona.com.",
+
+  "imprint.title": "Aviso Legal (Impressum)",
+  "imprint.intro": "Este sitio web es mantenido como un proyecto personal por el titular que figura a continuación. No está destinado al uso comercial y puede contener funcionalidades experimentales o incompletas.",
+  "imprint.ownerTitle": "Titular",
+  "imprint.owner": "Juan G Carmona",
+  "imprint.addressTitle": "Dirección",
+  "imprint.address": "Madrid, España",
+  "imprint.contactTitle": "Contacto",
+  "imprint.contact": "Correo electrónico: juan@jgcarmona.com",
+  "imprint.disclaimerTitle": "Descargo de Responsabilidad",
+  "imprint.disclaimer": "La información contenida en este sitio web se proporciona únicamente con fines informativos generales. No se asume responsabilidad por la integridad, exactitud o disponibilidad de la información. Este proyecto se encuentra en fase experimental (pre-producción) y no se ofrecen garantías sobre su rendimiento o seguridad de datos."
 }

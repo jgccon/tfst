@@ -17,8 +17,10 @@ const { title = "TFST", lang = "en" } = Astro.props;
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-900">
     <Header lang={lang} />
-    <main class="flex-1">
-      <slot />
+    <main class="flex-1 px-4 sm:px-6 lg:px-8 py-12">
+       <div class="max-w-3xl mx-auto">
+         <slot />
+       </div>
     </main>
     <Footer lang={lang} />
   </body>  
