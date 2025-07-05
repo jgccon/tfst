@@ -37,3 +37,8 @@
     @apply bg-white;
   }
 }
+
+/* Reusable Pain Point Card */
+.pain-point-card {
+  @apply bg-red-50 p-6 rounded-lg shadow;
+}

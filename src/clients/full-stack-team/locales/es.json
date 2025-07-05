@@ -147,7 +147,37 @@
   
   "forProfessionals.heroTitle": "Construye con confianza. Crece con el mejor talento.",
   "forProfessionals.heroSubtitle": "Despídete de los freelancers poco fiables y de las promesas incumplidas. Contrata desarrolladores de confianza — con contratos inteligentes y reputación transparente.",
-  "forProfessionals.heroButton": "Inicia tu proyecto"
+  "forProfessionals.heroButton": "Inicia tu proyecto",
+
+  "forProfessionals.painTitle": "¿Por qué es tan difícil contratar talento tech?",
+  
+  "forProfessionals.painPoints.hiringTitle": "Encontrar talento es difícil",
+  "forProfessionals.painPoints.hiring": "Los CVs mienten. Las entrevistas son una apuesta. Evaluar habilidades reales sin ayuda experta es casi imposible.",
+
+  "forProfessionals.painPoints.qualityTitle": "Freelancers que desaparecen o no cumplen",
+  "forProfessionals.painPoints.quality": "Contratar al desarrollador equivocado puede costarte meses de retrasos y miles de euros tirados. Pasa más de lo que crees.",
+
+  "forProfessionals.painPoints.riskTitle": "Sin garantías ni responsabilidad real",
+  "forProfessionals.painPoints.risk": "Pagas, desaparecen. No hay recurso. Las plataformas tradicionales se protegen a sí mismas, no a tu proyecto.",
+
+  "forProfessionals.painPoints.wasteTitle": "Agencias que solo encarecen el proceso",
+  "forProfessionals.painPoints.waste": "No quieres pagar un 60% de sobrecoste solo por reenviar correos. Quieres talento, no burocracia.",
+
+  
+  "forProfessionals.gainsTitle": "Lo que ganas con TFST",
+  "forProfessionals.gainsSubtitle": "Contratación más inteligente. Menos riesgo. Más resultados.",
+
+  "forProfessionals.gains.talent": "Talento verificado, no promesas vacías",
+  "forProfessionals.gains.talentDesc": "Nuestros developers están validados por sus pares, probados en proyectos reales y rankeados por reputación — sin humo ni adivinanzas.",
+
+  "forProfessionals.gains.control": "Control total de contratos y pagos",
+  "forProfessionals.gains.controlDesc": "Tú defines los términos, apruebas hitos y solo pagas por trabajo verificado. Nosotros automatizamos el resto — con seguridad y transparencia.",
+
+  "forProfessionals.gains.trust": "Confianza integrada con smart contracts",
+  "forProfessionals.gains.trustDesc": "Escrow, reputación y resolución de disputas están integrados — no necesitas perseguir a nadie ni cruzar los dedos.",
+
+  "forProfessionals.gains.speed": "Incorporación rápida, resultados reales",
+  "forProfessionals.gains.speedDesc": "Sin agencias, sin entrevistas eternas, sin esperas. Encuentra talento top y empieza a construir — en días, no semanas."
 
 
 

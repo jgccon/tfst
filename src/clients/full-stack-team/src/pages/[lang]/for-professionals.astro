@@ -3,6 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getLocalizedPaths } from "../../utils/localization.ts";
 import { t, defaultLocale, type Locale } from "../../i18n.ts";
 import ProfessionalHero from "../../components/ProfessionalHero.astro";
+import ProfessionalPainPoints from "../../components/ProfessionalPainPoints.astro";
+import ProfessionalGains from "../../components/ProfessionalGains.astro";
 
 export const getStaticPaths = getLocalizedPaths;
 
@@ -12,4 +14,6 @@ const locale = lang as Locale;
 
 <BaseLayout title={`TFST – ${t(locale, "forDevs.title")}`} lang={lang}>
     <ProfessionalHero locale={locale} />
+    <ProfessionalPainPoints locale={locale} />
+    <ProfessionalGains locale={locale} />
 </BaseLayout>

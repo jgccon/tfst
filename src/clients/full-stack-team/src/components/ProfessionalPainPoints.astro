@@ -1,0 +1,49 @@
+---
+// src/components/ProfessionalPainPoints.astro
+import { t } from "../i18n";
+const { locale } = Astro.props;
+---
+
+<section class="max-w-5xl mx-auto px-6 py-20">
+  <h2 class="text-3xl font-semibold text-center mb-12">
+    {t(locale, "forProfessionals.painTitle")}
+  </h2>
+
+  <div class="grid md:grid-cols-2 gap-10">
+    <div class="pain-point-card">
+      <h3 class="font-bold text-lg mb-2">
+        🔍 {t(locale, "forProfessionals.painPoints.hiringTitle")}
+      </h3>
+      <p class="text-gray-700">
+        {t(locale, "forProfessionals.painPoints.hiring")}
+      </p>
+    </div>
+
+    <div class="pain-point-card">
+      <h3 class="font-bold text-lg mb-2">
+        🚫 {t(locale, "forProfessionals.painPoints.qualityTitle")}
+      </h3>
+      <p class="text-gray-700">
+         {t(locale, "forProfessionals.painPoints.quality")}
+      </p>
+    </div>
+
+    <div class="pain-point-card">
+      <h3 class="font-bold text-lg mb-2">
+        ❗ {t(locale, "forProfessionals.painPoints.riskTitle")}
+      </h3>
+      <p class="text-gray-700">
+        {t(locale, "forProfessionals.painPoints.risk")}
+      </p>
+    </div>
+
+    <div class="pain-point-card">
+      <h3 class="font-bold text-lg mb-2">
+        💸 {t(locale, "forProfessionals.painPoints.wasteTitle")}
+      </h3>
+      <p class="text-gray-700">
+        {t(locale, "forProfessionals.painPoints.waste")}
+      </p>
+    </div>
+  </div>
+</section>

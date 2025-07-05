@@ -159,6 +159,39 @@
   
   "forProfessionals.heroTitle": "Build with trust. Grow with top talent.",
   "forProfessionals.heroSubtitle": "Say goodbye to flaky freelancers and broken promises. Hire developers you can trust — backed by smart contracts and transparent reputation.",
-  "forProfessionals.heroButton": "Start your project"
+  "forProfessionals.heroButton": "Start your project",
+
+  
+  "forProfessionals.painTitle": "Why hiring tech talent is so painful",
+ 
+  "forProfessionals.painPoints.hiringTitle": "Identifying real talent is hard",
+  "forProfessionals.painPoints.hiring": "CVs lie. Interviews are a gamble. It's nearly impossible to assess true skills without expert help.",
+
+  "forProfessionals.painPoints.qualityTitle": "Freelancers vanish or underdeliver",
+  "forProfessionals.painPoints.quality": "Working with the wrong dev can cost you months of delays and budget waste — and it happens too often.",
+
+  "forProfessionals.painPoints.riskTitle": "No guarantees or accountability",
+  "forProfessionals.painPoints.risk": "You pay, they ghost. No recourse. Traditional platforms protect themselves, not your project.",
+
+  "forProfessionals.painPoints.wasteTitle": "Agencies are overpriced middlemen",
+  "forProfessionals.painPoints.waste": "You don’t want to pay a 60% margin just for someone to forward emails. You want talent, not bureaucracy.",
+
+  
+  "forProfessionals.gainsTitle": "What you gain with TFST",
+  "forProfessionals.gainsSubtitle": "Smarter hiring. Less risk. More results.",
+
+  "forProfessionals.gains.talent": "Verified talent, not empty promises",
+  "forProfessionals.gains.talentDesc": "Our developers are vetted by peers, proven in real projects, and ranked by reputation — no fluff, no guessing.",
+
+  "forProfessionals.gains.control": "Full control over contracts and payments",
+  "forProfessionals.gains.controlDesc": "You decide the terms, approve milestones, and only pay for verified work. We automate the rest — securely and transparently.",
+
+  "forProfessionals.gains.trust": "Built-in trust with smart contracts",
+  "forProfessionals.gains.trustDesc": "Escrow, reputation, and dispute resolution are built in — so you don’t need to chase anyone or hope for the best.",
+
+  "forProfessionals.gains.speed": "Faster onboarding, real results",
+  "forProfessionals.gains.speedDesc": "No agencies, no interviews, no delays. Find top talent and start building — days, not weeks."
+
+
 
 }
