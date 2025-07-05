@@ -3,6 +3,10 @@ import { t, defaultLocale, type Locale } from '../i18n.ts';
 
 const lang = Astro.params.lang ?? defaultLocale;
 const locale = lang as Locale;
+
+// Get current path suffix after /{lang}
+const path = Astro.url.pathname;
+const pathSuffix = path.replace(/^\/(en|es)(\/|$)/, '');
 ---
 
 <header class="w-full bg-white shadow-sm sticky top-0 z-50">
@@ -13,7 +17,7 @@ const locale = lang as Locale;
         <a href={`/${lang}/`} class="flex items-center space-x-2">
           <img src="/logo.svg" alt="TFST Logo" class="h-8 w-auto" />
           <span class="text-lg font-semibold text-gray-800 hover:text-blue-600 transition">
-            TFST
+            The Full-Stack Team
           </span>
         </a>
       </div>
@@ -42,8 +46,8 @@ const locale = lang as Locale;
         <a href={`/${lang}/blog`} class="hover:text-blue-600">{t(locale, 'nav.blog')}</a>
 
         <div class="pl-2 border-l border-gray-200 text-gray-600">
-          <a href="/en/" class={lang === 'en' ? 'font-bold underline' : 'hover:underline'}>EN</a> |
-          <a href="/es/" class={lang === 'es' ? 'font-bold underline' : 'hover:underline'}>ES</a>
+          <a href={`/en/${pathSuffix}`} class={lang === 'en' ? 'font-bold underline' : 'hover:underline'}>EN</a> |
+          <a href={`/es/${pathSuffix}`} class={lang === 'es' ? 'font-bold underline' : 'hover:underline'}>ES</a>
         </div>
 
         <a href="https://github.com/jgccon/tfst" target="_blank"
