@@ -256,8 +256,17 @@
   
   "forCompanies.ctaTitle": "Build your team with trusted professionals",
   "forCompanies.ctaSubtitle": "Explore TFST and join the open ecosystem of talent and technology.",
-  "forCompanies.ctaButton": "Discover TFST on GitHub"
+  "forCompanies.ctaButton": "Discover TFST on GitHub",
+  
 
+  "forCompanies.howTitle": "How TFST works for organizations",
+  "forCompanies.howSubtitle": "Forget recruiters and intermediaries. Work directly with the best talent.",
+  "forCompanies.how.step1Title": "Post your need",
+  "forCompanies.how.step1Text": "Create a public opportunity, describe your project, and attract verified professionals.",
+  "forCompanies.how.step2Title": "Evaluate transparently",
+  "forCompanies.how.step2Text": "Review public profiles, real skills, and on-chain reputation — not just CVs.",
+  "forCompanies.how.step3Title": "Collaborate and build",
+  "forCompanies.how.step3Text": "Hire directly or through smart contracts. Track work, reputation, and payments in one place."
 
 
 
