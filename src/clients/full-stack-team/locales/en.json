@@ -1,0 +1,308 @@
+{
+  "nav.community": "Community",
+  "nav.contact": "Contact",
+  "home.title": "Building the future of Talent Collaboration",
+  "hero.title": "Build the Future of Work, Together.",
+  "hero.subtitle": "The Full-Stack Team is an open-source platform for freelancers, teams, and companies to connect, collaborate, and grow — with smart contracts, AI, and transparency.",
+  "hero.cta.explore": "Explore the Platform",
+  "hero.cta.star": "⭐ Star on GitHub",
+  "nav.features": "Features",
+  "nav.developers": "Developers",
+  "nav.professionals": "Professionals",
+  "nav.companies": "Companies",
+  "nav.blog": "Blog",
+  "nav.star": "Star TFST",
+  "footer.rights": "All rights reserved.",
+  "footer.poweredBy": "Powered by our",
+  "footer.contributors": "contributors",
+  "footer.community": "Community",
+  "footer.docs": "Developer Docs",
+  "footer.contribute": "Contribute",
+  "footer.privacy": "Privacy",
+  "footer.terms": "Terms",
+  "footer.imprint": "Imprint",
+  "footer.ctaText": "Help shape the future of decentralized HR.",
+  "footer.ctaButton": "Join TFST",
+  "privacy.title": "Privacy Policy",
+  "privacy.meta": "Learn how TFST handles data and privacy.",
+  "privacy.intro": "TFST (The Full Stack Team) is currently an open-source hobby project, developed in spare time by volunteers. We aim to build a robust HR and talent platform, but this software is currently in pre-release status (alpha).",
+  "privacy.scopeTitle": "Scope of This Policy",
+  "privacy.scope": "This Privacy Policy applies only to the websites and services directly maintained by the TFST project. At this time, TFST does not collect, process, or store any personal data from users unless explicitly stated.",
+  "privacy.dataTitle": "Data Collection and Use",
+  "privacy.data": "TFST does not track users, use cookies, or collect personal information by default. If in the future any feature involves data collection, it will be documented and opt-in only.",
+  "privacy.responsibilityTitle": "Disclaimer of Responsibility",
+  "privacy.responsibility": "This software is provided 'as is', without warranty of any kind. The maintainers and contributors are not liable for any issues, data loss, or damages arising from the use of TFST while it remains in an experimental or pre-release phase.",
+  "privacy.contactTitle": "Contact",
+  "privacy.contact": "If you have questions, contact us at juan@jgcarmona.com or contribute directly via GitHub: https://github.com/jgccon/tfst",
+
+"terms.title": "Terms & Conditions",
+  "terms.intro": "By accessing and using this website, you agree to be bound by these terms and conditions. If you do not agree with any part of these terms, please refrain from using the site.",
+  "terms.useTitle": "Use License",
+  "terms.use": "Permission is granted to view and use the materials on this website for personal, non-commercial use only. You may not modify, redistribute, or use any part of this site for commercial purposes without prior written consent.",
+  "terms.disclaimerTitle": "Disclaimer",
+  "terms.disclaimer": "This website is provided 'as is'. We make no warranties, expressed or implied, and hereby disclaim all other warranties including, without limitation, implied warranties of merchantability or fitness for a particular purpose. We do not warrant that the website will be error-free, secure, or continuously available.",
+  "terms.limitationsTitle": "Limitations",
+  "terms.limitations": "In no event shall the owner or contributors be liable for any damages (including, without limitation, loss of data, loss of profits, or interruption of service) arising out of the use or inability to use this website, even if we have been notified orally or in writing of the possibility of such damage.",
+  "terms.modificationsTitle": "Modifications",
+  "terms.modifications": "We may revise these terms of use at any time without notice. By using this website, you agree to be bound by the then-current version of these Terms and Conditions.",
+  "terms.contactTitle": "Contact",
+  "terms.contact": "If you have questions about these terms, you may contact us at juan@jgcarmona.com.",
+
+  "imprint.title": "Legal Notice (Impressum)",
+  "imprint.intro": "This website is maintained as a hobby and side project by the owner listed below. It is not intended for commercial use and may contain experimental or incomplete functionality.",
+  "imprint.ownerTitle": "Owner",
+  "imprint.owner": "Juan G Carmona",
+  "imprint.addressTitle": "Address",
+  "imprint.address": "Madrid, Spain",
+  "imprint.contactTitle": "Contact",
+  "imprint.contact": "Email: juan@jgcarmona.com",
+  "imprint.disclaimerTitle": "Disclaimer",
+  "imprint.disclaimer": "The information on this website is provided for general information purposes only. No liability is assumed for completeness, accuracy, or availability. This project is in an experimental phase (pre-production) and no guarantees are made regarding performance or data security.",
+
+
+  "features.talent.title": "Talent & Hiring",
+  "features.talent.subtitle": "Find, align, and hire professionals with confidence.",
+  "features.talent.smartContracts.title": "Smart contracts",
+  "features.talent.smartContracts.desc": "Formalize agreements with trust and automation.",
+  "features.talent.transparentHiring.title": "Transparent hiring",
+  "features.talent.transparentHiring.desc": "Clear conditions from day one.",
+  "features.talent.escoProfiles.title": "Standardized profiles (ESCO)",
+  "features.talent.escoProfiles.desc": "Share talent using a European common framework.",
+
+  "features.time.title": "Time & Projects",
+  "features.time.subtitle": "Track, manage and report work across teams.",
+  "features.time.tracking.title": "Time tracking",
+  "features.time.tracking.desc": "Log time per project and task.",
+  "features.time.management.title": "Project & task management",
+  "features.time.management.desc": "Organize work by milestones and deliverables.",
+  "features.time.reports.title": "Automatic reports",
+  "features.time.reports.desc": "See time, performance and progress.",
+
+  "features.billing.title": "Billing & Payments",
+  "features.billing.subtitle": "Automate invoicing and pay with confidence.",
+  "features.billing.invoicing.title": "Automatic invoicing",
+  "features.billing.invoicing.desc": "Generate invoices from contracts and hours.",
+  "features.billing.escrow.title": "Smart escrow",
+  "features.billing.escrow.desc": "Funds are released only when agreed.",
+  "features.billing.payments.title": "Integrated payments",
+  "features.billing.payments.desc": "Send and receive money securely.",
+
+  "features.legal.title": "Legal & Trust",
+  "features.legal.subtitle": "Ensure traceability and compliance.",
+  "features.legal.audit.title": "Verifiable history",
+  "features.legal.audit.desc": "All actions and agreements are recorded.",
+  "features.legal.decentralized.title": "Trustless architecture",
+  "features.legal.decentralized.desc": "No single point of failure.",
+  "features.legal.compliance.title": "GDPR & CCPA compliance",
+  "features.legal.compliance.desc": "Your privacy and rights are protected.",
+
+  "features.collaboration.title": "Collaboration & Transparency",
+  "features.collaboration.subtitle": "Work openly with roles, teams and shared goals.",
+  "features.collaboration.teams.title": "Multidisciplinary teams",
+  "features.collaboration.teams.desc": "Connect talent across organizations.",
+  "features.collaboration.roles.title": "Granular roles & permissions",
+  "features.collaboration.roles.desc": "Everyone sees what they need — and nothing more.",
+  "features.collaboration.clarity.title": "Clear communication from the start",
+  "features.collaboration.clarity.desc": "Avoid misunderstandings with shared processes.",
+
+  
+  "forDevs.title": "For Developers",
+  "forDevs.heroTitle": "Build the Future of Work with Us",
+  "forDevs.heroSubtitle": "TFST is an open, composable, and extensible platform for HR, billing, contracts, and decentralized collaboration. It’s built for engineers who care about clean code and real impact.",
+
+  "forDevs.modularTitle": "Modular, Scalable Architecture",
+  "forDevs.modularDesc": "Every module in TFST is independent, cleanly separated, and easy to extend. From hiring pipelines to time tracking, you can build only what you need.",
+  
+  "forDevs.authTitle": "Solid Authentication & Multitenancy",
+  "forDevs.authDesc": "Built with OpenIddict, OIDC, JWT, and role-based access. Tenants are fully isolated — perfect for SaaS platforms or client projects.",
+  
+  "forDevs.devopsTitle": "Built for DevOps & CI/CD",
+  "forDevs.devopsDesc": "GitHub Actions handle tests, builds, deploys. Supports Docker, Azure, and local development with full environment parity.",
+  
+  "forDevs.openTitle": "Open Source by Default",
+  "forDevs.openDesc": "You own your data, your stack, and your roadmap. TFST is MIT-licensed and community-driven. Fork it, remix it, or contribute upstream.",
+  
+  "forDevs.joinTitle": "Get Involved",
+  "forDevs.joinDesc": "Star us on GitHub, join the community, or build something powerful on top of TFST. Your next idea starts here.",
+
+
+  
+  "roadmap.title": "📍 Roadmap",
+  "roadmap.mvpTitle": "✅ MVP",
+  "roadmap.mvp.registration": "Freelancer & client registration with KYC validation.",
+  "roadmap.mvp.profiles": "Profile system with skill-based filtering.",
+  "roadmap.mvp.contracts": "Initial hiring and smart contract-based payments.",
+  
+  "roadmap.phase2Title": "🚀 Phase 2",
+  "roadmap.phase2.projects": "Full project management with time tracking & automated payments.",
+  "roadmap.phase2.reputation": "Reputation system based on client validation and technical assessments.",
+  "roadmap.phase2.marketplace": "Consulting marketplace for mentorship & training.",
+
+  "roadmap.challengesTitle": "🧠 Challenges We Are Tackling",
+  "roadmap.challenges.scalability": "Scalability → From a Modular Monolith to a scalable Microservices architecture.",
+  "roadmap.challenges.security": "Security → Smart contract auditing & data protection.",
+  "roadmap.challenges.ux": "User Experience → Simple & intuitive UI/UX for high conversion rates.",
+
+  "developers-cta.title": "Help Us Shape the Future — Together",
+  "developers-cta.subtitle": "The rise of AI is changing how we work, collaborate, and build software. We believe developers have a unique role to play in keeping this future ethical, transparent, and human. Contribute your skills and your ideas.",
+  "developers-cta.button": "Contribute on GitHub",
+
+  "forDevelopers.heroTitle": "Be found. Get paid. Work on your terms.",
+  "forDevelopers.heroSubtitle": "Join a trusted network of professionals powered by blockchain and open reputation. No middlemen. Just work.",
+  "forDevelopers.cta": "Create your professional profile",
+    
+
+  "forDevelopers.painTitle": "Tired of platforms that don’t work for you?",
+  "forDevelopers.painPoints.exposureTitle": "🚫 Exposure",
+  "forDevelopers.painPoints.exposure": "You’re invisible on traditional job platforms unless you pay or game the system.",
+  "forDevelopers.painPoints.feesTitle": "💸 Fees",
+  "forDevelopers.painPoints.fees": "You lose up to 20% of your income in fees, commissions, and unclear rules.",
+  "forDevelopers.painPoints.trustTitle": "❓ Trust",
+  "forDevelopers.painPoints.trust": "You spend more time convincing clients than actually coding.",
+  "forDevelopers.painPoints.ownershipTitle": "🔒 Ownership",
+  "forDevelopers.painPoints.ownership": "Your reputation is locked in someone else’s system — not portable, not yours.",
+
+
+  "forDevelopers.gainsTitle": "Why TFST is different",
+  "forDevelopers.gainsSubtitle": "We’re building a global dev network — transparent, trusted, and open-source.",
+  "forDevelopers.gains.network": "A network, not a platform",
+  "forDevelopers.gains.networkDesc": "Join a decentralized community of professionals, not a closed marketplace controlled by third parties.",
+  "forDevelopers.gains.tech": "Built with and for developers",
+  "forDevelopers.gains.techDesc": "Open code, modular design, and public roadmaps. You can contribute or fork it.",
+  "forDevelopers.gains.trust": "Smart trust layer",
+  "forDevelopers.gains.trustDesc": "We use smart contracts and verifiable credentials to replace middlemen with transparency.",
+  "forDevelopers.gains.ownership": "You own your data & reputation",
+  "forDevelopers.gains.ownershipDesc": "Your work, your reputation, your rules — portable, provable, and independent.",
+
+  
+  "forDevelopers.howItWorksTitle": "How TFST Works for Developers",
+  "forDevelopers.howItWorksSubtitle": "A simple process to connect your skills with trusted, paid opportunities.",
+  "forDevelopers.step1Title": "Create your profile",
+  "forDevelopers.step1Desc": "Import your ESCO skills, past experience, and public contributions to build a verifiable profile.",
+  "forDevelopers.step2Title": "Join an organization or project",
+  "forDevelopers.step2Desc": "Browse open opportunities, join a team, or start contributing to open-source projects.",
+  "forDevelopers.step3Title": "Work transparently",
+  "forDevelopers.step3Desc": "Track time, deliver value, and build reputation — every action is auditable and recorded.",
+  "forDevelopers.step4Title": "Get paid with confidence",
+  "forDevelopers.step4Desc": "Receive payments via smart contracts and escrow — no intermediaries or lost invoices.",
+
+  
+  "forDevelopers.ctaTitle": "Ready to join the network?",
+  "forDevelopers.ctaSubtitle": "Start building your reputation, contribute to real projects, and get paid for your work.",
+  "forDevelopers.ctaButton": "Join TFST on GitHub",
+
+  
+  "forProfessionals.title": "For Professionals",
+
+  "forProfessionals.heroTitle": "Build with trust. Grow with top talent.",
+  "forProfessionals.heroSubtitle": "Say goodbye to flaky freelancers and broken promises. Hire developers you can trust — backed by smart contracts and transparent reputation.",
+  "forProfessionals.heroButton": "Start your project",
+
+  
+  "forProfessionals.painTitle": "Why hiring tech talent is so painful",
+ 
+  "forProfessionals.painPoints.hiringTitle": "Identifying real talent is hard",
+  "forProfessionals.painPoints.hiring": "CVs lie. Interviews are a gamble. It's nearly impossible to assess true skills without expert help.",
+
+  "forProfessionals.painPoints.qualityTitle": "Freelancers vanish or underdeliver",
+  "forProfessionals.painPoints.quality": "Working with the wrong dev can cost you months of delays and budget waste — and it happens too often.",
+
+  "forProfessionals.painPoints.riskTitle": "No guarantees or accountability",
+  "forProfessionals.painPoints.risk": "You pay, they ghost. No recourse. Traditional platforms protect themselves, not your project.",
+
+  "forProfessionals.painPoints.wasteTitle": "Agencies are overpriced middlemen",
+  "forProfessionals.painPoints.waste": "You don’t want to pay a 60% margin just for someone to forward emails. You want talent, not bureaucracy.",
+
+  
+  "forProfessionals.gainsTitle": "What you gain with TFST",
+  "forProfessionals.gainsSubtitle": "Smarter hiring. Less risk. More results.",
+
+  "forProfessionals.gains.talent": "Verified talent, not empty promises",
+  "forProfessionals.gains.talentDesc": "Our developers are vetted by peers, proven in real projects, and ranked by reputation — no fluff, no guessing.",
+
+  "forProfessionals.gains.control": "Full control over contracts and payments",
+  "forProfessionals.gains.controlDesc": "You decide the terms, approve milestones, and only pay for verified work. We automate the rest — securely and transparently.",
+
+  "forProfessionals.gains.trust": "Built-in trust with smart contracts",
+  "forProfessionals.gains.trustDesc": "Escrow, reputation, and dispute resolution are built in — so you don’t need to chase anyone or hope for the best.",
+
+  "forProfessionals.gains.speed": "Faster onboarding, real results",
+  "forProfessionals.gains.speedDesc": "No agencies, no interviews, no delays. Find top talent and start building — days, not weeks.",
+
+  
+  "forProfessionals.howTitle": "How TFST works for professionals",
+  "forProfessionals.howSubtitle": "Hiring talent has never been this easy, transparent, and secure.",
+
+  "forProfessionals.howSteps.0.title": "Post your project",
+  "forProfessionals.howSteps.0.desc": "Describe your need, timeline, and budget. TFST helps you write clear, actionable briefs using AI and templates.",
+
+  "forProfessionals.howSteps.1.title": "Get matched with top talent",
+  "forProfessionals.howSteps.1.desc": "Browse vetted developers ranked by skills, reputation, and past performance — or let the network recommend for you.",
+
+  "forProfessionals.howSteps.2.title": "Sign, track & pay in one place",
+  "forProfessionals.howSteps.2.desc": "Contracts, milestones, and payments are all managed on TFST. No paperwork, no hidden fees, full transparency.",
+
+  "forProfessionals.howSteps.3.title": "Review, rate, and repeat",
+  "forProfessionals.howSteps.3.desc": "Build long-term relationships with reliable developers — and help others by sharing your feedback.",
+
+  
+  "forProfessionals.ctaTitle": "Start hiring smarter with TFST",
+  "forProfessionals.ctaSubtitle": "Find the right developer, sign contracts, and manage payments — all in one open platform.",
+  "forProfessionals.ctaButton": "Explore the network",
+
+
+  "forCompanies.title": "For Companies",
+  "forCompanies.heroTitle": "The easiest way to hire top tech talent",
+  "forCompanies.heroSubtitle": "From developers to product designers, QA or DevOps — build your team with verified professionals, trusted contracts and zero bureaucracy.",
+  "forCompanies.heroCta": "Get in touch",
+
+  
+  "forCompanies.painTitle": "Why hiring tech teams is so painful",
+  "forCompanies.painSubtitle": "Hiring just one dev is hard enough. Building a full team is a minefield of risk, waste and delays.",
+
+  "forCompanies.painPoints.hiringTitle": "It’s hard to find the right people",
+  "forCompanies.painPoints.hiring": "Everyone looks good on LinkedIn. But without deep technical screening, you can’t tell who’s actually good.",
+
+  "forCompanies.painPoints.costTitle": "Recruiters and agencies cost too much",
+  "forCompanies.painPoints.cost": "You pay up to 60% in fees just to get intros — and still do all the heavy lifting.",
+
+  "forCompanies.painPoints.riskTitle": "Freelancers ghost you. Agencies overpromise.",
+  "forCompanies.painPoints.risk": "Working with the wrong partner costs you money, time and trust. And it happens more often than you’d like.",
+
+  "forCompanies.painPoints.fragileTitle": "Teams break easily",
+  "forCompanies.painPoints.fragile": "Projects slow down or stall when key people leave. There’s no continuity, no redundancy, no resilience.",
+
+  
+  "forCompanies.gainTitle": "A smarter way to build your tech team",
+  "forCompanies.gainSubtitle": "We bring you talent you can trust — vetted, committed, and ready to deliver.",
+
+  "forCompanies.gainPoints.expertTitle": "Expert screening by top engineers",
+  "forCompanies.gainPoints.expert": "Every professional in TFST has been peer-reviewed, tested in real projects, and continuously validated.",
+
+  "forCompanies.gainPoints.assemblyTitle": "We help you assemble complete teams",
+  "forCompanies.gainPoints.assembly": "You can hire one person or an entire squad. We help you compose the right mix of skills, experience, and culture fit.",
+
+  "forCompanies.gainPoints.trustTitle": "Built-in trust and accountability",
+  "forCompanies.gainPoints.trust": "Reputation is shared and public. Work is verifiable. Contracts are smart. You’re never in the dark again.",
+
+  "forCompanies.gainPoints.scalingTitle": "You grow. We adapt.",
+  "forCompanies.gainPoints.scaling": "From startup MVPs to scale-ups and enterprise projects — TFST grows with you, flexibly and transparently.",
+
+  
+  "forCompanies.ctaTitle": "Build your team with trusted professionals",
+  "forCompanies.ctaSubtitle": "Explore TFST and join the open ecosystem of talent and technology.",
+  "forCompanies.ctaButton": "Discover TFST on GitHub",
+
+
+  "forCompanies.howTitle": "How TFST works for organizations",
+  "forCompanies.howSubtitle": "Forget recruiters and intermediaries. Work directly with the best talent.",
+  "forCompanies.how.step1Title": "Post your need",
+  "forCompanies.how.step1Text": "Create a public opportunity, describe your project, and attract verified professionals.",
+  "forCompanies.how.step2Title": "Evaluate transparently",
+  "forCompanies.how.step2Text": "Review public profiles, real skills, and on-chain reputation — not just CVs.",
+  "forCompanies.how.step3Title": "Collaborate and build",
+  "forCompanies.how.step3Text": "Hire directly or through smart contracts. Track work, reputation, and payments in one place."
+
+
+
+}

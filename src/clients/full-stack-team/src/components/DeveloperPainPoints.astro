@@ -1,0 +1,46 @@
+---
+// src/components/DeveloperPainPoints.astro
+import { t } from "../i18n";
+const { locale } = Astro.props;
+---
+
+<section class="max-w-5xl mx-auto px-6 py-20">
+    <h2 class="text-3xl font-semibold text-center mb-12">
+        {t(locale, "forDevelopers.painTitle")}
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-10">
+        <div class="pain-point-card">
+            <h3 class="font-bold text-lg mb-2">
+                {t(locale, "forDevelopers.painPoints.exposureTitle")}
+            </h3>
+            <p class="text-gray-700">
+                {t(locale, "forDevelopers.painPoints.exposure")}
+            </p>
+        </div>
+        <div class="pain-point-card">
+            <h3 class="font-bold text-lg mb-2">
+                {t(locale, "forDevelopers.painPoints.feesTitle")}
+            </h3>
+            <p class="text-gray-700">
+                {t(locale, "forDevelopers.painPoints.fees")}
+            </p>
+        </div>
+        <div class="pain-point-card">
+            <h3 class="font-bold text-lg mb-2">
+                {t(locale, "forDevelopers.painPoints.trustTitle")}
+            </h3>
+            <p class="text-gray-700">
+                {t(locale, "forDevelopers.painPoints.trust")}
+            </p>
+        </div>
+        <div class="pain-point-card">
+            <h3 class="font-bold text-lg mb-2">
+                {t(locale, "forDevelopers.painPoints.ownershipTitle")}
+            </h3>
+            <p class="text-gray-700">
+                {t(locale, "forDevelopers.painPoints.ownership")}
+            </p>
+        </div>
+    </div>
+</section>

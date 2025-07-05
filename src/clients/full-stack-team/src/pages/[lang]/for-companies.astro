@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getLocalizedPaths } from "../../utils/localization.ts";
+import { t, defaultLocale, type Locale } from "../../i18n.ts";
+import CompaniesHero from "../../components/CompaniesHero.astro";
+import CompaniesPainPoints from "../../components/CompaniesPainPoints.astro";
+import CompaniesGains from "../../components/CompaniesGains.astro";
+import CompaniesJoinCta from "../../components/CompaniesJoinCta.astro";
+import CompaniesHowItWorks from "../../components/CompaniesHowItWorks.astro";
+
+export const getStaticPaths = getLocalizedPaths;
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<BaseLayout title={`TFST – ${t(locale, "forCompanies.title")}`} lang={lang}>
+    <CompaniesHero locale={locale} />
+    <CompaniesPainPoints locale={locale} />
+    <CompaniesGains locale={locale} />
+    <CompaniesHowItWorks locale={locale} />
+    <CompaniesJoinCta locale={locale} />
+</BaseLayout>

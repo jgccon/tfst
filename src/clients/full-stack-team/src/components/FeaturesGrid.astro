@@ -1,0 +1,64 @@
+---
+import FeatureBox from "./FeatureBox.astro";
+import { t } from "../i18n";
+const { locale } = Astro.props;
+---
+
+<section class="max-w-6xl mx-auto px-4 py-20 grid gap-24">
+
+  <!-- Talent & Hiring -->
+  <header class="text-center">
+    <h2 class="text-3xl font-bold mb-2">{t(locale, "features.talent.title")}</h2>
+    <p class="text-gray-700">{t(locale, "features.talent.subtitle")}</p>
+  </header>
+  <div class="grid md:grid-cols-3 gap-12">
+    <FeatureBox icon="🤖" title={t(locale, "features.talent.smartContracts.title")} desc={t(locale, "features.talent.smartContracts.desc")} />
+    <FeatureBox icon="📄" title={t(locale, "features.talent.transparentHiring.title")} desc={t(locale, "features.talent.transparentHiring.desc")} />
+    <FeatureBox icon="🌍" title={t(locale, "features.talent.escoProfiles.title")} desc={t(locale, "features.talent.escoProfiles.desc")} />
+  </div>
+
+  <!-- Time & Projects -->
+  <header class="text-center">
+    <h2 class="text-3xl font-bold mb-2">{t(locale, "features.time.title")}</h2>
+    <p class="text-gray-700">{t(locale, "features.time.subtitle")}</p>
+  </header>
+  <div class="grid md:grid-cols-3 gap-12">
+    <FeatureBox icon="⏱️" title={t(locale, "features.time.tracking.title")} desc={t(locale, "features.time.tracking.desc")} />
+    <FeatureBox icon="🗂️" title={t(locale, "features.time.management.title")} desc={t(locale, "features.time.management.desc")} />
+    <FeatureBox icon="📊" title={t(locale, "features.time.reports.title")} desc={t(locale, "features.time.reports.desc")} />
+  </div>
+
+  <!-- Billing & Payments -->
+  <header class="text-center">
+    <h2 class="text-3xl font-bold mb-2">{t(locale, "features.billing.title")}</h2>
+    <p class="text-gray-700">{t(locale, "features.billing.subtitle")}</p>
+  </header>
+  <div class="grid md:grid-cols-3 gap-12">
+    <FeatureBox icon="🧾" title={t(locale, "features.billing.invoicing.title")} desc={t(locale, "features.billing.invoicing.desc")} />
+    <FeatureBox icon="🤝" title={t(locale, "features.billing.escrow.title")} desc={t(locale, "features.billing.escrow.desc")} />
+    <FeatureBox icon="💸" title={t(locale, "features.billing.payments.title")} desc={t(locale, "features.billing.payments.desc")} />
+  </div>
+
+  <!-- Legal & Trust -->
+  <header class="text-center">
+    <h2 class="text-3xl font-bold mb-2">{t(locale, "features.legal.title")}</h2>
+    <p class="text-gray-700">{t(locale, "features.legal.subtitle")}</p>
+  </header>
+  <div class="grid md:grid-cols-3 gap-12">
+    <FeatureBox icon="📚" title={t(locale, "features.legal.audit.title")} desc={t(locale, "features.legal.audit.desc")} />
+    <FeatureBox icon="🔓" title={t(locale, "features.legal.decentralized.title")} desc={t(locale, "features.legal.decentralized.desc")} />
+    <FeatureBox icon="🛡️" title={t(locale, "features.legal.compliance.title")} desc={t(locale, "features.legal.compliance.desc")} />
+  </div>
+
+  <!-- Collaboration -->
+  <header class="text-center">
+    <h2 class="text-3xl font-bold mb-2">{t(locale, "features.collaboration.title")}</h2>
+    <p class="text-gray-700">{t(locale, "features.collaboration.subtitle")}</p>
+  </header>
+  <div class="grid md:grid-cols-3 gap-12">
+    <FeatureBox icon="👥" title={t(locale, "features.collaboration.teams.title")} desc={t(locale, "features.collaboration.teams.desc")} />
+    <FeatureBox icon="🔐" title={t(locale, "features.collaboration.roles.title")} desc={t(locale, "features.collaboration.roles.desc")} />
+    <FeatureBox icon="💬" title={t(locale, "features.collaboration.clarity.title")} desc={t(locale, "features.collaboration.clarity.desc")} />
+  </div>
+
+</section>

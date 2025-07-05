@@ -1,0 +1,32 @@
+---
+import { getLocalizedPaths } from "../../utils/localization.ts";
+import { t, defaultLocale, type Locale } from "../../i18n.ts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export const getStaticPaths = getLocalizedPaths;
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<BaseLayout lang={locale} title={t(locale, "terms.title")}>
+  <article class="prose prose-sm sm:prose lg:prose-lg prose-slate max-w-none">
+    <h1>{t(locale, "terms.title")}</h1>
+    <p>{t(locale, "terms.intro")}</p>
+
+    <h2>{t(locale, "terms.useTitle")}</h2>
+    <p>{t(locale, "terms.use")}</p>
+
+    <h2>{t(locale, "terms.disclaimerTitle")}</h2>
+    <p>{t(locale, "terms.disclaimer")}</p>
+
+    <h2>{t(locale, "terms.limitationsTitle")}</h2>
+    <p>{t(locale, "terms.limitations")}</p>
+
+    <h2>{t(locale, "terms.modificationsTitle")}</h2>
+    <p>{t(locale, "terms.modifications")}</p>
+
+    <h2>{t(locale, "terms.contactTitle")}</h2>
+    <p>{t(locale, "terms.contact")}</p>
+  </article>
+</BaseLayout>
