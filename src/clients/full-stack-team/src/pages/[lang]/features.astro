@@ -2,6 +2,7 @@
 import { getLocalizedPaths } from "../../utils/localization.ts";
 import { t, defaultLocale, type Locale } from "../../i18n.ts";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import FeaturesGrid from "../../components/FeaturesGrid.astro";
 
 export const getStaticPaths = getLocalizedPaths;
 
@@ -10,27 +11,5 @@ const locale = lang as Locale;
 ---
 
 <BaseLayout title={`TFST – ${t(locale, 'nav.features')}`} lang={lang}>
-  <section class="max-w-4xl mx-auto px-4 py-16">
-    <h1 class="text-3xl font-bold mb-6 text-center">{t(locale, 'features.title')}</h1>
-    <p class="text-lg text-gray-700 mb-8 text-center">{t(locale, 'features.intro')}</p>
-
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="p-6 border rounded-lg bg-white shadow hover:shadow-md transition">
-        <h2 class="text-xl font-semibold mb-2">{t(locale, 'features.hr.title')}</h2>
-        <p class="text-gray-700">{t(locale, 'features.hr.description')}</p>
-      </div>
-      <div class="p-6 border rounded-lg bg-white shadow hover:shadow-md transition">
-        <h2 class="text-xl font-semibold mb-2">{t(locale, 'features.billing.title')}</h2>
-        <p class="text-gray-700">{t(locale, 'features.billing.description')}</p>
-      </div>
-      <div class="p-6 border rounded-lg bg-white shadow hover:shadow-md transition">
-        <h2 class="text-xl font-semibold mb-2">{t(locale, 'features.contracts.title')}</h2>
-        <p class="text-gray-700">{t(locale, 'features.contracts.description')}</p>
-      </div>
-      <div class="p-6 border rounded-lg bg-white shadow hover:shadow-md transition">
-        <h2 class="text-xl font-semibold mb-2">{t(locale, 'features.escrow.title')}</h2>
-        <p class="text-gray-700">{t(locale, 'features.escrow.description')}</p>
-      </div>
-    </div>
-  </section>
+    <FeaturesGrid locale={locale} />
 </BaseLayout>
