@@ -24,6 +24,8 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+        working-directory: src/clients/full-stack-team
 
       - name: Build Site
         run: npm run build
+        working-directory: src/clients/full-stack-team
