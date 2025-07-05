@@ -4,6 +4,8 @@
 
 **TFST** is an open-source platform designed to revolutionize **freelance and project management** by integrating **transparency, smart contracts, and decentralized trust mechanisms**. It provides professionals, businesses, and recruiters with the tools they need to manage **clients, projects, contracts, billing, and work hours**—all in a **scalable, multitenant** environment.
 
+[![Fullstack Team - Deployment](https://github.com/jgccon/tfst/actions/workflows/full-stack-team-cd.yml/badge.svg)](https://github.com/jgccon/tfst/actions/workflows/full-stack-team-cd.yml)
+
 ## 🌍 Why TFST?
 
 TFST is more than a freelancer marketplace—it’s a **HUB** where top IT talent connects with the best opportunities in a **transparent and efficient** way.
