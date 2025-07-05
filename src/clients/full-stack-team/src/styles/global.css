@@ -15,5 +15,24 @@
   .text-tfst-blue { color: var(--tfst-blue); }
   .bg-tfst-blue { background-color: var(--tfst-blue); }
   .hover\:bg-tfst-blue-dark:hover { background-color: var(--tfst-blue-dark); }
-  /* ...y más según necesites */
+
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block px-6 py-3 rounded-lg text-white font-medium transition;
+    background-color: var(--tfst-blue);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--tfst-blue-dark);
+  }
+
+  .btn-secondary {
+    @apply inline-block px-6 py-3 rounded-lg border border-gray-300 text-gray-800 hover:bg-gray-100 transition;
+  }
+
+  .hero-section {
+    @apply bg-white;
+  }
 }

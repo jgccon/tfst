@@ -1,5 +1,15 @@
 {
   "nav.community": "Comunidad",
   "nav.contact": "Contacto",
-  "home.title": "Construyendo el futuro de la colaboración de talento"
+  "home.title": "Construyendo el futuro de la colaboración de talento",
+  "hero.title": "Construye el futuro del trabajo. Juntos.",
+  "hero.subtitle": "The Full-Stack Team es una plataforma open source para conectar profesionales, equipos y empresas con contratos inteligentes, IA y colaboración transparente.",
+  "hero.cta.explore": "Explora la plataforma",
+  "hero.cta.star": "⭐ Dale una estrella en GitHub",
+  "nav.features": "Características",
+  "nav.developers": "Desarrolladores",
+  "nav.professionals": "Profesionales",
+  "nav.companies": "Empresas",
+  "nav.blog": "Blog",
+  "nav.star": "Dale una estrella a TFST"
 }
