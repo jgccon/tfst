@@ -1,7 +1,8 @@
 {
-  "name": "satnaing-astro-paper",
+  "name": "@tfst/full-stack-team",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "description": "Website for the Full Stack Team (TFST) — open-source HR & Talent Management Platform.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
