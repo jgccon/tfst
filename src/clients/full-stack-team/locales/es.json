@@ -1,6 +1,4 @@
 {
-  "nav.community": "Comunidad",
-  "nav.contact": "Contacto",
   "home.title": "Construyendo el futuro de la colaboración de talento",
   "hero.title": "Construye el futuro del trabajo. Juntos.",
   "hero.subtitle": "The Full-Stack Team es una plataforma open source para conectar profesionales, equipos y empresas con contratos inteligentes, IA y colaboración transparente.",
@@ -11,5 +9,28 @@
   "nav.professionals": "Profesionales",
   "nav.companies": "Empresas",
   "nav.blog": "Blog",
-  "nav.star": "Dale una estrella a TFST"
+  "nav.star": "Dale una estrella a TFST",
+  "footer.rights": "Todos los derechos reservados.",
+  "footer.poweredBy": "Impulsado por nuestros",
+  "footer.contributors": "colaboradores",
+  "footer.community": "Comunidad",
+  "footer.docs": "Documentación técnica",
+  "footer.contribute": "Contribuir",
+  "footer.privacy": "Privacidad",
+  "footer.terms": "Términos",
+  "footer.imprint": "Aviso legal",
+  "footer.ctaText": "Ayúdanos a construir el futuro del talento descentralizado.",
+  "footer.ctaButton": "Únete a TFST",
+  "privacy.title": "Política de Privacidad",
+  "privacy.meta": "Conoce cómo TFST maneja los datos y la privacidad.",
+  "privacy.intro": "TFST (The Full Stack Team) es actualmente un proyecto de código abierto desarrollado por voluntarios en su tiempo libre. Nuestro objetivo es construir una plataforma sólida de gestión de talento, pero el software se encuentra en fase pre-lanzamiento (alfa).",
+  "privacy.scopeTitle": "Ámbito de esta política",
+  "privacy.scope": "Esta política de privacidad se aplica únicamente a los sitios web y servicios mantenidos directamente por el proyecto TFST. En este momento, TFST no recopila, procesa ni almacena datos personales de los usuarios, salvo que se indique explícitamente.",
+  "privacy.dataTitle": "Recogida y uso de datos",
+  "privacy.data": "TFST no rastrea a los usuarios, no utiliza cookies ni recopila información personal por defecto. Si en el futuro alguna funcionalidad requiere datos, se documentará y será siempre opcional.",
+  "privacy.responsibilityTitle": "Exención de responsabilidad",
+  "privacy.responsibility": "Este software se proporciona 'tal cual', sin ninguna garantía. Los mantenedores y colaboradores no son responsables de problemas, pérdidas de datos o daños derivados del uso de TFST mientras permanezca en fase experimental o de prueba.",
+  "privacy.contactTitle": "Contacto",
+  "privacy.contact": "Si tienes preguntas, escríbenos a juan@jgcarmona.com o contribuye directamente en GitHub: https://github.com/jgccon/tfst"
+
 }

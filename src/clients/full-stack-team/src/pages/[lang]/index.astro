@@ -4,12 +4,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { t, defaultLocale, type Locale } from '../../i18n.ts';
 import HomeHero from '../../components/HomeHero.astro';
 
-export async function getStaticPaths() {
-  return [
-    { params: { lang: 'en' } },
-    { params: { lang: 'es' } }
-  ];
-}
+import { getLocalizedPaths } from '../../utils/localization.ts';
+
+export const getStaticPaths = getLocalizedPaths;
 
 const lang = Astro.params.lang ?? defaultLocale;
 const locale = lang as Locale;

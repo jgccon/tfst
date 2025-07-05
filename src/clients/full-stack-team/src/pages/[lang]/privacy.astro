@@ -1,0 +1,36 @@
+---
+import { getLocalizedPaths } from "../../utils/localization.ts";
+import { t, defaultLocale, type Locale } from "../../i18n.ts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export const getStaticPaths = getLocalizedPaths;
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<BaseLayout lang={locale} title={t(locale, "privacy.title")}>
+    <h1 class="text-3xl font-bold mb-6">{t(locale, "privacy.title")}</h1>
+
+    <p class="mb-4">{t(locale, "privacy.intro")}</p>
+
+    <h2 class="text-xl font-semibold mt-8 mb-2">
+        {t(locale, "privacy.scopeTitle")}
+    </h2>
+    <p class="mb-4">{t(locale, "privacy.scope")}</p>
+
+    <h2 class="text-xl font-semibold mt-8 mb-2">
+        {t(locale, "privacy.dataTitle")}
+    </h2>
+    <p class="mb-4">{t(locale, "privacy.data")}</p>
+
+    <h2 class="text-xl font-semibold mt-8 mb-2">
+        {t(locale, "privacy.responsibilityTitle")}
+    </h2>
+    <p class="mb-4">{t(locale, "privacy.responsibility")}</p>
+
+    <h2 class="text-xl font-semibold mt-8 mb-2">
+        {t(locale, "privacy.contactTitle")}
+    </h2>
+    <p>{t(locale, "privacy.contact")}</p>
+</BaseLayout>
