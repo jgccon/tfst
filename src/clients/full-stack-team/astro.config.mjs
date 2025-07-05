@@ -19,7 +19,7 @@ export default defineConfig({
                 },
             },
             xslURL: '/sitemap.xsl',
-            filenameBase: 'the-full-stack-team-sitemap'
+            filenameBase: 'sitemap'
         }),
     ],
   redirects: {
