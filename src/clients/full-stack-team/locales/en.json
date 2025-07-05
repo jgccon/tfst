@@ -110,7 +110,33 @@
 
   "developers-cta.title": "Help Us Shape the Future — Together",
   "developers-cta.subtitle": "The rise of AI is changing how we work, collaborate, and build software. We believe developers have a unique role to play in keeping this future ethical, transparent, and human. Contribute your skills and your ideas.",
-  "developers-cta.button": "Contribute on GitHub"
+  "developers-cta.button": "Contribute on GitHub",
 
+  "forDevelopers.heroTitle": "Be found. Get paid. Work on your terms.",
+  "forDevelopers.heroSubtitle": "Join a trusted network of professionals powered by blockchain and open reputation. No middlemen. Just work.",
+  "forDevelopers.cta": "Create your professional profile",
+    
+
+  "forDevelopers.painTitle": "Tired of platforms that don’t work for you?",
+  "forDevelopers.painPoints.exposureTitle": "🚫 Exposure",
+  "forDevelopers.painPoints.exposure": "You’re invisible on traditional job platforms unless you pay or game the system.",
+  "forDevelopers.painPoints.feesTitle": "💸 Fees",
+  "forDevelopers.painPoints.fees": "You lose up to 20% of your income in fees, commissions, and unclear rules.",
+  "forDevelopers.painPoints.trustTitle": "❓ Trust",
+  "forDevelopers.painPoints.trust": "You spend more time convincing clients than actually coding.",
+  "forDevelopers.painPoints.ownershipTitle": "🔒 Ownership",
+  "forDevelopers.painPoints.ownership": "Your reputation is locked in someone else’s system — not portable, not yours.",
+
+
+  "forDevelopers.gainsTitle": "Why TFST is different",
+  "forDevelopers.gainsSubtitle": "We’re building a global dev network — transparent, trusted, and open-source.",
+  "forDevelopers.gains.network": "A network, not a platform",
+  "forDevelopers.gains.networkDesc": "Join a decentralized community of professionals, not a closed marketplace controlled by third parties.",
+  "forDevelopers.gains.tech": "Built with and for developers",
+  "forDevelopers.gains.techDesc": "Open code, modular design, and public roadmaps. You can contribute or fork it.",
+  "forDevelopers.gains.trust": "Smart trust layer",
+  "forDevelopers.gains.trustDesc": "We use smart contracts and verifiable credentials to replace middlemen with transparency.",
+  "forDevelopers.gains.ownership": "You own your data & reputation",
+  "forDevelopers.gains.ownershipDesc": "Your work, your reputation, your rules — portable, provable, and independent."
 
 }

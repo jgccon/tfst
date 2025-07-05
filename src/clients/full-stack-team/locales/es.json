@@ -99,6 +99,34 @@
   
   "developers-cta.title": "Ayúdanos a construir TFST",
   "developers-cta.subtitle": "La irrupción de la IA está transformando cómo trabajamos, colaboramos y construimos software. Creemos que los desarrolladores tienen un papel clave en mantener este futuro ético, transparente y humano. Comparte tus habilidades y tus ideas.",
-  "developers-cta.button": "Contribuye en GitHub"
+  "developers-cta.button": "Contribuye en GitHub",
+
+  "forDevelopers.heroTitle": "Hazte visible. Cobra a tiempo. Trabaja a tu manera.",
+  "forDevelopers.heroSubtitle": "Únete a una red de profesionales de confianza impulsada por blockchain y reputación abierta. Sin intermediarios. Solo trabajo.",
+  "forDevelopers.cta": "Crea tu perfil profesional",
+
+  
+  "forDevelopers.painTitle": "¿Cansado de plataformas que no piensan en ti?",
+  "forDevelopers.painPoints.exposureTitle": "🚫 Visibilidad",
+  "forDevelopers.painPoints.exposure": "Eres invisible en las plataformas tradicionales a menos que pagues o manipules el sistema.",
+  "forDevelopers.painPoints.feesTitle": "💸 Comisiones",
+  "forDevelopers.painPoints.fees": "Pierdes hasta un 20% de tus ingresos en comisiones y reglas opacas.",
+  "forDevelopers.painPoints.trustTitle": "❓ Confianza",
+  "forDevelopers.painPoints.trust": "Pasas más tiempo ganándote la confianza del cliente que programando.",
+  "forDevelopers.painPoints.ownershipTitle": "🔒 Reputación",
+  "forDevelopers.painPoints.ownership": "Tu reputación está encerrada en sistemas de terceros — no es portable, no es tuya.",
+
+  
+  "forDevelopers.gainsTitle": "Por qué TFST es diferente",
+  "forDevelopers.gainsSubtitle": "Estamos construyendo una red global de desarrolladores y profesionales del software y la tecnología — transparente, confiable y open-source.",
+  "forDevelopers.gains.network": "Una red, no una plataforma",
+  "forDevelopers.gains.networkDesc": "Únete a una comunidad descentralizada de profesionales, no a un marketplace cerrado controlado por terceros.",
+  "forDevelopers.gains.tech": "Hecho por y para profesionales como tú",
+  "forDevelopers.gains.techDesc": "Código abierto, diseño modular y hoja de ruta pública. Puedes contribuir o hacer fork.",
+  "forDevelopers.gains.trust": "Capa de confianza inteligente",
+  "forDevelopers.gains.trustDesc": "Usamos smart contracts y credenciales verificables para reemplazar intermediarios con transparencia.",
+  "forDevelopers.gains.ownership": "Tú controlas tu reputación",
+  "forDevelopers.gains.ownershipDesc": "Tu trabajo, tu reputación, tus reglas — portable, demostrable e independiente."
+
 
 }
