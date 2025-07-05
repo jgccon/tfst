@@ -32,8 +32,7 @@
   "privacy.responsibility": "Este software se proporciona 'tal cual', sin ninguna garantía. Los mantenedores y colaboradores no son responsables de problemas, pérdidas de datos o daños derivados del uso de TFST mientras permanezca en fase experimental o de prueba.",
   "privacy.contactTitle": "Contacto",
   "privacy.contact": "Si tienes preguntas, escríbenos a juan@jgcarmona.com o contribuye directamente en GitHub: https://github.com/jgccon/tfst",
-
-"terms.title": "Términos y Condiciones",
+  "terms.title": "Términos y Condiciones",
   "terms.intro": "Al acceder y utilizar este sitio web, aceptas quedar sujeto a estos términos y condiciones. Si no estás de acuerdo con alguna parte de estos términos, por favor abstente de utilizar el sitio.",
   "terms.useTitle": "Licencia de Uso",
   "terms.use": "Se concede permiso para ver y utilizar los materiales de este sitio web únicamente con fines personales y no comerciales. No se permite modificar, redistribuir ni utilizar ninguna parte del sitio con fines comerciales sin consentimiento previo por escrito.",
@@ -45,7 +44,6 @@
   "terms.modifications": "Nos reservamos el derecho de modificar estos términos de uso en cualquier momento y sin previo aviso. Al utilizar este sitio web, aceptas quedar sujeto a la versión vigente de los Términos y Condiciones.",
   "terms.contactTitle": "Contacto",
   "terms.contact": "Si tienes preguntas sobre estos términos, puedes escribirnos a juan@jgcarmona.com.",
-
   "imprint.title": "Aviso Legal (Impressum)",
   "imprint.intro": "Este sitio web es mantenido como un proyecto personal por el titular que figura a continuación. No está destinado al uso comercial y puede contener funcionalidades experimentales o incompletas.",
   "imprint.ownerTitle": "Titular",
@@ -56,8 +54,6 @@
   "imprint.contact": "Correo electrónico: juan@jgcarmona.com",
   "imprint.disclaimerTitle": "Descargo de Responsabilidad",
   "imprint.disclaimer": "La información contenida en este sitio web se proporciona únicamente con fines informativos generales. No se asume responsabilidad por la integridad, exactitud o disponibilidad de la información. Este proyecto se encuentra en fase experimental (pre-producción) y no se ofrecen garantías sobre su rendimiento o seguridad de datos.",
-
-  
   "features.title": "Explora las funcionalidades de TFST",
   "features.intro": "Desde la contratación hasta los pagos, TFST aporta transparencia y confianza.",
   "features.hr.title": "RRHH descentralizado",
@@ -67,6 +63,42 @@
   "features.contracts.title": "Contratos inteligentes",
   "features.contracts.description": "Firma y gestiona contratos entre organizaciones de forma digital.",
   "features.escrow.title": "Pagos con escrow",
-  "features.escrow.description": "Asegura las transacciones con tecnología blockchain y cuentas escrow."
+  "features.escrow.description": "Asegura las transacciones con tecnología blockchain y cuentas escrow.",
+  "forDevs.title": "For Developers",
+
+  "forDevs.heroTitle": "Construye el futuro del trabajo con nosotros",
+  "forDevs.heroSubtitle": "TFST es una plataforma abierta, modular y extensible para RRHH., facturación, contratos y colaboración descentralizada. Está diseñada para ingenieros que se preocupan por un código limpio y un impacto real.",
+  "forDevs.modularTitle": "Arquitectura modular y escalable",
+  "forDevs.modularDesc": "Cada módulo de TFST es independiente, está claramente separado y es fácil de extender. Desde los procesos de contratación hasta el control de tiempo, puedes crear solo lo que necesitas.",
+  "forDevs.authTitle": "Autenticación sólida y multiusuario",
+  "forDevs.authDesc": "Desarrollado con OpenIddict, OIDC, JWT y acceso basado en roles. Los inquilinos están completamente aislados, perfecto para plataformas SaaS o proyectos de clientes.",
+  "forDevs.devopsTitle": "Diseñado para DevOps y CI/CD",
+  "forDevs.devopsDesc": "Las Acciones de GitHub gestionan pruebas, compilaciones e implementaciones. Compatible con Docker, Azure y desarrollo local con total paridad con el entorno.",
+  "forDevs.openTitle": "Código abierto por defecto",
+  "forDevs.openDesc": "Eres el propietario de tus datos, tu pila y tu hoja de ruta. TFST cuenta con licencia MIT y es impulsado por la comunidad. Bifurca, remezcla o contribuye con recursos originales.",
+  "forDevs.joinTitle": "Participa",
+  "forDevs.joinDesc": "Danos una estrella en GitHub, únete a la comunidad o crea algo potente basado en TFST. Tu próxima idea empieza aquí.",
+
+  
+  "roadmap.title": "📍 Hoja de ruta",
+  "roadmap.mvpTitle": "✅ MVP", 
+  "roadmap.mvp.registration": "Registro de freelancers y clientes con validación KYC.",
+  "roadmap.mvp.profiles": "Sistema de perfiles con filtrado basado en habilidades.",
+  "roadmap.mvp.contracts": "Contratación inicial y pagos mediante smart contracts.",
+  
+  "roadmap.phase2Title": "🚀 Fase 2",
+  "roadmap.phase2.projects": "Gestión completa de proyectos con seguimiento de tiempo y pagos automáticos.",
+  "roadmap.phase2.reputation": "Sistema de reputación basado en validación del cliente y evaluaciones técnicas.",
+  "roadmap.phase2.marketplace": "Marketplace de consultoría para mentoría y formación.",
+
+  "roadmap.challengesTitle": "🧠 Retos que estamos afrontando",
+  "roadmap.challenges.scalability": "Escalabilidad → De un Monolito Modular a una arquitectura de Microservicios escalable.",
+  "roadmap.challenges.security": "Seguridad → Auditoría de smart contracts y protección de datos.",
+  "roadmap.challenges.ux": "Experiencia de Usuario → UI/UX simple e intuitiva para maximizar la conversión.",
+
+  
+  "developers-cta.title": "Ayúdanos a construir TFST",
+  "developers-cta.subtitle": "La irrupción de la IA está transformando cómo trabajamos, colaboramos y construimos software. Creemos que los desarrolladores tienen un papel clave en mantener este futuro ético, transparente y humano. Comparte tus habilidades y tus ideas.",
+  "developers-cta.button": "Contribuye en GitHub"
 
 }

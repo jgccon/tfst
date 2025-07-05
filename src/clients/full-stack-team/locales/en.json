@@ -68,5 +68,49 @@
   "features.contracts.title": "Smart Contracts",
   "features.contracts.description": "Digitally sign, manage, and execute contracts across organizations.",
   "features.escrow.title": "Escrow & Payments",
-  "features.escrow.description": "Use blockchain-based escrow to ensure secure transactions."
+  "features.escrow.description": "Use blockchain-based escrow to ensure secure transactions.",
+
+  
+  "forDevs.title": "For Developers",
+  "forDevs.heroTitle": "Build the Future of Work with Us",
+  "forDevs.heroSubtitle": "TFST is an open, composable, and extensible platform for HR, billing, contracts, and decentralized collaboration. It’s built for engineers who care about clean code and real impact.",
+
+  "forDevs.modularTitle": "Modular, Scalable Architecture",
+  "forDevs.modularDesc": "Every module in TFST is independent, cleanly separated, and easy to extend. From hiring pipelines to time tracking, you can build only what you need.",
+  
+  "forDevs.authTitle": "Solid Authentication & Multitenancy",
+  "forDevs.authDesc": "Built with OpenIddict, OIDC, JWT, and role-based access. Tenants are fully isolated — perfect for SaaS platforms or client projects.",
+  
+  "forDevs.devopsTitle": "Built for DevOps & CI/CD",
+  "forDevs.devopsDesc": "GitHub Actions handle tests, builds, deploys. Supports Docker, Azure, and local development with full environment parity.",
+  
+  "forDevs.openTitle": "Open Source by Default",
+  "forDevs.openDesc": "You own your data, your stack, and your roadmap. TFST is MIT-licensed and community-driven. Fork it, remix it, or contribute upstream.",
+  
+  "forDevs.joinTitle": "Get Involved",
+  "forDevs.joinDesc": "Star us on GitHub, join the community, or build something powerful on top of TFST. Your next idea starts here.",
+
+
+  
+  "roadmap.title": "📍 Roadmap",
+  "roadmap.mvpTitle": "✅ MVP",
+  "roadmap.mvp.registration": "Freelancer & client registration with KYC validation.",
+  "roadmap.mvp.profiles": "Profile system with skill-based filtering.",
+  "roadmap.mvp.contracts": "Initial hiring and smart contract-based payments.",
+  
+  "roadmap.phase2Title": "🚀 Phase 2",
+  "roadmap.phase2.projects": "Full project management with time tracking & automated payments.",
+  "roadmap.phase2.reputation": "Reputation system based on client validation and technical assessments.",
+  "roadmap.phase2.marketplace": "Consulting marketplace for mentorship & training.",
+
+  "roadmap.challengesTitle": "🧠 Challenges We Are Tackling",
+  "roadmap.challenges.scalability": "Scalability → From a Modular Monolith to a scalable Microservices architecture.",
+  "roadmap.challenges.security": "Security → Smart contract auditing & data protection.",
+  "roadmap.challenges.ux": "User Experience → Simple & intuitive UI/UX for high conversion rates.",
+
+  "developers-cta.title": "Help Us Shape the Future — Together",
+  "developers-cta.subtitle": "The rise of AI is changing how we work, collaborate, and build software. We believe developers have a unique role to play in keeping this future ethical, transparent, and human. Contribute your skills and your ideas.",
+  "developers-cta.button": "Contribute on GitHub"
+
+
 }
