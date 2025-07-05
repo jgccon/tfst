@@ -204,7 +204,23 @@
   "forCompanies.title": "Para Empresas",
   "forCompanies.heroTitle": "La forma más fácil de contratar el mejor talento tecnológico",
   "forCompanies.heroSubtitle": "Desde desarrolladores hasta diseñadores de producto, QA o DevOps — forma tu equipo con profesionales verificados, contratos claros y cero burocracia.",
-  "forCompanies.heroCta": "Habla con nosotros"
+  "forCompanies.heroCta": "Habla con nosotros",
+
+  "forCompanies.painTitle": "¿Por qué es tan difícil contratar equipos técnicos?",
+  "forCompanies.painSubtitle": "Contratar a un solo desarrollador ya es complicado. Formar un equipo completo es un campo minado de riesgos, sobrecostes y retrasos.",
+
+  "forCompanies.painPoints.hiringTitle": "Es difícil encontrar a los adecuados",
+  "forCompanies.painPoints.hiring": "Todo el mundo parece bueno en LinkedIn. Pero sin evaluación técnica real, es imposible saber quién lo es de verdad.",
+
+  "forCompanies.painPoints.costTitle": "Los recruiters y agencias cobran demasiado",
+  "forCompanies.painPoints.cost": "Pagas hasta un 60 % solo por presentaciones — y aún así haces tú todo el trabajo duro.",
+
+  "forCompanies.painPoints.riskTitle": "Los freelance desaparecen. Las agencias prometen en vano.",
+  "forCompanies.painPoints.risk": "Trabajar con el socio equivocado te cuesta dinero, tiempo y confianza. Y pasa más veces de las que quisieras.",
+
+  "forCompanies.painPoints.fragileTitle": "Los equipos son frágiles",
+  "forCompanies.painPoints.fragile": "Los proyectos se frenan o se paran si alguien clave se va. No hay continuidad, ni redundancia, ni resiliencia."
+
 
 
 

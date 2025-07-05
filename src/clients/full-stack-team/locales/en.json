@@ -219,7 +219,23 @@
   "forCompanies.title": "For Companies",
   "forCompanies.heroTitle": "The easiest way to hire top tech talent",
   "forCompanies.heroSubtitle": "From developers to product designers, QA or DevOps — build your team with verified professionals, trusted contracts and zero bureaucracy.",
-  "forCompanies.heroCta": "Get in touch"
+  "forCompanies.heroCta": "Get in touch",
+
+  
+  "forCompanies.painTitle": "Why hiring tech teams is so painful",
+  "forCompanies.painSubtitle": "Hiring just one dev is hard enough. Building a full team is a minefield of risk, waste and delays.",
+
+  "forCompanies.painPoints.hiringTitle": "It’s hard to find the right people",
+  "forCompanies.painPoints.hiring": "Everyone looks good on LinkedIn. But without deep technical screening, you can’t tell who’s actually good.",
+
+  "forCompanies.painPoints.costTitle": "Recruiters and agencies cost too much",
+  "forCompanies.painPoints.cost": "You pay up to 60% in fees just to get intros — and still do all the heavy lifting.",
+
+  "forCompanies.painPoints.riskTitle": "Freelancers ghost you. Agencies overpromise.",
+  "forCompanies.painPoints.risk": "Working with the wrong partner costs you money, time and trust. And it happens more often than you’d like.",
+
+  "forCompanies.painPoints.fragileTitle": "Teams break easily",
+  "forCompanies.painPoints.fragile": "Projects slow down or stall when key people leave. There’s no continuity, no redundancy, no resilience."
 
 
 
