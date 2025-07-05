@@ -126,7 +126,29 @@
   "forDevelopers.gains.trust": "Capa de confianza inteligente",
   "forDevelopers.gains.trustDesc": "Usamos smart contracts y credenciales verificables para reemplazar intermediarios con transparencia.",
   "forDevelopers.gains.ownership": "Tú controlas tu reputación",
-  "forDevelopers.gains.ownershipDesc": "Tu trabajo, tu reputación, tus reglas — portable, demostrable e independiente."
+  "forDevelopers.gains.ownershipDesc": "Tu trabajo, tu reputación, tus reglas — portable, demostrable e independiente.",
+  
+  "forDevelopers.howItWorksTitle": "Cómo funciona TFST para developers",
+  "forDevelopers.howItWorksSubtitle": "Un proceso simple para conectar tus habilidades con oportunidades reales y seguras.",
+  "forDevelopers.step1Title": "Crea tu perfil",
+  "forDevelopers.step1Desc": "Importa tus habilidades ESCO, experiencia previa y contribuciones públicas para crear un perfil verificable.",
+  "forDevelopers.step2Title": "Únete a una organización o proyecto",
+  "forDevelopers.step2Desc": "Explora oportunidades abiertas, únete a un equipo o empieza a contribuir en proyectos open-source.",
+  "forDevelopers.step3Title": "Trabaja con transparencia",
+  "forDevelopers.step3Desc": "Registra tu tiempo, entrega valor y construye reputación — cada acción es auditable.",
+  "forDevelopers.step4Title": "Cobra con confianza",
+  "forDevelopers.step4Desc": "Recibe pagos mediante smart contracts y escrow — sin intermediarios ni facturas perdidas.",
+
+  
+  "forDevelopers.ctaTitle": "¿Listo para unirte a la red?",
+  "forDevelopers.ctaSubtitle": "Empieza a construir tu reputación, contribuye a proyectos reales y cobra por tu trabajo.",
+  "forDevelopers.ctaButton": "Únete a TFST en GitHub",
+
+  
+  "forProfessionals.heroTitle": "Construye con confianza. Crece con el mejor talento.",
+  "forProfessionals.heroSubtitle": "Despídete de los freelancers poco fiables y de las promesas incumplidas. Contrata desarrolladores de confianza — con contratos inteligentes y reputación transparente.",
+  "forProfessionals.heroButton": "Inicia tu proyecto"
+
 
 
 }

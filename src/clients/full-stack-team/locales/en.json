@@ -137,6 +137,28 @@
   "forDevelopers.gains.trust": "Smart trust layer",
   "forDevelopers.gains.trustDesc": "We use smart contracts and verifiable credentials to replace middlemen with transparency.",
   "forDevelopers.gains.ownership": "You own your data & reputation",
-  "forDevelopers.gains.ownershipDesc": "Your work, your reputation, your rules — portable, provable, and independent."
+  "forDevelopers.gains.ownershipDesc": "Your work, your reputation, your rules — portable, provable, and independent.",
+
+  
+  "forDevelopers.howItWorksTitle": "How TFST Works for Developers",
+  "forDevelopers.howItWorksSubtitle": "A simple process to connect your skills with trusted, paid opportunities.",
+  "forDevelopers.step1Title": "Create your profile",
+  "forDevelopers.step1Desc": "Import your ESCO skills, past experience, and public contributions to build a verifiable profile.",
+  "forDevelopers.step2Title": "Join an organization or project",
+  "forDevelopers.step2Desc": "Browse open opportunities, join a team, or start contributing to open-source projects.",
+  "forDevelopers.step3Title": "Work transparently",
+  "forDevelopers.step3Desc": "Track time, deliver value, and build reputation — every action is auditable and recorded.",
+  "forDevelopers.step4Title": "Get paid with confidence",
+  "forDevelopers.step4Desc": "Receive payments via smart contracts and escrow — no intermediaries or lost invoices.",
+
+  
+  "forDevelopers.ctaTitle": "Ready to join the network?",
+  "forDevelopers.ctaSubtitle": "Start building your reputation, contribute to real projects, and get paid for your work.",
+  "forDevelopers.ctaButton": "Join TFST on GitHub",
+
+  
+  "forProfessionals.heroTitle": "Build with trust. Grow with top talent.",
+  "forProfessionals.heroSubtitle": "Say goodbye to flaky freelancers and broken promises. Hire developers you can trust — backed by smart contracts and transparent reputation.",
+  "forProfessionals.heroButton": "Start your project"
 
 }

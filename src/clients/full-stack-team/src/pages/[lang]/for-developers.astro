@@ -5,6 +5,8 @@ import { t, defaultLocale, type Locale } from "../../i18n.ts";
 import DeveloperHero from "../../components/DeveloperHero.astro";
 import DeveloperPainPoints from "../../components/DeveloperPainPoints.astro";
 import DeveloperGains from "../../components/DeveloperGains.astro";
+import DeveloperHowItWorks from "../../components/DeveloperHowItWorks.astro";
+import DeveloperJoinCta from "../../components/DeveloperJoinCta.astro";
 
 export const getStaticPaths = getLocalizedPaths;
 
@@ -16,4 +18,6 @@ const locale = lang as Locale;
     <DeveloperHero locale={locale} />
     <DeveloperPainPoints locale={locale} />
     <DeveloperGains locale={locale} />
+    <DeveloperHowItWorks locale={locale} />
+    <DeveloperJoinCta locale={locale} />
 </BaseLayout>
