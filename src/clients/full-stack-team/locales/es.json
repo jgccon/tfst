@@ -219,7 +219,27 @@
   "forCompanies.painPoints.risk": "Trabajar con el socio equivocado te cuesta dinero, tiempo y confianza. Y pasa más veces de las que quisieras.",
 
   "forCompanies.painPoints.fragileTitle": "Los equipos son frágiles",
-  "forCompanies.painPoints.fragile": "Los proyectos se frenan o se paran si alguien clave se va. No hay continuidad, ni redundancia, ni resiliencia."
+  "forCompanies.painPoints.fragile": "Los proyectos se frenan o se paran si alguien clave se va. No hay continuidad, ni redundancia, ni resiliencia.",
+  
+  "forCompanies.gainTitle": "Una forma más inteligente de construir tu equipo tech",
+  "forCompanies.gainSubtitle": "Te traemos talento de confianza — validado, comprometido y listo para entregar resultados.",
+
+  "forCompanies.gainPoints.expertTitle": "Evaluación experta por ingenieros senior",
+  "forCompanies.gainPoints.expert": "Cada profesional en TFST ha sido revisado por pares, probado en proyectos reales y validado de forma continua.",
+
+  "forCompanies.gainPoints.assemblyTitle": "Te ayudamos a montar equipos completos",
+  "forCompanies.gainPoints.assembly": "Puedes contratar a una persona o a un equipo entero. Te ayudamos a componer el mix ideal de habilidades, experiencia y cultura.",
+
+  "forCompanies.gainPoints.trustTitle": "Confianza y responsabilidad integradas",
+  "forCompanies.gainPoints.trust": "La reputación es compartida y pública. El trabajo es verificable. Los contratos son inteligentes. Nunca más estarás a ciegas.",
+
+  "forCompanies.gainPoints.scalingTitle": "Tú creces. Nosotros nos adaptamos.",
+  "forCompanies.gainPoints.scaling": "Desde MVPs hasta proyectos empresariales — TFST crece contigo, con flexibilidad y total transparencia.",
+
+  
+  "forCompanies.ctaTitle": "Construye tu equipo con profesionales de confianza",
+  "forCompanies.ctaSubtitle": "Explora TFST y únete al ecosistema abierto de talento y tecnología.",
+  "forCompanies.ctaButton": "Descubre TFST en GitHub"
 
 
 

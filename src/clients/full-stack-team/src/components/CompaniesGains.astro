@@ -1,0 +1,54 @@
+---
+// src/components/CompaniesGains.astro
+import { t } from "../i18n";
+const { locale } = Astro.props;
+---
+
+<section class="max-w-6xl mx-auto px-6 py-20">
+  <header class="text-center mb-16">
+    <h2 class="text-3xl font-bold mb-4">
+      {t(locale, "forCompanies.gainTitle")}
+    </h2>
+    <p class="text-gray-700 text-lg">
+      {t(locale, "forCompanies.gainSubtitle")}
+    </p>
+  </header>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <div class="gain-card">
+      <h3 class="text-xl font-semibold mb-2">
+        🧠 {t(locale, "forCompanies.gainPoints.expertTitle")}
+      </h3>
+      <p class="text-gray-700">
+        {t(locale, "forCompanies.gainPoints.expert")}
+      </p>
+    </div>
+
+    <div class="gain-card">
+      <h3 class="text-xl font-semibold mb-2">
+        🧩 {t(locale, "forCompanies.gainPoints.assemblyTitle")}
+      </h3>
+      <p class="text-gray-700">
+        {t(locale, "forCompanies.gainPoints.assembly")}
+      </p>
+    </div>
+
+    <div class="gain-card">
+      <h3 class="text-xl font-semibold mb-2">
+        🔐 {t(locale, "forCompanies.gainPoints.trustTitle")}
+      </h3>
+      <p class="text-gray-700">
+        {t(locale, "forCompanies.gainPoints.trust")}
+      </p>
+    </div>
+
+    <div class="gain-card">
+      <h3 class="text-xl font-semibold mb-2">
+        ⚙️ {t(locale, "forCompanies.gainPoints.scalingTitle")}
+      </h3>
+      <p class="text-gray-700">
+        {t(locale, "forCompanies.gainPoints.scaling")}
+      </p>
+    </div>
+  </div>
+</section>

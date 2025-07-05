@@ -235,7 +235,28 @@
   "forCompanies.painPoints.risk": "Working with the wrong partner costs you money, time and trust. And it happens more often than you’d like.",
 
   "forCompanies.painPoints.fragileTitle": "Teams break easily",
-  "forCompanies.painPoints.fragile": "Projects slow down or stall when key people leave. There’s no continuity, no redundancy, no resilience."
+  "forCompanies.painPoints.fragile": "Projects slow down or stall when key people leave. There’s no continuity, no redundancy, no resilience.",
+
+  
+  "forCompanies.gainTitle": "A smarter way to build your tech team",
+  "forCompanies.gainSubtitle": "We bring you talent you can trust — vetted, committed, and ready to deliver.",
+
+  "forCompanies.gainPoints.expertTitle": "Expert screening by top engineers",
+  "forCompanies.gainPoints.expert": "Every professional in TFST has been peer-reviewed, tested in real projects, and continuously validated.",
+
+  "forCompanies.gainPoints.assemblyTitle": "We help you assemble complete teams",
+  "forCompanies.gainPoints.assembly": "You can hire one person or an entire squad. We help you compose the right mix of skills, experience, and culture fit.",
+
+  "forCompanies.gainPoints.trustTitle": "Built-in trust and accountability",
+  "forCompanies.gainPoints.trust": "Reputation is shared and public. Work is verifiable. Contracts are smart. You’re never in the dark again.",
+
+  "forCompanies.gainPoints.scalingTitle": "You grow. We adapt.",
+  "forCompanies.gainPoints.scaling": "From startup MVPs to scale-ups and enterprise projects — TFST grows with you, flexibly and transparently.",
+
+  
+  "forCompanies.ctaTitle": "Build your team with trusted professionals",
+  "forCompanies.ctaSubtitle": "Explore TFST and join the open ecosystem of talent and technology.",
+  "forCompanies.ctaButton": "Discover TFST on GitHub"
 
 
 
