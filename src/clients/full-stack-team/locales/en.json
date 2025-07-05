@@ -157,6 +157,8 @@
   "forDevelopers.ctaButton": "Join TFST on GitHub",
 
   
+  "forProfessionals.title": "For Professionals",
+
   "forProfessionals.heroTitle": "Build with trust. Grow with top talent.",
   "forProfessionals.heroSubtitle": "Say goodbye to flaky freelancers and broken promises. Hire developers you can trust — backed by smart contracts and transparent reputation.",
   "forProfessionals.heroButton": "Start your project",
@@ -206,7 +208,19 @@
   "forProfessionals.howSteps.2.desc": "Contracts, milestones, and payments are all managed on TFST. No paperwork, no hidden fees, full transparency.",
 
   "forProfessionals.howSteps.3.title": "Review, rate, and repeat",
-  "forProfessionals.howSteps.3.desc": "Build long-term relationships with reliable developers — and help others by sharing your feedback."
+  "forProfessionals.howSteps.3.desc": "Build long-term relationships with reliable developers — and help others by sharing your feedback.",
+
+  
+  "forProfessionals.ctaTitle": "Start hiring smarter with TFST",
+  "forProfessionals.ctaSubtitle": "Find the right developer, sign contracts, and manage payments — all in one open platform.",
+  "forProfessionals.ctaButton": "Explore the network",
+
+
+  "forCompanies.title": "For Companies",
+  "forCompanies.heroTitle": "The easiest way to hire top tech talent",
+  "forCompanies.heroSubtitle": "From developers to product designers, QA or DevOps — build your team with verified professionals, trusted contracts and zero bureaucracy.",
+  "forCompanies.heroCta": "Get in touch"
+
 
 
 

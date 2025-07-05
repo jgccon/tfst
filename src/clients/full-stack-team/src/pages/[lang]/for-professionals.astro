@@ -6,6 +6,7 @@ import ProfessionalHero from "../../components/ProfessionalHero.astro";
 import ProfessionalPainPoints from "../../components/ProfessionalPainPoints.astro";
 import ProfessionalGains from "../../components/ProfessionalGains.astro";
 import ProfessionalHowItWorks from "../../components/ProfessionalHowItWorks.astro";
+import ProfessionalJoinCta from "../../components/ProfessionalJoinCta.astro";
 
 export const getStaticPaths = getLocalizedPaths;
 
@@ -13,9 +14,10 @@ const lang = Astro.params.lang ?? defaultLocale;
 const locale = lang as Locale;
 ---
 
-<BaseLayout title={`TFST – ${t(locale, "forDevs.title")}`} lang={lang}>
+<BaseLayout title={`TFST – ${t(locale, "forProfessionals.title")}`} lang={lang}>
     <ProfessionalHero locale={locale} />
     <ProfessionalPainPoints locale={locale} />
     <ProfessionalGains locale={locale} />
     <ProfessionalHowItWorks locale={locale} />
+    <ProfessionalJoinCta locale={locale} />
 </BaseLayout>

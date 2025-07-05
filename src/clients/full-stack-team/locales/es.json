@@ -144,7 +144,9 @@
   "forDevelopers.ctaSubtitle": "Empieza a construir tu reputación, contribuye a proyectos reales y cobra por tu trabajo.",
   "forDevelopers.ctaButton": "Únete a TFST en GitHub",
 
-  
+    
+  "forProfessionals.title": "Para Profesionales",
+
   "forProfessionals.heroTitle": "Construye con confianza. Crece con el mejor talento.",
   "forProfessionals.heroSubtitle": "Despídete de los freelancers poco fiables y de las promesas incumplidas. Contrata desarrolladores de confianza — con contratos inteligentes y reputación transparente.",
   "forProfessionals.heroButton": "Inicia tu proyecto",
@@ -168,7 +170,7 @@
   "forProfessionals.gainsSubtitle": "Contratación más inteligente. Menos riesgo. Más resultados.",
 
   "forProfessionals.gains.talent": "Talento verificado, no promesas vacías",
-  "forProfessionals.gains.talentDesc": "Nuestros developers están validados por sus pares, probados en proyectos reales y rankeados por reputación — sin humo ni adivinanzas.",
+  "forProfessionals.gains.talentDesc": "Nuestros profesionales están validados por sus pares, probados en proyectos reales y rankeados por reputación — sin humo ni adivinanzas.",
 
   "forProfessionals.gains.control": "Control total de contratos y pagos",
   "forProfessionals.gains.controlDesc": "Tú defines los términos, apruebas hitos y solo pagas por trabajo verificado. Nosotros automatizamos el resto — con seguridad y transparencia.",
@@ -186,13 +188,23 @@
   "forProfessionals.howSteps.0.desc": "Describe lo que necesitas, el plazo y el presupuesto. TFST te ayuda a crear briefs claros y accionables con IA y plantillas.",
 
   "forProfessionals.howSteps.1.title": "Recibe matches con talento top",
-  "forProfessionals.howSteps.1.desc": "Explora developers validados, clasificados por habilidades, reputación y experiencia previa — o deja que la red recomiende por ti.",
+  "forProfessionals.howSteps.1.desc": "Explora profesionales validados, clasificados por habilidades, reputación y experiencia previa — o deja que la red recomiende por ti.",
 
   "forProfessionals.howSteps.2.title": "Firma, gestiona y paga en un solo lugar",
   "forProfessionals.howSteps.2.desc": "Contratos, hitos y pagos se gestionan desde TFST. Sin papeleo, sin comisiones ocultas, con total transparencia.",
 
   "forProfessionals.howSteps.3.title": "Valora y construye relaciones",
-  "forProfessionals.howSteps.3.desc": "Crea relaciones a largo plazo con developers fiables — y ayuda a otros dejando tu feedback."
+  "forProfessionals.howSteps.3.desc": "Crea relaciones a largo plazo con profesionales fiables — y ayuda a otros dejando tu feedback.",
+
+  
+  "forProfessionals.ctaTitle": "Empieza a contratar con inteligencia",
+  "forProfessionals.ctaSubtitle": "Encuentra al profesional adecuado, firma contratos y gestiona pagos — todo desde una plataforma abierta.",
+  "forProfessionals.ctaButton": "Explorar la red",
+
+  "forCompanies.title": "Para Empresas",
+  "forCompanies.heroTitle": "La forma más fácil de contratar el mejor talento tecnológico",
+  "forCompanies.heroSubtitle": "Desde desarrolladores hasta diseñadores de producto, QA o DevOps — forma tu equipo con profesionales verificados, contratos claros y cero burocracia.",
+  "forCompanies.heroCta": "Habla con nosotros"
 
 
 
