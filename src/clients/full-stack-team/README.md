@@ -65,3 +65,4 @@ Check out our main repo at [github.com/jgccon/tfst](https://github.com/jgccon/tf
 
 **Made with ♥ by The Full-Stack Team**  
 **Website:** [full-stack.team](https://full-stack.team) · **Project:** [tfst.dev](https://tfst.dev)
+
