@@ -1,0 +1,14 @@
+{
+    "common": "Welcome {{username}} to TFST",
+    "menu": {
+        "dashboard": "Dashboard",
+        "projects": "Projects",
+        "clients": "Clients",
+        "reports": "Reports",
+        "configuration": "Configuration"
+    },
+    "languages": {
+        "spanish": "Spanish",
+        "english": "English"
+    }
+}

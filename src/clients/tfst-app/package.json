@@ -17,8 +17,13 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@colsen1991/ngx-translate-extract-marker": "^3.0.1",
+    "@ngx-translate/core": "^16.0.4",
+    "@ngx-translate/http-loader": "^16.0.1",
     "@primeng/themes": "^19.0.9",
     "@tailwindcss/postcss": "^4.0.9",
+    "ngx-cookie-service": "19.1.2",
+    "ngx-translate-multi-http-loader": "^19.0.3",
     "postcss": "^8.5.3",
     "primeicons": "^7.0.0",
     "primeng": "^19.0.9",
@@ -40,5 +45,8 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+  },
+    "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }

@@ -1,23 +1,48 @@
-# .github/workflows/webapp-dev-deploy.yml
-name: Deploy Angular WebApp to DEV
+name: Deploy tfst-app to Static Web App (DEV)
 
 on:
   push:
     branches:
       - dev
     paths:
-      - src/clients/tfst-app/**
+      - 'src/clients/tfst-app/**'
+      - '.github/workflows/tfst-app-dev-cd.yml'
 
   workflow_dispatch:
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
-  deploy_tfst_app_dev:
-    uses: ./.github/workflows/deploy-angular.yml
-    with:
-      environment: dev
-      working_directory: src/clients/tfst-app
-      app_service_name: tfst-app-dev
-    secrets:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  build_and_deploy:
+    name: Build and Deploy tfst-app to Azure Static Web Apps
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          cd src/clients/tfst-app
+          npm ci
+
+      - name: Build Angular app
+        run: |
+          cd src/clients/tfst-app
+          npm run build -- --project=tfst-app --configuration=production
+
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_TFST_APP_DEV }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # For PR builds
+          action: "upload"
+          app_location: "src/clients/tfst-app"
+          output_location: "dist/tfst-app/browser"

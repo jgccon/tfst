@@ -1,15 +1,20 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
-
 import { routes } from './app.routes';
 import MyPreset from './mypreset';
+import { provideHttpClient } from '@angular/common/http';
+import {TranslateModule, TranslateLoader} from "@ngx-translate/core";
+import {CookieService} from 'ngx-cookie-service';
+import { HttpBackend} from '@angular/common/http';
+import { HttpLoaderFactory } from './core/functions/httpLoaderFactory';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimationsAsync(),
+    CookieService,
     providePrimeNG({
       theme: {
         preset: MyPreset,
@@ -25,5 +30,14 @@ export const appConfig: ApplicationConfig = {
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(),
+    importProvidersFrom([TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpBackend],
+      },
+    })])
+    
   ],
 };

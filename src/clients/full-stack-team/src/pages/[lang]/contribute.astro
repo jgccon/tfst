@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getLocalizedPaths } from "../../utils/localization.ts";
+import { t, defaultLocale, type Locale } from "../../i18n.ts";
+import DeveloperPitch from "../../components/DeveloperPitch.astro";
+import Roadmap from "../../components/Roadmap.astro";
+import DeveloperCallToAction from "../../components/DeveloperCallToAction.astro";
+
+export const getStaticPaths = getLocalizedPaths;
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<BaseLayout title={`TFST – ${t(locale, "forDevs.title")}`} lang={lang}>
+    <DeveloperPitch locale={locale} />
+    <Roadmap locale={locale} />
+    <DeveloperCallToAction locale={locale} t={t} />
+</BaseLayout>

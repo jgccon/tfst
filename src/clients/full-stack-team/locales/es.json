@@ -1,0 +1,296 @@
+{
+  "home.title": "Construyendo el futuro de la colaboración de talento",
+  "hero.title": "Construye el futuro del trabajo. Juntos.",
+  "hero.subtitle": "The Full-Stack Team es una plataforma open source para conectar profesionales, equipos y empresas con contratos inteligentes, IA y colaboración transparente.",
+  "hero.cta.explore": "Explora la plataforma",
+  "hero.cta.star": "⭐ Dale una estrella en GitHub",
+  "nav.features": "Características",
+  "nav.developers": "Desarrolladores",
+  "nav.professionals": "Profesionales",
+  "nav.companies": "Empresas",
+  "nav.blog": "Blog",
+  "nav.star": "Dale una estrella a TFST",
+  "footer.rights": "Todos los derechos reservados.",
+  "footer.poweredBy": "Impulsado por nuestros",
+  "footer.contributors": "colaboradores",
+  "footer.community": "Comunidad",
+  "footer.docs": "Documentación técnica",
+  "footer.contribute": "Contribuir",
+  "footer.privacy": "Privacidad",
+  "footer.terms": "Términos",
+  "footer.imprint": "Aviso legal",
+  "footer.ctaText": "Ayúdanos a construir el futuro del talento descentralizado.",
+  "footer.ctaButton": "Únete a TFST",
+  "privacy.title": "Política de Privacidad",
+  "privacy.meta": "Conoce cómo TFST maneja los datos y la privacidad.",
+  "privacy.intro": "TFST (The Full Stack Team) es actualmente un proyecto de código abierto desarrollado por voluntarios en su tiempo libre. Nuestro objetivo es construir una plataforma sólida de gestión de talento, pero el software se encuentra en fase pre-lanzamiento (alfa).",
+  "privacy.scopeTitle": "Ámbito de esta política",
+  "privacy.scope": "Esta política de privacidad se aplica únicamente a los sitios web y servicios mantenidos directamente por el proyecto TFST. En este momento, TFST no recopila, procesa ni almacena datos personales de los usuarios, salvo que se indique explícitamente.",
+  "privacy.dataTitle": "Recogida y uso de datos",
+  "privacy.data": "TFST no rastrea a los usuarios, no utiliza cookies ni recopila información personal por defecto. Si en el futuro alguna funcionalidad requiere datos, se documentará y será siempre opcional.",
+  "privacy.responsibilityTitle": "Exención de responsabilidad",
+  "privacy.responsibility": "Este software se proporciona 'tal cual', sin ninguna garantía. Los mantenedores y colaboradores no son responsables de problemas, pérdidas de datos o daños derivados del uso de TFST mientras permanezca en fase experimental o de prueba.",
+  "privacy.contactTitle": "Contacto",
+  "privacy.contact": "Si tienes preguntas, escríbenos a juan@jgcarmona.com o contribuye directamente en GitHub: https://github.com/jgccon/tfst",
+  "terms.title": "Términos y Condiciones",
+  "terms.intro": "Al acceder y utilizar este sitio web, aceptas quedar sujeto a estos términos y condiciones. Si no estás de acuerdo con alguna parte de estos términos, por favor abstente de utilizar el sitio.",
+  "terms.useTitle": "Licencia de Uso",
+  "terms.use": "Se concede permiso para ver y utilizar los materiales de este sitio web únicamente con fines personales y no comerciales. No se permite modificar, redistribuir ni utilizar ninguna parte del sitio con fines comerciales sin consentimiento previo por escrito.",
+  "terms.disclaimerTitle": "Descargo de Responsabilidad",
+  "terms.disclaimer": "Este sitio web se proporciona 'tal cual'. No ofrecemos garantías, expresas o implícitas, y rechazamos cualquier otra garantía, incluyendo, sin limitación, garantías implícitas de comerciabilidad o adecuación para un propósito particular. No garantizamos que el sitio esté libre de errores, sea seguro o esté disponible de forma continua.",
+  "terms.limitationsTitle": "Limitaciones",
+  "terms.limitations": "En ningún caso el titular o los colaboradores serán responsables de ningún daño (incluyendo, sin limitación, pérdida de datos, lucro cesante o interrupción del servicio) que surja del uso o la imposibilidad de uso de este sitio web, incluso si se ha notificado previamente la posibilidad de tales daños.",
+  "terms.modificationsTitle": "Modificaciones",
+  "terms.modifications": "Nos reservamos el derecho de modificar estos términos de uso en cualquier momento y sin previo aviso. Al utilizar este sitio web, aceptas quedar sujeto a la versión vigente de los Términos y Condiciones.",
+  "terms.contactTitle": "Contacto",
+  "terms.contact": "Si tienes preguntas sobre estos términos, puedes escribirnos a juan@jgcarmona.com.",
+  "imprint.title": "Aviso Legal (Impressum)",
+  "imprint.intro": "Este sitio web es mantenido como un proyecto personal por el titular que figura a continuación. No está destinado al uso comercial y puede contener funcionalidades experimentales o incompletas.",
+  "imprint.ownerTitle": "Titular",
+  "imprint.owner": "Juan G Carmona",
+  "imprint.addressTitle": "Dirección",
+  "imprint.address": "Madrid, España",
+  "imprint.contactTitle": "Contacto",
+  "imprint.contact": "Correo electrónico: juan@jgcarmona.com",
+  "imprint.disclaimerTitle": "Descargo de Responsabilidad",
+  "imprint.disclaimer": "La información contenida en este sitio web se proporciona únicamente con fines informativos generales. No se asume responsabilidad por la integridad, exactitud o disponibilidad de la información. Este proyecto se encuentra en fase experimental (pre-producción) y no se ofrecen garantías sobre su rendimiento o seguridad de datos.",
+  
+  
+
+  "features.talent.title": "Gestión del Talento y Contratación",
+  "features.talent.subtitle": "Encuentra, alinea y contrata talento con confianza.",
+  "features.talent.smartContracts.title": "Contratos inteligentes",
+  "features.talent.smartContracts.desc": "Formaliza acuerdos con confianza y sin intermediarios.",
+  "features.talent.transparentHiring.title": "Contratación transparente",
+  "features.talent.transparentHiring.desc": "Todas las condiciones están claras desde el principio.",
+  "features.talent.escoProfiles.title": "Perfiles estandarizados (ESCO)",
+  "features.talent.escoProfiles.desc": "Comparte el talento usando una base común europea.",
+
+  "features.time.title": "Gestión del Tiempo y Proyectos",
+  "features.time.subtitle": "Registra, organiza y visualiza el trabajo.",
+  "features.time.tracking.title": "Seguimiento de horas",
+  "features.time.tracking.desc": "Registra el tiempo invertido por proyecto y tarea.",
+  "features.time.management.title": "Gestión de proyectos y tareas",
+  "features.time.management.desc": "Organiza el trabajo por equipos, hitos y entregables.",
+  "features.time.reports.title": "Informes automáticos",
+  "features.time.reports.desc": "Visualiza horas, rendimiento y evolución.",
+
+  "features.billing.title": "Facturación y Pagos",
+  "features.billing.subtitle": "Genera facturas y paga con seguridad.",
+  "features.billing.invoicing.title": "Facturación automática",
+  "features.billing.invoicing.desc": "Genera facturas según contratos y horas registradas.",
+  "features.billing.escrow.title": "Escrow inteligente",
+  "features.billing.escrow.desc": "El dinero se libera solo cuando se cumple lo pactado.",
+  "features.billing.payments.title": "Pagos integrados",
+  "features.billing.payments.desc": "Envía y recibe dinero con confianza.",
+
+  "features.legal.title": "Legal y Confianza",
+  "features.legal.subtitle": "Asegura trazabilidad y cumplimiento.",
+  "features.legal.audit.title": "Historial verificable",
+  "features.legal.audit.desc": "Los acuerdos y acciones quedan registrados.",
+  "features.legal.decentralized.title": "Descentralización de confianza",
+  "features.legal.decentralized.desc": "Sin depender de un intermediario único.",
+  "features.legal.compliance.title": "Cumplimiento normativo (GDPR/CCPA)",
+  "features.legal.compliance.desc": "La privacidad y los derechos están protegidos.",
+
+  "features.collaboration.title": "Colaboración y Transparencia",
+  "features.collaboration.subtitle": "Trabaja en abierto con roles y objetivos compartidos.",
+  "features.collaboration.teams.title": "Equipos multidisciplinares",
+  "features.collaboration.teams.desc": "Conecta talento de distintas organizaciones.",
+  "features.collaboration.roles.title": "Roles y permisos granulares",
+  "features.collaboration.roles.desc": "Cada miembro accede solo a lo que necesita.",
+  "features.collaboration.clarity.title": "Comunicación clara desde el inicio",
+  "features.collaboration.clarity.desc": "Reduce malentendidos con procesos compartidos.",
+  
+  "forDevs.title": "For Developers",
+
+  "forDevs.heroTitle": "Construye el futuro del trabajo con nosotros",
+  "forDevs.heroSubtitle": "TFST es una plataforma abierta, modular y extensible para RRHH., facturación, contratos y colaboración descentralizada. Está diseñada para ingenieros que se preocupan por un código limpio y un impacto real.",
+  "forDevs.modularTitle": "Arquitectura modular y escalable",
+  "forDevs.modularDesc": "Cada módulo de TFST es independiente, está claramente separado y es fácil de extender. Desde los procesos de contratación hasta el control de tiempo, puedes crear solo lo que necesitas.",
+  "forDevs.authTitle": "Autenticación sólida y multiusuario",
+  "forDevs.authDesc": "Desarrollado con OpenIddict, OIDC, JWT y acceso basado en roles. Los inquilinos están completamente aislados, perfecto para plataformas SaaS o proyectos de clientes.",
+  "forDevs.devopsTitle": "Diseñado para DevOps y CI/CD",
+  "forDevs.devopsDesc": "Las Acciones de GitHub gestionan pruebas, compilaciones e implementaciones. Compatible con Docker, Azure y desarrollo local con total paridad con el entorno.",
+  "forDevs.openTitle": "Código abierto por defecto",
+  "forDevs.openDesc": "Eres el propietario de tus datos, tu pila y tu hoja de ruta. TFST cuenta con licencia MIT y es impulsado por la comunidad. Bifurca, remezcla o contribuye con recursos originales.",
+  "forDevs.joinTitle": "Participa",
+  "forDevs.joinDesc": "Danos una estrella en GitHub, únete a la comunidad o crea algo potente basado en TFST. Tu próxima idea empieza aquí.",
+
+  
+  "roadmap.title": "📍 Hoja de ruta",
+  "roadmap.mvpTitle": "✅ MVP", 
+  "roadmap.mvp.registration": "Registro de freelancers y clientes con validación KYC.",
+  "roadmap.mvp.profiles": "Sistema de perfiles con filtrado basado en habilidades.",
+  "roadmap.mvp.contracts": "Contratación inicial y pagos mediante smart contracts.",
+  
+  "roadmap.phase2Title": "🚀 Fase 2",
+  "roadmap.phase2.projects": "Gestión completa de proyectos con seguimiento de tiempo y pagos automáticos.",
+  "roadmap.phase2.reputation": "Sistema de reputación basado en validación del cliente y evaluaciones técnicas.",
+  "roadmap.phase2.marketplace": "Marketplace de consultoría para mentoría y formación.",
+
+  "roadmap.challengesTitle": "🧠 Retos que estamos afrontando",
+  "roadmap.challenges.scalability": "Escalabilidad → De un Monolito Modular a una arquitectura de Microservicios escalable.",
+  "roadmap.challenges.security": "Seguridad → Auditoría de smart contracts y protección de datos.",
+  "roadmap.challenges.ux": "Experiencia de Usuario → UI/UX simple e intuitiva para maximizar la conversión.",
+
+  
+  "developers-cta.title": "Ayúdanos a construir TFST",
+  "developers-cta.subtitle": "La irrupción de la IA está transformando cómo trabajamos, colaboramos y construimos software. Creemos que los desarrolladores tienen un papel clave en mantener este futuro ético, transparente y humano. Comparte tus habilidades y tus ideas.",
+  "developers-cta.button": "Contribuye en GitHub",
+
+  "forDevelopers.heroTitle": "Hazte visible. Cobra a tiempo. Trabaja a tu manera.",
+  "forDevelopers.heroSubtitle": "Únete a una red de profesionales de confianza impulsada por blockchain y reputación abierta. Sin intermediarios. Solo trabajo.",
+  "forDevelopers.cta": "Crea tu perfil profesional",
+
+  
+  "forDevelopers.painTitle": "¿Cansado de plataformas que no piensan en ti?",
+  "forDevelopers.painPoints.exposureTitle": "🚫 Visibilidad",
+  "forDevelopers.painPoints.exposure": "Eres invisible en las plataformas tradicionales a menos que pagues o manipules el sistema.",
+  "forDevelopers.painPoints.feesTitle": "💸 Comisiones",
+  "forDevelopers.painPoints.fees": "Pierdes hasta un 20% de tus ingresos en comisiones y reglas opacas.",
+  "forDevelopers.painPoints.trustTitle": "❓ Confianza",
+  "forDevelopers.painPoints.trust": "Pasas más tiempo ganándote la confianza del cliente que programando.",
+  "forDevelopers.painPoints.ownershipTitle": "🔒 Reputación",
+  "forDevelopers.painPoints.ownership": "Tu reputación está encerrada en sistemas de terceros — no es portable, no es tuya.",
+
+  
+  "forDevelopers.gainsTitle": "Por qué TFST es diferente",
+  "forDevelopers.gainsSubtitle": "Estamos construyendo una red global de desarrolladores y profesionales del software y la tecnología — transparente, confiable y open-source.",
+  "forDevelopers.gains.network": "Una red, no una plataforma",
+  "forDevelopers.gains.networkDesc": "Únete a una comunidad descentralizada de profesionales, no a un marketplace cerrado controlado por terceros.",
+  "forDevelopers.gains.tech": "Hecho por y para profesionales como tú",
+  "forDevelopers.gains.techDesc": "Código abierto, diseño modular y hoja de ruta pública. Puedes contribuir o hacer fork.",
+  "forDevelopers.gains.trust": "Capa de confianza inteligente",
+  "forDevelopers.gains.trustDesc": "Usamos smart contracts y credenciales verificables para reemplazar intermediarios con transparencia.",
+  "forDevelopers.gains.ownership": "Tú controlas tu reputación",
+  "forDevelopers.gains.ownershipDesc": "Tu trabajo, tu reputación, tus reglas — portable, demostrable e independiente.",
+  
+  "forDevelopers.howItWorksTitle": "Cómo funciona TFST para developers",
+  "forDevelopers.howItWorksSubtitle": "Un proceso simple para conectar tus habilidades con oportunidades reales y seguras.",
+  "forDevelopers.step1Title": "Crea tu perfil",
+  "forDevelopers.step1Desc": "Importa tus habilidades ESCO, experiencia previa y contribuciones públicas para crear un perfil verificable.",
+  "forDevelopers.step2Title": "Únete a una organización o proyecto",
+  "forDevelopers.step2Desc": "Explora oportunidades abiertas, únete a un equipo o empieza a contribuir en proyectos open-source.",
+  "forDevelopers.step3Title": "Trabaja con transparencia",
+  "forDevelopers.step3Desc": "Registra tu tiempo, entrega valor y construye reputación — cada acción es auditable.",
+  "forDevelopers.step4Title": "Cobra con confianza",
+  "forDevelopers.step4Desc": "Recibe pagos mediante smart contracts y escrow — sin intermediarios ni facturas perdidas.",
+
+  
+  "forDevelopers.ctaTitle": "¿Listo para unirte a la red?",
+  "forDevelopers.ctaSubtitle": "Empieza a construir tu reputación, contribuye a proyectos reales y cobra por tu trabajo.",
+  "forDevelopers.ctaButton": "Únete a TFST en GitHub",
+
+    
+  "forProfessionals.title": "Para Profesionales",
+
+  "forProfessionals.heroTitle": "Construye con confianza. Crece con el mejor talento.",
+  "forProfessionals.heroSubtitle": "Despídete de los freelancers poco fiables y de las promesas incumplidas. Contrata desarrolladores de confianza — con contratos inteligentes y reputación transparente.",
+  "forProfessionals.heroButton": "Inicia tu proyecto",
+
+  "forProfessionals.painTitle": "¿Por qué es tan difícil contratar talento tech?",
+  
+  "forProfessionals.painPoints.hiringTitle": "Encontrar talento es difícil",
+  "forProfessionals.painPoints.hiring": "Los CVs mienten. Las entrevistas son una apuesta. Evaluar habilidades reales sin ayuda experta es casi imposible.",
+
+  "forProfessionals.painPoints.qualityTitle": "Freelancers que desaparecen o no cumplen",
+  "forProfessionals.painPoints.quality": "Contratar al desarrollador equivocado puede costarte meses de retrasos y miles de euros tirados. Pasa más de lo que crees.",
+
+  "forProfessionals.painPoints.riskTitle": "Sin garantías ni responsabilidad real",
+  "forProfessionals.painPoints.risk": "Pagas, desaparecen. No hay recurso. Las plataformas tradicionales se protegen a sí mismas, no a tu proyecto.",
+
+  "forProfessionals.painPoints.wasteTitle": "Agencias que solo encarecen el proceso",
+  "forProfessionals.painPoints.waste": "No quieres pagar un 60% de sobrecoste solo por reenviar correos. Quieres talento, no burocracia.",
+
+  
+  "forProfessionals.gainsTitle": "Lo que ganas con TFST",
+  "forProfessionals.gainsSubtitle": "Contratación más inteligente. Menos riesgo. Más resultados.",
+
+  "forProfessionals.gains.talent": "Talento verificado, no promesas vacías",
+  "forProfessionals.gains.talentDesc": "Nuestros profesionales están validados por sus pares, probados en proyectos reales y rankeados por reputación — sin humo ni adivinanzas.",
+
+  "forProfessionals.gains.control": "Control total de contratos y pagos",
+  "forProfessionals.gains.controlDesc": "Tú defines los términos, apruebas hitos y solo pagas por trabajo verificado. Nosotros automatizamos el resto — con seguridad y transparencia.",
+
+  "forProfessionals.gains.trust": "Confianza integrada con smart contracts",
+  "forProfessionals.gains.trustDesc": "Escrow, reputación y resolución de disputas están integrados — no necesitas perseguir a nadie ni cruzar los dedos.",
+
+  "forProfessionals.gains.speed": "Incorporación rápida, resultados reales",
+  "forProfessionals.gains.speedDesc": "Sin agencias, sin entrevistas eternas, sin esperas. Encuentra talento top y empieza a construir — en días, no semanas.",
+  
+  "forProfessionals.howTitle": "Cómo funciona TFST para profesionales",
+  "forProfessionals.howSubtitle": "Contratar talento nunca ha sido tan fácil, transparente y seguro.",
+
+  "forProfessionals.howSteps.0.title": "Publica tu proyecto",
+  "forProfessionals.howSteps.0.desc": "Describe lo que necesitas, el plazo y el presupuesto. TFST te ayuda a crear briefs claros y accionables con IA y plantillas.",
+
+  "forProfessionals.howSteps.1.title": "Recibe matches con talento top",
+  "forProfessionals.howSteps.1.desc": "Explora profesionales validados, clasificados por habilidades, reputación y experiencia previa — o deja que la red recomiende por ti.",
+
+  "forProfessionals.howSteps.2.title": "Firma, gestiona y paga en un solo lugar",
+  "forProfessionals.howSteps.2.desc": "Contratos, hitos y pagos se gestionan desde TFST. Sin papeleo, sin comisiones ocultas, con total transparencia.",
+
+  "forProfessionals.howSteps.3.title": "Valora y construye relaciones",
+  "forProfessionals.howSteps.3.desc": "Crea relaciones a largo plazo con profesionales fiables — y ayuda a otros dejando tu feedback.",
+
+  
+  "forProfessionals.ctaTitle": "Empieza a contratar con inteligencia",
+  "forProfessionals.ctaSubtitle": "Encuentra al profesional adecuado, firma contratos y gestiona pagos — todo desde una plataforma abierta.",
+  "forProfessionals.ctaButton": "Explorar la red",
+
+  "forCompanies.title": "Para Empresas",
+  "forCompanies.heroTitle": "La forma más fácil de contratar el mejor talento tecnológico",
+  "forCompanies.heroSubtitle": "Desde desarrolladores hasta diseñadores de producto, QA o DevOps — forma tu equipo con profesionales verificados, contratos claros y cero burocracia.",
+  "forCompanies.heroCta": "Habla con nosotros",
+
+  "forCompanies.painTitle": "¿Por qué es tan difícil contratar equipos técnicos?",
+  "forCompanies.painSubtitle": "Contratar a un solo desarrollador ya es complicado. Formar un equipo completo es un campo minado de riesgos, sobrecostes y retrasos.",
+
+  "forCompanies.painPoints.hiringTitle": "Es difícil encontrar a los adecuados",
+  "forCompanies.painPoints.hiring": "Todo el mundo parece bueno en LinkedIn. Pero sin evaluación técnica real, es imposible saber quién lo es de verdad.",
+
+  "forCompanies.painPoints.costTitle": "Los recruiters y agencias cobran demasiado",
+  "forCompanies.painPoints.cost": "Pagas hasta un 60 % solo por presentaciones — y aún así haces tú todo el trabajo duro.",
+
+  "forCompanies.painPoints.riskTitle": "Los freelance desaparecen. Las agencias prometen en vano.",
+  "forCompanies.painPoints.risk": "Trabajar con el socio equivocado te cuesta dinero, tiempo y confianza. Y pasa más veces de las que quisieras.",
+
+  "forCompanies.painPoints.fragileTitle": "Los equipos son frágiles",
+  "forCompanies.painPoints.fragile": "Los proyectos se frenan o se paran si alguien clave se va. No hay continuidad, ni redundancia, ni resiliencia.",
+  
+  "forCompanies.gainTitle": "Una forma más inteligente de construir tu equipo tech",
+  "forCompanies.gainSubtitle": "Te traemos talento de confianza — validado, comprometido y listo para entregar resultados.",
+
+  "forCompanies.gainPoints.expertTitle": "Evaluación experta por ingenieros senior",
+  "forCompanies.gainPoints.expert": "Cada profesional en TFST ha sido revisado por pares, probado en proyectos reales y validado de forma continua.",
+
+  "forCompanies.gainPoints.assemblyTitle": "Te ayudamos a montar equipos completos",
+  "forCompanies.gainPoints.assembly": "Puedes contratar a una persona o a un equipo entero. Te ayudamos a componer el mix ideal de habilidades, experiencia y cultura.",
+
+  "forCompanies.gainPoints.trustTitle": "Confianza y responsabilidad integradas",
+  "forCompanies.gainPoints.trust": "La reputación es compartida y pública. El trabajo es verificable. Los contratos son inteligentes. Nunca más estarás a ciegas.",
+
+  "forCompanies.gainPoints.scalingTitle": "Tú creces. Nosotros nos adaptamos.",
+  "forCompanies.gainPoints.scaling": "Desde MVPs hasta proyectos empresariales — TFST crece contigo, con flexibilidad y total transparencia.",
+
+  
+  "forCompanies.ctaTitle": "Construye tu equipo con profesionales de confianza",
+  "forCompanies.ctaSubtitle": "Explora TFST y únete al ecosistema abierto de talento y tecnología.",
+  "forCompanies.ctaButton": "Descubre TFST en GitHub",
+
+  
+  "forCompanies.howTitle": "Cómo funciona TFST para organizaciones",
+  "forCompanies.howSubtitle": "Olvídate de reclutadores e intermediarios. Trabaja directamente con el mejor talento.",
+  "forCompanies.how.step1Title": "Publica tu necesidad",
+  "forCompanies.how.step1Text": "Crea una oportunidad pública, describe tu proyecto y atrae a profesionales verificados.",
+  "forCompanies.how.step2Title": "Evalúa con transparencia",
+  "forCompanies.how.step2Text": "Consulta perfiles públicos, habilidades reales y reputación on-chain — no sólo CVs.",
+  "forCompanies.how.step3Title": "Colabora y construye",
+  "forCompanies.how.step3Text": "Contrata directamente o mediante smart contracts. Gestiona trabajo, reputación y pagos en un solo sitio."
+
+
+
+
+
+}

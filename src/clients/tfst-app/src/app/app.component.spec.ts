@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'TFST-Front' title`, () => {
+  it(`should have the 'TFST-App' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('TFST-Front');
+    expect(app.title).toEqual('TFST-App');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, TFST-Front');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, TFST-App');
   });
 });

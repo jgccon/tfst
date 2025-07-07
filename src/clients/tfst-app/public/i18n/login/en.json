@@ -1,0 +1,14 @@
+{
+    "login": {
+        "title": "Login",
+        "description": "Please enter your credentials to access your account.",
+        "fields": {
+            "username": "Username",
+            "password": "Password"
+        },
+        "actions": {
+            "login": "Login",
+            "forgotPassword": "Forgot Password?"
+        }
+    }
+}

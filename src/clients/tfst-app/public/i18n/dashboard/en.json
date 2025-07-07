@@ -1,0 +1,16 @@
+{
+    "dashboard": {
+        "title": "Dashboard",
+        "description": "Welcome to the dashboard! Here you can find an overview of your activities and statistics.",
+        "stats": {
+            "totalUsers": "Total Users",
+            "activeUsers": "Active Users",
+            "newSignups": "New Signups"
+        },
+        "actions": {
+            "viewDetails": "View Details",
+            "manageUsers": "Manage Users",
+            "settings": "Settings"
+        }
+    }
+} 

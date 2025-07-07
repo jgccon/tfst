@@ -63,6 +63,38 @@ services:
     networks:
       - tfst_network
 
+  tfst.app:
+    container_name: tfst.app
+    build:
+      context: ./clients/tfst-app
+      dockerfile: Dockerfile.dev
+    image: tfst/app
+    ports:
+      - "4200:4200"
+    working_dir: /app
+    volumes:
+      - ./clients/tfst-app:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - tfst_network
+ 
+  tfst.dev:
+    container_name: tfst.dev
+    build:
+      context: ./clients/tfst-dev
+      dockerfile: Dockerfile
+    image: tfst/dev
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    volumes:
+      - ./clients/tfst-dev:/app
+      - /app/node_modules
+    networks:
+      - tfst_network
+
 volumes:
   mssql_data:
     name: tfst_mssql_data

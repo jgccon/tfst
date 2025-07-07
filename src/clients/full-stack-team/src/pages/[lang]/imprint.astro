@@ -1,0 +1,29 @@
+---
+import { getLocalizedPaths } from "../../utils/localization.ts";
+import { t, defaultLocale, type Locale } from "../../i18n.ts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export const getStaticPaths = getLocalizedPaths;
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<BaseLayout lang={locale} title={t(locale, "imprint.title")}>
+  <article class="prose prose-sm sm:prose lg:prose-lg prose-slate max-w-none">
+    <h1>{t(locale, "imprint.title")}</h1>
+    <p>{t(locale, "imprint.intro")}</p>
+
+    <h2>{t(locale, "imprint.ownerTitle")}</h2>
+    <p>{t(locale, "imprint.owner")}</p>
+
+    <h2>{t(locale, "imprint.addressTitle")}</h2>
+    <p>{t(locale, "imprint.address")}</p>
+
+    <h2>{t(locale, "imprint.contactTitle")}</h2>
+    <p>{t(locale, "imprint.contact")}</p>
+
+    <h2>{t(locale, "imprint.disclaimerTitle")}</h2>
+    <p>{t(locale, "imprint.disclaimer")}</p>
+  </article>
+</BaseLayout>

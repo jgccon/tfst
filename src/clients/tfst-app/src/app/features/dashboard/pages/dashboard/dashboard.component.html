@@ -1,1 +1,9 @@
-<p>dashboard works!</p>
+<p>{{'dashboard.title' | translate }}</p>
+<p>{{'login.title' | translate }}</p>
+
+<p>{{'common' | translate : {username : username()} }}</p>
+
+
+<div class="card flex justify-center">
+    <p-datepicker class="max-w-full" [(ngModel)]="date" [inline]="true" [showWeek]="true" />
+</div> 
