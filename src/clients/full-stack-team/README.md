@@ -1,26 +1,68 @@
-# Full-Stack Team Website
+# Full-Stack Team – Landing Site (`full-stack.team`)
 
-This is the official website of **The Full-Stack Team (TFST)**, designed to present our mission, community, and resources.
+Welcome to the **official landing website** of [The Full-Stack Team (TFST)](https://tfst.dev) — an open-source, decentralized platform designed to empower professionals, freelancers, recruiters, and companies through smart contracts, AI, and transparent collaboration.
 
-## Purpose
+This site is the **primary marketing and engagement hub** for the project. It is designed as a **funnel** to attract contributors, showcase features, and convert interest into real participation — whether you're a developer, a recruiter, or a project owner.
 
-The **full-stack.team** site serves as the primary **marketing, community, and educational hub** for TFST. It is focused on attracting professionals, startups, and companies interested in our platform and ecosystem.
+---
 
-## Key Features
+## 🎯 Purpose
 
-- **Homepage:** Overview of TFST's mission and value proposition.
-- **Blog:** Insights on freelancing, AI, blockchain, and software development.
-- **Community:** A place for networking, forums, and discussions.
-- **Documentation:** Basic user guides and onboarding materials.
-- **Events & Webinars:** Announcements about upcoming industry-related events.
-- **Contact & Support:** How users can reach out for inquiries.
+The `full-stack.team` site is focused on **attracting and converting** four main audiences:
 
-## Target Audience
+- **Developers & OSS Contributors**: Join the project, contribute code, shape the future of TFST.
+- **Freelancers & Professionals**: Use free tools for project tracking, invoicing, CV optimization, and more.
+- **Recruiters & Companies**: Discover talent, publish project opportunities, automate hiring with AI.
+- **Investors & Supporters**: Support the vision of decentralized, AI-enhanced talent ecosystems.
 
-- **Freelancers & IT Professionals** looking for new opportunities.
-- **Startups & Companies** interested in decentralized collaboration.
-- **Curious Learners & Enthusiasts** who want to understand the ecosystem.
+---
 
-## Deployment
+## 🧰 Key Pages (Scaffolded in Astro)
 
-This site is expected to be a **static site** or a lightweight CMS-driven platform optimized for SEO and engagement.
+- `/` – Main Landing Page (hero, features, CTA)
+- `/features` – Platform capabilities: identity, contracts, smart hiring, etc.
+- `/for-developers` – OSS contribution guide, GitHub, architecture
+- `/for-professionals` – Free tools, smart CVs, reputation & billing
+- `/for-companies` – Post projects, use smart contracts, hire transparently
+- `/about` – Our vision, mission, and roadmap (coming soon)
+
+---
+
+## 🚀 Tech Stack
+
+This site is built using:
+
+- [Astro](https://astro.build) with **static generation** and **i18n support**
+- Tailwind CSS for styling
+- Markdown + Astro components for content modularity
+- Multilingual routing (currently `en` and `es`)
+- Deployment-ready for **SEO-first static hosting**
+
+---
+
+## 📦 Project Status
+
+- ✅ Astro scaffolding completed
+- 🔧 Pages and components in progress
+- 🎯 Goal: Launch the MVP landing with real content before inviting external contributors
+
+---
+
+## 🤝 Contributing
+
+If you're a designer, developer, writer, or strategist — we welcome help!  
+Check out our main repo at [github.com/jgccon/tfst](https://github.com/jgccon/tfst) and open a PR or issue.
+
+---
+
+## 📬 Contact
+
+- 💬 Community & Support: `/community` (coming soon)
+- 🧠 Technical Docs: [tfst.dev](https://tfst.dev)
+- 📩 Business inquiries: juan@jgcarmona.com
+
+---
+
+**Made with ♥ by The Full-Stack Team**  
+**Website:** [full-stack.team](https://full-stack.team) · **Project:** [tfst.dev](https://tfst.dev)
+

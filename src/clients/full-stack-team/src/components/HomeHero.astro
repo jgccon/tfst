@@ -1,0 +1,27 @@
+---
+import { t, defaultLocale, type Locale } from '../i18n.ts';
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<section class="hero-section px-4 py-24 max-w-4xl mx-auto text-center">
+  <img src="/tfst_card_blue.svg" alt="TFST logo card" class="mx-auto mb-6 w-64" />
+
+  <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+    {t(locale, 'hero.title')}
+  </h1>
+
+  <p class="text-lg sm:text-xl text-gray-600 mb-8">
+    {t(locale, 'hero.subtitle')}
+  </p>
+
+  <div class="flex flex-col sm:flex-row justify-center gap-4">
+    <a href="features" target="_blank" class="btn-primary">
+      {t(locale, 'hero.cta.explore')}
+    </a>
+    <a href="https://github.com/jgccon/tfst" target="_blank" class="btn-secondary">
+      {t(locale, 'hero.cta.star')}
+    </a>
+  </div>
+</section>

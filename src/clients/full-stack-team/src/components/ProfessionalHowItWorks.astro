@@ -1,0 +1,49 @@
+---
+import { t } from "../i18n";
+const { locale } = Astro.props;
+---
+
+<section class="max-w-6xl mx-auto px-6 py-20">
+  <header class="text-center mb-16">
+    <h2 class="text-3xl font-bold mb-4">
+      {t(locale, "forProfessionals.howTitle")}
+    </h2>
+    <p class="text-gray-700 text-lg">
+      {t(locale, "forProfessionals.howSubtitle")}
+    </p>
+  </header>
+
+  <div class="grid md:grid-cols-2 gap-12">
+    <div>
+      <h3 class="text-xl font-semibold mb-2">
+        📝 {t(locale, "forProfessionals.howSteps.0.title")}
+      </h3>
+      <p class="text-gray-600 mb-6">
+        {t(locale, "forProfessionals.howSteps.0.desc")}
+      </p>
+
+      <h3 class="text-xl font-semibold mb-2">
+        🎯 {t(locale, "forProfessionals.howSteps.1.title")}
+      </h3>
+      <p class="text-gray-600 mb-6">
+        {t(locale, "forProfessionals.howSteps.1.desc")}
+      </p>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-semibold mb-2">
+        🤝 {t(locale, "forProfessionals.howSteps.2.title")}
+      </h3>
+      <p class="text-gray-600 mb-6">
+        {t(locale, "forProfessionals.howSteps.2.desc")}
+      </p>
+
+      <h3 class="text-xl font-semibold mb-2">
+        ✅ {t(locale, "forProfessionals.howSteps.3.title")}
+      </h3>
+      <p class="text-gray-600">
+        {t(locale, "forProfessionals.howSteps.3.desc")}
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+---
+import { getLocalizedPaths } from "../../utils/localization.ts";
+import { t, defaultLocale, type Locale } from "../../i18n.ts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FeaturesGrid from "../../components/FeaturesGrid.astro";
+
+export const getStaticPaths = getLocalizedPaths;
+
+const lang = Astro.params.lang ?? defaultLocale;
+const locale = lang as Locale;
+---
+
+<BaseLayout title={`TFST – ${t(locale, 'nav.features')}`} lang={lang}>
+    <FeaturesGrid locale={locale} />
+</BaseLayout>

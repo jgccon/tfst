@@ -1,0 +1,19 @@
+---
+import { t } from "../i18n";
+const { locale } = Astro.props;
+---
+
+<section class="max-w-6xl mx-auto px-6 py-24 text-center">
+  <h1 class="text-4xl md:text-5xl font-extrabold mb-6">
+    {t(locale, "forProfessionals.heroTitle")}
+  </h1>
+  <p class="text-lg text-gray-700 mb-8">
+    {t(locale, "forProfessionals.heroSubtitle")}
+  </p>
+  <a
+    href="/start-project"
+    class="inline-block bg-black text-white px-6 py-3 rounded hover:bg-gray-900 transition"
+  >
+    {t(locale, "forProfessionals.heroButton")}
+  </a>
+</section>
